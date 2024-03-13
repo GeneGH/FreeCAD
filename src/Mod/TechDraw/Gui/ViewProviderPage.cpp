@@ -42,10 +42,8 @@
 #include <Gui/MainWindow.h>
 #include <Gui/ViewProviderDocumentObject.h>
 #include <Mod/TechDraw/App/DrawHatch.h>
-#include <Mod/TechDraw/App/DrawLeaderLine.h>
 #include <Mod/TechDraw/App/DrawPage.h>
 #include <Mod/TechDraw/App/DrawProjGroupItem.h>
-#include <Mod/TechDraw/App/DrawRichAnno.h>
 #include <Mod/TechDraw/App/DrawTemplate.h>
 #include <Mod/TechDraw/App/DrawView.h>
 #include <Mod/TechDraw/App/DrawViewBalloon.h>
@@ -393,11 +391,8 @@ std::vector<App::DocumentObject*> ViewProviderPage::claimChildren(void) const
     // for Page, valid children are any View except: DrawProjGroupItem
     //                                               DrawViewDimension
     //                                               DrawViewBalloon
-    //                                               DrawLeaderLine
-    //                                               DrawRichAnno
     //                                               any FeatuerView in a DrawViewClip
     //                                               DrawHatch
-    //                                               DrawWeldSymbol
 
     const std::vector<App::DocumentObject*>& views = getDrawPage()->Views.getValues();
 
@@ -405,24 +400,18 @@ std::vector<App::DocumentObject*> ViewProviderPage::claimChildren(void) const
         for (std::vector<App::DocumentObject*>::const_iterator it = views.begin();
              it != views.end(); ++it) {
             TechDraw::DrawView* featView = dynamic_cast<TechDraw::DrawView*>(*it);
-            App::DocumentObject* docObj = *it;
-            //DrawRichAnno with no parent is child of Page
-            TechDraw::DrawRichAnno* dra = dynamic_cast<TechDraw::DrawRichAnno*>(*it);
-            if (dra) {
-                if (!dra->AnnoParent.getValue()) {
-                    temp.push_back(*it);//no parent, belongs to page
-                }
-                continue;//has a parent somewhere else
+
+            // If the child view appoints a parent, skip it
+            if (featView && featView->claimParent()) {
+                continue;
             }
 
+            App::DocumentObject* docObj = *it;
             // Don't collect if dimension, projection group item, hatch or member of ClipGroup as these should be grouped elsewhere
             if (docObj->isDerivedFrom(TechDraw::DrawProjGroupItem::getClassTypeId())
                 || docObj->isDerivedFrom(TechDraw::DrawViewDimension::getClassTypeId())
                 || docObj->isDerivedFrom(TechDraw::DrawHatch::getClassTypeId())
                 || docObj->isDerivedFrom(TechDraw::DrawViewBalloon::getClassTypeId())
-                || docObj->isDerivedFrom(TechDraw::DrawRichAnno::getClassTypeId())
-                || docObj->isDerivedFrom(TechDraw::DrawLeaderLine::getClassTypeId())
-                || docObj->isDerivedFrom(TechDraw::DrawWeldSymbol::getClassTypeId())
                 || (featView && featView->isInClip()))
                 continue;
             else

@@ -592,6 +592,74 @@ int SketchObject::toggleActive(int ConstrId)
     return 0;
 }
 
+int SketchObject::setLabelPosition(int ConstrId, float value)
+{
+    Base::StateLocker lock(managedoperation, true);
+
+    const std::vector<Constraint*>& vals = this->Constraints.getValues();
+
+    if (ConstrId < 0 || ConstrId >= int(vals.size())) {
+        return -1;
+    }
+
+    // copy the list
+    std::vector<Constraint*> newVals(vals);
+    // clone the changed Constraint
+    Constraint* constNew = vals[ConstrId]->clone();
+    constNew->LabelPosition = value;
+    newVals[ConstrId] = constNew;
+    this->Constraints.setValues(std::move(newVals));
+
+    return 0;
+}
+
+int SketchObject::getLabelPosition(int ConstrId, float& value)
+{
+    const std::vector<Constraint*>& vals = this->Constraints.getValues();
+
+    if (ConstrId < 0 || ConstrId >= int(vals.size())) {
+        return -1;
+    }
+
+    value = vals[ConstrId]->LabelPosition;
+
+    return 0;
+}
+
+int SketchObject::setLabelDistance(int ConstrId, float value)
+{
+    Base::StateLocker lock(managedoperation, true);
+
+    const std::vector<Constraint*>& vals = this->Constraints.getValues();
+
+    if (ConstrId < 0 || ConstrId >= int(vals.size())) {
+        return -1;
+    }
+
+    // copy the list
+    std::vector<Constraint*> newVals(vals);
+    // clone the changed Constraint
+    Constraint* constNew = vals[ConstrId]->clone();
+    constNew->LabelDistance = value;
+    newVals[ConstrId] = constNew;
+    this->Constraints.setValues(std::move(newVals));
+
+    return 0;
+}
+
+int SketchObject::getLabelDistance(int ConstrId, float& value)
+{
+    const std::vector<Constraint*>& vals = this->Constraints.getValues();
+
+    if (ConstrId < 0 || ConstrId >= int(vals.size())) {
+        return -1;
+    }
+
+    value = vals[ConstrId]->LabelDistance;
+
+    return 0;
+}
+
 
 /// Make all dimensionals Driving/non-Driving
 int SketchObject::setDatumsDriving(bool isdriving)
@@ -3772,7 +3840,7 @@ int SketchObject::split(int GeoId, const Base::Vector3d& point)
     return -1;
 }
 
-int SketchObject::join(int geoId1, Sketcher::PointPos posId1, int geoId2, Sketcher::PointPos posId2)
+int SketchObject::join(int geoId1, Sketcher::PointPos posId1, int geoId2, Sketcher::PointPos posId2, int continuity)
 {
     // No need to check input data validity as this is an sketchobject managed operation
 
@@ -3833,7 +3901,25 @@ int SketchObject::join(int geoId1, Sketcher::PointPos posId1, int geoId2, Sketch
     else if (bsp2->getDegree() < bsp1->getDegree())
         bsp2->increaseDegree(bsp1->getDegree());
 
-    // TODO: set up vectors for new poles, knots, mults
+    // TODO: Check for tangent constraint here
+    bool makeC1Continuous = (continuity >= 1);
+
+    // TODO: Rescale one or both sections to fulfill some purpose.
+    // This could include making param between [0,1], and/or making
+    // C1 continuity possible.
+    if (makeC1Continuous) {
+        // We assume here that there is already G1 continuity.
+        // Just scale parameters to get C1.
+        Base::Vector3d slope1 = bsp1->firstDerivativeAtParameter(bsp1->getLastParameter());
+        Base::Vector3d slope2 = bsp2->firstDerivativeAtParameter(bsp2->getFirstParameter());
+        // TODO: slope2 can technically be a zero vector
+        // But that seems not possible unless the spline is trivial.
+        // Prove or account for the possibility.
+        double scale = slope2.Length() / slope1.Length();
+        bsp2->scaleKnotsToBounds(0, scale * (bsp2->getLastParameter() - bsp2->getFirstParameter()));
+    }
+
+    // set up vectors for new poles, knots, mults
     std::vector<Base::Vector3d> poles1 = bsp1->getPoles();
     std::vector<double> weights1 = bsp1->getWeights();
     std::vector<double> knots1 = bsp1->getKnots();
@@ -3848,13 +3934,18 @@ int SketchObject::join(int geoId1, Sketcher::PointPos posId1, int geoId2, Sketch
     std::vector<double> newKnots(std::move(knots1));
     std::vector<int> newMults(std::move(mults1));
 
+
     poles2.erase(poles2.begin());
+    if (makeC1Continuous)
+        newPoles.erase(newPoles.end()-1);
     newPoles.insert(newPoles.end(),
                     std::make_move_iterator(poles2.begin()),
                     std::make_move_iterator(poles2.end()));
 
     // TODO: Weights might need to be scaled
     weights2.erase(weights2.begin());
+    if (makeC1Continuous)
+        newWeights.erase(newWeights.end()-1);
     newWeights.insert(newWeights.end(),
                       std::make_move_iterator(weights2.begin()),
                       std::make_move_iterator(weights2.end()));
@@ -3869,8 +3960,15 @@ int SketchObject::join(int geoId1, Sketcher::PointPos posId1, int geoId2, Sketch
                     std::make_move_iterator(knots2.end()));
 
     // end knots can have a multiplicity of (degree + 1)
-    if (bsp1->getDegree() < newMults.back())
-        newMults.back() = bsp1->getDegree();
+    if (bsp1->getDegree() < newMults.back()) {
+        if (makeC1Continuous) {
+            newMults.back() = bsp1->getDegree()-1;
+        }
+        else {
+            newMults.back() = bsp1->getDegree();
+        }
+    }
+
     mults2.erase(mults2.begin());
     newMults.insert(newMults.end(),
                     std::make_move_iterator(mults2.begin()),
@@ -3935,7 +4033,7 @@ bool SketchObject::isExternalAllowed(App::Document* pDoc, App::DocumentObject* p
 
     // Note: Checking for the body of the support doesn't work when the support are the three base
     // planes
-    // App::DocumentObject *support = this->Support.getValue();
+    // App::DocumentObject *support = this->AttachmentSupport.getValue();
     Part::BodyBase* body_this = Part::BodyBase::findBodyOf(this);
     Part::BodyBase* body_obj = Part::BodyBase::findBodyOf(pObj);
     App::Part* part_this = App::Part::getPartOfObject(this);
@@ -4000,7 +4098,7 @@ bool SketchObject::isCarbonCopyAllowed(App::Document* pDoc, App::DocumentObject*
 
     // Note: Checking for the body of the support doesn't work when the support are the three base
     // planes
-    // App::DocumentObject *support = this->Support.getValue();
+    // App::DocumentObject *support = this->AttachmentSupport.getValue();
     Part::BodyBase* body_this = Part::BodyBase::findBodyOf(this);
     Part::BodyBase* body_obj = Part::BodyBase::findBodyOf(pObj);
     App::Part* part_this = App::Part::getPartOfObject(this);
@@ -7307,7 +7405,7 @@ Part::Geometry* projectLine(const BRepAdaptor_Curve& curve, const Handle(Geom_Pl
 bool SketchObject::evaluateSupport()
 {
     // returns false if the shape is broken, null or non-planar
-    App::DocumentObject* link = Support.getValue();
+    App::DocumentObject* link = AttachmentSupport.getValue();
     if (!link || !link->isDerivedFrom<Part::Feature>())
         return false;
     return true;
@@ -8263,6 +8361,20 @@ void SketchObject::getDirectlyCoincidentPoints(int GeoId, PointPos PosId,
                 PosIdList.push_back((*it)->FirstPos);
             }
         }
+        if ((*it)->Type == Sketcher::Tangent) {
+            if ((*it)->First == GeoId && (*it)->FirstPos == PosId &&
+                ((*it)->SecondPos == Sketcher::PointPos::start ||
+                 (*it)->SecondPos == Sketcher::PointPos::end)) {
+                GeoIdList.push_back((*it)->Second);
+                PosIdList.push_back((*it)->SecondPos);
+            }
+            if ((*it)->Second == GeoId && (*it)->SecondPos == PosId &&
+                ((*it)->FirstPos == Sketcher::PointPos::start ||
+                 (*it)->FirstPos == Sketcher::PointPos::end)) {
+                GeoIdList.push_back((*it)->First);
+                PosIdList.push_back((*it)->FirstPos);
+            }
+        }
     }
     if (GeoIdList.size() == 1) {
         GeoIdList.clear();
@@ -8578,12 +8690,23 @@ double SketchObject::calculateAngleViaPoint(int GeoId1, int GeoId2, double px, d
     // Temporary sketch based calculation. Slow, but guaranteed consistency with constraints.
     Sketcher::Sketch sk;
 
-    const Part::Geometry* p1 = this->getGeometry(GeoId1);
-    const Part::Geometry* p2 = this->getGeometry(GeoId2);
+    const Part::GeomCurve* p1 = dynamic_cast<const Part::GeomCurve*>(this->getGeometry(GeoId1));
+    const Part::GeomCurve* p2 = dynamic_cast<const Part::GeomCurve*>(this->getGeometry(GeoId2));
 
     if (p1 && p2) {
+        // TODO: Check if any of these are B-splines
         int i1 = sk.addGeometry(this->getGeometry(GeoId1));
         int i2 = sk.addGeometry(this->getGeometry(GeoId2));
+
+        if (p1->is<Part::GeomBSplineCurve>() ||
+            p2->is<Part::GeomBSplineCurve>()) {
+            double p1ClosestParam, p2ClosestParam;
+            Base::Vector3d pt(px, py, 0);
+            p1->closestParameter(pt, p1ClosestParam);
+            p2->closestParameter(pt, p2ClosestParam);
+
+            return sk.calculateAngleViaParams(i1, i2, p1ClosestParam, p2ClosestParam);
+        }
 
         return sk.calculateAngleViaPoint(i1, i2, px, py);
     }
@@ -8784,7 +8907,7 @@ void SketchObject::onChanged(const App::Property* prop)
 #if 0
     // For now do not delete anything (#0001791). When changing the support
     // face it might be better to check which external geometries can be kept.
-    else if (prop == &Support) {
+    else if (prop == &AttachmentSupport) {
         // make sure not to change anything while restoring this object
         if (!isRestoring()) {
             // if support face has changed then clear the external geometry

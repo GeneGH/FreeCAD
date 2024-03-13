@@ -172,6 +172,7 @@
 #include <Base/Writer.h>
 
 #include "TopoShape.h"
+#include "BRepMesh.h"
 #include "BRepOffsetAPI_MakeOffsetFix.h"
 #include "CrossSection.h"
 #include "encodeFilename.h"
@@ -346,6 +347,7 @@ TopoDS_Shape TopoShape::getSubShape(TopAbs_ShapeEnum type, int index, bool silen
     if(index <= 0) {
         if(silent)
             return {};
+        // TODO: Is this message clear?  Should we complain about the negative index instead
         Standard_Failure::Raise("Unsupported sub-shape type");
     }
 
@@ -438,14 +440,6 @@ static inline std::vector<T> _getSubShapes(const TopoDS_Shape &s, TopAbs_ShapeEn
     return shapes;
 }
 
-std::vector<TopoShape> TopoShape::getSubTopoShapes(TopAbs_ShapeEnum type) const {
-    return _getSubShapes<TopoShape>(_Shape,type);
-}
-
-std::vector<TopoDS_Shape> TopoShape::getSubShapes(TopAbs_ShapeEnum type) const {
-    return _getSubShapes<TopoDS_Shape>(_Shape,type);
-}
-
 static std::array<std::string,TopAbs_SHAPE> _ShapeNames;
 
 static void initShapeNameMap() {
@@ -482,6 +476,22 @@ std::pair<TopAbs_ShapeEnum,int> TopoShape::shapeTypeAndIndex(const char *name) {
         }
     }
     return std::make_pair(type,idx);
+}
+
+std::pair<TopAbs_ShapeEnum, int> TopoShape::shapeTypeAndIndex(const Data::IndexedName& element)
+{
+    if (!element) {
+        return std::make_pair(TopAbs_SHAPE, 0);
+    }
+    static const std::string _subshape("SubShape");
+    if (boost::equals(element.getType(), _subshape)) {
+        return std::make_pair(TopAbs_SHAPE, element.getIndex());
+    }
+    TopAbs_ShapeEnum shapetype = shapeType(element.getType(), true);
+    if (shapetype == TopAbs_SHAPE) {
+        return std::make_pair(TopAbs_SHAPE, 0);
+    }
+    return std::make_pair(shapetype, element.getIndex());
 }
 
 TopAbs_ShapeEnum TopoShape::shapeType(const char *type, bool silent) {
@@ -547,44 +557,44 @@ PyObject * TopoShape::getPyObject()
 {
     Base::PyObjectBase* prop = nullptr;
     if (_Shape.IsNull()) {
-        prop = new TopoShapePy(new TopoShape(_Shape));
+        prop = new TopoShapePy(new TopoShape(*this));
     }
     else {
         TopAbs_ShapeEnum type = _Shape.ShapeType();
         switch (type)
         {
         case TopAbs_COMPOUND:
-            prop = new TopoShapeCompoundPy(new TopoShape(_Shape));
+            prop = new TopoShapeCompoundPy(new TopoShape(*this));
             break;
         case TopAbs_COMPSOLID:
-            prop = new TopoShapeCompSolidPy(new TopoShape(_Shape));
+            prop = new TopoShapeCompSolidPy(new TopoShape(*this));
             break;
         case TopAbs_SOLID:
-            prop = new TopoShapeSolidPy(new TopoShape(_Shape));
+            prop = new TopoShapeSolidPy(new TopoShape(*this));
             break;
         case TopAbs_SHELL:
-            prop = new TopoShapeShellPy(new TopoShape(_Shape));
+            prop = new TopoShapeShellPy(new TopoShape(*this));
             break;
         case TopAbs_FACE:
-            prop = new TopoShapeFacePy(new TopoShape(_Shape));
+            prop = new TopoShapeFacePy(new TopoShape(*this));
             break;
         case TopAbs_WIRE:
-            prop = new TopoShapeWirePy(new TopoShape(_Shape));
+            prop = new TopoShapeWirePy(new TopoShape(*this));
             break;
         case TopAbs_EDGE:
-            prop = new TopoShapeEdgePy(new TopoShape(_Shape));
+            prop = new TopoShapeEdgePy(new TopoShape(*this));
             break;
         case TopAbs_VERTEX:
-            prop = new TopoShapeVertexPy(new TopoShape(_Shape));
+            prop = new TopoShapeVertexPy(new TopoShape(*this));
             break;
         case TopAbs_SHAPE:
         default:
-            prop = new TopoShapePy(new TopoShape(_Shape));
+            prop = new TopoShapePy(new TopoShape(*this));
             break;
         }
     }
 
-    prop->setNotTracking();
+    prop->setNotTracking(); // TODO: Does this still belong here?
     return prop;
 }
 
@@ -597,14 +607,6 @@ void TopoShape::setPyObject(PyObject* obj)
         std::string error = std::string("type must be 'Shape', not ");
         error += obj->ob_type->tp_name;
         throw Base::TypeError(error);
-    }
-}
-
-void TopoShape::operator = (const TopoShape& sh)
-{
-    if (this != &sh) {
-        this->Tag = sh.Tag;
-        this->_Shape = sh._Shape;
     }
 }
 
@@ -669,41 +671,6 @@ Base::Matrix4D TopoShape::getTransform() const
     return mtrx;
 }
 
-/*!
- * \obsolete
- */
-void TopoShape::setShapePlacement(const Base::Placement& rclTrf)
-{
-    const Base::Vector3d& pos = rclTrf.getPosition();
-    Base::Vector3d axis;
-    double angle;
-    rclTrf.getRotation().getValue(axis, angle);
-
-    gp_Trsf trsf;
-    trsf.SetRotation(gp_Ax1(gp_Pnt(0.,0.,0.), gp_Dir(axis.x, axis.y, axis.z)), angle);
-    trsf.SetTranslationPart(gp_Vec(pos.x, pos.y, pos.z));
-    TopLoc_Location loc(trsf);
-    _Shape.Location(loc);
-}
-
-/*!
- * \obsolete
- */
-Base::Placement TopoShape::getShapePlacement() const
-{
-    TopLoc_Location loc = _Shape.Location();
-    gp_Trsf trsf = loc.Transformation();
-    gp_XYZ pos = trsf.TranslationPart();
-
-    gp_XYZ axis;
-    Standard_Real angle;
-    trsf.GetRotation(axis, angle);
-
-    Base::Rotation rot(Base::Vector3d(axis.X(), axis.Y(), axis.Z()), angle);
-    Base::Placement placement(Base::Vector3d(pos.X(), pos.Y(), pos.Z()), rot);
-
-    return placement;
-}
 
 void TopoShape::read(const char *FileName)
 {
@@ -3146,6 +3113,59 @@ void TopoShape::sewShape(double tolerance)
     this->_Shape = sew.SewedShape();
 }
 
+bool TopoShape::fix()
+{
+    if (this->_Shape.IsNull()) {
+        return false;
+    }
+
+    // First, we do fix regardless if the current shape is valid or not,
+    // because not all problems that are handled by ShapeFix_Shape can be
+    // recognized by BRepCheck_Analyzer.
+    //
+    // Second, for some reason, a failed fix (i.e. a fix that produces invalid shape)
+    // will affect the input shape. (See // https://github.com/realthunder/FreeCAD/issues/585,
+    // BTW, the file attached in the issue also shows that ShapeFix_Shape may
+    // actually make a valid input shape invalid). So, it actually change the
+    // underlying shape data. Therefore, we try with a copy first.
+    auto copy = makeElementCopy();
+    ShapeFix_Shape fix(copy._Shape);
+    fix.Perform();
+
+    if (fix.Shape().IsSame(copy._Shape)) {
+        return false;
+    }
+
+    BRepCheck_Analyzer aChecker(fix.Shape());
+    if (!aChecker.IsValid()) {
+        return false;
+    }
+
+    // If the above fix produces a valid shape, then we fix the original shape,
+    // because BRepBuilderAPI_Copy has some undesired side effect (e.g. flatten
+    // underlying shape, and thus break internal shape sharing).
+    ShapeFix_Shape fixThis(this->_Shape);
+    fixThis.Perform();
+
+    aChecker.Init(fixThis.Shape());
+    if (aChecker.IsValid()) {
+        // Must call makESHAPE() (which calls mapSubElement()) to remap element
+        // names because ShapeFix_Shape may delete (e.g. small edges) or modify
+        // the input shape.
+        //
+        // See https://github.com/realthunder/FreeCAD/issues/595. Sketch001
+        // has small edges. Simply recompute the sketch to trigger call of fix()
+        // through makEWires(), and it will remove those edges. Without
+        // remapping, there will be invalid index jumpping in reference in
+        // Sketch002.ExternalEdge5.
+        makeShapeWithElementMap(fixThis.Shape(), MapperHistory(fixThis), {*this});
+    }
+    else {
+        makeShapeWithElementMap(fix.Shape(), MapperHistory(fix), {copy});
+    }
+    return true;
+}
+
 bool TopoShape::fix(double precision, double mintol, double maxtol)
 {
     if (this->_Shape.IsNull())
@@ -3340,119 +3360,12 @@ void TopoShape::getDomains(std::vector<Domain>& domains) const
     }
 }
 
-namespace Part {
-struct MeshVertex
-{
-    Standard_Real x,y,z;
-    Standard_Integer i;
-
-    MeshVertex(Standard_Real X, Standard_Real Y, Standard_Real Z)
-        : x(X),y(Y),z(Z),i(0)
-    {
-    }
-    explicit MeshVertex(const Base::Vector3d& p)
-        : x(p.x),y(p.y),z(p.z),i(0)
-    {
-    }
-
-    Base::Vector3d toPoint() const
-    { return Base::Vector3d(x,y,z); }
-
-    bool operator < (const MeshVertex &v) const
-    {
-        if (fabs ( this->x - v.x) >= MESH_MIN_PT_DIST)
-            return this->x < v.x;
-        if (fabs ( this->y - v.y) >= MESH_MIN_PT_DIST)
-            return this->y < v.y;
-        if (fabs ( this->z - v.z) >= MESH_MIN_PT_DIST)
-            return this->z < v.z;
-        return false; // points are considered to be equal
-    }
-
-private:
-    // use the same value as used inside the Mesh module
-    static const double MESH_MIN_PT_DIST;
-};
-}
-
-//const double Vertex::MESH_MIN_PT_DIST = 1.0e-6;
-const double MeshVertex::MESH_MIN_PT_DIST = gp::Resolution();
-
 void TopoShape::getFacesFromDomains(const std::vector<Domain>& domains,
                                     std::vector<Base::Vector3d>& points,
                                     std::vector<Facet>& faces) const
 {
-    std::set<MeshVertex> vertices;
-    Standard_Real x1, y1, z1;
-    Standard_Real x2, y2, z2;
-    Standard_Real x3, y3, z3;
-
-    for (const auto & domain : domains) {
-        for (std::vector<Facet>::const_iterator jt = domain.facets.begin(); jt != domain.facets.end(); ++jt) {
-            x1 = domain.points[jt->I1].x;
-            y1 = domain.points[jt->I1].y;
-            z1 = domain.points[jt->I1].z;
-
-            x2 = domain.points[jt->I2].x;
-            y2 = domain.points[jt->I2].y;
-            z2 = domain.points[jt->I2].z;
-
-            x3 = domain.points[jt->I3].x;
-            y3 = domain.points[jt->I3].y;
-            z3 = domain.points[jt->I3].z;
-
-            TopoShape::Facet face;
-            std::set<MeshVertex>::iterator vIt;
-
-            // 1st vertex
-            MeshVertex v1(x1,y1,z1);
-            vIt = vertices.find(v1);
-            if (vIt == vertices.end()) {
-                v1.i = vertices.size();
-                face.I1 = v1.i;
-                vertices.insert(v1);
-            }
-            else {
-                face.I1 = vIt->i;
-            }
-
-            // 2nd vertex
-            MeshVertex v2(x2,y2,z2);
-            vIt = vertices.find(v2);
-            if (vIt == vertices.end()) {
-                v2.i = vertices.size();
-                face.I2 = v2.i;
-                vertices.insert(v2);
-            }
-            else {
-                face.I2 = vIt->i;
-            }
-
-            // 3rd vertex
-            MeshVertex v3(x3,y3,z3);
-            vIt = vertices.find(v3);
-            if (vIt == vertices.end()) {
-                v3.i = vertices.size();
-                face.I3 = v3.i;
-                vertices.insert(v3);
-            }
-            else {
-                face.I3 = vIt->i;
-            }
-
-            // make sure that we don't insert invalid facets
-            if (face.I1 != face.I2 &&
-                face.I2 != face.I3 &&
-                face.I3 != face.I1)
-                faces.push_back(face);
-        }
-    }
-
-    std::vector<Base::Vector3d> meshPoints;
-    meshPoints.resize(vertices.size());
-    for (const auto & vertex : vertices)
-        meshPoints[vertex.i] = vertex.toPoint();
-    points.swap(meshPoints);
+    BRepMesh mesh;
+    mesh.getFacesFromDomains(domains, points, faces);
 }
 
 double TopoShape::getAccuracy() const
@@ -4042,14 +3955,15 @@ TopoShape &TopoShape::makeFace(const std::vector<TopoShape> &shapes, const char 
     return *this;
 }
 
-TopoShape &TopoShape::makeRefine(const TopoShape &shape, const char *op, bool no_fail)
+TopoShape &TopoShape::makeRefine(const TopoShape &shape, const char *op, RefineFail no_fail)
 {
     (void)op;
     _Shape.Nullify();
 
     if(shape.isNull()) {
-        if(!no_fail)
+        if (no_fail == RefineFail::throwException) {
             HANDLE_NULL_SHAPE;
+        }
         return *this;
     }
     try {
@@ -4057,12 +3971,15 @@ TopoShape &TopoShape::makeRefine(const TopoShape &shape, const char *op, bool no
         _Shape = mkRefine.Shape();
         return *this;
     }catch (Standard_Failure &) {
-        if(!no_fail) throw;
+        if(no_fail == RefineFail::throwException ) {
+            throw;
+        }
     }
     *this = shape;
     return *this;
 }
 
+// TODO: Does the toponaming branch version of this method need to be here?
 bool TopoShape::findPlane(gp_Pln &pln, double tol) const {
     if(_Shape.IsNull())
         return false;

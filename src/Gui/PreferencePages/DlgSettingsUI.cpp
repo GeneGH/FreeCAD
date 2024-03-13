@@ -93,11 +93,11 @@ DlgSettingsUI::DlgSettingsUI(QWidget* parent)
     ResizableColumn->setParamGrpPath("TreeView");
 
     // Auto generated code (Tools/params_utils.py:433)
-    CheckBoxesSelection = new Gui::PrefCheckBox(this);
-    layoutTreeview->addWidget(CheckBoxesSelection, 3, 0);
-    CheckBoxesSelection->setChecked(Gui::TreeParams::defaultCheckBoxesSelection());
-    CheckBoxesSelection->setEntryName("CheckBoxesSelection");
-    CheckBoxesSelection->setParamGrpPath("TreeView");
+    VisibilityIcon = new Gui::PrefCheckBox(this);
+    layoutTreeview->addWidget(VisibilityIcon, 3, 0);
+    VisibilityIcon->setChecked(Gui::TreeParams::defaultVisibilityIcon());
+    VisibilityIcon->setEntryName("VisibilityIcon");
+    VisibilityIcon->setParamGrpPath("TreeView");
 
     // Auto generated code (Tools/params_utils.py:433)
     HideColumn = new Gui::PrefCheckBox(this);
@@ -449,7 +449,7 @@ void DlgSettingsUI::saveSettings()
     ItemBackground->onSave();
     ItemBackgroundPadding->onSave();
     ResizableColumn->onSave();
-    CheckBoxesSelection->onSave();
+    VisibilityIcon->onSave();
     HideColumn->onSave();
     HideScrollBar->onSave();
     HideHeaderView->onSave();
@@ -490,7 +490,7 @@ void DlgSettingsUI::loadSettings()
     ItemBackground->onRestore();
     ItemBackgroundPadding->onRestore();
     ResizableColumn->onRestore();
-    CheckBoxesSelection->onRestore();
+    VisibilityIcon->onRestore();
     HideColumn->onRestore();
     HideScrollBar->onRestore();
     HideHeaderView->onRestore();
@@ -537,8 +537,8 @@ void DlgSettingsUI::retranslateUi()
     labelItemBackgroundPadding->setToolTip(ItemBackgroundPadding->toolTip());
     ResizableColumn->setToolTip(QApplication::translate("TreeParams", Gui::TreeParams::docResizableColumn()));
     ResizableColumn->setText(QObject::tr("Resizable columns"));
-    CheckBoxesSelection->setToolTip(QApplication::translate("TreeParams", Gui::TreeParams::docCheckBoxesSelection()));
-    CheckBoxesSelection->setText(QObject::tr("Show item checkbox"));
+    VisibilityIcon->setToolTip(QApplication::translate("TreeParams", Gui::TreeParams::docVisibilityIcon()));
+    VisibilityIcon->setText(QObject::tr("Show visibility icon"));
     HideColumn->setToolTip(QApplication::translate("TreeParams", Gui::TreeParams::docHideColumn()));
     HideColumn->setText(QObject::tr("Hide extra column"));
     HideScrollBar->setToolTip(QApplication::translate("TreeParams", Gui::TreeParams::docHideScrollBar()));

@@ -46,7 +46,6 @@ from draftobjects.patharray import PathArray
 from draftobjects.pathtwistedarray import PathTwistedArray
 
 if App.GuiUp:
-    from draftutils.todo import ToDo
     from draftviewproviders.view_array import ViewProviderDraftArray
     from draftviewproviders.view_draftlink import ViewProviderDraftLink
 
@@ -170,20 +169,14 @@ def make_path_array(base_object, path_object, count=4,
         _err(translate("draft","No active document. Aborting."))
         return None
 
-    if isinstance(base_object, str):
-        base_object_str = base_object
-
     found, base_object = utils.find_object(base_object, doc)
     if not found:
-        _err(translate("draft","Wrong input: base_object {} not in document.").format(base_object_str))
+        _err(translate("draft","Wrong input: base_object not in document."))
         return None
-
-    if isinstance(path_object, str):
-        path_object_str = path_object
 
     found, path_object = utils.find_object(path_object, doc)
     if not found:
-        _err(translate("draft","Wrong input: path_object not in document.").format(path_object_str))
+        _err(translate("draft","Wrong input: path_object not in document."))
         return None
 
     try:
@@ -306,8 +299,6 @@ def make_path_array(base_object, path_object, count=4,
             ViewProviderDraftArray(new_obj.ViewObject)
             gui_utils.formatObject(new_obj, new_obj.Base)
             new_obj.ViewObject.Proxy.resetColors(new_obj.ViewObject)
-            # Workaround to trigger update of DiffuseColor:
-            ToDo.delay(reapply_diffuse_color, new_obj.ViewObject)
         new_obj.Base.ViewObject.hide()
         gui_utils.select(new_obj)
 
@@ -338,20 +329,14 @@ def make_path_twisted_array(base_object, path_object,
         _err(translate("draft","No active document. Aborting."))
         return None
 
-    if isinstance(base_object, str):
-        base_object_str = base_object
-
     found, base_object = utils.find_object(base_object, doc)
     if not found:
-        _err(translate("draft","Wrong input: base_object not in document.").format(base_object_str))
+        _err(translate("draft","Wrong input: base_object not in document."))
         return None
-
-    if isinstance(path_object, str):
-        path_object_str = path_object
 
     found, path_object = utils.find_object(path_object, doc)
     if not found:
-        _err(translate("draft","Wrong input: path_object not in document.").format(path_object_str))
+        _err(translate("draft","Wrong input: path_object not in document."))
         return None
     try:
         utils.type_check([(count, (int, float))],

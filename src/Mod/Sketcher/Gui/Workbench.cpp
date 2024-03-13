@@ -42,6 +42,7 @@ using namespace SketcherGui;
     qApp->translate("Workbench", "Sketcher constraints");
     qApp->translate("Workbench", "Sketcher tools");
     qApp->translate("Workbench", "Sketcher B-spline tools");
+    qApp->translate("Workbench", "Sketcher visual");
     qApp->translate("Workbench", "Sketcher virtual space");
     qApp->translate("Workbench", "Sketcher edit tools");
 #endif
@@ -438,9 +439,9 @@ inline void SketcherAddWorkbenchConstraints<Gui::MenuItem>(Gui::MenuItem& cons)
         cons << "Sketcher_ConstrainCoincident"
              << "Sketcher_ConstrainPointOnObject";
     }
-    cons << "Sketcher_ConstrainVertical"
+    cons << "Sketcher_ConstrainHorVer"
          << "Sketcher_ConstrainHorizontal"
-         << "Sketcher_ConstrainHorVer"
+         << "Sketcher_ConstrainVertical"
          << "Sketcher_ConstrainParallel"
          << "Sketcher_ConstrainPerpendicular"
          << "Sketcher_ConstrainTangent"
@@ -449,14 +450,14 @@ inline void SketcherAddWorkbenchConstraints<Gui::MenuItem>(Gui::MenuItem& cons)
          << "Sketcher_ConstrainBlock"
          << "Separator"
          << "Sketcher_Dimension"
-         << "Sketcher_ConstrainLock"
          << "Sketcher_ConstrainDistanceX"
          << "Sketcher_ConstrainDistanceY"
          << "Sketcher_ConstrainDistance"
+         << "Sketcher_ConstrainRadiam"
          << "Sketcher_ConstrainRadius"
          << "Sketcher_ConstrainDiameter"
-         << "Sketcher_ConstrainRadiam"
          << "Sketcher_ConstrainAngle"
+         << "Sketcher_ConstrainLock"
          << "Sketcher_ConstrainSnellsLaw"
          << "Separator"
          << "Sketcher_ToggleDrivingConstraint"
@@ -480,8 +481,8 @@ inline void SketcherAddWorkbenchConstraints<Gui::ToolBarItem>(Gui::ToolBarItem& 
         cons << "Sketcher_CompHorVer";
     }
     else {
-        cons << "Sketcher_ConstrainVertical"
-             << "Sketcher_ConstrainHorizontal";
+        cons << "Sketcher_ConstrainHorizontal"
+             << "Sketcher_ConstrainVertical";
     }
     cons << "Sketcher_ConstrainParallel"
          << "Sketcher_ConstrainPerpendicular"
@@ -503,12 +504,12 @@ inline void SketcherAddWorkbenchConstraints<Gui::ToolBarItem>(Gui::ToolBarItem& 
         }
     }
     if (hGrp->GetBool("SeparatedDimensioningTools", false)) {
-        cons << "Sketcher_ConstrainLock"
-             << "Sketcher_ConstrainDistanceX"
+        cons << "Sketcher_ConstrainDistanceX"
              << "Sketcher_ConstrainDistanceY"
              << "Sketcher_ConstrainDistance"
              << "Sketcher_CompConstrainRadDia"
-             << "Sketcher_ConstrainAngle";
+             << "Sketcher_ConstrainAngle"
+             << "Sketcher_ConstrainLock";
         // << "Sketcher_ConstrainSnellsLaw" // Rarely used, show only in menu
     }
     cons << "Separator"
@@ -537,10 +538,7 @@ inline void SketcherAddWorkbenchTools<Gui::MenuItem>(Gui::MenuItem& consaccel)
               << "Sketcher_Rotate"
               << "Sketcher_Scale"
               << "Sketcher_Symmetry"
-              << "Sketcher_Clone"
-              << "Sketcher_Copy"
-              << "Sketcher_Move"
-              << "Sketcher_RectangularArray"
+              << "Sketcher_Translate"
               << "Sketcher_RemoveAxesAlignment"
               << "Separator"
               << "Sketcher_DeleteAllGeometry"
@@ -567,8 +565,7 @@ inline void SketcherAddWorkbenchTools<Gui::ToolBarItem>(Gui::ToolBarItem& consac
         << "Sketcher_Rotate"
         << "Sketcher_Scale"
         << "Sketcher_Symmetry"
-        << "Sketcher_CompCopy"
-        << "Sketcher_RectangularArray"
+        << "Sketcher_Translate"
         << "Sketcher_RemoveAxesAlignment";
 }
 

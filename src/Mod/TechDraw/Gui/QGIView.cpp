@@ -103,11 +103,6 @@ QGIView::QGIView()
     m_lock->hide();
 }
 
-void QGIView::onSourceChange(TechDraw::DrawView* newParent)
-{
-    Q_UNUSED(newParent);
-}
-
 void QGIView::isVisible(bool state)
 {
     auto feat = getViewObject();
@@ -660,6 +655,27 @@ void QGIView::addArbitraryItem(QGraphicsItem* qgi)
 //        m_randomItems.push_back(qgi);
         addToGroup(qgi);
         qgi->show();
+    }
+}
+
+void QGIView::switchParentItem(QGIView *targetParent)
+{
+    auto currentParent = dynamic_cast<QGIView *>(this->parentItem());
+    if (currentParent != targetParent) {
+        if (targetParent) {
+            targetParent->addToGroup(this);
+            targetParent->updateView();
+            if (currentParent) {
+                currentParent->updateView();
+            }
+        }
+        else {
+            while (currentParent) {
+                currentParent->removeFromGroup(this);
+                currentParent->updateView();
+                currentParent = dynamic_cast<QGIView *>(this->parentItem());
+            }
+        }
     }
 }
 

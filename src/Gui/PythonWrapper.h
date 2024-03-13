@@ -29,6 +29,7 @@
 #include <FCGlobal.h>
 
 QT_BEGIN_NAMESPACE
+class QAction;
 class QDir;
 class QIcon;
 class QImage;
@@ -58,6 +59,7 @@ public:
     QGraphicsObject* toQGraphicsObject(PyObject* pyPtr);
     QGraphicsObject* toQGraphicsObject(const Py::Object& pyObject);
 
+    Py::Object fromQAction(QAction*);
     Py::Object fromQPrinter(QPrinter*);
     Py::Object fromQObject(QObject*, const char* className=nullptr);
     Py::Object fromQWidget(QWidget*, const char* className=nullptr);
@@ -75,10 +77,6 @@ public:
     QDir* toQDir(PyObject* pyobj);
     static void createChildrenNameAttributes(PyObject* root, QObject* object);
     static void setParent(PyObject* pyWdg, QObject* parent);
-
-private:
-    static std::string shiboken;
-    static std::string PySide;
 };
 
 } // namespace Gui

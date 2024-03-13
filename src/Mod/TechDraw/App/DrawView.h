@@ -84,6 +84,8 @@ public:
 
     virtual DrawPage* findParentPage() const;
     virtual std::vector<DrawPage*> findAllParentPages() const;
+    virtual DrawView *claimParent() const;
+
     virtual int countParentPages() const;
     virtual QRectF getRect() const;                      //must be overridden by derived class
     QRectF getRectAligned() const;
@@ -116,7 +118,10 @@ public:
 
     void translateLabel(std::string context, std::string baseName, std::string uniqueName);
 
+    virtual App::PropertyLink *getOwnerProperty() { return nullptr; }
+
 protected:
+    void onBeforeChange(const App::Property *prop) override;
     void onChanged(const App::Property* prop) override;
     virtual void validateScale();
     std::string pageFeatName;
@@ -125,6 +130,8 @@ protected:
 
     int prefScaleType();
     double prefScale();
+
+    void touchTreeOwner(App::DocumentObject *owner) const;
 
 private:
     static const char* ScaleTypeEnums[];

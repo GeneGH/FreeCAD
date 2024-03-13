@@ -264,6 +264,15 @@ public:
     /// toggle the driving status of this constraint
     int toggleActive(int ConstrId);
 
+    /// set the label position of the constraint
+    int setLabelPosition(int ConstrId, float value);
+    /// get the label position of the constraint
+    int getLabelPosition(int ConstrId, float& value);
+    /// set the label distance of the constraint
+    int setLabelDistance(int ConstrId, float value);
+    /// get the label distance of the constraint
+    int getLabelDistance(int ConstrId, float& value);
+
     /// Make all dimensionals Driving/non-Driving
     int setDatumsDriving(bool isdriving);
     /// Move Dimensional constraints at the end of the properties array
@@ -345,7 +354,11 @@ public:
       \param geoId1, posId1, geoId2, posId2: the end points to join
       \retval - 0 on success, -1 on failure
     */
-    int join(int geoId1, Sketcher::PointPos posId1, int geoId2, Sketcher::PointPos posId2);
+    int join(int geoId1,
+             Sketcher::PointPos posId1,
+             int geoId2,
+             Sketcher::PointPos posId2,
+             int continuity = 0);
 
     /// adds symmetric geometric elements with respect to the refGeoId (line or point)
     int addSymmetric(const std::vector<int>& geoIdList,

@@ -968,14 +968,7 @@ bool ViewProviderSketch::mouseButtonPressed(int Button, bool pressed, const SbVe
                         std::stringstream ss;
                         ss << "Vertex" << preselection.getPreselectionVertexIndex();
 
-                        if (isSelected(ss.str())) {
-                            rmvSelection(ss.str());
-                        }
-                        else {
-                            addSelection2(
-                                ss.str(), pp->getPoint()[0], pp->getPoint()[1], pp->getPoint()[2]);
-                            drag.resetIds();
-                        }
+                        preselectToSelection(ss, pp, true);
                     }
                     Mode = STATUS_NONE;
                     return true;
@@ -988,16 +981,7 @@ bool ViewProviderSketch::mouseButtonPressed(int Button, bool pressed, const SbVe
                         else// external geometry
                             ss << "ExternalEdge" << preselection.getPreselectionExternalEdgeIndex();
 
-                        // If edge already selected move from selection
-                        if (isSelected(ss.str())) {
-                            rmvSelection(ss.str());
-                        }
-                        else {
-                            // Add edge to the selection
-                            addSelection2(
-                                ss.str(), pp->getPoint()[0], pp->getPoint()[1], pp->getPoint()[2]);
-                            drag.resetIds();
-                        }
+                        preselectToSelection(ss, pp, true);
                     }
                     Mode = STATUS_NONE;
                     return true;
@@ -1019,16 +1003,7 @@ bool ViewProviderSketch::mouseButtonPressed(int Button, bool pressed, const SbVe
                                 break;
                         }
 
-                        // If cross already selected move from selection
-                        if (isSelected(ss.str())) {
-                            rmvSelection(ss.str());
-                        }
-                        else {
-                            // Add cross to the selection
-                            addSelection2(
-                                ss.str(), pp->getPoint()[0], pp->getPoint()[1], pp->getPoint()[2]);
-                            drag.resetIds();
-                        }
+                        preselectToSelection(ss, pp, true);
                     }
                     Mode = STATUS_NONE;
                     return true;
@@ -1044,18 +1019,7 @@ bool ViewProviderSketch::mouseButtonPressed(int Button, bool pressed, const SbVe
                             std::stringstream ss;
                             ss << Sketcher::PropertyConstraintList::getConstraintName(id);
 
-                            // If the constraint already selected remove
-                            if (isSelected(ss.str())) {
-                                rmvSelection(ss.str());
-                            }
-                            else {
-                                // Add constraint to current selection
-                                addSelection2(ss.str(),
-                                              pp->getPoint()[0],
-                                              pp->getPoint()[1],
-                                              pp->getPoint()[2]);
-                                drag.resetIds();
-                            }
+                            preselectToSelection(ss, pp, true);
                         }
                     }
                     Mode = STATUS_NONE;
@@ -1171,15 +1135,27 @@ bool ViewProviderSketch::mouseButtonPressed(int Button, bool pressed, const SbVe
                     return true;
                 case STATUS_SKETCH_DragConstraint:
                     if (!drag.DragConstraintSet.empty()) {
-                        getDocument()->openCommand(QT_TRANSLATE_NOOP("Command", "Drag Constraint"));
                         auto idset = drag.DragConstraintSet;
+                        // restore the old positions before opening the transaction and setting the new positions
                         for (int id : idset) {
-                            moveConstraint(id, Base::Vector2d(x, y));
-                            // updateColor();
+                            moveConstraint(id, Base::Vector2d(drag.xInit, drag.yInit));
                         }
+
+                        getDocument()->openCommand(QT_TRANSLATE_NOOP("Command", "Drag Constraint"));
+                        std::vector<Sketcher::Constraint*> constraints = getConstraints();
+                        for (int id : idset) {
+                            Sketcher::Constraint* constr = constraints[id]->clone();
+                            moveConstraint(constr, id, Base::Vector2d(x, y));
+                            constraints[id] = constr;
+                        }
+
+                        Sketcher::SketchObject* obj = getSketchObject();
+                        obj->Constraints.setValues(std::move(constraints));
+
                         preselection.PreselectConstraintSet = drag.DragConstraintSet;
                         drag.DragConstraintSet.clear();
                         getDocument()->commitCommand();
+                        tryAutoRecomputeIfNotSolve(getSketchObject());
                     }
                     Mode = STATUS_NONE;
                     return true;
@@ -1210,17 +1186,102 @@ bool ViewProviderSketch::mouseButtonPressed(int Button, bool pressed, const SbVe
     }
     // Right mouse button ****************************************************
     else if (Button == 2) {
-        if (!pressed) {
+        if (pressed) {
+            // Do things depending on the mode of the user interaction
+            switch (Mode) {
+                case STATUS_NONE: {
+                    if (preselection.isPreselectPointValid()) {
+                        // Base::Console().Log("start dragging, point:%d\n",this->DragPoint);
+                        Mode = STATUS_SELECT_Point;
+                    }
+                    else if (preselection.isPreselectCurveValid()) {
+                        // Base::Console().Log("start dragging, point:%d\n",this->DragPoint);
+                        Mode = STATUS_SELECT_Edge;
+                    }
+                    else if (preselection.isCrossPreselected()) {
+                        // Base::Console().Log("start dragging, point:%d\n",this->DragPoint);
+                        Mode = STATUS_SELECT_Cross;
+                    }
+                    else if (!preselection.PreselectConstraintSet.empty()) {
+                        // Base::Console().Log("start dragging, point:%d\n",this->DragPoint);
+                        Mode = STATUS_SELECT_Constraint;
+                    }
+                }
+                default:
+                    break;
+            }
+        }
+        else if (!pressed) {
             switch (Mode) {
                 case STATUS_SKETCH_UseHandler:
                     // delegate to handler whether to quit or do otherwise
                     sketchHandler->pressRightButton(Base::Vector2d(x, y));
                     return true;
                 case STATUS_NONE:
+                    generateContextMenu();
+                    return true;
                 case STATUS_SELECT_Point:
+                    if (pp) {
+                        // Base::Console().Log("Select Point:%d\n",this->DragPoint);
+                        //  Do selection
+                        std::stringstream ss;
+                        ss << "Vertex" << preselection.getPreselectionVertexIndex();
+
+                        preselectToSelection(ss, pp, false);
+                    }
+                    Mode = STATUS_NONE;
+                    generateContextMenu();
+                    return true;
                 case STATUS_SELECT_Edge:
+                    if (pp) {
+                        // Base::Console().Log("Select Point:%d\n",this->DragPoint);
+                        std::stringstream ss;
+                        if (preselection.isEdge()) {
+                            ss << "Edge" << preselection.getPreselectionEdgeIndex();
+                        }
+                        else {  // external geometry
+                            ss << "ExternalEdge" << preselection.getPreselectionExternalEdgeIndex();
+                        }
+
+                        preselectToSelection(ss, pp, false);
+                    }
+                    Mode = STATUS_NONE;
+                    generateContextMenu();
+                    return true;
                 case STATUS_SELECT_Cross:
+                    if (pp) {
+                        // Base::Console().Log("Select Point:%d\n",this->DragPoint);
+                        std::stringstream ss;
+                        switch (preselection.PreselectCross) {
+                            case Preselection::Axes::RootPoint:
+                                ss << "RootPoint";
+                                break;
+                            case Preselection::Axes::HorizontalAxis:
+                                ss << "H_Axis";
+                                break;
+                            case Preselection::Axes::VerticalAxis:
+                                ss << "V_Axis";
+                                break;
+                            default:
+                                break;
+                        }
+
+                        preselectToSelection(ss, pp, false);
+                    }
+                    Mode = STATUS_NONE;
+                    generateContextMenu();
+                    return true;
                 case STATUS_SELECT_Constraint: {
+                    if (pp) {
+                        auto sels = preselection.PreselectConstraintSet;
+                        for (int id : sels) {
+                            std::stringstream ss;
+                            ss << Sketcher::PropertyConstraintList::getConstraintName(id);
+
+                            preselectToSelection(ss, pp, false);
+                        }
+                    }
+                    Mode = STATUS_NONE;
                     generateContextMenu();
                     return true;
                 }
@@ -1229,6 +1290,7 @@ bool ViewProviderSketch::mouseButtonPressed(int Button, bool pressed, const SbVe
                 case STATUS_SKETCH_DragConstraint:
                 case STATUS_SKETCH_StartRubberBand:
                 case STATUS_SKETCH_UseRubberBand:
+                case STATUS_SELECT_Wire:
                     break;
             }
         }
@@ -1545,6 +1607,8 @@ bool ViewProviderSketch::mouseMove(const SbVec2s& cursorPos, Gui::View3DInventor
         case STATUS_SELECT_Constraint:
             Mode = STATUS_SKETCH_DragConstraint;
             drag.DragConstraintSet = preselection.PreselectConstraintSet;
+            drag.xInit = x;
+            drag.yInit = y;
             resetPreselectPoint();
             return true;
         case STATUS_SKETCH_DragPoint:
@@ -1608,8 +1672,9 @@ bool ViewProviderSketch::mouseMove(const SbVec2s& cursorPos, Gui::View3DInventor
         case STATUS_SKETCH_DragConstraint:
             if (!drag.DragConstraintSet.empty()) {
                 auto idset = drag.DragConstraintSet;
-                for (int id : idset)
+                for (int id : idset) {
                     moveConstraint(id, Base::Vector2d(x, y));
+                }
             }
             return true;
         case STATUS_SKETCH_UseHandler:
@@ -1646,15 +1711,19 @@ bool ViewProviderSketch::mouseMove(const SbVec2s& cursorPos, Gui::View3DInventor
 
 void ViewProviderSketch::moveConstraint(int constNum, const Base::Vector2d& toPos)
 {
+    if (auto constr = getConstraint(constNum)) {
+        moveConstraint(constr, constNum, toPos);
+    }
+}
+
+void ViewProviderSketch::moveConstraint(Sketcher::Constraint* Constr, int constNum, const Base::Vector2d& toPos)
+{
     // are we in edit?
     if (!isInEditMode())
         return;
 
-    Sketcher::SketchObject* obj = getSketchObject();
-    const std::vector<Sketcher::Constraint*>& constrlist = obj->Constraints.getValues();
-    Constraint* Constr = constrlist[constNum];
-
 #ifdef FC_DEBUG
+    Sketcher::SketchObject* obj = getSketchObject();
     int intGeoCount = obj->getHighestCurveIndex() + 1;
     int extGeoCount = obj->getExternalGeometryCount();
 #endif
@@ -1821,7 +1890,7 @@ void ViewProviderSketch::moveConstraint(int constNum, const Base::Vector2d& toPo
         }
     }
     else if (Constr->Type == Angle) {
-        moveAngleConstraint(constNum, toPos);
+        moveAngleConstraint(Constr, constNum, toPos);
     }
 
     // delete the cloned objects
@@ -1834,12 +1903,9 @@ void ViewProviderSketch::moveConstraint(int constNum, const Base::Vector2d& toPo
     draw(true, false);
 }
 
-void ViewProviderSketch::moveAngleConstraint(int constNum, const Base::Vector2d& toPos)
+void ViewProviderSketch::moveAngleConstraint(Sketcher::Constraint* constr, int constNum, const Base::Vector2d& toPos)
 {
     Sketcher::SketchObject* obj = getSketchObject();
-    const std::vector<Sketcher::Constraint*>& constrlist = obj->Constraints.getValues();
-    Constraint* constr = constrlist[constNum];
-
     Base::Vector3d p0(0., 0., 0.);
     double factor = 0.5;
     if (constr->Second != GeoEnum::GeoUndef) {// line to line angle
@@ -2907,7 +2973,7 @@ bool ViewProviderSketch::setEdit(int ModNum)
                     "if ActiveSketch.ViewObject.HideDependent:\n"
                     "  tv.hide(tv.get_all_dependent(%3, '%4'))\n"
                     "if ActiveSketch.ViewObject.ShowSupport:\n"
-                    "  tv.show([ref[0] for ref in ActiveSketch.Support if not "
+                    "  tv.show([ref[0] for ref in ActiveSketch.AttachmentSupport if not "
                     "ref[0].isDerivedFrom(\"PartDesign::Plane\")])\n"
                     "if ActiveSketch.ViewObject.ShowLinks:\n"
                     "  tv.show([ref[0] for ref in ActiveSketch.ExternalGeometry])\n"
@@ -2946,7 +3012,7 @@ bool ViewProviderSketch::setEdit(int ModNum)
     // The false parameter indicates that the geometry of the SketchObject shall not be updateData
     // so as not to trigger an onChanged that would set the document as modified and trigger a
     // recompute if we just close the sketch without touching anything.
-    if (getSketchObject()->Support.getValue()) {
+    if (getSketchObject()->AttachmentSupport.getValue()) {
         if (!getSketchObject()->evaluateSupport())
             getSketchObject()->validateExternalLinks();
     }
@@ -3292,7 +3358,10 @@ void ViewProviderSketch::camSensCB(void* data, SoSensor*)
     auto vp = proxyVPrdr->vp;
     auto cam = proxyVPrdr->renderMgr->getCamera();
 
-    vp->onCameraChanged(cam);
+    if (cam == nullptr)
+        Base::Console().DeveloperWarning("ViewProviderSketch", "Camera is nullptr!\n");
+    else
+        vp->onCameraChanged(cam);
 }
 
 void ViewProviderSketch::onCameraChanged(SoCamera* cam)
@@ -3687,6 +3756,17 @@ const std::vector<Sketcher::Constraint*> ViewProviderSketch::getConstraints() co
     return getSketchObject()->Constraints.getValues();
 }
 
+Sketcher::Constraint* ViewProviderSketch::getConstraint(int constid) const
+{
+    Sketcher::SketchObject* obj = getSketchObject();
+    const std::vector<Sketcher::Constraint*>& constrlist = obj->Constraints.getValues();
+    if (constid >= 0 || constid < int(constrlist.size())) {
+        return constrlist[constid];
+    }
+
+    return nullptr;
+}
+
 const GeoList ViewProviderSketch::getGeoList() const
 {
     const std::vector<Part::Geometry*> tempGeo =
@@ -3907,7 +3987,7 @@ void ViewProviderSketch::generateContextMenu()
             for (auto& name : SubNames) {
                 int geoId = std::atoi(name.substr(4, 4000).c_str()) - 1;
                 const Part::Geometry* geo = getSketchObject()->getGeometry(geoId);
-                if (name.substr(0, 4) == "Edge") {
+                if (name.substr(0, 4) == "Edge" || name.substr(0, 12) == "ExternalEdge") {
                     ++selectedEdges;
 
                     if (geoId >= 0) {
@@ -3929,9 +4009,8 @@ void ViewProviderSketch::generateContextMenu()
                     if (isBsplineKnotOrEndPoint(obj, geoId, posId)) {
                         ++selectedBsplineKnots;
                     }
-                    if (Sketcher::PointPos::start != posId || Sketcher::PointPos::end != posId) {
-                        ++selectedEndPoints;
-                    }
+
+                    ++selectedEndPoints;
                 }
                 else if (name.substr(0, 4) == "Cons") {
                     ++selectedConstraints;
@@ -3968,8 +4047,8 @@ void ViewProviderSketch::generateContextMenu()
             menu << "Sketcher_Dimension";
             if (selectedConics == 0) {
                 menu << "Sketcher_ConstrainHorVer"
-                     << "Sketcher_ConstrainVertical"
-                     << "Sketcher_ConstrainHorizontal";
+                     << "Sketcher_ConstrainHorizontal"
+                     << "Sketcher_ConstrainVertical";
 
                 if (selectedLines > 1) {
                     menu << "Sketcher_ConstrainParallel";
@@ -3997,8 +4076,8 @@ void ViewProviderSketch::generateContextMenu()
             if (selectedConics == 0 && selectedBsplines == 0) {
                 menu << "Sketcher_ConstrainCoincidentUnified"
                      << "Sketcher_ConstrainHorVer"
-                     << "Sketcher_ConstrainVertical"
-                     << "Sketcher_ConstrainHorizontal";
+                     << "Sketcher_ConstrainHorizontal"
+                     << "Sketcher_ConstrainVertical";
                 if (selectedPoints == 2) {
                     menu << "Sketcher_ConstrainSymmetric";
                 }
@@ -4019,8 +4098,8 @@ void ViewProviderSketch::generateContextMenu()
             if (selectedPoints > 1) {
                 menu << "Sketcher_ConstrainCoincidentUnified"
                      << "Sketcher_ConstrainHorVer"
-                     << "Sketcher_ConstrainVertical"
-                     << "Sketcher_ConstrainHorizontal";
+                     << "Sketcher_ConstrainHorizontal"
+                     << "Sketcher_ConstrainVertical";
             }
             if (selectedPoints == 2) {
                 menu << "Sketcher_ConstrainPerpendicular"
@@ -4033,8 +4112,8 @@ void ViewProviderSketch::generateContextMenu()
         else if (selectedLines >= 1 && selectedPoints >= 1 && !onlyOrigin) {
             menu << "Sketcher_Dimension"
                  << "Sketcher_ConstrainHorVer"
-                 << "Sketcher_ConstrainVertical"
-                 << "Sketcher_ConstrainHorizontal";
+                 << "Sketcher_ConstrainHorizontal"
+                 << "Sketcher_ConstrainVertical";
         }
         // context menu if only constraints are selected
         else if (selectedConstraints >= 1) {
@@ -4049,15 +4128,19 @@ void ViewProviderSketch::generateContextMenu()
             menu << "Separator"
                  << "Sketcher_ToggleConstruction"
                  << "Separator"
-                 << "Sketcher_CreatePointFillet"
-                 << "Sketcher_Trimming"
-                 << "Sketcher_Extend"
-                 << "Sketcher_Offset"
+                 << "Sketcher_Translate"
                  << "Sketcher_Rotate"
+                 << "Sketcher_Scale"
+                 << "Sketcher_Offset"
                  << "Separator"
                  << "Sketcher_CompDimensionTools"
                  << "Sketcher_CompConstrainTools"
+                 << "Separator"
                  << "Sketcher_SelectConstraints"
+                 << "Separator"
+                 << "Sketcher_CopyClipboard"
+                 << "Sketcher_Cut"
+                 << "Sketcher_Paste"
                  << "Separator"
                  << "Std_Delete";
         }
@@ -4090,6 +4173,8 @@ void ViewProviderSketch::generateContextMenu()
              << "Sketcher_DeleteAllGeometry"
              << "Sketcher_DeleteAllConstraints"
              << "Separator"
+             << "Sketcher_Paste"
+             << "Separator"
              << "Sketcher_LeaveSketch";
     }
     // create context menu
@@ -4098,5 +4183,20 @@ void ViewProviderSketch::generateContextMenu()
         qobject_cast<Gui::View3DInventor*>(this->getActiveView())->getViewer()->getGLWidget());
     Gui::MenuManager::getInstance()->setupContextMenu(&menu, contextMenu);
     contextMenu.exec(QCursor::pos());
+}
+
+void ViewProviderSketch::preselectToSelection(const std::stringstream& ss,
+                                              boost::scoped_ptr<SoPickedPoint>& pp,
+                                              bool toggle)
+{
+    // If toggle true and preselection already selected remove from selection
+    if (toggle && isSelected(ss.str())) {
+        rmvSelection(ss.str());
+    }
+    // add to selection
+    else {
+        addSelection2(ss.str(), pp->getPoint()[0], pp->getPoint()[1], pp->getPoint()[2]);
+        drag.resetIds();
+    }
 }
 // clang-format on

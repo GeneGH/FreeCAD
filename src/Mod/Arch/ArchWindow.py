@@ -195,15 +195,15 @@ class _CommandWindow:
                 if obj.Shape.Wires and (not obj.Shape.Solids) and (not obj.Shape.Shells):
                     FreeCADGui.Control.closeDialog()
                     host = None
-                    if hasattr(obj,"Support"):
-                        if obj.Support:
-                            if isinstance(obj.Support,tuple):
-                                host = obj.Support[0]
-                            elif isinstance(obj.Support,list):
-                                host = obj.Support[0][0]
+                    if hasattr(obj,"AttachmentSupport"):
+                        if obj.AttachmentSupport:
+                            if isinstance(obj.AttachmentSupport,tuple):
+                                host = obj.AttachmentSupport[0]
+                            elif isinstance(obj.AttachmentSupport,list):
+                                host = obj.AttachmentSupport[0][0]
                             else:
-                                host = obj.Support
-                            obj.Support = None # remove
+                                host = obj.AttachmentSupport
+                            obj.AttachmentSupport = None # remove
                     elif Draft.isClone(obj,"Window"):
                         if obj.Objects[0].Inlist:
                             host = obj.Objects[0].Inlist[0]
@@ -643,7 +643,7 @@ class _Window(ArchComponent.Component):
 
         if prop in ["Base","WindowParts","Placement","HoleDepth","Height","Width","Hosts"]:
             setattr(self,prop,getattr(obj,prop))
-        if prop in ["Height","Width"]:
+        if prop in ["Height","Width"] and obj.CloneOf is None:
             self.TouchOnShapeChange = True  # touch hosts after next "Shape" change
 
     def onChanged(self,obj,prop):
@@ -1190,7 +1190,7 @@ class _ViewProviderWindow(ArchComponent.ViewProviderComponent):
 
         """Returns a tuple defining as uniquely as possible a solid"""
 
-        return (solid.ShapeType,solid.Volume,solid.Area,solid.Length)
+        return (solid.ShapeType,round(solid.Volume,3),round(solid.Area,3),round(solid.Length,3))
 
     def getSolidMaterial(self,obj,name,mtype=None):
 

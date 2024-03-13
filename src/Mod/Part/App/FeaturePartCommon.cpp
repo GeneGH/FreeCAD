@@ -34,6 +34,7 @@
 #include <Base/Parameter.h>
 
 #include "FeaturePartCommon.h"
+#include "TopoShapeOpCode.h"
 #include "modelRefine.h"
 
 
@@ -43,6 +44,11 @@ PROPERTY_SOURCE(Part::Common, Part::Boolean)
 
 
 Common::Common() = default;
+
+const char *Common::opCode() const
+{
+    return Part::OpCodes::Common;
+}
 
 BRepAlgoAPI_BooleanOperation* Common::makeOperation(const TopoDS_Shape& base, const TopoDS_Shape& tool) const
 {
@@ -205,7 +211,7 @@ App::DocumentObjectExecReturn *MultiCommon::execute()
         shapes.push_back(sh);
     }
 
-    TopoShape res {};
+    TopoShape res {0};
     res.makeElementBoolean(Part::OpCodes::Common, shapes);
     if (res.isNull()) {
         throw Base::RuntimeError("Resulting shape is null");

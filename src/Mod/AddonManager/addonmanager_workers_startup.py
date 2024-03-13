@@ -23,7 +23,7 @@
 # ***************************************************************************
 
 """ Worker thread classes for Addon Manager startup """
-
+import datetime
 import hashlib
 import json
 import os
@@ -41,6 +41,7 @@ import FreeCAD
 import addonmanager_utilities as utils
 from addonmanager_macro import Macro
 from Addon import Addon
+from AddonStats import AddonStats
 import NetworkManager
 from addonmanager_git import initialize_git, GitFailed
 from addonmanager_metadata import MetadataReader, get_branch_from_metadata
@@ -93,7 +94,7 @@ class CreateAddonListWorker(QtCore.QThread):
     def _get_freecad_addon_repo_data(self):
         # update info lists
         p = NetworkManager.AM_NETWORK_MANAGER.blocking_get(
-            "https://raw.githubusercontent.com/FreeCAD/FreeCAD-addons/master/addonflags.json"
+            "https://raw.githubusercontent.com/FreeCAD/FreeCAD-addons/master/addonflags.json", 5000
         )
         if p:
             p = p.data().decode("utf8")
@@ -203,7 +204,7 @@ class CreateAddonListWorker(QtCore.QThread):
     def _get_official_addons(self):
         # querying official addons
         p = NetworkManager.AM_NETWORK_MANAGER.blocking_get(
-            "https://raw.githubusercontent.com/FreeCAD/FreeCAD-addons/master/.gitmodules"
+            "https://raw.githubusercontent.com/FreeCAD/FreeCAD-addons/master/.gitmodules", 5000
         )
         if not p:
             return
@@ -369,7 +370,7 @@ class CreateAddonListWorker(QtCore.QThread):
         """
 
         p = NetworkManager.AM_NETWORK_MANAGER.blocking_get(
-            "https://wiki.freecad.org/Macros_recipes"
+            "https://wiki.freecad.org/Macros_recipes", 5000
         )
         if not p:
             # The Qt Python translation extractor doesn't support splitting this string (yet)
@@ -859,7 +860,7 @@ class CacheMacroCodeWorker(QtCore.QThread):
                 ).format(macro_name)
                 + "\n"
             )
-            worker.blockSignals(True)
+            # worker.blockSignals(True)
             worker.requestInterruption()
             worker.wait(100)
             if worker.isRunning():
@@ -871,8 +872,6 @@ class CacheMacroCodeWorker(QtCore.QThread):
                 )
             with self.lock:
                 self.failed.append(macro_name)
-                self.repo_queue.task_done()
-                self.counter += 1
 
 
 class GetMacroDetailsWorker(QtCore.QThread):
@@ -915,3 +914,84 @@ class GetMacroDetailsWorker(QtCore.QThread):
         if QtCore.QThread.currentThread().isInterruptionRequested():
             return
         self.readme_updated.emit(message)
+
+
+class GetBasicAddonStatsWorker(QtCore.QThread):
+    """Fetch data from an addon stats repository."""
+
+    update_addon_stats = QtCore.Signal(Addon)
+
+    def __init__(self, url: str, addons: List[Addon], parent: QtCore.QObject = None):
+        super().__init__(parent)
+        self.url = url
+        self.addons = addons
+
+    def run(self):
+        """Fetch the remote data and load it into the addons"""
+
+        fetch_result = NetworkManager.AM_NETWORK_MANAGER.blocking_get(self.url, 5000)
+        if fetch_result is None:
+            FreeCAD.Console.PrintError(
+                translate(
+                    "AddonsInstaller",
+                    "Failed to get Addon statistics from {} -- only sorting alphabetically will be accurate\n",
+                ).format(self.url)
+            )
+            return
+        text_result = fetch_result.data().decode("utf8")
+        json_result = json.loads(text_result)
+
+        for addon in self.addons:
+            if addon.url in json_result:
+                addon.stats = AddonStats.from_json(json_result[addon.url])
+                self.update_addon_stats.emit(addon)
+
+
+class GetAddonScoreWorker(QtCore.QThread):
+    """Fetch data from an addon score file."""
+
+    update_addon_score = QtCore.Signal(Addon)
+
+    def __init__(self, url: str, addons: List[Addon], parent: QtCore.QObject = None):
+        super().__init__(parent)
+        self.url = url
+        self.addons = addons
+
+    def run(self):
+        """Fetch the remote data and load it into the addons"""
+
+        if self.url != "TEST":
+            fetch_result = NetworkManager.AM_NETWORK_MANAGER.blocking_get(self.url, 5000)
+            if fetch_result is None:
+                FreeCAD.Console.PrintError(
+                    translate(
+                        "AddonsInstaller",
+                        "Failed to get Addon score from '{}' -- sorting by score will fail\n",
+                    ).format(self.url)
+                )
+                return
+            text_result = fetch_result.data().decode("utf8")
+            json_result = json.loads(text_result)
+        else:
+            FreeCAD.Console.PrintWarning("Running score generation in TEST mode...\n")
+            json_result = {}
+            for addon in self.addons:
+                if addon.macro:
+                    json_result[addon.name] = len(addon.macro.comment) if addon.macro.comment else 0
+                else:
+                    json_result[addon.url] = len(addon.description) if addon.description else 0
+
+        for addon in self.addons:
+            score = None
+            if addon.url in json_result:
+                score = json_result[addon.url]
+            elif addon.name in json_result:
+                score = json_result[addon.name]
+            if score is not None:
+                try:
+                    addon.score = int(score)
+                    self.update_addon_score.emit(addon)
+                except (ValueError, OverflowError):
+                    FreeCAD.Console.PrintLog(
+                        f"Failed to convert score value '{score}' to an integer for addon {addon.name}"
+                    )

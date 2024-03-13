@@ -67,6 +67,7 @@
 #endif
 
 #include <App/PropertyStandard.h>
+#include <App/StringHasherPy.h>
 #include <Base/FileInfo.h>
 #include <Base/GeometryPyCXX.h>
 #include <Base/MatrixPy.h>
@@ -85,6 +86,7 @@
 #include <Mod/Part/App/TopoShapeCompSolidPy.h>
 #include <Mod/Part/App/TopoShapeEdgePy.h>
 #include <Mod/Part/App/TopoShapeFacePy.h>
+#include <Mod/Part/App/TopoShapeOpCode.h>
 #include <Mod/Part/App/TopoShapeShellPy.h>
 #include <Mod/Part/App/TopoShapeSolidPy.h>
 #include <Mod/Part/App/TopoShapeVertexPy.h>
@@ -92,6 +94,7 @@
 
 #include "OCCError.h"
 #include "PartPyCXX.h"
+#include "ShapeMapHasher.h"
 
 
 using namespace Part;
@@ -102,6 +105,26 @@ using namespace Part;
 
 #ifndef M_PI_2
     #define M_PI_2  1.57079632679489661923 /* pi/2 */
+#endif
+
+#ifdef FC_USE_TNP_FIX
+static Py_hash_t _TopoShapeHash(PyObject *self) {
+    if (!self) {
+        PyErr_SetString(PyExc_TypeError, "descriptor 'hash' of 'Part.TopoShape' object needs an argument");
+        return 0;
+    }
+    if (!static_cast<Base::PyObjectBase*>(self)->isValid()) {
+        PyErr_SetString(PyExc_ReferenceError, "This object is already deleted most likely through closing a document. This reference is no longer valid!");
+        return 0;
+    }
+    return static_cast<TopoShapePy*>(self)->getTopoShapePtr()->getShape().HashCode(INT_MAX);
+}
+
+struct TopoShapePyInit {
+    TopoShapePyInit() {
+        TopoShapePy::Type.tp_hash = _TopoShapeHash;
+    }
+} _TopoShapePyInit;
 #endif
 
 // returns a string which represents the object e.g. when printed in python
@@ -119,18 +142,68 @@ PyObject *TopoShapePy::PyMake(struct _typeobject *, PyObject *, PyObject *)  // 
     return new TopoShapePy(new TopoShape);
 }
 
-int TopoShapePy::PyInit(PyObject* args, PyObject*)
+int TopoShapePy::PyInit(PyObject* args, PyObject* keywds)
 {
-    PyObject *pcObj=nullptr;
-    if (!PyArg_ParseTuple(args, "|O", &pcObj))
+#ifdef FC_USE_TNP_FIX
+    static char* kwlist[] = {"shape", "op", "tag", "hasher", nullptr};
+    long tag = 0;
+    PyObject* pyHasher = nullptr;
+    const char* op = nullptr;
+    PyObject* pcObj = nullptr;
+    if (!PyArg_ParseTupleAndKeywords(args,
+                                     keywds,
+                                     "|OsiO!",
+                                     kwlist,
+                                     &pcObj,
+                                     &op,
+                                     &tag,
+                                     &App::StringHasherPy::Type,
+                                     &pyHasher)) {
         return -1;
+    }
+    auto& self = *getTopoShapePtr();
+    self.Tag = tag;
+    if (pyHasher) {
+        self.Hasher = static_cast<App::StringHasherPy*>(pyHasher)->getStringHasherPtr();
+    }
+    auto shapes = getPyShapes(pcObj);
+    PY_TRY
+    {
+        if (shapes.size() == 1 && !op) {
+            auto s = shapes.front();
+            if (self.Tag) {
+                if ((s.Tag && self.Tag != s.Tag)
+                    || (self.Hasher && s.getElementMapSize() && self.Hasher != s.Hasher)) {
+                    s.reTagElementMap(self.Tag, self.Hasher);
+                }
+                else {
+                    s.Tag = self.Tag;
+                    s.Hasher = self.Hasher;
+                }
+            }
+            self = s;
+        }
+        else if (shapes.size()) {
+            if (!op) {
+                op = Part::OpCodes::Fuse;
+            }
+            self.makeElementBoolean(op, shapes);
+        }
+    }
+    _PY_CATCH_OCC(return (-1))
+#else
+    PyObject* pcObj = nullptr;
+    if (!PyArg_ParseTuple(args, "|O", &pcObj)) {
+        return -1;
+    }
 
     auto shapes = getPyShapes(pcObj);
 
     if (pcObj) {
         TopoShape shape;
-        PY_TRY {
-            if (PyObject_TypeCheck(pcObj,&TopoShapePy::Type)) {
+        PY_TRY
+        {
+            if (PyObject_TypeCheck(pcObj, &TopoShapePy::Type)) {
                 shape = *static_cast<TopoShapePy*>(pcObj)->getTopoShapePtr();
             }
             else {
@@ -138,8 +211,8 @@ int TopoShapePy::PyInit(PyObject* args, PyObject*)
                 bool first = true;
                 for (Py::Sequence::iterator it = list.begin(); it != list.end(); ++it) {
                     if (PyObject_TypeCheck((*it).ptr(), &(Part::GeometryPy::Type))) {
-                        TopoDS_Shape sh = static_cast<GeometryPy*>((*it).ptr())->
-                            getGeometryPtr()->toShape();
+                        TopoDS_Shape sh =
+                            static_cast<GeometryPy*>((*it).ptr())->getGeometryPtr()->toShape();
                         if (first) {
                             first = false;
                             shape.setShape(sh);
@@ -151,11 +224,11 @@ int TopoShapePy::PyInit(PyObject* args, PyObject*)
                 }
             }
         }
-        _PY_CATCH_OCC(return(-1))
+        _PY_CATCH_OCC(return (-1))
 
         getTopoShapePtr()->setShape(shape.getShape());
     }
-
+ #endif
     return 0;
 }
 
@@ -1306,11 +1379,7 @@ PyObject*  TopoShapePy::ancestorsOfType(PyObject *args)
         TopTools_ListIteratorOfListOfShape it(ancestors);
         for (; it.More(); it.Next()) {
             // make sure to avoid duplicates
-#if OCC_VERSION_HEX >= 0x070800
-            const size_t code = std::hash<TopoDS_Shape>{}(static_cast<TopoDS_Shape>(it.Value()));
-#else
-            Standard_Integer code = it.Value().HashCode(INT_MAX);
-#endif
+            Standard_Integer code = ShapeMapHasher{}(it.Value());
             if (hashes.find(code) == hashes.end()) {
                 list.append(shape2pyshape(it.Value()));
                 hashes.insert(code);
@@ -1932,11 +2001,7 @@ PyObject* TopoShapePy::hashCode(PyObject *args)
     if (!PyArg_ParseTuple(args, "|i",&upper))
         return nullptr;
 
-#if OCC_VERSION_HEX >= 0x070800
-    int hc = std::hash<TopoDS_Shape>{}(getTopoShapePtr()->getShape());
-#else
-    int hc = getTopoShapePtr()->getShape().HashCode(upper);
-#endif
+    int hc = ShapeMapHasher{}(getTopoShapePtr()->getShape());
     return Py_BuildValue("i", hc);
 }
 

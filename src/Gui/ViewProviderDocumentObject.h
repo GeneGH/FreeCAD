@@ -64,6 +64,9 @@ public:
     App::PropertyEnumeration OnTopWhenSelected;
     App::PropertyEnumeration SelectionStyle;
 
+    // Hidden properties
+    App::PropertyInteger TreeRank;
+
     virtual void attach(App::DocumentObject *pcObject);
     virtual void reattach(App::DocumentObject *);
     void update(const App::Property*) override;
@@ -94,6 +97,8 @@ public:
     App::DocumentObject *getObject() const {return pcObject;}
     /// Asks the view provider if the given object can be deleted.
     bool canDelete(App::DocumentObject* obj) const override;
+    /// Ask the view provider if it accepts object deletions while in edit
+    virtual bool acceptDeletionsInEdit() { return false; }
     /// Get the GUI document to this ViewProvider object
     Gui::Document* getDocument() const;
     /// Get the python wrapper for that ViewProvider

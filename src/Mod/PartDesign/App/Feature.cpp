@@ -58,6 +58,26 @@ Feature::Feature()
                 App::Prop_ReadOnly|App::Prop_Hidden|App::Prop_Output|App::Prop_Transient),0);
     Placement.setStatus(App::Property::Hidden, true);
     BaseFeature.setStatus(App::Property::Hidden, true);
+
+    App::SuppressibleExtension::initExtension(this);
+    Suppressed.setStatus(App::Property::Status::Hidden, true); //Todo: remove when TNP fixed
+}
+
+App::DocumentObjectExecReturn* Feature::recompute()
+{
+    try {
+        auto baseShape = getBaseShape();
+        if (Suppressed.getValue()) {
+            this->Shape.setValue(baseShape);
+            return StdReturn;
+        }
+    }
+    catch (Base::Exception&) {
+        //invalid BaseShape
+        Suppressed.setValue(false);
+    }
+
+    return DocumentObject::recompute();
 }
 
 short Feature::mustExecute() const
@@ -136,6 +156,9 @@ Part::Feature* Feature::getBaseObject(bool silent) const {
 
 const TopoDS_Shape& Feature::getBaseShape() const {
     const Part::Feature* BaseObject = getBaseObject();
+
+    if (!BaseObject)
+        throw Base::ValueError("Base feature's shape is not defined");
 
     if (BaseObject->isDerivedFrom(PartDesign::ShapeBinder::getClassTypeId())||
         BaseObject->isDerivedFrom(PartDesign::SubShapeBinder::getClassTypeId()))

@@ -393,6 +393,7 @@ def _get_param_dictionary():
 
     # Arch parameters that are not in the preferences:
     param_dict["Mod/Arch"] = {
+        "applyConstructionStyle":      ("bool",      True),
         "ClaimHosted":                 ("bool",      True),
         "CustomIfcSchema":             ("string",    ""),     # importIFClegacy.py
         "createIfcGroups":             ("bool",      False),  # importIFClegacy.py
@@ -485,7 +486,7 @@ def _get_param_dictionary():
         "BackgroundColor":             ("unsigned",  336897023),
         "BackgroundColor2":            ("unsigned",  859006463),
         "BackgroundColor3":            ("unsigned",  2543299327),
-        "DefaultShapeColor":           ("unsigned",  3435973887),
+        "DefaultShapeColor":           ("unsigned",  3435980543),
         "DefaultShapeLineColor":       ("unsigned",  421075455),
         "DefaultShapeLineWidth":       ("int",       2),
         "DefaultShapePointSize":       ("int",       2),
