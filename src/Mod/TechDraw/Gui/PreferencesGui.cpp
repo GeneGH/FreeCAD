@@ -33,6 +33,7 @@
 #include <App/Material.h>
 #include <Base/Console.h>
 #include <Base/Parameter.h>
+#include <Gui/Selection.h>
 #include <Mod/TechDraw/App/Preferences.h>
 #include <Mod/TechDraw/App/LineGenerator.h>
 
@@ -93,6 +94,21 @@ QColor PreferencesGui::sectionLineQColor()
 //if the App::Color version has already lightened the color, we don't want to do it again
     App::Color fcColor;
     fcColor.setPackedValue(Preferences::getPreferenceGroup("Decorations")->GetUnsigned("SectionColor", 0x000000FF));
+    return fcColor.asValue<QColor>();
+}
+
+App::Color PreferencesGui::breaklineColor()
+{
+    App::Color fcColor;
+    fcColor.setPackedValue(Preferences::getPreferenceGroup("Decorations")->GetUnsigned("BreaklineColor", 0x000000FF));
+    return fcColor;
+}
+
+QColor PreferencesGui::breaklineQColor()
+{
+//if the App::Color version has already lightened the color, we don't want to do it again
+    App::Color fcColor;
+    fcColor.setPackedValue(Preferences::getPreferenceGroup("Decorations")->GetUnsigned("BreaklineColor", 0x000000FF));
     return fcColor.asValue<QColor>();
 }
 
@@ -199,7 +215,8 @@ bool PreferencesGui::showGrid()
 
 bool PreferencesGui::multiSelection()
 {
-  return Preferences::getPreferenceGroup("General")->GetBool("multiSelection", false);
+    bool greedy = Gui::Selection().getSelectionStyle() == Gui::SelectionSingleton::SelectionStyle::GreedySelection;
+    return greedy || Preferences::getPreferenceGroup("General")->GetBool("multiSelection", false);
 }
 
 App::Color PreferencesGui::pageColor()

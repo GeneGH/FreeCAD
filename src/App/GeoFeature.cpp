@@ -26,9 +26,11 @@
 #include <App/GeoFeaturePy.h>
 
 #include "ComplexGeoData.h"
+#include "Document.h"
 #include "GeoFeature.h"
 #include "GeoFeatureGroupExtension.h"
 #include "ElementNamingUtils.h"
+#include "Link.h"
 
 
 using namespace App;
@@ -87,6 +89,12 @@ GeoFeature::getElementName(const char *name, ElementNameType type) const
     std::pair<std::string,std::string> ret;
     if(!name)
         return ret;
+
+#ifndef FC_USE_TNP_FIX
+    ret.second = name;
+
+    return ret;
+#else
     auto prop = getPropertyOfGeometry();
     if (!prop) {
         return std::make_pair("", name);
@@ -98,6 +106,7 @@ GeoFeature::getElementName(const char *name, ElementNameType type) const
     }
 
     return _getElementName(name, geo->getElementName(name));
+#endif
 }
 
 std::pair<std::string, std::string>
@@ -133,18 +142,35 @@ DocumentObject *GeoFeature::resolveElement(DocumentObject *obj, const char *subn
         ElementNameType type, const DocumentObject *filter, 
         const char **_element, GeoFeature **geoFeature)
 {
+#ifdef FC_USE_TNP_FIX
+    elementName.first.clear();
+    elementName.second.clear();
+#endif
     if(!obj || !obj->isAttachedToDocument())
         return nullptr;
     if(!subname)
         subname = "";
     const char *element = Data::findElementName(subname);
     if(_element) *_element = element;
+#ifdef FC_USE_TNP_FIX
+    auto sobj = obj->getSubObject(std::string(subname, element).c_str());
+    if(!sobj)
+        return nullptr;
+    auto linked = sobj->getLinkedObject(true);
+    auto geo = Base::freecad_dynamic_cast<GeoFeature>(linked);
+    if(!geo && linked) {
+        auto ext = linked->getExtensionByType<LinkBaseExtension>(true);
+        if(ext)
+            geo = Base::freecad_dynamic_cast<GeoFeature>(ext->getTrueLinkedObject(true));
+    }
+#else
     auto sobj = obj->getSubObject(subname);
     if(!sobj)
         return nullptr;
     obj = sobj->getLinkedObject(true);
     auto geo = dynamic_cast<GeoFeature*>(obj);
-    if(geoFeature) 
+#endif
+    if(geoFeature)
         *geoFeature = geo;
     if(!obj || (filter && obj!=filter))
         return nullptr;
@@ -173,3 +199,84 @@ DocumentObject *GeoFeature::resolveElement(DocumentObject *obj, const char *subn
     return sobj;
 }
 
+App::Material GeoFeature::getMaterialAppearance() const
+{
+    return App::Material(App::Material::DEFAULT);
+}
+
+void GeoFeature::setMaterialAppearance(const App::Material& material)
+{
+    Q_UNUSED(material)
+}
+
+#ifdef FC_USE_TNP_FIX
+bool GeoFeature::hasMissingElement(const char* subname)
+{
+    return Data::hasMissingElement(subname);
+    if (!subname) {
+        return false;
+    }
+    auto dot = strrchr(subname, '.');
+    if (!dot) {
+        return subname[0] == '?';
+    }
+    return dot[1] == '?';
+}
+
+void GeoFeature::updateElementReference()
+{
+    auto prop = getPropertyOfGeometry();
+    if (!prop) {
+        return;
+    }
+    auto geo = prop->getComplexData();
+    if (!geo) {
+        return;
+    }
+    bool reset = false;
+    PropertyLinkBase::updateElementReferences(this, reset);
+}
+
+void GeoFeature::onChanged(const Property* prop)
+{
+    if (prop == getPropertyOfGeometry()) {
+        if (getDocument() && !getDocument()->testStatus(Document::Restoring)
+            && !getDocument()->isPerformingTransaction()) {
+            updateElementReference();
+        }
+    }
+    DocumentObject::onChanged(prop);
+}
+
+const std::vector<std::string>& GeoFeature::searchElementCache(const std::string& element,
+                                                               Data::SearchOptions options,
+                                                               double tol,
+                                                               double atol) const
+{
+    static std::vector<std::string> none;
+    (void)element;
+    (void)options;
+    (void)tol;
+    (void)atol;
+    return none;
+}
+
+const std::vector<const char*>& GeoFeature::getElementTypes(bool /*all*/) const
+{
+    static std::vector<const char*> nil;
+    auto prop = getPropertyOfGeometry();
+    if (!prop) {
+        return nil;
+    }
+    return prop->getComplexData()->getElementTypes();
+}
+
+std::vector<Data::IndexedName> GeoFeature::getHigherElements(const char* element, bool silent) const
+{
+    auto prop = getPropertyOfGeometry();
+    if (!prop) {
+        return {};
+    }
+    return prop->getComplexData()->getHigherElements(element, silent);
+}
+#endif

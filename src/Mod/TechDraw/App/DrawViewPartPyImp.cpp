@@ -98,6 +98,46 @@ PyObject* DrawViewPartPy::getHiddenEdges(PyObject *args)
     return Py::new_reference_to(pEdgeList);
 }
 
+PyObject* DrawViewPartPy::getVisibleVertexes(PyObject *args)
+{
+    if (!PyArg_ParseTuple(args, "")) {
+        return nullptr;
+    }
+
+    DrawViewPart* dvp = getDrawViewPartPtr();
+    Py::List pVertexList;
+    auto vertsAll = dvp->getVertexGeometry();
+    for (auto& vert: vertsAll) {
+        if (vert->getHlrVisible()) {
+            PyObject* pVertex = new Base::VectorPy(new Base::Vector3d(vert->point()));
+            pVertexList.append(Py::asObject(pVertex));
+        }
+    }
+
+    return Py::new_reference_to(pVertexList);
+}
+
+PyObject* DrawViewPartPy::getHiddenVertexes(PyObject *args)
+{
+    if (!PyArg_ParseTuple(args, "")) {
+        return nullptr;
+    }
+
+    DrawViewPart* dvp = getDrawViewPartPtr();
+    Py::List pVertexList;
+    auto vertsAll = dvp->getVertexGeometry();
+    for (auto& vert: vertsAll) {
+        if (!vert->getHlrVisible()) {
+            PyObject* pVertex = new Base::VectorPy(new Base::Vector3d(vert->point()));
+            pVertexList.append(Py::asObject(pVertex));
+        }
+    }
+
+    return Py::new_reference_to(pVertexList);
+}
+
+
+
 PyObject* DrawViewPartPy::requestPaint(PyObject *args)
 {
     if (!PyArg_ParseTuple(args, "")) {
@@ -109,6 +149,18 @@ PyObject* DrawViewPartPy::requestPaint(PyObject *args)
 
     Py_Return;
 }
+
+PyObject* DrawViewPartPy::getGeometricCenter(PyObject *args)
+{
+    if (!PyArg_ParseTuple(args, "")) {
+        return nullptr;
+    }
+
+    DrawViewPart* dvp = getDrawViewPartPtr();
+    Base::Vector3d pointOut = dvp->getCurrentCentroid();
+    return new Base::VectorPy(new Base::Vector3d(pointOut));
+}
+
 
 // remove all cosmetics
 PyObject* DrawViewPartPy::clearCosmeticVertices(PyObject *args)
@@ -262,15 +314,14 @@ PyObject* DrawViewPartPy::removeCosmeticVertex(PyObject *args)
     }
 
     if (PySequence_Check(pDelList))  {
-        Py_ssize_t nSize = PySequence_Size(pDelList);
-        for (Py_ssize_t i=0; i < nSize; i++) {
-            PyObject* item = PySequence_GetItem(pDelList, i);
-            if (!PyObject_TypeCheck(item, &(TechDraw::CosmeticVertexPy::Type)))  {
+        Py::Sequence sequence(pDelList);
+        for (const auto& item : sequence) {
+            if (!PyObject_TypeCheck(item.ptr(), &(TechDraw::CosmeticVertexPy::Type)))  {
                 PyErr_Format(PyExc_TypeError ,"Types in sequence must be 'CosmeticVertex', not %s",
-                    Py_TYPE(item)->tp_name);
+                    Py_TYPE(item.ptr())->tp_name);
                 return nullptr;
             }
-            TechDraw::CosmeticVertexPy* cvPy = static_cast<TechDraw::CosmeticVertexPy*>(item);
+            TechDraw::CosmeticVertexPy* cvPy = static_cast<TechDraw::CosmeticVertexPy*>(item.ptr());
             TechDraw::CosmeticVertex* cv = cvPy->getCosmeticVertexPtr();
             dvp->removeCosmeticVertex(cv->getTagAsString());
         }

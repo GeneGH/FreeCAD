@@ -2,6 +2,7 @@
 
 #include "gtest/gtest.h"
 
+#include <boost/core/ignore_unused.hpp>
 #include "Mod/Part/App/FeaturePartCommon.h"
 #include <src/App/InitApplication.h>
 #include <BRepBuilderAPI_MakeVertex.hxx>
@@ -110,7 +111,7 @@ TEST_F(FeaturePartTest, create)
     // the same document, the other feature will get an unique name that will still contain "Shape"
     EXPECT_STREQ(_doc->getObjectName(featureNoName), "Shape001");
 
-    // There aren't other features with name "Vertex" in _doc, therefor that name will be assigned
+    // There aren't other features with name "Vertex" in _doc, therefore that name will be assigned
     // without modifications
     EXPECT_STREQ(_doc->getObjectName(featureNoDoc), "Vertex");
 
@@ -120,19 +121,18 @@ TEST_F(FeaturePartTest, create)
 
     // Check that the features have been created in the correct document
 
-    // The first 3 calls to Feature::create acts on _doc, which is empty, and therefor the number of
-    // features in that document is the same of the features created with Feature::create
+    // The first 3 calls to Feature::create acts on _doc, which is empty, and therefore the number
+    // of features in that document is the same of the features created with Feature::create
     EXPECT_EQ(_doc->getObjects().size(), 3);
 
-    // The last call to Feature::create acts on otherDoc, which is empty, and therefor that document
-    // will have only 1 feature
+    // The last call to Feature::create acts on otherDoc, which is empty, and therefore that
+    // document will have only 1 feature
     EXPECT_EQ(otherDoc->getObjects().size(), 1);
 }
 
 TEST_F(FeaturePartTest, getElementHistory)
 {
     // Arrange
-    const char* name = "Part__Box";
     const char* name2 = "Edge2";  // Edge, Vertex, or Face. will work here.
     // Act
     auto result = Feature::getElementHistory(_boxes[0], name2, true, false);
@@ -156,6 +156,7 @@ TEST_F(FeaturePartTest, getRelatedElements)
     auto label1 = _common->Label.getValue();
     auto label2 = _boxes[1]->Label.getValue();
     const TopoShape& ts = _common->Shape.getShape();
+    boost::ignore_unused(ts);
     auto result = Feature::getRelatedElements(_doc->getObject(label1),
                                               "Edge2",
                                               HistoryTraceType::followTypeChange,
@@ -189,6 +190,9 @@ TEST_F(FeaturePartTest, getElementFromSource)
     auto label1 = _common->Label.getValue();
     auto label2 = _boxes[1]->Label.getValue();
     const TopoShape& ts = _common->Shape.getShape();
+    boost::ignore_unused(label1);
+    boost::ignore_unused(label2);
+    boost::ignore_unused(ts);
     auto element = Feature::getElementFromSource(_common,
                                                  "Part__Box001",  // "Edge1",
                                                  _boxes[0],
@@ -204,7 +208,6 @@ TEST_F(FeaturePartTest, getSubObject)
     _common->Base.setValue(_boxes[0]);
     _common->Tool.setValue(_boxes[1]);
     App::DocumentObject sourceObject;
-    const char* sourceSubElement;
     PyObject* pyObj;
     // Act
     _common->execute();

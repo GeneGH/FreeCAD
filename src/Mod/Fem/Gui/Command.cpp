@@ -58,6 +58,7 @@
 
 #ifdef FC_USE_VTK
 #include <Mod/Fem/App/FemPostPipeline.h>
+#include <Mod/Fem/Gui/ViewProviderFemPostObject.h>
 #endif
 
 
@@ -387,6 +388,58 @@ bool CmdFemConstraintFixed::isActive()
 
 
 //================================================================================================
+DEF_STD_CMD_A(CmdFemConstraintRigidBody)
+
+CmdFemConstraintRigidBody::CmdFemConstraintRigidBody()
+    : Command("FEM_ConstraintRigidBody")
+{
+    sAppModule = "Fem";
+    sGroup = QT_TR_NOOP("Fem");
+    sMenuText = QT_TR_NOOP("Constraint rigid body");
+    sToolTipText = QT_TR_NOOP("Creates a FEM constraint for a rigid body");
+    sWhatsThis = "FEM_ConstraintRigidBody";
+    sStatusTip = sToolTipText;
+    sPixmap = "FEM_ConstraintRigidBody";
+}
+
+void CmdFemConstraintRigidBody::activated(int)
+{
+    Fem::FemAnalysis* Analysis;
+
+    if (getConstraintPrerequisits(&Analysis)) {
+        return;
+    }
+
+    std::string FeatName = getUniqueObjectName("ConstraintRigidBody");
+
+    openCommand(QT_TRANSLATE_NOOP("Command", "Make FEM constraint fixed geometry"));
+    doCommand(Doc,
+              "App.activeDocument().addObject(\"Fem::ConstraintRigidBody\",\"%s\")",
+              FeatName.c_str());
+    doCommand(Doc,
+              "App.activeDocument().%s.Scale = 1",
+              FeatName.c_str());  // OvG: set initial scale to 1
+    doCommand(Doc,
+              "App.activeDocument().%s.addObject(App.activeDocument().%s)",
+              Analysis->getNameInDocument(),
+              FeatName.c_str());
+
+    doCommand(Doc,
+              "%s",
+              gethideMeshShowPartStr(FeatName).c_str());  // OvG: Hide meshes and show parts
+
+    updateActive();
+
+    doCommand(Gui, "Gui.activeDocument().setEdit('%s')", FeatName.c_str());
+}
+
+bool CmdFemConstraintRigidBody::isActive()
+{
+    return FemGui::ActiveAnalysisObserver::instance()->hasActiveObject();
+}
+
+
+//================================================================================================
 DEF_STD_CMD_A(CmdFemConstraintFluidBoundary)
 
 CmdFemConstraintFluidBoundary::CmdFemConstraintFluidBoundary()
@@ -577,6 +630,9 @@ void CmdFemConstraintHeatflux::activated(int)
               FeatName.c_str());  // OvG: set default not equal to 0
     doCommand(Doc,
               "App.activeDocument().%s.FilmCoef = 10.0",
+              FeatName.c_str());  // OvG: set default not equal to 0
+    doCommand(Doc,
+              "App.activeDocument().%s.Emissivity = 1.0",
               FeatName.c_str());  // OvG: set default not equal to 0
     doCommand(Doc,
               "App.activeDocument().%s.Scale = 1",
@@ -1688,6 +1744,22 @@ void setupFilter(Gui::Command* cmd, std::string Name)
         femFilter->Input.setValue(selObject);
     }
 
+    femFilter->Data.setValue(static_cast<Fem::FemPostObject*>(selObject)->Data.getValue());
+    auto selObjectView = static_cast<FemGui::ViewProviderFemPostObject*>(
+        Gui::Application::Instance->getViewProvider(selObject));
+
+    cmd->doCommand(Gui::Command::Doc,
+                   "App.activeDocument().ActiveObject.ViewObject.Field = \"%s\"",
+                   selObjectView->Field.getValueAsString());
+    cmd->doCommand(Gui::Command::Doc,
+                   "App.activeDocument().ActiveObject.ViewObject.VectorMode = \"%s\"",
+                   selObjectView->VectorMode.getValueAsString());
+
+    // hide selected filter
+    cmd->doCommand(Gui::Command::Doc,
+                   "App.activeDocument().%s.ViewObject.Visibility = False",
+                   selObject->getNameInDocument());
+
     cmd->updateActive();
     // open the dialog to edit the filter
     cmd->doCommand(Gui::Command::Gui, "Gui.activeDocument().setEdit('%s')", FeatName.c_str());
@@ -2605,6 +2677,7 @@ void CreateFemCommands()
     rcCmdMgr.addCommand(new CmdFemConstraintContact());
     rcCmdMgr.addCommand(new CmdFemConstraintDisplacement());
     rcCmdMgr.addCommand(new CmdFemConstraintFixed());
+    rcCmdMgr.addCommand(new CmdFemConstraintRigidBody());
     rcCmdMgr.addCommand(new CmdFemConstraintFluidBoundary());
     rcCmdMgr.addCommand(new CmdFemConstraintForce());
     rcCmdMgr.addCommand(new CmdFemConstraintGear());

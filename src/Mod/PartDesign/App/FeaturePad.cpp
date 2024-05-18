@@ -67,6 +67,13 @@ Pad::Pad()
     Length2.setConstraints(nullptr);
 }
 
+#ifdef FC_USE_TNP_FIX
+
+App::DocumentObjectExecReturn* Pad::execute()
+{
+    return buildExtrusion(ExtrudeOption::MakeFace | ExtrudeOption::MakeFuse);
+}
+#else
 App::DocumentObjectExecReturn *Pad::execute()
 {
     double L = Length.getValue();
@@ -109,7 +116,7 @@ App::DocumentObjectExecReturn *Pad::execute()
 
         base.Move(invObjLoc);
 
-        Base::Vector3d paddingDirection = computeDirection(SketchVector);
+        Base::Vector3d paddingDirection = computeDirection(SketchVector, false);
 
         // create vector in padding direction with length 1
         gp_Dir dir(paddingDirection.x, paddingDirection.y, paddingDirection.z);
@@ -262,3 +269,4 @@ App::DocumentObjectExecReturn *Pad::execute()
     }
 
 }
+#endif

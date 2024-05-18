@@ -15,6 +15,7 @@ link_directories(${OCC_LIBRARY_DIR})
 set(PartGui_LIBS
     Part
     FreeCADGui
+    MatGui
 )
 
 if(MSVC)
@@ -56,7 +57,6 @@ set(PartGui_UIC_SRCS
     DlgRevolution.ui
     DlgSettings3DViewPart.ui
     DlgSettingsGeneral.ui
-    DlgSettingsMeasure.ui
     DlgSettingsObjectColor.ui
     DlgProjectionOnSurface.ui
     SectionCutting.ui
@@ -132,15 +132,9 @@ SET(PartGui_SRCS
     DlgSettingsGeneral.cpp
     DlgSettingsGeneral.h
     DlgSettingsGeneral.ui
-    DlgSettingsMeasure.cpp
-    DlgSettingsMeasure.h
-    DlgSettingsMeasure.ui
     DlgSettingsObjectColor.cpp
     DlgSettingsObjectColor.h
     DlgSettingsObjectColor.ui
-    DlgSettingsMeasure.cpp
-    DlgSettingsMeasure.h
-    DlgSettingsMeasure.ui
     DlgProjectionOnSurface.cpp
     DlgProjectionOnSurface.h
     DlgProjectionOnSurface.ui
@@ -213,6 +207,8 @@ SET(PartGui_SRCS
     ViewProviderPython.h
     ViewProviderBoolean.cpp
     ViewProviderBoolean.h
+    ViewProviderProjectOnSurface.cpp
+    ViewProviderProjectOnSurface.h
     ViewProviderRuledSurface.cpp
     ViewProviderRuledSurface.h
     ViewProviderPrimitive.cpp
@@ -245,8 +241,6 @@ SET(PartGui_SRCS
     TaskSweep.ui
     TaskThickness.cpp
     TaskThickness.h
-    TaskDimension.cpp
-    TaskDimension.h
     TaskCheckGeometry.cpp
     TaskCheckGeometry.h
     TaskAttacher.h

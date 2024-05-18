@@ -742,7 +742,8 @@ SoFCUnifiedSelection::handleEvent(SoHandleEventAction * action)
             // check to see if the mouse is over a geometry...
             auto infos = this->getPickedList(action,!Selection().needPickedList());
             bool greedySel = Gui::Selection().getSelectionStyle() == Gui::SelectionSingleton::SelectionStyle::GreedySelection;
-            if(setSelection(infos, event->wasCtrlDown() || greedySel))
+            greedySel = greedySel || event->wasCtrlDown();
+            if(setSelection(infos, greedySel) || greedySel)
                 action->setHandled();
         } // mouse release
     }
@@ -1712,7 +1713,7 @@ void SoFCPathAnnotation::GLRenderBelowPath(SoGLRenderAction * action)
 
     if(path->getLength() != tmpPath->getLength()) {
         // The auditing SoPath may be truncated due to harmless things such as
-        // fliping a SoSwitch sibling node. So we keep an unauditing SoTempPath
+        // flipping a SoSwitch sibling node. So we keep an unauditing SoTempPath
         // around to try to restore the path.
         for(int i=path->getLength()-1;i<tmpPath->getLength()-1;++i) {
             auto children = path->getNode(i)->getChildren();

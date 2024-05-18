@@ -237,13 +237,19 @@ void Workbench::setupContextMenu(const char* recipient, Gui::MenuItem* item) con
 
             if (Gui::Selection().countObjectsOfType(App::DocumentObject::getClassTypeId()) > 0) {
                 *item << "Std_Placement"
-                      << "Std_SetAppearance"
+                      << "Std_ToggleVisibility"
+                      << "Std_ShowSelection"
+                      << "Std_HideSelection"
+                      << "Std_ToggleSelectability"
+                      << "Std_TreeSelectAllInstances"
+                      << "Separator"
                       << "Std_RandomColor"
+                      << "Std_ToggleTransparency"
                       << "Std_Cut"
                       << "Std_Copy"
                       << "Std_Paste"
-                      << "Separator"
-                      << "Std_Delete";
+                      << "Std_Delete"
+                      << "Separator";
             }
         }
     }
@@ -574,20 +580,6 @@ Gui::MenuItem* Workbench::setupMenuBar() const
         *part << "Separator" << "PartDesign_WizardShaft";
     }
 
-    // use Part's measure features also for PartDesign
-    Gui::MenuItem* measure = new Gui::MenuItem;
-    root->insertItem(item, measure);
-    measure->setCommand("Measure");
-
-    *measure << "Part_Measure_Linear"
-             << "Part_Measure_Angular"
-             << "Separator"
-             << "Part_Measure_Refresh"
-             << "Part_Measure_Clear_All"
-             << "Part_Measure_Toggle_All"
-             << "Part_Measure_Toggle_3D"
-             << "Part_Measure_Toggle_Delta";
-
     Gui::MenuItem* view = root->findItem("&View");
     if (view) {
         Gui::MenuItem* appr = view->findItem("Std_RandomColor");
@@ -655,19 +647,6 @@ Gui::ToolBarItem* Workbench::setupToolBars() const
           << "PartDesign_Thickness"
           << "Separator"
           << "PartDesign_Boolean";
-
-    // use Part's measure features also for PartDesign
-    Gui::ToolBarItem* measure = new Gui::ToolBarItem(root);
-    measure->setCommand("Measure");
-
-    *measure << "Part_Measure_Linear"
-             << "Part_Measure_Angular"
-             << "Separator"
-             << "Part_Measure_Refresh"
-             << "Part_Measure_Clear_All"
-             << "Part_Measure_Toggle_All"
-             << "Part_Measure_Toggle_3D"
-             << "Part_Measure_Toggle_Delta";
 
     return root;
 }

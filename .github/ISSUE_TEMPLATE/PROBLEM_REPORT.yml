@@ -32,8 +32,8 @@ body:
       label: Subproject(s) affected?
       options:
         - Addon Manager
-        - Arch
         - Assembly
+        - BIM/Arch
         - CAM/Path
         - Core
         - Draft
@@ -41,6 +41,7 @@ body:
         - FEM
         - File formats
         - GCS
+        - Mesh
         - OpenSCAD
         - Part
         - PartDesign

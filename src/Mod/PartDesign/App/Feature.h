@@ -84,6 +84,7 @@ public:
         return "PartDesignGui::ViewProvider";
     }
 
+    void onChanged(const App::Property* prop) override;
 
     App::DocumentObject *getSubObject(const char *subname, 
         PyObject **pyObj, Base::Matrix4D *pmat, bool transform, int depth) const override;
@@ -94,14 +95,18 @@ protected:
     /**
      * Get a solid of the given shape. If no solid is found an exception is raised.
      */
+    // TODO: Toponaming April 2024 Deprecated in favor of TopoShape method.  Remove when possible.
     static TopoDS_Shape getSolid(const TopoDS_Shape&);
-    static int countSolids(const TopoDS_Shape&, TopAbs_ShapeEnum type = TopAbs_SOLID );
+    TopoShape getSolid(const TopoShape&);
+    static int countSolids(const TopoDS_Shape&, TopAbs_ShapeEnum type = TopAbs_SOLID);
 
     /// Grab any point from the given face
     static const gp_Pnt getPointFromFace(const TopoDS_Face& f);
     /// Make a shape from a base plane (convenience method)
     static gp_Pln makePlnFromPlane(const App::DocumentObject* obj);
+    // TODO: Toponaming April 2024 Deprecated in favor of TopoShape method.  Remove when possible.
     static TopoDS_Shape makeShapeFromPlane(const App::DocumentObject* obj);
+    static TopoShape makeTopoShapeFromPlane(const App::DocumentObject* obj);
 };
 
 using FeaturePython = App::FeaturePythonT<Feature>;

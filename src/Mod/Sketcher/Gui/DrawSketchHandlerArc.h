@@ -146,8 +146,8 @@ private:
                     }
                 }
                 else {
-                    if (areColinear(firstPoint, secondPoint, onSketchPos)) {
-                        // If points are colinear then we can't calculate the center.
+                    if (areCollinear(firstPoint, secondPoint, onSketchPos)) {
+                        // If points are collinear then we can't calculate the center.
                         return;
                     }
                     centerPoint =
@@ -833,6 +833,12 @@ void DSHArcController::addConstraints()
         }
     }
     else {  // Valid diagnosis. Must check which constraints may be added.
+
+        // if no curve exists a crash occurs #12755
+        if (firstCurve < 0) {
+            return;
+        }
+
         auto startpointinfo = handler->getPointInfo(GeoElementId(firstCurve, pos1));
 
         if (x0set && startpointinfo.isXDoF()) {

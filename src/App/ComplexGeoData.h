@@ -52,7 +52,13 @@ using BoundBox3d = BoundBox3<double>;
 namespace Data
 {
 
-struct MappedChildElements;
+//struct MappedChildElements;
+/// Option for App::GeoFeature::searchElementCache()
+enum class SearchOptions {
+    /// Whether to compare shape geometry
+    CheckGeometry = 1,
+    SingleResult = 2,
+};
 
 /** Segments
  *  Sub-element type of the ComplexGeoData type
@@ -230,6 +236,36 @@ public:
                                  ElementIDRefs *sid = nullptr,
                                  bool copy = false) const;
 
+    /** Add a sub-element name mapping.
+     *
+     * @param element: the original \c Type + \c Index element name
+     * @param name: the mapped sub-element name. May or may not start with
+     * elementMapPrefix().
+     * @param sid: in case you use a hasher to hash the element name, pass in
+     * the string id reference using this parameter. You can have more than one
+     * string id associated with the same name.
+     * @param overwrite: if true, it will overwrite existing names
+     *
+     * @return Returns the stored mapped element name.
+     *
+     * An element can have multiple mapped names. However, a name can only be
+     * mapped to one element
+     *
+     * Note: the original proc was in the context of ComplexGeoData, which provided `Tag` access,
+     *   now you must pass in `long masterTag` explicitly.
+     */
+    MappedName setElementName(const IndexedName& element,
+                              const MappedName& name,
+                              long masterTag,
+                              const ElementIDRefs* sid = nullptr,
+                              bool overwrite = false) {
+        return _elementMap -> setElementName(element, name, masterTag, sid, overwrite);
+    }
+
+    bool hasElementMap() {
+        return _elementMap != nullptr;
+    }
+
     /** Get mapped element names
      *
      * @param element: original element name with \c Type + \c Index
@@ -291,6 +327,9 @@ public:
     /// Get the current element map size
     size_t getElementMapSize(bool flush=true) const;
 
+    /// Return the higher level element names of the given element
+    virtual std::vector<IndexedName> getHigherElements(const char *name, bool silent=false) const;
+
     /// Return the current element map version
     virtual std::string getElementMapVersion() const;
 
@@ -330,6 +369,17 @@ public:
     bool isRestoreFailed() const { return _restoreFailed; }
     void resetRestoreFailure() const { _restoreFailed = true; }
     //@}
+
+    /**
+     * Debugging method to dump an entire element map in human readable form to a stream
+     * @param stream
+     */
+    void dumpElementMap(std::ostream& stream) const;
+    /**
+     * Debugging method to dump an entire element map in human readable form into a string
+     * @return The string
+     */
+    const std::string dumpElementMap() const;
 
 protected:
 
@@ -391,8 +441,6 @@ protected:
 public:
     mutable long Tag{0};
 
-
-public:
     /// String hasher for element name shortening
     mutable App::StringHasherRef Hasher;
 

@@ -549,7 +549,7 @@ CmdSketcherMapSketch::CmdSketcherMapSketch()
 {
     sAppModule = "Sketcher";
     sGroup = "Sketcher";
-    sMenuText = QT_TR_NOOP("Map sketch to face...");
+    sMenuText = QT_TR_NOOP("Attach sketch...");
     sToolTipText = QT_TR_NOOP(
         "Set the 'AttachmentSupport' of a sketch.\n"
         "First select the supporting geometry, for example, a face or an edge of a solid object,\n"
@@ -1771,16 +1771,16 @@ void CmdRenderingOrder::updateIcon()
         Gui::BitmapFactory().iconFromTheme("Sketcher_RenderingOrder_Construction");
     static QIcon external = Gui::BitmapFactory().iconFromTheme("Sketcher_RenderingOrder_External");
 
-    auto* pcAction = qobject_cast<Gui::ActionGroup*>(getAction());
-
-    if (TopElement == ElementType::Normal) {
-        pcAction->setIcon(normal);
-    }
-    else if (TopElement == ElementType::Construction) {
-        pcAction->setIcon(construction);
-    }
-    else if (TopElement == ElementType::External) {
-        pcAction->setIcon(external);
+    if (auto* pcAction = qobject_cast<Gui::ActionGroup*>(getAction())) {
+        if (TopElement == ElementType::Normal) {
+            pcAction->setIcon(normal);
+        }
+        else if (TopElement == ElementType::Construction) {
+            pcAction->setIcon(construction);
+        }
+        else if (TopElement == ElementType::External) {
+            pcAction->setIcon(external);
+        }
     }
 }
 
