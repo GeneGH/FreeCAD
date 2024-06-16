@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 #include "src/App/InitApplication.h"
 #include <Mod/Part/App/TopoShape.h>
 #include "Mod/Part/App/TopoShapeMapper.h"
@@ -45,6 +45,7 @@ protected:
 
     void SetUp() override
     {
+        Base::Interpreter().runString("import Part");
         _docName = App::GetApplication().getUniqueDocumentName("test");
         App::GetApplication().newDocument(_docName.c_str(), "testUser");
         _hasher = Base::Reference<App::StringHasher>(new App::StringHasher);
