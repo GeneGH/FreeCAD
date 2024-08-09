@@ -231,8 +231,8 @@
     <message>
       <location filename="../../Command.cpp" line="617"/>
       <location filename="../../Command.cpp" line="619"/>
-      <source>Inserts a symbol from a svg file in the active drawing</source>
-      <translation>Уставіць знак з файла svg у бягучы чарцёж</translation>
+      <source>Inserts a symbol from a SVG file in the active drawing</source>
+      <translation>Уставіць знак з файла SVG у бягучы чарцёж</translation>
     </message>
   </context>
   <context>

@@ -45,6 +45,7 @@
 #include <App/DocumentObject.h>
 #include <App/Application.h>
 #include <Base/Interpreter.h>
+#include <Base/Tools.h>
 #include <Gui/Application.h>
 #include <Gui/Command.h>
 #include <gsl/pointers>
@@ -99,8 +100,8 @@ gsl::owner<QPushButton*> createNewButton(const NewButton& newButton)
 
 }  // namespace
 
-StartView::StartView(Gui::Document* pcDocument, QWidget* parent)
-    : Gui::MDIView(pcDocument, parent)
+StartView::StartView(QWidget* parent)
+    : Gui::MDIView(nullptr, parent)
     , _contents(new QScrollArea(parent))
     , _newFileLabel {nullptr}
     , _examplesLabel {nullptr}
@@ -146,8 +147,18 @@ StartView::StartView(Gui::Document* pcDocument, QWidget* parent)
 
     _newFileLabel = gsl::owner<QLabel*>(new QLabel());
     layout->addWidget(_newFileLabel);
+
+    auto createNewRow = gsl::owner<QWidget*>(new QWidget);
     auto flowLayout = gsl::owner<FlowLayout*>(new FlowLayout);
-    layout->addLayout(flowLayout);
+
+    // reset margins of layout to provide consistent spacing
+    flowLayout->setContentsMargins({});
+
+    // this allows new file widgets to be targeted via QSS
+    createNewRow->setObjectName(QStringLiteral("CreateNewRow"));
+    createNewRow->setLayout(flowLayout);
+
+    layout->addWidget(createNewRow);
     configureNewFileButtons(flowLayout);
 
     _recentFilesLabel = gsl::owner<QLabel*>(new QLabel());
@@ -388,7 +399,9 @@ void StartView::postStart(PostStartBehavior behavior) const
 void StartView::fileCardSelected(const QModelIndex& index)
 {
     auto file = index.data(static_cast<int>(Start::DisplayedFilesModelRoles::path)).toString();
-    auto command = std::string("FreeCAD.loadFile('") + file.toStdString() + "')";
+    std::string escapedstr = Base::Tools::escapedUnicodeFromUtf8(file.toStdString().c_str());
+    escapedstr = Base::Tools::escapeEncodeFilename(escapedstr);
+    auto command = std::string("FreeCAD.loadFile('") + escapedstr + "')";
     try {
         Base::Interpreter().runString(command.c_str());
         postStart(PostStartBehavior::doNotSwitchWorkbench);

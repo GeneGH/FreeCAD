@@ -222,11 +222,11 @@ Any values of the SetupSheet that are changed from their default are preselected
 This option is most useful if stock is a box or cylinder, or if the machine has a standard placement for machining.
 
 Note that this option is disabled if a stock object from an existing solid is used in the job - they cannot be stored in a template.</source>
-      <translation type="unfinished">If enabled the creation of stock is included in the template. If a template does not include a stock definition the default stock creation algorithm will be used (creation from the Base object&apos;s bounding box).
+      <translation>Ha engedélyezett, akkor a készlet létrehozása szerepel a sablonban. Ha a sablon nem tartalmaz készletleírást, akkor az alapértelmezett készletkészítési algoritmus kerül alkalmazásra (készítés az alaptárgyat határoló négyzetből).
 
-This option is most useful if stock is a box or cylinder, or if the machine has a standard placement for machining.
+Ez az opció akkor a leghasznosabb, ha a készlet egy négyzet vagy henger, vagy ha a gépnek van egy szabványos elhelyezése a megmunkáláshoz.
 
-Note that this option is disabled if a stock object from an existing solid is used in the job - they cannot be stored in a template.</translation>
+Vegye figyelembe, hogy ez a lehetőség ki van kapcsolva, ha a munkában egy meglévő szilárdtestből származó készletelemből használ - ezek nem tárolhatók sablonban.</translation>
     </message>
     <message>
       <location filename="../panels/DlgJobTemplateExport.ui" line="184"/>
@@ -274,11 +274,11 @@ Ne feledje, hogy csak olyan műveletek vannak felsorolva, amelyek jelenleg konfi
 For Box and Cylinder stocks this means the actual size of the stock solid being created.
 
 For stock from the Base object&apos;s bounding box it means the extra material in all directions. A stock object created from such a template will get its basic size from the new job&apos;s Base object and apply the stored extra settings.</source>
-      <translation type="unfinished">If enabled the current size settings for the stock object are included in the template.
+      <translation>Ha engedélyezve van, a sablon tartalmazza a készlet tárgy aktuális méretbeállításait.
 
-For Box and Cylinder stocks this means the actual size of the stock solid being created.
+A keretes és hengeres készletek esetében ez a létrehozandó készlettest tényleges méretét jelenti.
 
-For stock from the Base object&apos;s bounding box it means the extra material in all directions. A stock object created from such a template will get its basic size from the new job&apos;s Base object and apply the stored extra settings.</translation>
+Az alap tárgy határoló keretéből származó készletek esetében ez az összes irányban lévő extra anyagot jelenti. Az ilyen sablonból létrehozott készlet tárgy alapméretét az új feladat Bázis tárgyából kapja, és alkalmazza a tárolt extra beállításokat.</translation>
     </message>
     <message>
       <location filename="../panels/DlgJobTemplateExport.ui" line="168"/>
@@ -383,7 +383,7 @@ For stock from the Base object&apos;s bounding box it means the extra material i
     <message>
       <location filename="../panels/PropertyCreate.ui" line="27"/>
       <source>Name of property. Can only contain letters, numbers, and underscores. MixedCase names will display with spaces &quot;Mixed Case&quot;</source>
-      <translation type="unfinished">Name of property. Can only contain letters, numbers, and underscores. MixedCase names will display with spaces &quot;Mixed Case&quot;</translation>
+      <translation>Az ingatlan neve. Csak betűket, számokat és aláhúzásokat tartalmazhat. A "Szavak csoportjai" alakú nevek szóközökkel lesznek megjelenítve &quot;Szavak csoportjai&quot;</translation>
     </message>
     <message>
       <location filename="../panels/PropertyCreate.ui" line="34"/>
@@ -499,11 +499,6 @@ For stock from the Base object&apos;s bounding box it means the extra material i
   <context>
     <name>DlgJobChooser</name>
     <message>
-      <location filename="../../DlgJobChooser.ui" line="17"/>
-      <source>Choose a Path Job</source>
-      <translation>Tevékenység elérési útjának kijelölése</translation>
-    </message>
-    <message>
       <location filename="../panels/DlgTCChooser.ui" line="23"/>
       <source>Choose a Tool Controller</source>
       <translation>Eszközvezérlő kijelölése</translation>
@@ -522,6 +517,11 @@ For stock from the Base object&apos;s bounding box it means the extra material i
       <location filename="../panels/DlgToolCopy.ui" line="29"/>
       <source>Destination</source>
       <translation>Célállomás</translation>
+    </message>
+    <message>
+      <location filename="../../DlgJobChooser.ui" line="17"/>
+      <source>Choose a CAM Job</source>
+      <translation>Válasszon egy CAM-munkát</translation>
     </message>
   </context>
   <context>
@@ -582,12 +582,12 @@ For stock from the Base object&apos;s bounding box it means the extra material i
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="107"/>
       <source>Extension of bounding box&apos;s MinX</source>
-      <translation type="unfinished">Extension of bounding box&apos;s MinX</translation>
+      <translation>A határolókeret &apos;MinX-ének kiterjesztése</translation>
     </message>
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="120"/>
       <source>Extension of bounding box&apos;s MaxX</source>
-      <translation type="unfinished">Extension of bounding box&apos;s MaxX</translation>
+      <translation>A határolókeret &apos;MaxX-ének kiterjesztése</translation>
     </message>
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="127"/>
@@ -597,12 +597,12 @@ For stock from the Base object&apos;s bounding box it means the extra material i
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="134"/>
       <source>Extension of bounding box&apos;s MinY</source>
-      <translation type="unfinished">Extension of bounding box&apos;s MinY</translation>
+      <translation>A határolókeret &apos;MinY-ának kiterjesztése</translation>
     </message>
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="141"/>
       <source>Extension of bounding box&apos;s MaxY</source>
-      <translation type="unfinished">Extension of bounding box&apos;s MaxY</translation>
+      <translation>A határolókeret &apos;MaxY-ának kiterjesztése</translation>
     </message>
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="148"/>
@@ -612,12 +612,12 @@ For stock from the Base object&apos;s bounding box it means the extra material i
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="155"/>
       <source>Extension of bounding box&apos;s MinZ</source>
-      <translation type="unfinished">Extension of bounding box&apos;s MinZ</translation>
+      <translation>A határolókeret &apos;MinZ-ének kiterjesztése</translation>
     </message>
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="162"/>
       <source>Extension of bounding box&apos;s MaxZ</source>
-      <translation type="unfinished">Extension of bounding box&apos;s MaxZ</translation>
+      <translation>A határolókeret &apos;MaxZ-ének kiterjesztése</translation>
     </message>
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="182"/>
@@ -647,12 +647,12 @@ For stock from the Base object&apos;s bounding box it means the extra material i
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="257"/>
       <source>If checked the path is constrained by the solid. Otherwise the volume of the solid describes a &apos;keep out&apos; zone</source>
-      <translation type="unfinished">If checked the path is constrained by the solid. Otherwise the volume of the solid describes a &apos;keep out&apos; zone</translation>
+      <translation>Ha bejelölte, az útvonalat a szilárdtest kényszeríti. Ellenkező esetben a szilárd test térfogata egy &apos; tartsd távol&apos; zónát ír le</translation>
     </message>
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="55"/>
       <source>Extend Model&apos;s Bounding Box</source>
-      <translation type="unfinished">Extend Model&apos;s Bounding Box</translation>
+      <translation>Modell kiterjesztése&apos;s Határoló keret</translation>
     </message>
     <message>
       <location filename="../panels/DressupPathBoundary.ui" line="175"/>
@@ -693,7 +693,7 @@ For stock from the Base object&apos;s bounding box it means the extra material i
     <message>
       <location filename="../panels/PageBaseGeometryEdit.ui" line="59"/>
       <source>Select one or more features in the 3d view and press &apos;Add&apos; to add them as the base items for this operation. Selected features can be deleted entirely.</source>
-      <translation type="unfinished">Select one or more features in the 3d view and press &apos;Add&apos; to add them as the base items for this operation. Selected features can be deleted entirely.</translation>
+      <translation>Jelöljön ki egy vagy több jellemzőt a 3D nézetben, és nyomja meg a &apos; Hozzáadás&apos; gombot a művelet alapelemeként történő hozzáadásukhoz. A kiválasztott jellemzők teljesen törölhetők.</translation>
     </message>
     <message>
       <location filename="../panels/PageBaseGeometryEdit.ui" line="69"/>
@@ -711,17 +711,17 @@ For stock from the Base object&apos;s bounding box it means the extra material i
       <translation>Törli az alapgeometriák listáját</translation>
     </message>
     <message>
-      <location filename="../panels/PageBaseGeometryEdit.ui" line="72"/>
       <location filename="../panels/PageBaseHoleGeometryEdit.ui" line="49"/>
+      <location filename="../panels/PageBaseGeometryEdit.ui" line="72"/>
       <location filename="../panels/PageBaseLocationEdit.ui" line="43"/>
       <source>Add</source>
       <translation>Hozzáad</translation>
     </message>
     <message>
-      <location filename="../panels/PageBaseGeometryEdit.ui" line="82"/>
       <location filename="../panels/PageBaseHoleGeometryEdit.ui" line="59"/>
-      <location filename="../panels/PageBaseLocationEdit.ui" line="53"/>
       <location filename="../panels/PropertyBag.ui" line="48"/>
+      <location filename="../panels/PageBaseGeometryEdit.ui" line="82"/>
+      <location filename="../panels/PageBaseLocationEdit.ui" line="53"/>
       <source>Remove</source>
       <translation>Törlés</translation>
     </message>
@@ -768,7 +768,7 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
     <message>
       <location filename="../panels/PageBaseHoleGeometryEdit.ui" line="66"/>
       <source>Remove all list items and fill list with all eligible features from the job&apos;s base object.</source>
-      <translation type="unfinished">Remove all list items and fill list with all eligible features from the job&apos;s base object.</translation>
+      <translation>A lista összes elemének eltávolítása és a lista feltöltése a feladat &apos;alaptárgyának összes támogatható jellemzőjével.</translation>
     </message>
     <message>
       <location filename="../panels/PageBaseHoleGeometryEdit.ui" line="69"/>
@@ -776,8 +776,8 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <translation>Alaphelyzetbe állítása</translation>
     </message>
     <message>
-      <location filename="../panels/PageBaseGeometryEdit.ui" line="99"/>
       <location filename="../panels/PageBaseHoleGeometryEdit.ui" line="76"/>
+      <location filename="../panels/PageBaseGeometryEdit.ui" line="99"/>
       <source>All objects will be processed using the same operation properties.</source>
       <translation>Az összes tárgy feldolgozása ugyanazzal a művelettulajdonságokkal történik.</translation>
     </message>
@@ -822,32 +822,32 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <translation>Az összes hely feldolgozása ugyanazokkal a műveleti tulajdonságokkal történik.</translation>
     </message>
     <message>
-      <location filename="../panels/PageDepthsEdit.ui" line="39"/>
       <location filename="../panels/SetupGlobal.ui" line="36"/>
+      <location filename="../panels/PageDepthsEdit.ui" line="39"/>
       <source>Start Depth</source>
       <translation>Kezdeti mélység</translation>
     </message>
     <message>
-      <location filename="../panels/PageDepthsEdit.ui" line="46"/>
       <location filename="../panels/PageDiametersEdit.ui" line="27"/>
+      <location filename="../panels/PageDepthsEdit.ui" line="46"/>
       <source>Start Depth of the operation. The highest point in Z-axis the operation needs to process.</source>
       <translation>Kezdeti műveleti mélység. A művelet által feldolgozni szükséges Z-tengely legmagasabb pontja.</translation>
     </message>
     <message>
-      <location filename="../panels/PageDepthsEdit.ui" line="59"/>
       <location filename="../panels/PageDiametersEdit.ui" line="43"/>
+      <location filename="../panels/PageDepthsEdit.ui" line="59"/>
       <source>Transfer the Z value of the selected feature as the Start Depth for the operation.</source>
       <translation>A kiválasztott funkció Z értékének átvitele a művelet kezdő mélységeként.</translation>
     </message>
     <message>
-      <location filename="../panels/PageDepthsEdit.ui" line="92"/>
       <location filename="../panels/PageDiametersEdit.ui" line="64"/>
+      <location filename="../panels/PageDepthsEdit.ui" line="92"/>
       <source>The depth of the operation which corresponds to the lowest value in Z-axis the operation needs to process.</source>
       <translation>A művelet mélysége, amely megfelel a művelet által feldolgozni szükséges legalacsonyabb Z-tengely értéknek.</translation>
     </message>
     <message>
-      <location filename="../panels/PageDepthsEdit.ui" line="105"/>
       <location filename="../panels/PageDiametersEdit.ui" line="80"/>
+      <location filename="../panels/PageDepthsEdit.ui" line="105"/>
       <source>Transfer the Z value of the selected feature as the Final Depth for the operation.</source>
       <translation>A kiválasztott funkció Z értékének átvitele a művelet végső mélységeként.</translation>
     </message>
@@ -862,14 +862,14 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <translation>A művelet végső vágásának mélysége. Használható tisztább felület előállítására.</translation>
     </message>
     <message>
-      <location filename="../panels/PageDepthsEdit.ui" line="85"/>
       <location filename="../panels/SetupGlobal.ui" line="52"/>
+      <location filename="../panels/PageDepthsEdit.ui" line="85"/>
       <source>Final Depth</source>
       <translation>Végső mélység</translation>
     </message>
     <message>
-      <location filename="../panels/PageDepthsEdit.ui" line="131"/>
       <location filename="../panels/SetupGlobal.ui" line="68"/>
+      <location filename="../panels/PageDepthsEdit.ui" line="131"/>
       <source>Step Down</source>
       <translation>Visszaléptetés</translation>
     </message>
@@ -909,65 +909,60 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <translation>Hézagmagasság</translation>
     </message>
     <message>
+      <location filename="../panels/PageOpWaterlineEdit.ui" line="36"/>
       <location filename="../panels/PageOpCustomEdit.ui" line="42"/>
-      <location filename="../panels/PageOpDeburrEdit.ui" line="60"/>
-      <location filename="../panels/PageOpDeburrEdit.ui" line="92"/>
-      <location filename="../panels/PageOpDrillingEdit.ui" line="42"/>
-      <location filename="../panels/PageOpDrillingEdit.ui" line="56"/>
       <location filename="../panels/PageOpEngraveEdit.ui" line="36"/>
       <location filename="../panels/PageOpEngraveEdit.ui" line="50"/>
       <location filename="../panels/PageOpHelixEdit.ui" line="36"/>
       <location filename="../panels/PageOpHelixEdit.ui" line="50"/>
+      <location filename="../panels/PageOpDrillingEdit.ui" line="42"/>
+      <location filename="../panels/PageOpDrillingEdit.ui" line="56"/>
       <location filename="../panels/PageOpSurfaceEdit.ui" line="36"/>
       <location filename="../panels/PageOpSurfaceEdit.ui" line="50"/>
-      <location filename="../panels/PageOpWaterlineEdit.ui" line="36"/>
+      <location filename="../panels/PageOpDeburrEdit.ui" line="60"/>
+      <location filename="../panels/PageOpDeburrEdit.ui" line="92"/>
       <source>The tool and its settings to be used for this operation.</source>
       <translation>A művelethez használandó szerszám és beállításai.</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpCustomEdit.ui" line="49"/>
-      <location filename="../panels/PageOpDeburrEdit.ui" line="85"/>
-      <location filename="../panels/PageOpDrillingEdit.ui" line="49"/>
-      <location filename="../panels/PageOpEngraveEdit.ui" line="43"/>
-      <location filename="../panels/PageOpPocketFullEdit.ui" line="43"/>
-      <location filename="../panels/PageOpProfileFullEdit.ui" line="43"/>
-      <location filename="../panels/PageOpSlotEdit.ui" line="52"/>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="43"/>
-      <location filename="../panels/PageOpVcarveEdit.ui" line="43"/>
-      <location filename="../panels/PageOpWaterlineEdit.ui" line="46"/>
       <location filename="../panels/SetupGlobal.ui" line="255"/>
       <location filename="../panels/SetupGlobal.ui" line="261"/>
+      <location filename="../panels/PageOpWaterlineEdit.ui" line="46"/>
+      <location filename="../panels/PageOpCustomEdit.ui" line="49"/>
+      <location filename="../panels/PageOpEngraveEdit.ui" line="43"/>
+      <location filename="../panels/PageOpSlotEdit.ui" line="52"/>
+      <location filename="../panels/PageOpProfileFullEdit.ui" line="43"/>
+      <location filename="../panels/PageOpDrillingEdit.ui" line="49"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="43"/>
+      <location filename="../panels/PageOpPocketFullEdit.ui" line="43"/>
+      <location filename="../panels/PageOpDeburrEdit.ui" line="85"/>
+      <location filename="../panels/PageOpVcarveEdit.ui" line="43"/>
       <source>Coolant Mode</source>
       <translation>Hűtőközeg mód</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpCustomEdit.ui" line="62"/>
-      <source>G Gode</source>
-      <translation>G Kód</translation>
-    </message>
-    <message>
-      <location filename="../panels/PageOpAdaptiveEdit.ui" line="23"/>
-      <location filename="../panels/PageOpCustomEdit.ui" line="35"/>
-      <location filename="../panels/PageOpDeburrEdit.ui" line="53"/>
-      <location filename="../panels/PageOpDrillingEdit.ui" line="35"/>
-      <location filename="../panels/PageOpEngraveEdit.ui" line="29"/>
-      <location filename="../panels/PageOpHelixEdit.ui" line="29"/>
-      <location filename="../panels/PageOpPocketFullEdit.ui" line="29"/>
       <location filename="../panels/PageOpProbeEdit.ui" line="35"/>
-      <location filename="../panels/PageOpProfileFullEdit.ui" line="29"/>
-      <location filename="../panels/PageOpSlotEdit.ui" line="35"/>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="29"/>
-      <location filename="../panels/PageOpThreadMillingEdit.ui" line="20"/>
-      <location filename="../panels/PageOpVcarveEdit.ui" line="29"/>
-      <location filename="../panels/PageOpWaterlineEdit.ui" line="29"/>
       <location filename="../panels/SetupGlobal.ui" line="180"/>
+      <location filename="../panels/PageOpWaterlineEdit.ui" line="29"/>
+      <location filename="../panels/PageOpThreadMillingEdit.ui" line="20"/>
+      <location filename="../panels/PageOpCustomEdit.ui" line="35"/>
+      <location filename="../panels/PageOpEngraveEdit.ui" line="29"/>
+      <location filename="../panels/PageOpSlotEdit.ui" line="35"/>
+      <location filename="../panels/PageOpHelixEdit.ui" line="29"/>
+      <location filename="../panels/PageOpProfileFullEdit.ui" line="29"/>
+      <location filename="../panels/PageOpDrillingEdit.ui" line="35"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="29"/>
+      <location filename="../panels/PageOpPocketFullEdit.ui" line="29"/>
+      <location filename="../panels/PageOpDeburrEdit.ui" line="53"/>
+      <location filename="../panels/PageOpVcarveEdit.ui" line="29"/>
+      <location filename="../panels/PageOpAdaptiveEdit.ui" line="23"/>
       <source>Tool Controller</source>
       <translation>Eszköz vezérlő</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpAdaptiveEdit.ui" line="33"/>
-      <location filename="../panels/PageOpHelixEdit.ui" line="43"/>
       <location filename="../panels/SetupGlobal.ui" line="249"/>
+      <location filename="../panels/PageOpHelixEdit.ui" line="43"/>
+      <location filename="../panels/PageOpAdaptiveEdit.ui" line="33"/>
       <source>Coolant</source>
       <translation>Hűtőfolyadék</translation>
     </message>
@@ -987,8 +982,8 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <translation>Művelettípus</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpAdaptiveEdit.ui" line="90"/>
       <location filename="../panels/PageOpPocketFullEdit.ui" line="178"/>
+      <location filename="../panels/PageOpAdaptiveEdit.ui" line="90"/>
       <source>Step Over Percent</source>
       <translation>Egy lépéssel tovább százalékban</translation>
     </message>
@@ -1038,8 +1033,8 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <translation>Profil befejezése</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpAdaptiveEdit.ui" line="55"/>
       <location filename="../panels/PageOpPocketFullEdit.ui" line="237"/>
+      <location filename="../panels/PageOpAdaptiveEdit.ui" line="55"/>
       <source>Use Outline</source>
       <translation>Kontúr használata</translation>
     </message>
@@ -1094,10 +1089,10 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <translation>Megállít</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpDeburrEdit.ui" line="131"/>
+      <location filename="../panels/PageOpThreadMillingEdit.ui" line="167"/>
       <location filename="../panels/PageOpHelixEdit.ui" line="87"/>
       <location filename="../panels/PageOpProfileFullEdit.ui" line="82"/>
-      <location filename="../panels/PageOpThreadMillingEdit.ui" line="167"/>
+      <location filename="../panels/PageOpDeburrEdit.ui" line="131"/>
       <source>Direction</source>
       <translation>Irány</translation>
     </message>
@@ -1105,19 +1100,6 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <location filename="../panels/PageOpDeburrEdit.ui" line="138"/>
       <source>The direction in which the profile is performed, clockwise or counterclockwise.</source>
       <translation>A profil végrehajtásának iránya az óramutató járásával megegyező vagy az óramutató járásával ellentétes irányban.</translation>
-    </message>
-    <message>
-      <location filename="../panels/PageOpDeburrEdit.ui" line="141"/>
-      <location filename="../panels/PageOpDeburrEdit.ui" line="148"/>
-      <location filename="../panels/PageOpHelixEdit.ui" line="98"/>
-      <source>CW</source>
-      <translation>Órajárás iránya</translation>
-    </message>
-    <message>
-      <location filename="../panels/PageOpDeburrEdit.ui" line="153"/>
-      <location filename="../panels/PageOpHelixEdit.ui" line="103"/>
-      <source>CCW</source>
-      <translation>Órajárással ellentétes irány</translation>
     </message>
     <message>
       <location filename="../panels/PageOpDeburrEdit.ui" line="195"/>
@@ -1140,8 +1122,6 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <translation>Gérvágás</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpDeburrEdit.ui" line="198"/>
-      <location filename="../panels/PageOpDeburrEdit.ui" line="225"/>
       <location filename="../panels/ToolEditor.ui" line="77"/>
       <location filename="../panels/ToolEditor.ui" line="134"/>
       <location filename="../panels/ToolEditor.ui" line="144"/>
@@ -1151,6 +1131,8 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <location filename="../panels/ToolEditor.ui" line="223"/>
       <location filename="../panels/ToolEditor.ui" line="240"/>
       <location filename="../panels/ToolEditor.ui" line="280"/>
+      <location filename="../panels/PageOpDeburrEdit.ui" line="198"/>
+      <location filename="../panels/PageOpDeburrEdit.ui" line="225"/>
       <source>mm</source>
       <translation>mm</translation>
     </message>
@@ -1187,7 +1169,7 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
     <message>
       <location filename="../panels/PageOpDrillingEdit.ui" line="63"/>
       <source>Don&apos;t retract after every hole</source>
-      <translation type="unfinished">Don&apos;t retract after every hole</translation>
+      <translation>Ne húzza vissza minden furat után</translation>
     </message>
     <message>
       <location filename="../panels/PageOpDrillingEdit.ui" line="66"/>
@@ -1361,12 +1343,17 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <translation>Vágási mód</translation>
     </message>
     <message>
+      <location filename="../panels/PageOpHelixEdit.ui" line="98"/>
       <location filename="../panels/PageOpPocketFullEdit.ui" line="99"/>
+      <location filename="../panels/PageOpDeburrEdit.ui" line="141"/>
+      <location filename="../panels/PageOpDeburrEdit.ui" line="148"/>
       <source>Climb</source>
       <translation>Emelkedés</translation>
     </message>
     <message>
+      <location filename="../panels/PageOpHelixEdit.ui" line="103"/>
       <location filename="../panels/PageOpPocketFullEdit.ui" line="104"/>
+      <location filename="../panels/PageOpDeburrEdit.ui" line="153"/>
       <source>Conventional</source>
       <translation>Konvencionális</translation>
     </message>
@@ -1376,11 +1363,11 @@ A Visszaállítás törli az összes aktuális elemet a listából, és kitölti
       <translation>Minta</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpPocketFullEdit.ui" line="36"/>
-      <location filename="../panels/PageOpPocketFullEdit.ui" line="50"/>
       <location filename="../panels/PageOpProbeEdit.ui" line="42"/>
       <location filename="../panels/PageOpProfileFullEdit.ui" line="36"/>
       <location filename="../panels/PageOpProfileFullEdit.ui" line="50"/>
+      <location filename="../panels/PageOpPocketFullEdit.ui" line="36"/>
+      <location filename="../panels/PageOpPocketFullEdit.ui" line="50"/>
       <location filename="../panels/PageOpVcarveEdit.ui" line="36"/>
       <location filename="../panels/PageOpVcarveEdit.ui" line="50"/>
       <source>The tool and its settings to be used for this operation</source>
@@ -1396,7 +1383,7 @@ The latter can be used to face of the entire stock area to ensure uniform height
     <message>
       <location filename="../panels/PageOpPocketFullEdit.ui" line="95"/>
       <source>The cutting mode assumes that the cut on one side of the tool bit represents the resulting part and the other side is either already milled away or will be removed later on. Climb mode is when the tool bit is moved into the cut on each rotation, whereas in conventional mode the tool bit&apos;s rotation and the tool&apos;s lateral movement are in the same direction</source>
-      <translation type="unfinished">The cutting mode assumes that the cut on one side of the tool bit represents the resulting part and the other side is either already milled away or will be removed later on. Climb mode is when the tool bit is moved into the cut on each rotation, whereas in conventional mode the tool bit&apos;s rotation and the tool&apos;s lateral movement are in the same direction</translation>
+      <translation>A vágási üzemmód feltételezi, hogy a szerszámhegy egyik oldalán lévő vágás jelenti a keletkező alkatrészt, a másik oldal pedig vagy már el van marva, vagy később kerül eltávolításra. A mászó üzemmód az, amikor a szerszámhegy minden egyes forgásnál a vágásba kerül, míg a hagyományos üzemmódban a szerszámhegy forgása és a szerszám oldalirányú mozgása azonos irányú</translation>
     </message>
     <message>
       <location filename="../panels/PageOpPocketFullEdit.ui" line="119"/>
@@ -1479,9 +1466,9 @@ The latter can be used to face of the entire stock area to ensure uniform height
       <translation>Anyag hozzáadása</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpPocketFullEdit.ui" line="227"/>
       <location filename="../panels/PageOpProfileFullEdit.ui" line="130"/>
       <location filename="../panels/PageOpSurfaceEdit.ui" line="257"/>
+      <location filename="../panels/PageOpPocketFullEdit.ui" line="227"/>
       <source>Use Start Point</source>
       <translation>Kezdőpont használata</translation>
     </message>
@@ -1589,7 +1576,7 @@ The latter can be used to face of the entire stock area to ensure uniform height
     <message>
       <location filename="../panels/PageOpProfileFullEdit.ui" line="157"/>
       <source>Check if you want this profile operation to also be applied to cylindrical holes, which normally get drilled. This can be useful if no drill of adequate size is available or the number of holes don&apos;t warrant a tool change. Note that the cut side and direction is reversed in respect to the specified values</source>
-      <translation type="unfinished">Check if you want this profile operation to also be applied to cylindrical holes, which normally get drilled. This can be useful if no drill of adequate size is available or the number of holes don&apos;t warrant a tool change. Note that the cut side and direction is reversed in respect to the specified values</translation>
+      <translation>Válassza ki, ha azt szeretné, hogy ez a formázási művelet a normál esetben fúrt kerek furatokra is vonatkozzon. Ez hasznos lehet, ha nem áll rendelkezésre megfelelő átmérőjű fúró, vagy a furatok száma nem indokolja a szerszám cseréjét. Figyeljen arra, hogy a vágási oldal és irány a megadott értékekhez képest fordítva van</translation>
     </message>
     <message>
       <location filename="../panels/PageOpProfileFullEdit.ui" line="167"/>
@@ -1722,9 +1709,9 @@ The latter can be used to face of the entire stock area to ensure uniform height
       <translation>Pozitív meghosszabbítja az út végét, negatív pedig lerövidíti</translation>
     </message>
     <message>
+      <location filename="../panels/PageOpWaterlineEdit.ui" line="98"/>
       <location filename="../panels/PageOpSlotEdit.ui" line="345"/>
       <location filename="../panels/PageOpSurfaceEdit.ui" line="91"/>
-      <location filename="../panels/PageOpWaterlineEdit.ui" line="98"/>
       <source>Layer Mode</source>
       <translation>Réteg mód</translation>
     </message>
@@ -1779,8 +1766,8 @@ The latter can be used to face of the entire stock area to ensure uniform height
       <translation>Szkennelési módszer</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="105"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="117"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="105"/>
       <source>Cut Pattern</source>
       <translation>Vágott minta</translation>
     </message>
@@ -1795,14 +1782,14 @@ The latter can be used to face of the entire stock area to ensure uniform height
       <translation>Kerülje az utolsó X felületet</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="63"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="79"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="63"/>
       <source>Bounding Box</source>
       <translation>Határolókeret</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="70"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="91"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="70"/>
       <source>Select the overall boundary for the operation.</source>
       <translation>Jelölje ki a művelet teljes határvonalát.</translation>
     </message>
@@ -1812,14 +1799,14 @@ The latter can be used to face of the entire stock area to ensure uniform height
       <translation>Síkbeli: Lapos, 3D felület letapogatás.  Forgatás: 4-tengelyes forgató letapogatás.</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="98"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="110"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="98"/>
       <source>Complete the operation in a single pass at depth, or multiple passes to final depth.</source>
       <translation>Fejezze be a műveletet egyetlen lépésben a mélységig, vagy több lépésben a végső mélységig.</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="112"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="129"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="112"/>
       <source>Set the geometric clearing pattern to use for the operation.</source>
       <translation>Állítsa be a művelet geometriai forgácsoló élmintázatát.</translation>
     </message>
@@ -1831,7 +1818,7 @@ The latter can be used to face of the entire stock area to ensure uniform height
     <message>
       <location filename="../panels/PageOpSurfaceEdit.ui" line="140"/>
       <source>Avoid cutting the last &apos;N&apos; faces in the Base Geometry list of selected faces.</source>
-      <translation type="unfinished">Avoid cutting the last &apos;N&apos; faces in the Base Geometry list of selected faces.</translation>
+      <translation>Kerülje az utolsó &apos;N&apos; felületek vágását a kiválasztott felületek bázisgeometria listájában.</translation>
     </message>
     <message>
       <location filename="../panels/PageOpSurfaceEdit.ui" line="147"/>
@@ -1844,14 +1831,14 @@ The latter can be used to face of the entire stock area to ensure uniform height
       <translation>A legördülő vonalak ezzel a tengelyekkel párhuzamosan jönnek létre.</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="205"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="149"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="205"/>
       <source>Set the Z-axis depth offset from the target surface.</source>
       <translation>Állítsa be a Z tengely mély eltolását a célfelületről.</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="244"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="194"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="244"/>
       <source>Set the sampling resolution. Smaller values quickly increase processing time.</source>
       <translation>Állítsa be a mintavételi sebesség felbontását. A kisebb értékek felgyorsítják a feldolgozási időt.</translation>
     </message>
@@ -1861,8 +1848,8 @@ The latter can be used to face of the entire stock area to ensure uniform height
       <translation>Állítsa igazra, ha egy kiinduló pontot ad meg</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="264"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="204"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="264"/>
       <source>Enable optimization of linear paths (co-linear points). Removes unnecessary co-linear points from G-code output.</source>
       <translation>Megvalósítja az egyenes vonalú pályák (egy vonalba eső pontok) optimalizálását. Eltávolítja a felesleges egy vonalba eső pontokat a generált G-kódból.</translation>
     </message>
@@ -1897,14 +1884,14 @@ The latter can be used to face of the entire stock area to ensure uniform height
       <translation>Mélységi eltolás</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="215"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="159"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="215"/>
       <source>Step over</source>
       <translation>Átlép</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="222"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="172"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="222"/>
       <source>The amount by which the tool is laterally displaced on each cycle of the pattern, specified in percent of the tool diameter.
 
 A step over of 100% results in no overlap between two different cycles.</source>
@@ -1913,14 +1900,14 @@ A step over of 100% results in no overlap between two different cycles.</source>
 A 100%-os eltolás megakadályozza, hogy két különböző ciklus átfedje egymást.</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="237"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="187"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="237"/>
       <source>Sample interval</source>
       <translation>Mintavételezés</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpSurfaceEdit.ui" line="267"/>
       <location filename="../panels/PageOpWaterlineEdit.ui" line="207"/>
+      <location filename="../panels/PageOpSurfaceEdit.ui" line="267"/>
       <source>Optimize Linear Paths</source>
       <translation>Egyenes útvonalak optimalizálása</translation>
     </message>
@@ -1996,27 +1983,27 @@ Alapértelmezett: OpToolDiameter</translation>
       <source>Expression set as ClearanceHeight for new operations.
 
 Default: &quot;OpStockZMax+SetupSheet.ClearanceHeightOffset&quot;</source>
-      <translation type="unfinished">Expression set as ClearanceHeight for new operations.
+      <translation>Az új műveleteknél ClearanceHeight-ként beállított kifejezés.
 
-Default: &quot;OpStockZMax+SetupSheet.ClearanceHeightOffset&quot;</translation>
+Alapértelmezett: &quot;OpStockZMax+SetupSheet.ClearanceHeightOffset&quot;</translation>
     </message>
     <message>
       <location filename="../panels/SetupGlobal.ui" line="145"/>
       <source>Expression set as SafeHeight for new operations.
 
 Default: &quot;OpStockZMax+SetupSheet.SafeHeightOffset&quot;</source>
-      <translation type="unfinished">Expression set as SafeHeight for new operations.
+      <translation>Új műveleteknél SafeHeight-ként beállított kifejezés.
 
-Default: &quot;OpStockZMax+SetupSheet.SafeHeightOffset&quot;</translation>
+Alapértelmezett: &quot;OpStockZMax+SetupSheet.SafeHeightOffset&quot;</translation>
     </message>
     <message>
       <location filename="../panels/SetupGlobal.ui" line="154"/>
       <source>SafeHeightOffset can be for expressions to set the SafeHeight for new operations.
 
 Default: &quot;5mm&quot;</source>
-      <translation type="unfinished">SafeHeightOffset can be for expressions to set the SafeHeight for new operations.
+      <translation>A SafeHeightOffset kifejezéseket használhatja az új műveletek SafeHeight értékének beállításához.
 
-Default: &quot;5mm&quot;</translation>
+Alapértelmezett: &quot;5mm&quot;</translation>
     </message>
     <message>
       <location filename="../panels/SetupGlobal.ui" line="205"/>
@@ -2066,8 +2053,8 @@ Default: 3 mm</source>
       <translation>Tájolás</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpThreadMillingEdit.ui" line="52"/>
       <location filename="../panels/ToolEditor.ui" line="43"/>
+      <location filename="../panels/PageOpThreadMillingEdit.ui" line="52"/>
       <source>Type</source>
       <translation>Típus</translation>
     </message>
@@ -2097,8 +2084,8 @@ Default: 3 mm</source>
       <translation>Menet per coll (inch)</translation>
     </message>
     <message>
-      <location filename="../panels/PageOpThreadMillingEdit.ui" line="144"/>
       <location filename="../panels/SetupGlobal.ui" line="24"/>
+      <location filename="../panels/PageOpThreadMillingEdit.ui" line="144"/>
       <source>Operation</source>
       <translation>Művelet</translation>
     </message>
@@ -2130,32 +2117,32 @@ Default: 3 mm</source>
     <message>
       <location filename="../panels/PageOpVcarveEdit.ui" line="117"/>
       <source>Finishing pass Z offset</source>
-      <translation type="unfinished">Finishing pass Z offset</translation>
+      <translation>Befejező áthaladás Z eltolás</translation>
     </message>
     <message>
       <location filename="../panels/PageOpVcarveEdit.ui" line="124"/>
       <source>Endmill offset for the finishing pass run. Use small value like -0.2 mm to help clean &quot;fuzzy skin&quot; or other artefacts.</source>
-      <translation type="unfinished">Endmill offset for the finishing pass run. Use small value like -0.2 mm to help clean &quot;fuzzy skin&quot; or other artefacts.</translation>
+      <translation>A végfutás befejező passzusának eltolása. Használjon kis értéket, például -0,2 mm-t a &quot; pontatlan hártya &quot; vagy más rendellenességek megtisztításához.</translation>
     </message>
     <message>
       <location filename="../panels/PageOpVcarveEdit.ui" line="140"/>
       <source>After carving travel again the path to remove artifacts and imperfections</source>
-      <translation type="unfinished">After carving travel again the path to remove artifacts and imperfections</translation>
+      <translation>Metszés után újra járja be az utat, hogy eltávolítsa a maradványokat és a hiányosságokat</translation>
     </message>
     <message>
       <location filename="../panels/PageOpVcarveEdit.ui" line="146"/>
       <source>Finishing pass</source>
-      <translation type="unfinished">Finishing pass</translation>
+      <translation>Befejező lépés</translation>
     </message>
     <message>
       <location filename="../panels/PageOpVcarveEdit.ui" line="153"/>
       <source>Optimize path to avoid raising endmill when moving to adjacent edges. May result in sub-millimeter inaccuracies. </source>
-      <translation type="unfinished">Optimize path to avoid raising endmill when moving to adjacent edges. May result in sub-millimeter inaccuracies. </translation>
+      <translation>Optimalizálja az útvonalat, hogy elkerülje a végfúró megemelkedését a szomszédos élekhez való elmozduláskor. Milliméter alatti pontatlanságokat eredményezhet. </translation>
     </message>
     <message>
       <location filename="../panels/PageOpVcarveEdit.ui" line="156"/>
       <source>Optimize movements</source>
-      <translation type="unfinished">Optimize movements</translation>
+      <translation>Mozgások optimalizálása</translation>
     </message>
     <message>
       <location filename="../panels/PageOpVcarveEdit.ui" line="97"/>
@@ -2306,9 +2293,9 @@ Ha a megadott magasság 0, a varázsló az alkatrész magasságának felét hasz
       <source>Radius of the fillet on the tag&apos;s top edge.
 
 If the radius is bigger than that which the tag shape itself supports, the resulting shape will be that of a dome.</source>
-      <translation type="unfinished">Radius of the fillet on the tag&apos;s top edge.
+      <translation>A címke felső szélén lévő bordázat sugara.
 
-If the radius is bigger than that which the tag shape itself supports, the resulting shape will be that of a dome.</translation>
+Ha a sugár nagyobb, mint amit maga a címke alakja támogat, akkor az eredmény egy kupola alakja lesz.</translation>
     </message>
     <message>
       <location filename="../preferences/PathDressupHoldingTags.ui" line="109"/>
@@ -2339,6 +2326,11 @@ If the radius is bigger than that which the tag shape itself supports, the resul
       <location filename="../preferences/PathDressupHoldingTags.ui" line="103"/>
       <source>Tag Generation</source>
       <translation>Csatolási mező generálása</translation>
+    </message>
+    <message>
+      <location filename="../panels/PageOpCustomEdit.ui" line="62"/>
+      <source>G-Code</source>
+      <translation>G-kód</translation>
     </message>
   </context>
   <context>
@@ -2405,59 +2397,6 @@ If the radius is bigger than that which the tag shape itself supports, the resul
       <translation>Alapértelmezett útvonal</translation>
     </message>
     <message>
-      <location filename="../preferences/PathJob.ui" line="188"/>
-      <source>Enter a path and optionally file name (see below) to be used as the default for the post processor export.
-The following substitutions are performed before the name is resolved at the time of the post processing:
-Substitution allows the following:
-%D ... directory of the active document
-%d ... name of the active document (with extension)
-%M ... user macro directory
-%j ... name of the active Job object
-
-The Following can be used if output is being split. If Output is not split
-these will be ignored.
-%T ... Tool Number
-%t ... Tool Controller label
-
-%W ... Work Coordinate System
-%O ... Operation Label
-
-When splitting output, a sequence number will always be added.
-
-if %S is included, you can specify where the number occurs.  Without it, the number will be added to the end of the string.
-
-%S ... Sequence Number
-
-The following example store all files with the same name as the document the directory /home/freecad (please remove quotes):
-&amp;quot;/home/cnc/%d.g-code&amp;quot;
-See the file save policy below on how to deal with name conflicts.</source>
-      <translation>Adja meg az utófeldolgozói export alapértelmezettként használandó elérési útvonalát és opcionálisan a fájl nevét (lásd alább).
-A következő helyettesítések az utófeldolgozáskor a név feloldása előtt történnek:
-A helyettesítés a következőket teszi lehetővé:
-%D ... az aktív dokumentum könyvtára
-%d ... az aktív dokumentum neve (kiterjesztéssel)
-%M ... felhasználói makró könyvtár
-%j ... az aktív munka tárgy neve
-
-A következő használható, ha a kimenet felosztása történik. Ha a kimenet nincs felosztva
-ezek figyelmen kívül maradnak.
-%T ... Szerszám száma
-%t ... Szerszámvezérlő címke
-
-%W ... Munkakoordináta-rendszer
-%O ... Művelet címke
-
-A kimenet felosztásakor mindig hozzáadódik egy sorszám.
-
-Ha a %S szerepel, akkor megadhatja, hogy hol szerepel a szám.  Enélkül a szám a karakterlánc végére kerül.
-
-%S ... Sorszám
-
-A következő példa a dokumentummal azonos nevű fájlokat a /home/freecad könyvtárban tárolja (kérjük, vegye ki az idézőjeleket):&amp;quot;"/home/cnc/%d.g-code"
-&amp;quot;
-A névkonfliktusok kezeléséről lásd az alábbi fájlmentési szabályzatot.</translation>
-    </message>
-    <message>
       <location filename="../preferences/PathJob.ui" line="230"/>
       <source>File Save Policy</source>
       <translation>Fájl tárolási szabályzat</translation>
@@ -2515,6 +2454,59 @@ Ez akkor lehet hasznos, ha szinte minden munkát ugyanaz a gép dolgoz fel hason
 Ha a mező üresen marad, nem lesz előre kiválasztott sablon.</translation>
     </message>
     <message>
+      <location filename="../preferences/PathJob.ui" line="188"/>
+      <source>Enter a path and optionally file name (see below) to be used as the default for the post processor export.
+The following substitutions are performed before the name is resolved at the time of the post processing:
+Substitution allows the following:
+%D ... directory of the active document
+%d ... name of the active document (with extension)
+%M ... user macro directory
+%j ... name of the active Job object
+
+The Following can be used if output is being split. If Output is not split
+these will be ignored.
+%T ... Tool Number
+%t ... Tool Controller label
+
+%W ... Work Coordinate System
+%O ... Operation Label
+
+When splitting output, a sequence number will always be added.
+
+if %S is included, you can specify where the number occurs.  Without it, the number will be added to the end of the string.
+
+%S ... Sequence Number
+
+The following example stores all files with the same name as the document in the directory /home/freecad (please remove quotes):
+&amp;quot;/home/cnc/%d.g-code&amp;quot;
+See the file save policy below on how to deal with name conflicts.</source>
+      <translation>Adja meg az utófeldolgozói export alapértelmezettként használandó elérési útvonalát és opcionálisan a fájl nevét (lásd alább).
+A következő helyettesítések a név feloldása előtt történnek az utófeldolgozáskor:
+A helyettesítés a következőket teszi lehetővé:
+%D ... az aktív dokumentum könyvtára
+%d ... az aktív dokumentum neve (kiterjesztéssel)
+%M ... felhasználói makró könyvtár
+%j ... az aktív feladatobjektum neve
+
+A következő használható, ha a kimenet felosztása történik. Ha a kimenet nincs felosztva
+ezek figyelmen kívül maradnak.
+%T ... Szerszám száma
+%t ... Szerszámvezérlő címke
+
+%W ... Munkakoordináta-rendszer
+%O ... Művelet címke
+
+A kimenet felosztásakor mindig hozzáadódik egy sorszám.
+
+Ha a %S szerepel, akkor megadhatja, hogy hol szerepel a szám.  Enélkül a szám a karakterlánc végére kerül.
+
+%S ... Sorszám
+
+A következő példa a dokumentummal azonos nevű fájlokat a /home/freecad könyvtárban tárolja (kérjük, vegye ki az idézőjeleket):
+&amp;quot;/home/cnc/%d.g-code&amp;quot;
+A névkonfliktusok kezeléséről lásd az alábbi fájlmentési szabályzatot.</translation>
+    </message>
+    <message>
       <location filename="../preferences/PathJob.ui" line="247"/>
       <source>Choose how to deal with potential file name conflicts. Always open a dialog, only open a dialog if the output file already exists, overwrite any existing file or add a unique (3 digit) sequential ID to the file name.</source>
       <translation>Válassza ki, hogyan kezelje az esetleges fájlnévkonfliktusokat. Mindig megnyithatja a párbeszédpanelt, csak akkor nyissa meg a párbeszédpanelt, ha a kimeneti fájl már létezik, írja felül a meglévő fájlt, vagy adjon hozzá egy egyedi (3 számjegyű) sorozatazonosítót a fájlnévhez.</translation>
@@ -2527,7 +2519,7 @@ Ha a mező üresen marad, nem lesz előre kiválasztott sablon.</translation>
     <message>
       <location filename="../preferences/PathJob.ui" line="298"/>
       <source>It doesn&apos;t seem there are any post processor scripts installed. Please add some into your macro directory and make sure the file name ends with &amp;quot;_post.py&amp;quot;.</source>
-      <translation type="unfinished">It doesn&apos;t seem there are any post processor scripts installed. Please add some into your macro directory and make sure the file name ends with &amp;quot;_post.py&amp;quot;.</translation>
+      <translation>Úgy tűnik, hogy nincsenek telepített utófeldolgozó szkriptek. Kérjük, adjon hozzá néhányat a makrókönyvtárába, és győződjön meg róla, hogy a fájl neve &amp;quot;_post.py&amp;quot; végződéssel végződik.</translation>
     </message>
     <message>
       <location filename="../preferences/PathJob.ui" line="312"/>
@@ -2537,7 +2529,7 @@ Ha a mező üresen marad, nem lesz előre kiválasztott sablon.</translation>
     <message>
       <location filename="../preferences/PathJob.ui" line="332"/>
       <source>Optional arguments passed to the default Post Processor specified above. See the Post Processor&apos;s documentation for supported arguments.</source>
-      <translation type="unfinished">Optional arguments passed to the default Post Processor specified above. See the Post Processor&apos;s documentation for supported arguments.</translation>
+      <translation>A fent megadott alapértelmezett utófeldolgozónak átadott választható érvelések. A támogatott érvelésekért olvassa el a utófeldolgozó dokumentációját.</translation>
     </message>
     <message>
       <location filename="../preferences/PathJob.ui" line="370"/>
@@ -2562,7 +2554,7 @@ Ha a mező üresen marad, nem lesz előre kiválasztott sablon.</translation>
     <message>
       <location filename="../preferences/PathJob.ui" line="405"/>
       <source>Extend Model&apos;s Bounding Box</source>
-      <translation type="unfinished">Extend Model&apos;s Bounding Box</translation>
+      <translation>A modellt körülvevő keret kiterjesztése</translation>
     </message>
     <message>
       <location filename="../preferences/PathJob.ui" line="429"/>
@@ -2882,8 +2874,8 @@ Ha több azonos nevű eszköz vagy szerszámforma létezik különböző könyvt
       <translation>AxisMap kivitelezés</translation>
     </message>
     <message>
-      <location filename="../panels/AxisMapEdit.ui" line="20"/>
       <location filename="../panels/HoldingTagsEdit.ui" line="80"/>
+      <location filename="../panels/AxisMapEdit.ui" line="20"/>
       <source>Radius</source>
       <translation>Sugár</translation>
     </message>
@@ -2951,7 +2943,7 @@ Ha több azonos nevű eszköz vagy szerszámforma létezik különböző könyvt
     <message>
       <location filename="../panels/DogboneEdit.ui" line="48"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select desired style of the bone dressup:&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Dogbone&lt;/span&gt; ... take the shortest path to cover the corner,&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;T-bone&lt;/span&gt; ... extend a certain direction until corner is covered&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select desired style of the bone dressup:&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Dogbone&lt;/span&gt; ... take the shortest path to cover the corner,&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;T-bone&lt;/span&gt; ... extend a certain direction until corner is covered&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Válassza ki a vágás kívánt stílusát:&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Csontszerkezet&lt;/span&gt; ... a legrövidebb utat választja a sarok lefedéséhez,&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;T-csont&lt;/span&gt; ... egy bizonyos irányban meghosszabbítja, amíg a sarok lefedésre kerül&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../panels/DogboneEdit.ui" line="52"/>
@@ -3006,7 +2998,7 @@ Ha több azonos nevű eszköz vagy szerszámforma létezik különböző könyvt
     <message>
       <location filename="../panels/DogboneEdit.ui" line="114"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Determines the incision length of the bone to be inserted into the profile.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;adaptive&lt;/span&gt; ... the length is adapted to cover the corner based on the angle of its edges, taking the current tool radius into account (default)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;fixed&lt;/span&gt; ... is the same as adaptive for straight angles. For T-bones it&apos;s the radius of the tool (R) and for dogbones it&apos;s R * (2/√2 - 1).&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;custom&lt;/span&gt; ... let&apos;s you specify a custom (fixed) length below&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Determines the incision length of the bone to be inserted into the profile.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;adaptive&lt;/span&gt; ... the length is adapted to cover the corner based on the angle of its edges, taking the current tool radius into account (default)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;fixed&lt;/span&gt; ... is the same as adaptive for straight angles. For T-bones it&apos;s the radius of the tool (R) and for dogbones it&apos;s R * (2/√2 - 1).&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;custom&lt;/span&gt; ... let&apos;s you specify a custom (fixed) length below&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;szelvény meghatározza a profilba illesztendő sarok bemetszés hosszát.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;alkalmazkodó&lt;/span&gt; ... a hossz a sarok lefedéséhez igazodik az élek szöge alapján, figyelembe véve az aktuális szerszámsugarat (alapértelmezett)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;fix&lt;/span&gt; ... megegyezik az alkalmazkodóval az egyenes szögek esetében. T-bemetszés esetén ez a szerszám sugara (R), sarokbemetszés esetén pedig R * (2/√2 - 1).&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;egyéni&lt;/span&gt; ... lehetővé teszi egy egyéni (fix) hossz megadását az alábbiakban&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../panels/DogboneEdit.ui" line="121"/>
@@ -3026,12 +3018,12 @@ Ha több azonos nevű eszköz vagy szerszámforma létezik különböző könyvt
     <message>
       <location filename="../panels/DogboneEdit.ui" line="142"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter length for each bone if &lt;span style=&quot; font-weight:600;&quot;&gt;Incision&lt;/span&gt; is set to &lt;span style=&quot; font-weight:600;&quot;&gt;custom&lt;/span&gt;, ignored otherwise.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter length for each bone if &lt;span style=&quot; font-weight:600;&quot;&gt;Incision&lt;/span&gt; is set to &lt;span style=&quot; font-weight:600;&quot;&gt;custom&lt;/span&gt;, ignored otherwise.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Adja meg az egyes sarkok felülvágásának hosszát, ha a &lt;span style=&quot; font-weight:600;&quot;&gt;Vágás&lt;/span&gt; értéke &lt;span style=&quot; font-weight:600;&quot;&gt;felhasználói&lt;/span&gt;, egyébként figyelmen kívül hagyja.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../panels/DogboneEdit.ui" line="155"/>
-      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of bone locations (with all bones at that location) that are part of this dressup. The list is determined by the corners in the profile and the selected &lt;span style=&quot; font-weight:600;&quot;&gt;Side&lt;/span&gt; for the bones. &lt;/p&gt;&lt;p&gt;You can &lt;span style=&quot; font-weight:600;&quot;&gt;un-check&lt;/span&gt; the bones you don&apos;t want to be dressed up.&lt;/p&gt;&lt;p&gt;If a bone is &lt;span style=&quot; font-weight:600;&quot;&gt;grayed out&lt;/span&gt; it means that it is already dressed up by a previous dressup. Or put another way, if you dress up this dogobone dressup again you will only be able to select the bones that are un-checked here.&lt;/p&gt;&lt;p&gt;If this list is empty it probably means you&apos;re trying to create bones on the wrong side of the profile.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of bone locations (with all bones at that location) that are part of this dressup. The list is determined by the corners in the profile and the selected &lt;span style=&quot; font-weight:600;&quot;&gt;Side&lt;/span&gt; for the bones. &lt;/p&gt;&lt;p&gt;You can &lt;span style=&quot; font-weight:600;&quot;&gt;un-check&lt;/span&gt; the bones you don&apos;t want to be dressed up.&lt;/p&gt;&lt;p&gt;If a bone is &lt;span style=&quot; font-weight:600;&quot;&gt;grayed out&lt;/span&gt; it means that it is already dressed up by a previous dressup. Or put another way, if you dress up this dogobone dressup again you will only be able to select the bones that are un-checked here.&lt;/p&gt;&lt;p&gt;If this list is empty it probably means you&apos;re trying to create bones on the wrong side of the profile.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of bone locations (with all bones at that location) that are part of this dressup. The list is determined by the corners in the profile and the selected &lt;span style=&quot; font-weight:600;&quot;&gt;Side&lt;/span&gt; for the bones. &lt;/p&gt;&lt;p&gt;You can &lt;span style=&quot; font-weight:600;&quot;&gt;un-check&lt;/span&gt; the bones you don&apos;t want to be dressed up.&lt;/p&gt;&lt;p&gt;If a bone is &lt;span style=&quot; font-weight:600;&quot;&gt;grayed out&lt;/span&gt; it means that it is already dressed up by a previous dressup. Or put another way, if you dress up this dogbone dressup again you will only be able to select the bones that are un-checked here.&lt;/p&gt;&lt;p&gt;If this list is empty it probably means you&apos;re trying to create bones on the wrong side of the profile.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A sarokszögek helyének listája (az összes bevágást az adott helyen), amelyek részei ennek az átalakításnak. A listát a profilban lévő sarkok és a felülvágások kiválasztott &lt;span style=&quot; font-weight:600;&quot;&gt; oldala &lt;/span&gt; határozza meg. &lt;/p&gt;&lt;p&gt;Kijelölheti &lt;span style=&quot; font-weight:600;&quot;&gt; azokat&lt;/span&gt; a levágásokat, amelyeket nem szeretne felöltöztetni.&lt;/p&gt;&lt;p&gt;Ha egy bevágás &lt;span style=&quot; font-weight:600;&quot;&gt; kiszürkített &lt;/span&gt; szelvényszelvényszelvényaz azt jelenti, hogy egy korábbi felöltöztetéssel már felöltöztette. Vagy másképpen fogalmazva, ha újra ezt a sarokbevágást újra befejezi, csak azokat a bevágásokat tudja majd kiválasztani, amelyek itt nincsenek bejelölve.&lt;/p&gt;&lt;p&gt;;Ha ez a lista üres, az valószínűleg azt jelenti, hogy a profil rossz oldalán próbál bevágást létrehozni.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../panels/DogboneEdit.ui" line="165"/>
@@ -3101,7 +3093,7 @@ Ha több azonos nevű eszköz vagy szerszámforma létezik különböző könyvt
     <message>
       <location filename="../panels/HoldingTagsEdit.ui" line="54"/>
       <source>Height of holding tag. Note that resulting tag might be smaller if the tag&apos;s width and angle result in a triangular shape.</source>
-      <translation type="unfinished">Height of holding tag. Note that resulting tag might be smaller if the tag&apos;s width and angle result in a triangular shape.</translation>
+      <translation>A csatolási mező magassága. Megjegyezzük, hogy a kapott címkék kisebbek is lehetnek, ha a címke szélessége és szöge háromszög alakot eredményez.</translation>
     </message>
     <message>
       <location filename="../panels/HoldingTagsEdit.ui" line="61"/>
@@ -3116,7 +3108,7 @@ Ha több azonos nevű eszköz vagy szerszámforma létezik különböző könyvt
     <message>
       <location filename="../panels/HoldingTagsEdit.ui" line="97"/>
       <source>List of current tags. Edit coordinates by double click or Edit button. Tags are automatically disabled if they overlap with the previous tag, or don&apos;t lie on the base wire.</source>
-      <translation type="unfinished">List of current tags. Edit coordinates by double click or Edit button. Tags are automatically disabled if they overlap with the previous tag, or don&apos;t lie on the base wire.</translation>
+      <translation>A jelenlegi jelölések listája. A koordinátákat dupla kattintással vagy a Szerkesztés gombbal szerkesztheti. A jelölések automatikusan deaktiválódnak, ha átfedésben vannak az előzővel, vagy nem az alapvonalon fekszenek.</translation>
     </message>
     <message>
       <location filename="../panels/HoldingTagsEdit.ui" line="116"/>
@@ -3299,8 +3291,8 @@ Ha több azonos nevű eszköz vagy szerszámforma létezik különböző könyvt
     <name>TaskPathSimulator</name>
     <message>
       <location filename="../panels/TaskCAMSimulator.ui" line="14"/>
-      <location filename="../panels/TaskPathCamoticsSim.ui" line="14"/>
       <location filename="../panels/TaskPathSimulator.ui" line="14"/>
+      <location filename="../panels/TaskPathCamoticsSim.ui" line="14"/>
       <source>Path Simulator</source>
       <translation>Folyamatszimulátor</translation>
     </message>
@@ -3390,13 +3382,13 @@ Ha több azonos nevű eszköz vagy szerszámforma létezik különböző könyvt
     </message>
     <message>
       <location filename="../panels/TaskPathCamoticsSim.ui" line="68"/>
-      <source>Launch Camotics</source>
-      <translation>Indítsa el a Camotics-ot</translation>
+      <source>Launch CAMotics</source>
+      <translation>Indítsa el a CAMotics-ot</translation>
     </message>
     <message>
       <location filename="../panels/TaskPathCamoticsSim.ui" line="75"/>
-      <source>Make Camotics File</source>
-      <translation>Camotics fájl létrehozás</translation>
+      <source>Make CAMotics File</source>
+      <translation>CAMotics fájl létrehozás</translation>
     </message>
   </context>
   <context>
@@ -3497,7 +3489,7 @@ Ha több azonos nevű eszköz vagy szerszámforma létezik különböző könyvt
     <message>
       <location filename="../panels/ToolBitSelector.ui" line="51"/>
       <source>Library editor...</source>
-      <translation type="unfinished">Library editor...</translation>
+      <translation>Könyvtári szerkesztő...</translation>
     </message>
     <message>
       <location filename="../panels/ToolBitSelector.ui" line="75"/>
@@ -3544,8 +3536,8 @@ Ha több azonos nevű eszköz vagy szerszámforma létezik különböző könyvt
     </message>
     <message>
       <location filename="../panels/PathEdit.ui" line="85"/>
-      <location filename="../panels/PathEdit.ui" line="1281"/>
-      <location filename="../panels/PathEdit.ui" line="1500"/>
+      <location filename="../panels/PathEdit.ui" line="1304"/>
+      <location filename="../panels/PathEdit.ui" line="1523"/>
       <source>Edit</source>
       <translation>Szerkesztés</translation>
     </message>
@@ -3568,6 +3560,59 @@ Ha több azonos nevű eszköz vagy szerszámforma létezik különböző könyvt
       <location filename="../panels/PathEdit.ui" line="134"/>
       <source>Output File</source>
       <translation>Kimeneti fájl</translation>
+    </message>
+    <message>
+      <location filename="../panels/PathEdit.ui" line="141"/>
+      <source>Enter a path and optionally file name (see below) to be used as the default for the post processor export.
+The following substitutions are performed before the name is resolved at the time of the post processing:
+Substitution allows the following:
+%D ... directory of the active document
+%d ... name of the active document (with extension)
+%M ... user macro directory
+%j ... name of the active Job object
+
+The Following can be used if output is being split. If Output is not split
+these will be ignored.
+%T ... Tool Number
+%t ... Tool Controller label
+
+%W ... Work Coordinate System
+%O ... Operation Label
+
+When splitting output, a sequence number will always be added.
+
+if %S is included, you can specify where the number occurs.  Without it, the number will be    added to the end of the string.
+
+%S ... Sequence Number
+
+The following example stores all files with the same name as the document in the directory /home/freecad (please remove quotes):
+&quot;/home/cnc/%d.g-code&quot;
+See the file save policy below on how to deal with name conflicts.</source>
+      <translation>Adja meg az utófeldolgozói export alapértelmezettként használandó elérési útvonalát és opcionálisan a fájl nevét (lásd alább).
+A következő helyettesítések a név feloldása előtt történnek az utófeldolgozáskor:
+A helyettesítés a következőket teszi lehetővé:
+%D ... az aktív dokumentum könyvtára
+%d ... az aktív dokumentum neve (kiterjesztéssel)
+%M ... felhasználói makró könyvtár
+%j ... az aktív feladatobjektum neve
+
+A következő használható, ha a kimenet felosztása történik. Ha a kimenet nincs felosztva
+ezek figyelmen kívül maradnak.
+%T ... Szerszám száma
+%t ... Szerszámvezérlő címke
+
+%W ... Munkakoordináta-rendszer
+%O ... Művelet címke
+
+A kimenet felosztásakor mindig hozzáadódik egy sorszám.
+
+Ha a %S szerepel, akkor megadhatja, hogy hol szerepel a szám.  Enélkül a szám a karakterlánc végére kerül.
+
+%S ... Sorszám
+
+A következő példa a dokumentummal azonos nevű fájlokat a /home/freecad könyvtárban tárolja (kérjük, vegye ki az idézőjeleket):
+&quot;/home/cnc/%d.g-code&quot;
+A névkonfliktusok kezeléséről lásd az alábbi fájlmentési szabályzatot.</translation>
     </message>
     <message>
       <location filename="../panels/PathEdit.ui" line="179"/>
@@ -3608,20 +3653,20 @@ This is useful if the operator can safely load work into one coordinate system w
 Ordering by Tool, will minimize the Tool Changes. A tool change will be done, then all operations in all coordinate systems before changing tools.
 
 Ordering by operation will do each operation in all coordinate systems before moving to the next operation. This is especially useful in conjunction with the &apos;split output&apos; even with only a single work coordinate system since it will put each operation into a separate file.</source>
-      <translation type="unfinished">Ordering by Fixture, will cause all operations to be performed in the first coordinate system before switching to the second. Then all operations will be performed there in the same order.
+      <translation>A Tartozék szerinti rendezés hatására minden műveletet az első koordináta-rendszerben kell végrehajtani, mielőtt átváltana a másodikra. Ezután az összes művelet ugyanabban a sorrendben kerül végrehajtásra.
 
-This is useful if the operator can safely load work into one coordinate system while the machine is doing work in another.
+Ez akkor hasznos, ha a kezelő biztonságosan be tudja tölteni a munkát az egyik koordinátarendszerbe, miközben a gép a másikban dolgozik.
 
-Ordering by Tool, will minimize the Tool Changes. A tool change will be done, then all operations in all coordinate systems before changing tools.
+A szerszámok szerinti rendezés, minimalizálja a szerszámváltásokat. Egy szerszámváltás megtörténik, majd a szerszámváltás előtt az összes művelet az összes koordináta-rendszerben.
 
-Ordering by operation will do each operation in all coordinate systems before moving to the next operation. This is especially useful in conjunction with the &apos;split output&apos; even with only a single work coordinate system since it will put each operation into a separate file.</translation>
+A művelet szerinti rendezés minden műveletet elvégez az összes koordináta-rendszerben, mielőtt a következő műveletre lépne. Ez különösen hasznos a &apos;megosztott kimenet&apos; funkcióval együtt, még egyetlen munkakoordináta-rendszer esetén is, mivel minden műveletet külön fájlba tesz.</translation>
     </message>
     <message>
       <location filename="../panels/PathEdit.ui" line="254"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Work Coordinate Systems&lt;/span&gt; also called &lt;span style=&quot; font-style:italic;&quot;&gt;Work Offsets&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;Fixture Offsets&lt;/span&gt;, or &lt;span style=&quot; font-style:italic;&quot;&gt;Fixtures &lt;/span&gt;are useful for building efficient production jobs where the same part is done many times on the machine.
-FreeCAD has no knowledge of where a particular coordinate system exists within the machine coordinate system so adding additional coordinate systems to your job will have no visual change within your job. It will, however, change your gcode output. The exact way in which the output is affected is controlled by the &apos;order by&apos; setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Work Coordinate Systems&lt;/span&gt; also called &lt;span style=&quot; font-style:italic;&quot;&gt;Work Offsets&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;Fixture Offsets&lt;/span&gt;, or &lt;span style=&quot; font-style:italic;&quot;&gt;Fixtures &lt;/span&gt;are useful for building efficient production jobs where the same part is done many times on the machine.
-FreeCAD has no knowledge of where a particular coordinate system exists within the machine coordinate system so adding additional coordinate systems to your job will have no visual change within your job. It will, however, change your gcode output. The exact way in which the output is affected is controlled by the &apos;order by&apos; setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+FreeCAD has no knowledge of where a particular coordinate system exists within the machine coordinate system so adding additional coordinate systems to your job will have no visual change within your job. It will, however, change your G-code output. The exact way in which the output is affected is controlled by the &apos;order by&apos; setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Munkakoordináta-rendszerek&lt;/span&gt; más néven &lt;span style=&quot; font-style:italic;&quot;&gt;Munkapontok&lt;/span&gt;, &lt;span style=&quot; font-style:italic;&quot;&gt;Vagy tartozékeltolás &lt;/span&gt;, vagy &lt;span style=&quot; font-style:italic;&quot;&gt;berendezési tárgyak &lt;/span&gt;hasznosak olyan hatékony gyártási munkák létrehozásához, ahol ugyanazt az alkatrészt többször is elkészítik a gépen.
+A FreeCAD nem tudja, hogy egy adott koordináta-rendszer hol található a gépi koordináta-rendszerben, így további koordináta-rendszerek hozzáadása a munkához nem fog vizuális változást okozni a munkán belül. Ez azonban megváltoztatja a G-kód kimenetét. A kimenet pontos befolyásolásának módját a &apos;rendezés alapján&apos;beállítás szabályozza.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../panels/PathEdit.ui" line="409"/>
@@ -3656,7 +3701,7 @@ FreeCAD has no knowledge of where a particular coordinate system exists within t
     <message>
       <location filename="../panels/PathEdit.ui" line="488"/>
       <source>Extend Model&apos;s Bounding Box</source>
-      <translation type="unfinished">Extend Model&apos;s Bounding Box</translation>
+      <translation>Modell kiterjesztése&apos;s Határoló keret</translation>
     </message>
     <message>
       <location filename="../panels/PathEdit.ui" line="493"/>
@@ -3669,251 +3714,203 @@ FreeCAD has no knowledge of where a particular coordinate system exists within t
       <translation>Frissítés</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="535"/>
+      <location filename="../panels/PathEdit.ui" line="514"/>
+      <source>Assign Stock Material</source>
+      <translation>Készletanyag hozzárendelése</translation>
+    </message>
+    <message>
+      <location filename="../panels/PathEdit.ui" line="558"/>
       <source>Ext. X</source>
       <translation>Kit. X</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="555"/>
+      <location filename="../panels/PathEdit.ui" line="578"/>
       <source>Ext. Y</source>
       <translation>Kit. Y</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="568"/>
+      <location filename="../panels/PathEdit.ui" line="591"/>
       <source>Ext. Z</source>
       <translation>Kit. Z</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="587"/>
+      <location filename="../panels/PathEdit.ui" line="610"/>
       <source>Radius</source>
       <translation>Sugár</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="597"/>
-      <location filename="../panels/PathEdit.ui" line="633"/>
+      <location filename="../panels/PathEdit.ui" line="620"/>
+      <location filename="../panels/PathEdit.ui" line="656"/>
       <source>Height</source>
       <translation>Magasság</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="613"/>
+      <location filename="../panels/PathEdit.ui" line="636"/>
       <source>Length</source>
       <translation>Hossz</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="623"/>
+      <location filename="../panels/PathEdit.ui" line="646"/>
       <source>Width</source>
       <translation>Szélesség</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="649"/>
+      <location filename="../panels/PathEdit.ui" line="672"/>
       <source>Alignment</source>
       <translation>Igazítás</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="655"/>
+      <location filename="../panels/PathEdit.ui" line="678"/>
       <source>Move to Origin</source>
       <translation>Eredetihez mozgatás</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="662"/>
+      <location filename="../panels/PathEdit.ui" line="685"/>
       <source>Set Origin</source>
       <translation>Kezdet kiválasztása</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="669"/>
+      <location filename="../panels/PathEdit.ui" line="692"/>
       <source>Center in Stock</source>
       <translation>Központosítás az anyagtestben</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="676"/>
+      <location filename="../panels/PathEdit.ui" line="699"/>
       <source>XY in Stock</source>
       <translation>XY az anyagtestben</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="686"/>
+      <location filename="../panels/PathEdit.ui" line="709"/>
       <source>Set</source>
       <translation>Beállít</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="692"/>
+      <location filename="../panels/PathEdit.ui" line="715"/>
       <source>X-Axis</source>
       <translation>X-tengely</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="699"/>
+      <location filename="../panels/PathEdit.ui" line="722"/>
       <source>Y-Axis</source>
       <translation>Y tengely</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="706"/>
+      <location filename="../panels/PathEdit.ui" line="729"/>
       <source>Z-Axis</source>
       <translation>Z-tengely</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="713"/>
+      <location filename="../panels/PathEdit.ui" line="736"/>
       <source>X=0</source>
       <translation>X=0</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="720"/>
+      <location filename="../panels/PathEdit.ui" line="743"/>
       <source>Y=0</source>
       <translation>Y=0</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="727"/>
+      <location filename="../panels/PathEdit.ui" line="750"/>
       <source>Z=0</source>
       <translation>Z=0</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="734"/>
+      <location filename="../panels/PathEdit.ui" line="757"/>
       <source>Link Stock and Model</source>
       <translation>Anyagtest és modell összekötés</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="744"/>
+      <location filename="../panels/PathEdit.ui" line="767"/>
       <source>Move - XY</source>
       <translation>Mozgatás - XY</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="902"/>
+      <location filename="../panels/PathEdit.ui" line="925"/>
       <source>Rotate - XY</source>
       <translation>Forgatás - XY</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="958"/>
+      <location filename="../panels/PathEdit.ui" line="981"/>
       <source>Compound</source>
       <translation>Összetétel</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1018"/>
-      <location filename="../panels/PathEdit.ui" line="1319"/>
+      <location filename="../panels/PathEdit.ui" line="1041"/>
+      <location filename="../panels/PathEdit.ui" line="1342"/>
       <source>Default Values</source>
       <translation>Alapértelmezett értékek</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1024"/>
+      <location filename="../panels/PathEdit.ui" line="1047"/>
       <source>Depths</source>
       <translation>Mélység</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1030"/>
+      <location filename="../panels/PathEdit.ui" line="1053"/>
       <source>Start Depth</source>
       <translation>Kezdeti mélység</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1114"/>
+      <location filename="../panels/PathEdit.ui" line="1137"/>
       <source>Expression set as ClearanceHeight for new operations.
 
 Default: &quot;OpStockZMax+SetupSheet.ClearanceHeightOffset&quot;</source>
-      <translation type="unfinished">Expression set as ClearanceHeight for new operations.
+      <translation>Az új műveleteknél ClearanceHeight-ként beállított kifejezés.
 
-Default: &quot;OpStockZMax+SetupSheet.ClearanceHeightOffset&quot;</translation>
+Alapértelmezett: &quot;OpStockZMax+SetupSheet.ClearanceHeightOffset&quot;</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1139"/>
+      <location filename="../panels/PathEdit.ui" line="1162"/>
       <source>Expression set as SafeHeight for new operations.
 
 Default: &quot;OpStockZMax+SetupSheet.SafeHeightOffset&quot;</source>
-      <translation type="unfinished">Expression set as SafeHeight for new operations.
+      <translation>Új műveleteknél SafeHeight-ként beállított kifejezés.
 
-Default: &quot;OpStockZMax+SetupSheet.SafeHeightOffset&quot;</translation>
+Alapértelmezett: &quot;OpStockZMax+SetupSheet.SafeHeightOffset&quot;</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1148"/>
+      <location filename="../panels/PathEdit.ui" line="1171"/>
       <source>SafeHeightOffset can be for expressions to set the SafeHeight for new operations.
 
 Default: &quot;5mm&quot;</source>
-      <translation type="unfinished">SafeHeightOffset can be for expressions to set the SafeHeight for new operations.
+      <translation>A SafeHeightOffset kifejezéseket használhatja az új műveletek SafeHeight értékének beállításához.
 
-Default: &quot;5mm&quot;</translation>
+Alapértelmezett: &quot;5mm&quot;</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1247"/>
+      <location filename="../panels/PathEdit.ui" line="1270"/>
       <source>Horizontal Feed</source>
       <translation>Vízszintes adagolás</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1259"/>
+      <location filename="../panels/PathEdit.ui" line="1282"/>
       <source>Vertical Feed</source>
       <translation>Függőleges adagolás</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1347"/>
+      <location filename="../panels/PathEdit.ui" line="1370"/>
       <source>Rapid horizontal speed assigned as HorizRapid to new ToolController.</source>
       <translation>Az új szerszámvezérlő HorizRapid értékéhez rendelt vízszintes előtolás sebessége.</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1367"/>
+      <location filename="../panels/PathEdit.ui" line="1390"/>
       <source>Rapid vertical speed assigned to VertRapid of new ToolController.</source>
       <translation>A VertRapid új szerszámvezérlőhöz rendelt függőleges sebességű előtolás.</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1407"/>
+      <location filename="../panels/PathEdit.ui" line="1430"/>
       <source>Active Tool</source>
       <translation>Aktív szerszám</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1046"/>
+      <location filename="../panels/PathEdit.ui" line="1069"/>
       <source>Final Depth</source>
       <translation>Végső mélység</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="141"/>
-      <source>Enter a path and optionally file name (see below) to be used as the default for the post processor export.
-The following substitutions are performed before the name is resolved at the time of the post processing:
-Substitution allows the following:
-%D ... directory of the active document
-%d ... name of the active document (with extension)
-%M ... user macro directory
-%j ... name of the active Job object
-
-The Following can be used if output is being split. If Output is not split
-these will be ignored.
-%T ... Tool Number
-%t ... Tool Controller label
-
-%W ... Work Coordinate System
-%O ... Operation Label
-
-When splitting output, a sequence number will always be added.
-
-if %S is included, you can specify where the number occurs.  Without it, the number will be    added to the end of the string.
-
-%S ... Sequence Number
-
-The following example store all files with the same name as the document the directory /home/freecad (please remove quotes):
-&quot;/home/cnc/%d.g-code&quot;
-See the file save policy below on how to deal with name conflicts.</source>
-      <translation type="unfinished">Enter a path and optionally file name (see below) to be used as the default for the post processor export.
-The following substitutions are performed before the name is resolved at the time of the post processing:
-Substitution allows the following:
-%D ... directory of the active document
-%d ... name of the active document (with extension)
-%M ... user macro directory
-%j ... name of the active Job object
-
-The Following can be used if output is being split. If Output is not split
-these will be ignored.
-%T ... Tool Number
-%t ... Tool Controller label
-
-%W ... Work Coordinate System
-%O ... Operation Label
-
-When splitting output, a sequence number will always be added.
-
-if %S is included, you can specify where the number occurs.  Without it, the number will be    added to the end of the string.
-
-%S ... Sequence Number
-
-The following example store all files with the same name as the document the directory /home/freecad (please remove quotes):
-&quot;/home/cnc/%d.g-code&quot;
-See the file save policy below on how to deal with name conflicts.</translation>
-    </message>
-    <message>
       <location filename="../panels/PathEdit.ui" line="397"/>
       <source>If multiple coordinate systems are in use, setting this to TRUE will cause the gcode to be written to multiple output files as controlled by the &apos;order by&apos; property.  For example, if ordering by Fixture, the first output file will be for the first fixture and separate file for the second.</source>
-      <translation type="unfinished">If multiple coordinate systems are in use, setting this to TRUE will cause the gcode to be written to multiple output files as controlled by the &apos;order by&apos; property.  For example, if ordering by Fixture, the first output file will be for the first fixture and separate file for the second.</translation>
+      <translation>Ha különböző koordináta rendszereket használunk, akkor ennek az opciónak a IGAZ értékre állítása azt eredményezi, hogy a g-kód több kimeneti fájlba íródik a &apos;Rendezés eszerint&apos; tulajdonságnak megfelelően.  Például, ha rögzítés szerint szeretne rendezni, akkor az első kimeneti fájl az első rögzítéshez, a másodikhoz pedig egy külön fájl lesz.</translation>
     </message>
     <message>
       <location filename="../panels/PathEdit.ui" line="400"/>
@@ -3924,16 +3921,16 @@ For example, if &lt;span style=&quot; font-style:italic;&quot;&gt;order by&lt;/s
 
 
 If &lt;span style=&quot; font-style:italic;&quot;&gt;order by&lt;/span&gt; is set to &lt;span style=&quot; font-style:italic;&quot;&gt;operation&lt;/span&gt; and &lt;span style=&quot; font-style:italic;&quot;&gt;split output&lt;/span&gt; is true, each operation will be written to a separate file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If True, post processing will create multiple output files based on the &lt;span style=&quot; font-style:italic;&quot;&gt;order by&lt;/span&gt; setting.
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ha Igaz, az utófeldolgozás több kimeneti fájlt hoz létre a beállításokban megadott &lt;span style=&quot; font-style:italic;&quot;&gt;rendezés&lt;/span&gt; alapján.
 
 
-For example, if &lt;span style=&quot; font-style:italic;&quot;&gt;order by&lt;/span&gt; is set to Tool, the first output file will contain the first tool change and all operations, in all coordinate systems, that can be done with that tool before the next tool change is called.
+Ha például a &lt;span style=&quot; font-style:italic;&quot;&gt;rendezés&lt;/span&gt; értéke Szerszám, akkor az első kimeneti fájl tartalmazza az első szerszámváltást és az összes műveletet, minden koordináta rendszerben, amely az adott szerszámmal elvégezhető, mielőtt a következő szerszámváltás meghívásra kerül.
 
 
-If &lt;span style=&quot; font-style:italic;&quot;&gt;order by&lt;/span&gt; is set to &lt;span style=&quot; font-style:italic;&quot;&gt;operation&lt;/span&gt; and &lt;span style=&quot; font-style:italic;&quot;&gt;split output&lt;/span&gt; is true, each operation will be written to a separate file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+Ha a &lt;span style=&quot; font-style:italic;&quot;&gt;rendezés&lt;/span&gt; értéke &lt;span style=&quot; font-style:italic;&quot;&gt;művelet&lt;/span&gt; és az &lt;span style=&quot; font-style:italic;&quot;&gt;osztás kimenet&lt;/span&gt; értéke Igaz, akkor minden művelet külön fájlba íródik.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1037"/>
+      <location filename="../panels/PathEdit.ui" line="1060"/>
       <source>Expression set as the StartDepth of a newly created operation.
 
 Default: OpStartDepth</source>
@@ -3942,7 +3939,7 @@ Default: OpStartDepth</source>
 Alapértelmezett: OpStartDepth</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1053"/>
+      <location filename="../panels/PathEdit.ui" line="1076"/>
       <source>Expression set as the FinalDepth for a newly created operation.
 
 Default: OpFinalDepth</source>
@@ -3951,12 +3948,12 @@ Default: OpFinalDepth</source>
 Alapértelmezett: OpFinalDepth</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1062"/>
+      <location filename="../panels/PathEdit.ui" line="1085"/>
       <source>Step Down</source>
       <translation>Visszaléptetés</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1069"/>
+      <location filename="../panels/PathEdit.ui" line="1092"/>
       <source>Expression set as the StepDown of a newly created operation.
 
 Default: OpToolDiameter</source>
@@ -3965,111 +3962,111 @@ Default: OpToolDiameter</source>
 Alapértelmezett: OpToolDiameter</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1081"/>
+      <location filename="../panels/PathEdit.ui" line="1104"/>
       <source>Heights</source>
       <translation>Magasságok</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1087"/>
+      <location filename="../panels/PathEdit.ui" line="1110"/>
       <source>Expression</source>
       <translation>Kifejezés</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1097"/>
+      <location filename="../panels/PathEdit.ui" line="1120"/>
       <source>Offset</source>
       <translation>Eltolás</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1107"/>
+      <location filename="../panels/PathEdit.ui" line="1130"/>
       <source>Clearance</source>
       <translation>Hézag</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1123"/>
+      <location filename="../panels/PathEdit.ui" line="1146"/>
       <source>ClearanceHeightOffset - can be used by expressions to set the default ClearanceHeight for new operations.
 
 Default: 3 mm</source>
       <translation>Biztonsági magasság eltolás - kifejezésekkel használható az új műveletek alapértelmezett biztonsági magasságának beállítására</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1132"/>
+      <location filename="../panels/PathEdit.ui" line="1155"/>
       <source>Safe</source>
       <translation>Biztonságos</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1160"/>
+      <location filename="../panels/PathEdit.ui" line="1183"/>
       <source>Coolant</source>
       <translation>Hűtőfolyadék</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1166"/>
+      <location filename="../panels/PathEdit.ui" line="1189"/>
       <source>Coolant Mode</source>
       <translation>Hűtőközeg mód</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1197"/>
-      <location filename="../panels/PathEdit.ui" line="1215"/>
+      <location filename="../panels/PathEdit.ui" line="1220"/>
+      <location filename="../panels/PathEdit.ui" line="1238"/>
       <source>Tools</source>
       <translation>Eszközök</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1234"/>
+      <location filename="../panels/PathEdit.ui" line="1257"/>
       <source>Name</source>
       <translation>Név</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1239"/>
+      <location filename="../panels/PathEdit.ui" line="1262"/>
       <source>Nr.</source>
       <translation>Sz.</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1244"/>
-      <location filename="../panels/PathEdit.ui" line="1256"/>
+      <location filename="../panels/PathEdit.ui" line="1267"/>
+      <location filename="../panels/PathEdit.ui" line="1279"/>
       <source>Feed</source>
       <translation>Betáplálás</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1268"/>
+      <location filename="../panels/PathEdit.ui" line="1291"/>
       <source>Spindle</source>
       <translation>Orsó</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1288"/>
+      <location filename="../panels/PathEdit.ui" line="1311"/>
       <source>Add</source>
       <translation>Hozzáad</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1298"/>
+      <location filename="../panels/PathEdit.ui" line="1321"/>
       <source>Remove</source>
       <translation>Törlés</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1325"/>
+      <location filename="../panels/PathEdit.ui" line="1348"/>
       <source>Rapid Speeds</source>
       <translation>Gyors szerszámsebesség</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1334"/>
+      <location filename="../panels/PathEdit.ui" line="1357"/>
       <source>Horizontal</source>
       <translation>Vízszintes</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1354"/>
+      <location filename="../panels/PathEdit.ui" line="1377"/>
       <source>Vertical</source>
       <translation>Függőleges</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1395"/>
+      <location filename="../panels/PathEdit.ui" line="1418"/>
       <source>Workplan</source>
       <translation>Munkaterv</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1520"/>
+      <location filename="../panels/PathEdit.ui" line="1543"/>
       <source>Delete</source>
       <translation>Törlés</translation>
     </message>
     <message>
-      <location filename="../panels/PathEdit.ui" line="1531"/>
+      <location filename="../panels/PathEdit.ui" line="1554"/>
       <source>Op Defaults</source>
       <translation>Művelet alapértékei</translation>
     </message>
@@ -4140,6 +4137,7 @@ Default: 3 mm</source>
     <message>
       <location filename="../../../Path/Base/Gui/IconViewProvider.py" line="97"/>
       <source>Edit</source>
+      <extracomment>int = field(default=None)</extracomment>
       <translation>Szerkesztés</translation>
     </message>
     <message>
@@ -4154,55 +4152,40 @@ Default: 3 mm</source>
     </message>
     <message>
       <location filename="../../../Path/Main/Gui/Camotics.py" line="84"/>
-      <source>Camotics Project (*.camotics)</source>
-      <translation>Camotics terv (*.camotics)</translation>
+      <source>CAMotics Project (*.camotics)</source>
+      <translation>CAMotics terv (*.camotics)</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="688"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="738"/>
       <source>H</source>
       <comment>H is horizontal feed rate. Must be as short as possible</comment>
       <translation>H</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="693"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="743"/>
       <source>V</source>
       <comment>V is vertical feed rate. Must be as short as possible</comment>
       <translation>V</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="698"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="748"/>
       <source>Tool number</source>
       <translation>Eszköz szám</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="701"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="751"/>
       <source>Horizontal feedrate</source>
       <translation>Vízszintes adagolási sebesség</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="704"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="754"/>
       <source>Vertical feedrate</source>
       <translation>Függőleges adagolási sebesség</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="707"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="757"/>
       <source>Spindle RPM</source>
       <translation>Orsó fordulatszáma</translation>
-    </message>
-    <message>
-      <location filename="../../../Path/Op/Deburr.py" line="184"/>
-      <source>CW</source>
-      <translation>Órajárás iránya</translation>
-    </message>
-    <message>
-      <location filename="../../../Path/Op/Deburr.py" line="185"/>
-      <source>CCW</source>
-      <translation>Órajárással ellentétes irány</translation>
-    </message>
-    <message>
-      <location filename="../../../PathScripts/PathUtilsGui.py" line="91"/>
-      <source>Choose a Path Job</source>
-      <translation>Tevékenység elérési útjának kijelölése</translation>
     </message>
     <message>
       <location filename="../../../PathScripts/PathUtils.py" line="548"/>
@@ -4223,6 +4206,21 @@ Default: 3 mm</source>
       <location filename="../../../Path/Main/Gui/SanityCmd.py" line="75"/>
       <source>Save Sanity Check Report</source>
       <translation>Az érvényesítési jelentés mentése</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Op/Deburr.py" line="182"/>
+      <source>Climb</source>
+      <translation>Emelkedés</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Op/Deburr.py" line="183"/>
+      <source>Conventional</source>
+      <translation>Konvencionális</translation>
+    </message>
+    <message>
+      <location filename="../../../PathScripts/PathUtilsGui.py" line="91"/>
+      <source>Choose a CAM Job</source>
+      <translation>Válasszon egy CAM-munkát</translation>
     </message>
   </context>
   <context>
@@ -4263,7 +4261,6 @@ Default: 3 mm</source>
     <message>
       <location filename="../../../Path/Base/PropertyBag.py" line="75"/>
       <source>List of custom property groups</source>
-      <extracomment>int = field(default=None)</extracomment>
       <translation>A felhasználó által definiált tárgycsoportok listája</translation>
     </message>
     <message>
@@ -4326,8 +4323,8 @@ Default: 3 mm</source>
     <message>
       <location filename="../../../Path/Dressup/Boundary.py" line="53"/>
       <location filename="../../../Path/Dressup/Tags.py" line="940"/>
-      <location filename="../../../Path/Dressup/Gui/AxisMap.py" line="54"/>
       <location filename="../../../Path/Dressup/Gui/Dogbone.py" line="423"/>
+      <location filename="../../../Path/Dressup/Gui/AxisMap.py" line="54"/>
       <source>The base path to modify</source>
       <translation>A megváltoztatni kívánt alap pálya útvonal</translation>
     </message>
@@ -4368,13 +4365,13 @@ Default: 3 mm</source>
       <location filename="../../../Path/Dressup/DogboneII.py" line="250"/>
       <location filename="../../../Path/Dressup/Gui/Dogbone.py" line="463"/>
       <source>Dressup length if incision is set to &apos;custom&apos;</source>
-      <translation type="unfinished">Dressup length if incision is set to &apos;custom&apos;</translation>
+      <translation>Felépítés hossza, ha a metszés hossza &apos;egyéni&apos;</translation>
     </message>
     <message>
       <location filename="../../../Path/Dressup/DogboneII.py" line="258"/>
       <location filename="../../../Path/Dressup/Gui/Dogbone.py" line="445"/>
       <source>Bones that aren&apos;t dressed up</source>
-      <translation type="unfinished">Bones that aren&apos;t dressed up</translation>
+      <translation>Halszálkák melyek nincsenek felépítve</translation>
     </message>
     <message>
       <location filename="../../../Path/Dressup/Tags.py" line="946"/>
@@ -4629,9 +4626,9 @@ Default: 3 mm</source>
       <translation>A feladathoz szükséges összes vezérlőeszköz gyűjteménye</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Job.py" line="503"/>
       <location filename="../../../Path/Op/Base.py" line="192"/>
       <location filename="../../../Path/Op/Base.py" line="463"/>
+      <location filename="../../../Path/Main/Job.py" line="503"/>
       <source>Operations Cycle Time Estimation</source>
       <translation>Műveleti ciklus időbecslése</translation>
     </message>
@@ -4641,72 +4638,67 @@ Default: 3 mm</source>
       <translation>Válassza ki a Feladat típusát</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="110"/>
+      <location filename="../../../Path/Main/Stock.py" line="119"/>
       <source>The base object this stock is derived from</source>
       <translation>Az alap tárgy állomány innen származik</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="119"/>
+      <location filename="../../../Path/Main/Stock.py" line="128"/>
       <source>Extra allowance from part bound box in negative X direction</source>
       <translation>Extra távtartás az alkatrészé határolókeretétől negatív X irányban</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="128"/>
+      <location filename="../../../Path/Main/Stock.py" line="137"/>
       <source>Extra allowance from part bound box in positive X direction</source>
       <translation>Extra távtartás az alkatrészé határolókeretétől pozitív X irányban</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="137"/>
+      <location filename="../../../Path/Main/Stock.py" line="146"/>
       <source>Extra allowance from part bound box in negative Y direction</source>
       <translation>Extra távtartás az alkatrészé határolókeretétől negatív Y irányban</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="146"/>
+      <location filename="../../../Path/Main/Stock.py" line="155"/>
       <source>Extra allowance from part bound box in positive Y direction</source>
       <translation>Extra távtartás az alkatrészé határolókeretétől pozitív Y irányban</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="155"/>
+      <location filename="../../../Path/Main/Stock.py" line="164"/>
       <source>Extra allowance from part bound box in negative Z direction</source>
       <translation>Extra távtartás az alkatrészé határolókeretétől negatív Z irányban</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="164"/>
+      <location filename="../../../Path/Main/Stock.py" line="173"/>
       <source>Extra allowance from part bound box in positive Z direction</source>
       <translation>Extra távtartás az alkatrészé határolókeretétől pozitív Z irányban</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="170"/>
-      <source>A material for this object</source>
-      <translation>Egy anyag ehhez a tárgyhoz</translation>
-    </message>
-    <message>
-      <location filename="../../../Path/Main/Stock.py" line="242"/>
+      <location filename="../../../Path/Main/Stock.py" line="245"/>
       <source>Length of this stock box</source>
       <translation>Ennek az alaptest mezőnek a hossza</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="248"/>
+      <location filename="../../../Path/Main/Stock.py" line="251"/>
       <source>Width of this stock box</source>
       <translation>Ennek az alaptest mezőnek a szélessége</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="254"/>
+      <location filename="../../../Path/Main/Stock.py" line="257"/>
       <source>Height of this stock box</source>
       <translation>Ennek az alaptest mezőnek a magassága</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="294"/>
+      <location filename="../../../Path/Main/Stock.py" line="297"/>
       <source>Radius of this stock cylinder</source>
       <translation>Ennek az alaptest hengernek a sugara</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="300"/>
+      <location filename="../../../Path/Main/Stock.py" line="303"/>
       <source>Height of this stock cylinder</source>
       <translation>Ennek az alaptest hengernek a magassága</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="336"/>
+      <location filename="../../../Path/Main/Stock.py" line="339"/>
       <source>Internal representation of stock type</source>
       <translation>Alaptest típusának belső ábrázolása</translation>
     </message>
@@ -4716,96 +4708,96 @@ Default: 3 mm</source>
       <translation>Koordináta rendszer kiválasztása</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Fixture.py" line="63"/>
       <location filename="../../../Path/Op/Base.py" line="172"/>
+      <location filename="../../../Path/Main/Gui/Fixture.py" line="63"/>
       <source>Make False, to prevent operation from generating code</source>
       <translation>Állítsa hamisra annak megakadályozására, hogy a művelet, kódot generálhasson</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="946"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="950"/>
       <source>Side of selected faces that tool should cut</source>
       <translation>A kijelölt felületek azon oldala, amelyet az eszköznek vágnia kell</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="960"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="964"/>
       <source>Type of adaptive operation</source>
       <translation>Az adaptív működés típusa</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="974"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="978"/>
       <source>Influences accuracy and performance</source>
       <translation>Befolyásolja a pontosságot és a teljesítményt</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="983"/>
       <location filename="../../../Path/Op/Helix.py" line="127"/>
-      <location filename="../../../Path/Op/PocketBase.py" line="151"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="987"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="156"/>
       <source>Percent of cutter diameter to step over on each pass</source>
       <translation>Maró átmérő százaléka mellyel átlép minden elhaladáskor</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="992"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="996"/>
       <source>Lift distance for rapid moves</source>
       <translation>Emelési távolság a gyors mozgásokhoz</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1001"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1005"/>
       <source>Max length of keep tool down path compared to direct distance between points</source>
       <translation>A megtartó eszköz maximális hossza a pontok közötti közvetlen távolsághoz képest</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1010"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1014"/>
       <source>How much stock to leave (i.e. for finishing operation)</source>
       <translation>Mennyi készletet kell hagyni (azaz a befejező művelethez)</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1019"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1023"/>
       <source>Force plunging into material inside and clearing towards the edges</source>
       <translation>Az anyagba mélyítő és a szélek felé tisztító erő</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1028"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1032"/>
       <source>To take a finishing profile path at the end</source>
       <translation>Befejező szelvény útvonal a végén</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1034"/>
-      <location filename="../../../Path/Op/Adaptive.py" line="1045"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1038"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1049"/>
       <source>Stop processing</source>
       <translation>Leállító feldolgozás</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1056"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1060"/>
       <source>Use Arcs (G2) for helix ramp</source>
       <translation>Használjon íveket (G2) a spirál rámpához</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1066"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1070"/>
       <source>Internal input state</source>
       <translation>Belső bemeneti állapot</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1075"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1079"/>
       <source>Internal output state</source>
       <translation>Belső kimeneti állapot</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1086"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1090"/>
       <source>Helix ramp entry angle (degrees)</source>
       <translation>Csigavonal rámpa belépési szöge (fok)</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1095"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1099"/>
       <source>Helix cone angle (degrees)</source>
       <translation>Csigavonal kúpszög (fok)</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1104"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1108"/>
       <source>Limit helix entry diameter, if limit larger than tool diameter or 0, tool diameter is used</source>
       <translation>Korlátozza a spirál belépési átmérőjét, ha a határérték nagyobb, mint a szerszámátmérő vagy 0, a szerszámátmérőt használja</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="1114"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="1118"/>
       <location filename="../../../Path/Op/PocketShape.py" line="70"/>
       <source>Uses the outline of the base geometry.</source>
       <translation>Használja az alap geometria körvonalát.</translation>
@@ -4913,10 +4905,10 @@ Default: 3 mm</source>
       <translation>Ennek a szerszámpályának az induló pontja</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Base.py" line="314"/>
-      <location filename="../../../Path/Op/Slot.py" line="236"/>
       <location filename="../../../Path/Op/Surface.py" line="431"/>
+      <location filename="../../../Path/Op/Slot.py" line="236"/>
       <location filename="../../../Path/Op/Waterline.py" line="460"/>
+      <location filename="../../../Path/Op/Base.py" line="314"/>
       <source>Make True, if specifying a Start Point</source>
       <translation>Állítsa igazra, ha egy kiinduló pontot ad meg</translation>
     </message>
@@ -4966,7 +4958,7 @@ Default: 3 mm</source>
       <translation>Az alaptárgy oldala</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Deburr.py" line="162"/>
+      <location filename="../../../Path/Op/Deburr.py" line="160"/>
       <source>The segment where the toolpath starts</source>
       <translation>Az a szakasz, ahol az eszköz útvonala kezdődik</translation>
     </message>
@@ -5036,9 +5028,9 @@ Default: 3 mm</source>
       <translation>G99 visszahúzás alkalmazása: csak a művelet furatai között húzza vissza a visszahúzási magasság értéket</translation>
     </message>
     <message>
+      <location filename="../../../Path/Op/Vcarve.py" line="285"/>
       <location filename="../../../Path/Op/Engrave.py" line="71"/>
       <location filename="../../../Path/Op/Engrave.py" line="81"/>
-      <location filename="../../../Path/Op/Vcarve.py" line="285"/>
       <source>Additional base objects to be engraved</source>
       <translation>Kiegészítő alap tárgyakat kell bevésni</translation>
     </message>
@@ -5064,8 +5056,8 @@ Default: 3 mm</source>
     </message>
     <message>
       <location filename="../../../Path/Op/Helix.py" line="109"/>
-      <source>The direction of the circular cuts, ClockWise (CW), or CounterClockWise (CCW)</source>
-      <translation>Körkivágás iránya, óramutató járásával megegyező irányban (CW), vagy az óramutató járásával ellentétes irányban (CCW)</translation>
+      <source>The direction of the circular cuts, ClockWise (Climb), or CounterClockWise (Conventional)</source>
+      <translation>A körkörös vágások iránya, órairányban (Emelkedés) vagy ellenórairányban (Hagyományos)</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Helix.py" line="118"/>
@@ -5079,9 +5071,9 @@ Default: 3 mm</source>
       <translation>Kezdő sugár</translation>
     </message>
     <message>
+      <location filename="../../../Path/Op/Profile.py" line="143"/>
       <location filename="../../../Path/Op/Helix.py" line="142"/>
       <location filename="../../../Path/Op/Helix.py" line="167"/>
-      <location filename="../../../Path/Op/Profile.py" line="143"/>
       <source>Extra value to stay away from final profile- good for roughing toolpath</source>
       <translation>Extra érték ami távol tart a záró profiltól- jó a nagyoló szerszámmozgáshoz</translation>
     </message>
@@ -5101,9 +5093,9 @@ Default: 3 mm</source>
       <translation>Zárja ki a felemelt területek marását a felületen belül.</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Pocket.py" line="66"/>
-      <location filename="../../../Path/Op/Profile.py" line="117"/>
       <location filename="../../../Path/Op/Surface.py" line="247"/>
+      <location filename="../../../Path/Op/Profile.py" line="117"/>
+      <location filename="../../../Path/Op/Pocket.py" line="66"/>
       <location filename="../../../Path/Op/Waterline.py" line="267"/>
       <source>Choose how to process multiple Base Geometry features.</source>
       <translation>Válassza ki, hogyan kezeljen több alapgeometriai függvényt.</translation>
@@ -5124,50 +5116,44 @@ Default: 3 mm</source>
       <translation>A modell és a primitív folyamat olyan műveletben, amely nem választja ki az alapgeometria beállítását.</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/PocketBase.py" line="128"/>
-      <location filename="../../../Path/Op/Profile.py" line="108"/>
-      <source>The direction that the toolpath should go around the part ClockWise (CW) or CounterClockWise (CCW)</source>
-      <translation>A szerszámmozgás az alkatrész körül leírt iránya az óramutató járásával megegyező (CW) vagy az óramutató járásával ellentétes irányú (CCW)</translation>
-    </message>
-    <message>
-      <location filename="../../../Path/Op/PocketBase.py" line="137"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="142"/>
       <source>Extra offset to apply to the operation. Direction is operation dependent.</source>
       <translation>Extra eltolása a művelethez. Iránya a függ a művelettől.</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/PocketBase.py" line="143"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="148"/>
       <source>Start pocketing at center or boundary</source>
       <translation>Zseb létrehozása a határvonal közepénél</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/PocketBase.py" line="157"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="162"/>
       <source>Angle of the zigzag pattern</source>
       <translation>Cikk-cakk minta szöge</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/PocketBase.py" line="163"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="168"/>
       <source>Clearing pattern to use</source>
       <translation>Felhasznált tisztázó minta</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/PocketBase.py" line="169"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="174"/>
       <source>Use 3D Sorting of Path</source>
       <translation>Használjon 3D-s válogatást az útvonalon</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/PocketBase.py" line="177"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="182"/>
       <source>Attempts to avoid unnecessary retractions.</source>
       <translation>Megkísérli, hogy elkerülje a felesleges visszahúzásokat.</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/PocketBase.py" line="186"/>
-      <location filename="../../../Path/Op/PocketBase.py" line="255"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="191"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="260"/>
       <source>Last Stepover Radius.  If 0, 50% of cutter is used. Tuning this can be used to improve stepover for some shapes</source>
       <translation>Utolsó lépéssugár.  Ha 0, 50% vágót használnak. Ennek finomhangolásával javítható bizonyos alakzatok átlépése</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/PocketBase.py" line="195"/>
-      <location filename="../../../Path/Op/PocketBase.py" line="267"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="200"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="272"/>
       <source>Skips machining regions that have already been cleared by previous operations.</source>
       <translation>Hagyja ki azokat a megmunkálási területeket, amelyeket előző műveletekkel már töröltek.</translation>
     </message>
@@ -5197,14 +5183,20 @@ Default: 3 mm</source>
       <translation>A letapogató adatok írható kimeneti helye</translation>
     </message>
     <message>
+      <location filename="../../../Path/Op/Profile.py" line="108"/>
+      <location filename="../../../Path/Op/PocketBase.py" line="133"/>
+      <source>The direction that the toolpath should go around the part ClockWise (Climb) or CounterClockWise (Conventional)</source>
+      <translation>Az irány, amelyben a szerszámpálya az alkatrész körül haladjon órairányban (Emelkedés) vagy ellenórairányban (Hagyományos)</translation>
+    </message>
+    <message>
       <location filename="../../../Path/Op/Profile.py" line="126"/>
       <source>Controls how tool moves around corners. Default=Round</source>
       <translation>Szabályozza az eszköz mozgását a sarkoknál. Alapértelmezett=Kerekített</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Profile.py" line="134"/>
-      <source>Maximum distance before a miter join is truncated</source>
-      <translation>Maximális távolság, mielőtt a ferde illesztés csonkul</translation>
+      <source>Maximum distance before a miter joint is truncated</source>
+      <translation>Maximális távolság a gérvágás csonkja előtt</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Profile.py" line="151"/>
@@ -5238,15 +5230,15 @@ Default: 3 mm</source>
       <translation>Az ideiglenes építőtárgyak megjelenítésének útvonala, ha a modul DEBUG módban van.</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Slot.py" line="147"/>
       <location filename="../../../Path/Op/Surface.py" line="291"/>
+      <location filename="../../../Path/Op/Slot.py" line="147"/>
       <location filename="../../../Path/Op/Waterline.py" line="329"/>
       <source>Set the geometric clearing pattern to use for the operation.</source>
       <translation>Állítsa be a művelet geometriai forgácsoló élmintázatát.</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Slot.py" line="174"/>
       <location filename="../../../Path/Op/Surface.py" line="326"/>
+      <location filename="../../../Path/Op/Slot.py" line="174"/>
       <location filename="../../../Path/Op/Waterline.py" line="372"/>
       <source>Complete the operation in a single pass at depth, or multiple passes to final depth.</source>
       <translation>Fejezze be a műveletet egyetlen lépésben a mélységig, vagy több lépésben a végső mélységig.</translation>
@@ -5293,8 +5285,8 @@ Default: 3 mm</source>
     </message>
     <message>
       <location filename="../../../Path/Op/Slot.py" line="210"/>
-      <source>For arcs/circlular edges, offset the radius for the toolpath.</source>
-      <translation>Ívek/köríves élek esetén a szerszámpálya sugarának eltolása.</translation>
+      <source>For arcs/circular edges, offset the radius for the toolpath.</source>
+      <translation>Ívek/köríves élek esetén a szerszámpálya sugarát eltolja.</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Slot.py" line="219"/>
@@ -5357,7 +5349,7 @@ Default: 3 mm</source>
       <location filename="../../../Path/Op/Surface.py" line="212"/>
       <location filename="../../../Path/Op/Waterline.py" line="232"/>
       <source>Avoid cutting the last &apos;N&apos; faces in the Base Geometry list of selected faces.</source>
-      <translation type="unfinished">Avoid cutting the last &apos;N&apos; faces in the Base Geometry list of selected faces.</translation>
+      <translation>Kerülje az utolsó &apos;N&apos; felületek vágását a kiválasztott felületek bázisgeometria listájában.</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Surface.py" line="220"/>
@@ -5446,7 +5438,7 @@ Default: 3 mm</source>
       <location filename="../../../Path/Op/Surface.py" line="369"/>
       <location filename="../../../Path/Op/Waterline.py" line="407"/>
       <source>Set the stepover percentage, based on the tool&apos;s diameter.</source>
-      <translation type="unfinished">Set the stepover percentage, based on the tool&apos;s diameter.</translation>
+      <translation>Állítsa be a lépésköz százalékos arányát a szerszám átmérője alapján.</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Surface.py" line="378"/>
@@ -5495,22 +5487,22 @@ Default: 3 mm</source>
     <message>
       <location filename="../../../Path/Op/ThreadMilling.py" line="349"/>
       <source>Set thread&apos;s major diameter</source>
-      <translation type="unfinished">Set thread&apos;s major diameter</translation>
+      <translation>Állítsa be a menet fő átmérőjét</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/ThreadMilling.py" line="355"/>
       <source>Set thread&apos;s minor diameter</source>
-      <translation type="unfinished">Set thread&apos;s minor diameter</translation>
+      <translation>Állítsa be a menet legkisebb átmérőjét</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/ThreadMilling.py" line="363"/>
       <source>Set thread&apos;s pitch - used for metric threads</source>
-      <translation type="unfinished">Set thread&apos;s pitch - used for metric threads</translation>
+      <translation>Állítsa be a menetemelkedést - metrikus meneteknél használatos</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/ThreadMilling.py" line="372"/>
       <source>Set thread&apos;s TPI (turns per inch) - used for imperial threads</source>
-      <translation type="unfinished">Set thread&apos;s TPI (turns per inch) - used for imperial threads</translation>
+      <translation>Menet beállítása TPI (fordulat per inch) - angolszász menetekhez használatos</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/ThreadMilling.py" line="381"/>
@@ -5540,17 +5532,17 @@ Default: 3 mm</source>
     <message>
       <location filename="../../../Path/Op/Vcarve.py" line="293"/>
       <source>Optimize movements</source>
-      <translation type="unfinished">Optimize movements</translation>
+      <translation>Mozgások optimalizálása</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Vcarve.py" line="300"/>
       <source>Add finishing pass</source>
-      <translation type="unfinished">Add finishing pass</translation>
+      <translation>Befejező lépés hozzáadása</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Vcarve.py" line="307"/>
       <source>Finishing pass Z offset</source>
-      <translation type="unfinished">Finishing pass Z offset</translation>
+      <translation>Befejező lépés Z eltolás</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Vcarve.py" line="321"/>
@@ -5764,12 +5756,17 @@ Default: 3 mm</source>
       <translation>Érvénytelen alapobjektum %s - nincs alakzat</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="603"/>
+      <location filename="../../../Path/Main/Stock.py" line="107"/>
+      <source>Stock Material property is deprecated. Removing the Material property. Please use native material system to assign a ShapeMaterial</source>
+      <translation>A készlet anyag tulajdonság elavult. Az anyag tulajdonság eltávolítása. Kérjük, használja a natív anyagrendszert a ShapeMaterial hozzárendeléséhez</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Main/Stock.py" line="606"/>
       <source>Unsupported stock type named {}</source>
       <translation>Nem támogatott alaptest típus név {}</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Stock.py" line="611"/>
+      <location filename="../../../Path/Main/Stock.py" line="614"/>
       <source>Unsupported PathStock template version {}</source>
       <translation>Nem támogatott AlaptestUtvonal sablon változat {}</translation>
     </message>
@@ -5797,12 +5794,12 @@ Default: 3 mm</source>
 </translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Deburr.py" line="188"/>
+      <location filename="../../../Path/Op/Deburr.py" line="186"/>
       <source>Round</source>
       <translation>Kerekített</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Deburr.py" line="189"/>
+      <location filename="../../../Path/Op/Deburr.py" line="187"/>
       <source>Miter</source>
       <translation>Gérvágó</translation>
     </message>
@@ -5810,26 +5807,26 @@ Default: 3 mm</source>
   <context>
     <name>PathProfile</name>
     <message>
-      <location filename="../../../Path/Op/Helix.py" line="75"/>
       <location filename="../../../Path/Op/Profile.py" line="209"/>
+      <location filename="../../../Path/Op/Helix.py" line="75"/>
       <source>Outside</source>
       <translation>Külső</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Helix.py" line="76"/>
       <location filename="../../../Path/Op/Profile.py" line="210"/>
+      <location filename="../../../Path/Op/Helix.py" line="76"/>
       <source>Inside</source>
       <translation>Belső</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Profile.py" line="196"/>
-      <source>CW</source>
-      <translation>Órajárás iránya</translation>
+      <source>Climb</source>
+      <translation>Emelkedés</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Profile.py" line="197"/>
-      <source>CCW</source>
-      <translation>Órajárással ellentétes irány</translation>
+      <source>Conventional</source>
+      <translation>Konvencionális</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Profile.py" line="200"/>
@@ -5904,8 +5901,8 @@ Default: 3 mm</source>
     </message>
     <message>
       <location filename="../../../Path/Op/Surface.py" line="786"/>
-      <source>No JOB</source>
-      <translation>Nincs FELADAT</translation>
+      <source>No job</source>
+      <translation>Nincs munka</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Surface.py" line="811"/>
@@ -6014,7 +6011,7 @@ Default: 3 mm</source>
   <context>
     <name>PathVcarve</name>
     <message>
-      <location filename="../../../Path/Op/Vcarve.py" line="583"/>
+      <location filename="../../../Path/Op/Vcarve.py" line="587"/>
       <source>The Job Base Object has no engraveable element. Engraving operation will produce no output.</source>
       <translation>A tevékenység tárgya nem rendelkezik vésett elemmel. A gravírozási művelet nem hoz létre kimenetet.</translation>
     </message>
@@ -6221,87 +6218,72 @@ Default: 3 mm</source>
       <translation>Szerkesztés</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="494"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="502"/>
       <source>Base Geometry</source>
       <translation>Alap geometria</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="558"/>
-      <source>Vertexes are not supported</source>
-      <translation>Csomópontok nem támogatottak</translation>
-    </message>
-    <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="565"/>
-      <source>Edges are not supported</source>
-      <translation>Élek nem támogatottak</translation>
-    </message>
-    <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="572"/>
-      <source>Faces are not supported</source>
-      <translation>Felületek nem támogatottak</translation>
-    </message>
-    <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="639"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="630"/>
       <source>Multiple operations are labeled as</source>
       <translation>Számos művelet van így megjelölve</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="716"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="707"/>
       <source>Base Location</source>
       <translation>Alap helyzet</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="835"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="826"/>
       <source>Heights</source>
       <translation>Magasságok</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="913"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="904"/>
       <source>FinalDepth cannot be modified for this operation.
 If it is necessary to set the FinalDepth manually please select a different operation.</source>
       <translation>Végleges-Mélység nem módosítható ehhez a művelethez.
 Ha szükséges a Végleges-mélység kézi beállítása, kérem válasszon egy másik műveletet.</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="938"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="929"/>
       <source>Depths</source>
       <translation>Mélység</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="1043"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="1034"/>
       <source>Diameters</source>
       <translation>Átmérők</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="1075"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="1066"/>
       <source>AreaOp Operation</source>
       <translation>AreaOp művelet</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="1140"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="1131"/>
       <source>Operation</source>
       <translation>Művelet</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="1207"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="1198"/>
       <source>Uncreate AreaOp Operation</source>
       <translation>Megsemmisített AreaOp művelet</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="1342"/>
-      <location filename="../../../Path/Op/Gui/Base.py" line="1343"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="1337"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="1338"/>
       <source>Pick Start Point</source>
       <translation>Válasszon indulási pontot</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="1386"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="1381"/>
       <source>No suitable tool controller found.
 Aborting op creation</source>
       <translation>Nem található megfelelő szerszámvezérlő.
 Az op-létrehozás megszakítása</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Base.py" line="1392"/>
+      <location filename="../../../Path/Op/Gui/Base.py" line="1387"/>
       <source>No tool controller, aborting op creation</source>
       <translation>Nincs eszközvezérlő, megszakítja az op létrehozását</translation>
     </message>
@@ -6346,7 +6328,7 @@ Az op-létrehozás megszakítása</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Custom.py" line="188"/>
-      <source>Invalid Gcode line: %s</source>
+      <source>Invalid G-code line: %s</source>
       <translation>Érvénytelen G-kód sor: %s</translation>
     </message>
   </context>
@@ -6645,24 +6627,24 @@ Az op-létrehozás megszakítása</translation>
   <context>
     <name>CAM_Dressup</name>
     <message>
-      <location filename="../../../Path/Dressup/Gui/AxisMap.py" line="284"/>
       <location filename="../../../Path/Dressup/Gui/ZCorrect.py" line="366"/>
+      <location filename="../../../Path/Dressup/Gui/AxisMap.py" line="284"/>
       <source>Please select one toolpath object
 </source>
       <translation>Kérjük, válasszon ki egy szerszámpálya tárgyat
 </translation>
     </message>
     <message>
-      <location filename="../../../Path/Dressup/Gui/AxisMap.py" line="289"/>
       <location filename="../../../Path/Dressup/Gui/ZCorrect.py" line="371"/>
+      <location filename="../../../Path/Dressup/Gui/AxisMap.py" line="289"/>
       <source>The selected object is not a toolpath
 </source>
       <translation>A kijelölt tárgy nem szerszámpálya útvonal
 </translation>
     </message>
     <message>
-      <location filename="../../../Path/Dressup/Gui/AxisMap.py" line="294"/>
       <location filename="../../../Path/Dressup/Gui/ZCorrect.py" line="376"/>
+      <location filename="../../../Path/Dressup/Gui/AxisMap.py" line="294"/>
       <source>Please select a toolpath object</source>
       <translation>Kérjük, válasszon ki egy szerszámpálya tárgyat</translation>
     </message>
@@ -6806,23 +6788,23 @@ Az op-létrehozás megszakítása</translation>
       <translation>Mérési pontfájl kiválasztása</translation>
     </message>
     <message>
+      <location filename="../../../Path/Op/Gui/Probe.py" line="106"/>
       <location filename="../../../Path/Dressup/Gui/ZCorrect.py" line="294"/>
-      <location filename="../../../Path/Op/Gui/Probe.py" line="95"/>
       <source>All Files (*.*)</source>
       <translation>Összes fájl (*.*)</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Probe.py" line="93"/>
+      <location filename="../../../Path/Op/Gui/Probe.py" line="104"/>
       <source>Select Output File</source>
       <translation>Válassza ki a kimeneti fájlt</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Probe.py" line="107"/>
+      <location filename="../../../Path/Op/Gui/Probe.py" line="118"/>
       <source>Probe</source>
       <translation>Szonda</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Probe.py" line="108"/>
+      <location filename="../../../Path/Op/Gui/Probe.py" line="119"/>
       <source>Create a Probing Grid from a job stock</source>
       <translation>Mintavételi rács létrehozása munka erőforráshoz</translation>
     </message>
@@ -6879,69 +6861,69 @@ Az op-létrehozás megszakítása</translation>
       <translation>Többtengelyes</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="344"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="348"/>
       <source>Edit</source>
       <translation>Szerkesztés</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="587"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="637"/>
       <source>Stock not a cylinder!</source>
       <translation>Alaptest nem egy henger!</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="1004"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="1067"/>
       <source>Select Output File</source>
       <translation>Válassza ki a kimeneti fájlt</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="1006"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="1069"/>
       <source>All Files (*.*)</source>
       <translation>Összes fájl (*.*)</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="1387"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="1450"/>
       <source>Unsupported stock object %s</source>
       <translation>Nem támogatott alaptest tárgy %s</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="1403"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="1466"/>
       <source>Unsupported stock type %s (%d)</source>
       <translation>Nem támogatott alaptest típus %s (%d)</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="1494"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="1557"/>
       <source>Model Selection</source>
       <translation>Modell kijelölés</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="1682"/>
       <location filename="../../../Path/Main/Gui/JobDlg.py" line="71"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="1746"/>
       <source>Warning</source>
       <translation>Figyelmeztetés</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="1683"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="1747"/>
       <source>Please add one.</source>
       <translation>Kérlek add hozzá egyet.</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="1684"/>
       <location filename="../../../Path/Main/Gui/JobDlg.py" line="76"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="1748"/>
       <source>Ok</source>
       <translation>Ok</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="1686"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="1750"/>
       <source>Add</source>
       <translation>Hozzáad</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="1697"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="1761"/>
       <source>This job has no base model.</source>
       <translation>Ennek a munkának nincs alap modellje.</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/Job.py" line="1704"/>
+      <location filename="../../../Path/Main/Gui/Job.py" line="1768"/>
       <source>This job has no tool.</source>
       <translation>Ennek a munkának nincs eszköze.</translation>
     </message>
@@ -6968,22 +6950,21 @@ For example:
     &apos;Metric, Small Parts &amp; CNC&apos;
     &apos;US Customary&apos;
     &apos;Imperial Decimal&apos;</source>
-      <translation type="unfinished">The currently selected unit schema: 
-     &apos;{}&apos; for this document
- Does not use &apos;minutes&apos; for velocity values. 
- 
-CNC machines require feed rate to be expressed in 
-unit/minute. To ensure correct G-code: 
-Select a minute-based schema in preferences.
-For example:
-    &apos;Metric, Small Parts &amp; CNC&apos;
-    &apos;US Customary&apos;
-    &apos;Imperial Decimal&apos;</translation>
+      <translation>Az aktuálisan kiválasztott egységséma: 
+     &apos;{}&apos; ehhez a dokumentumhoz
+ Nem használja a &apos; perc &apos; értékeket a sebességértékekhez. 
+A CNC-gépek megkövetelik, hogy az előtolási sebesség a következő mértékegységben legyen megadva 
+egység/perc. A helyes G-kód biztosítása érdekében: 
+Válasszon perc alapú sémát a beállításokban.
+Például:
+    Például: &apos;Metrikus, kis alkatrészek és CNC&apos;
+    &apos;US szokás szerint&apos;
+    &apos; Brit tizedesjegyrendszer&apos;</translation>
     </message>
     <message>
       <location filename="../../../Path/Main/Gui/JobDlg.py" line="79"/>
       <source>Don&apos;t Show This Anymore</source>
-      <translation type="unfinished">Don&apos;t Show This Anymore</translation>
+      <translation>Ne mutasd ezt többet</translation>
     </message>
     <message>
       <location filename="../../../Path/Main/Gui/JobDlg.py" line="88"/>
@@ -7024,19 +7005,6 @@ For example:
       <location filename="../../../Path/Main/Gui/JobDlg.py" line="383"/>
       <source>Unsupported stock type</source>
       <translation>Nem támogatott alaptest típus</translation>
-    </message>
-  </context>
-  <context>
-    <name>CAM_Camotics</name>
-    <message>
-      <location filename="../../../Path/Main/Gui/Camotics.py" line="314"/>
-      <source>Camotics</source>
-      <translation>Camotics</translation>
-    </message>
-    <message>
-      <location filename="../../../Path/Main/Gui/Camotics.py" line="316"/>
-      <source>Simulate using Camotics</source>
-      <translation>Szimuláció Camotics használatával</translation>
     </message>
   </context>
   <context>
@@ -7108,7 +7076,7 @@ For example:
       <translation>Ellenőrizze a CAM munkát a gyakori hibákra</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="88"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="90"/>
       <source>Table of Contents</source>
       <translation>Tartalomjegyzék</translation>
     </message>
@@ -7128,7 +7096,7 @@ For example:
       <translation>Durva raktárkészlet</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="90"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="92"/>
       <source>Tool Data</source>
       <translation>Szerszám adat</translation>
     </message>
@@ -7143,12 +7111,12 @@ For example:
       <translation>Nyikorgás (fém)</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="102"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="104"/>
       <source>Job Type</source>
       <translation>Feladat típusa</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="105"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="107"/>
       <source>Customer</source>
       <translation>Ügyfél</translation>
     </message>
@@ -7158,12 +7126,12 @@ For example:
       <translation>Művelet</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="99"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="101"/>
       <source>Cycle Time</source>
       <translation>Ciklusidő</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="91"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="93"/>
       <source>Tool Number</source>
       <translation>Eszköz szám</translation>
     </message>
@@ -7178,12 +7146,22 @@ For example:
       <translation>Gyártó</translation>
     </message>
     <message>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="77"/>
+      <source>Output (G-code)</source>
+      <translation>Kimenet (G-kód)</translation>
+    </message>
+    <message>
       <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="79"/>
       <source>Part Number</source>
       <translation>Cikkszám</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="92"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="89"/>
+      <source>Surface Speed HSS</source>
+      <translation>Felületi sebesség HSS</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="94"/>
       <source>URL</source>
       <translation>URL</translation>
     </message>
@@ -7193,7 +7171,7 @@ For example:
       <translation>Vizsgálati megjegyzés</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="89"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="91"/>
       <source>Tool Controller</source>
       <translation>Eszköz vezérlő</translation>
     </message>
@@ -7223,57 +7201,57 @@ For example:
       <translation>Beállítási jelentés CAM munkához</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="77"/>
-      <source>Output (Gcode)</source>
-      <translation>Kimenet (Gcode)</translation>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="88"/>
+      <source>Surface Speed Carbide</source>
+      <translation>Felületi sebesség keményfém</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="93"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="95"/>
       <source>X Size</source>
       <translation>X méret</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="94"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="96"/>
       <source>Y Size</source>
       <translation>Y méret</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="95"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="97"/>
       <source>Z Size</source>
       <translation>Z méret</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="96"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="98"/>
       <source>Minimum Z</source>
       <translation>Minimum Z</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="97"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="99"/>
       <source>Maximum Z</source>
       <translation>Maximum Z</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="98"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="100"/>
       <source>Coolant Mode</source>
       <translation>Hűtőközeg mód</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="100"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="102"/>
       <source>Part</source>
       <translation>Alkatrész</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="101"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="103"/>
       <source>Sequence</source>
       <translation>Sorrend</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="103"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="105"/>
       <source>CAD File</source>
       <translation>CAD fájl</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="104"/>
+      <location filename="../../../Path/Main/Sanity/ReportGenerator.py" line="106"/>
       <source>Last Save</source>
       <translation>Legutóbbi mentés</translation>
     </message>
@@ -7358,49 +7336,49 @@ For example:
       <translation>Dátum</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/Sanity.py" line="236"/>
+      <location filename="../../../Path/Main/Sanity/Sanity.py" line="243"/>
       <source>The Job&apos;s last post-processed file is missing</source>
-      <translation type="unfinished">The Job&apos;s last post-processed file is missing</translation>
+      <translation>A feladathoz az utolsó utofeldolgozott fájl hiányzik</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/Sanity.py" line="363"/>
+      <location filename="../../../Path/Main/Sanity/Sanity.py" line="382"/>
       <source>Tool number {} is a legacy tool. Legacy tools not 
                     supported by Path-Sanity</source>
       <translation>A {} számú eszköz egy örökölt eszköz. Az örökölt eszközök 
                     Path-Sanity által nem támogatottak</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/Sanity.py" line="377"/>
+      <location filename="../../../Path/Main/Sanity/Sanity.py" line="396"/>
       <source>Tool number {} used by multiple tools</source>
       <translation>Több szerszám által használt szerszámszám {}</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/Sanity.py" line="400"/>
+      <location filename="../../../Path/Main/Sanity/Sanity.py" line="419"/>
       <source>Toolbit Shape for TC: {} not found</source>
       <translation>Szerszámbetét forma a Szerszámvezérlőhöz: {} nem található</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/Sanity.py" line="420"/>
+      <location filename="../../../Path/Main/Sanity/Sanity.py" line="439"/>
       <source>Tool Controller &apos;{}&apos; has no feedrate</source>
-      <translation type="unfinished">Tool Controller &apos;{}&apos; has no feedrate</translation>
+      <translation>A szerszámvezérlő &apos;{}&apos; nem rendelkezik előtolási értékkel</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/Sanity.py" line="432"/>
+      <location filename="../../../Path/Main/Sanity/Sanity.py" line="451"/>
       <source>Tool Controller &apos;{}&apos; has no spindlespeed</source>
-      <translation type="unfinished">Tool Controller &apos;{}&apos; has no spindlespeed</translation>
+      <translation>A szerszámvezérlő &apos;{}&apos; nem rendelkezik orsófordulatszámmal</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/Sanity.py" line="457"/>
+      <location filename="../../../Path/Main/Sanity/Sanity.py" line="477"/>
       <source>Tool Controller &apos;{}&apos; is not used</source>
-      <translation type="unfinished">Tool Controller &apos;{}&apos; is not used</translation>
+      <translation>A szerszámvezérlő &apos;{}&apos; nem használatos</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/Sanity.py" line="334"/>
+      <location filename="../../../Path/Main/Sanity/Sanity.py" line="353"/>
       <source>Consider Specifying the Stock Material</source>
       <translation>Fontolja meg a készletanyag meghatározását</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Sanity/Sanity.py" line="220"/>
+      <location filename="../../../Path/Main/Sanity/Sanity.py" line="223"/>
       <source>The Job has not been post-processed</source>
       <translation>A munka nem került utófeldolgozásra</translation>
     </message>
@@ -7413,51 +7391,51 @@ For example:
       <translation>CAM szimulátor</translation>
     </message>
     <message>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="311"/>
       <location filename="../../../Path/Main/Gui/Simulator.py" line="635"/>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="291"/>
       <source>Simulate G-code on stock</source>
       <translation>Szimulálni G-kód állomány útvonalát</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="260"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="270"/>
       <source>High</source>
-      <translation type="unfinished">High</translation>
+      <translation>Magas</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="262"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="272"/>
       <source>Low</source>
-      <translation type="unfinished">Low</translation>
+      <translation>Alacsony</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="264"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="274"/>
       <source>Medium</source>
-      <translation type="unfinished">Medium</translation>
+      <translation>Közepes</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="287"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="307"/>
       <source>New CAM Simulator</source>
-      <translation type="unfinished">New CAM Simulator</translation>
+      <translation>Új CAM szimulátor</translation>
     </message>
   </context>
   <context>
     <name>CAM_Adaptive</name>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="913"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="917"/>
       <source>Outside</source>
       <translation>Külső</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="914"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="918"/>
       <source>Inside</source>
       <translation>Belső</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="917"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="921"/>
       <source>Clearing</source>
       <translation>Tisztítás</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Adaptive.py" line="918"/>
+      <location filename="../../../Path/Op/Adaptive.py" line="922"/>
       <source>Profiling</source>
       <translation>Marás</translation>
     </message>
@@ -7500,7 +7478,7 @@ For example:
     <message>
       <location filename="../../../Path/Op/Base.py" line="650"/>
       <source>Parent job %s doesn&apos;t have a base object</source>
-      <translation type="unfinished">Parent job %s doesn&apos;t have a base object</translation>
+      <translation>A %s szülői feladatnak nincs alaptárgya</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Base.py" line="796"/>
@@ -7548,7 +7526,7 @@ For example:
       <translation>Alap tárgy %s.%s már szerepel a listában</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Base.py" line="917"/>
+      <location filename="../../../Path/Op/Base.py" line="915"/>
       <source>Base object %s.%s rejected by operation</source>
       <translation>Alap tárgy: %s.%s művelet elutasította</translation>
     </message>
@@ -7579,10 +7557,22 @@ For example:
       <translation>A nem síkbeli adaptív rendszerindítás szintén nem érhető el.</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Engrave.py" line="76"/>
       <location filename="../../../Path/Op/Gui/Vcarve.py" line="68"/>
+      <location filename="../../../Path/Op/Gui/Engrave.py" line="76"/>
       <source>%s is not a Base Model object of the job %s</source>
       <translation>%s nem egy alap modell objektuma ennek a feladatnak: %s</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Op/Gui/Vcarve.py" line="183"/>
+      <location filename="../../../Path/Op/Gui/Probe.py" line="69"/>
+      <location filename="../../../Path/Op/Gui/ThreadMilling.py" line="120"/>
+      <source>No valid toolcontroller</source>
+      <translation>Nincs érvényes szerszámvezérlő</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Op/Gui/Vcarve.py" line="188"/>
+      <source>This operation requires a tool controller with a v-bit tool</source>
+      <translation>Ehhez a művelethez egy v-hegyes szerszámmal ellátott szerszámvezérlőre van szükség</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Gui/Engrave.py" line="83"/>
@@ -7598,6 +7588,21 @@ For example:
       <location filename="../../../Path/Post/scripts/generic_post.py" line="44"/>
       <source>Generic post processor</source>
       <translation>Általános utófeldolgozó</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Op/Adaptive.py" line="685"/>
+      <source>Adaptive operation couldn&apos;t determine the boundary wire. Did you select base geometry?</source>
+      <translation>Az adaptív művelet nem tudta meghatározni a szegélyvonalat. Kiválasztotta az alapgeometriát?</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Op/Gui/Probe.py" line="74"/>
+      <source>This operation requires a tool controller with a probe tool</source>
+      <translation>Ehhez a művelethez egy szerszámvezérlőre van szükség, szúrószerszámmal</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Op/Gui/ThreadMilling.py" line="125"/>
+      <source>This operation requires a tool controller with a threadmilling tool</source>
+      <translation>Ehhez a művelethez egy menetfúró szerszámmal ellátott szerszámvezérlőre van szükség</translation>
     </message>
   </context>
   <context>
@@ -7641,16 +7646,6 @@ For example:
   <context>
     <name>CAM_Helix</name>
     <message>
-      <location filename="../../../Path/Op/Helix.py" line="71"/>
-      <source>CW</source>
-      <translation>Órajárás iránya</translation>
-    </message>
-    <message>
-      <location filename="../../../Path/Op/Helix.py" line="72"/>
-      <source>CCW</source>
-      <translation>Órajárással ellentétes irány</translation>
-    </message>
-    <message>
       <location filename="../../../Path/Op/Gui/Helix.py" line="112"/>
       <source>Helix</source>
       <translation>Csigavonal</translation>
@@ -7659,6 +7654,16 @@ For example:
       <location filename="../../../Path/Op/Gui/Helix.py" line="115"/>
       <source>Creates a Helical toolpath from the features of a base object</source>
       <translation>Spirális szerszámpálya létrehozása egy alaptárgy jellemzőiből</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Op/Helix.py" line="71"/>
+      <source>Climb</source>
+      <translation>Emelkedés</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Op/Helix.py" line="72"/>
+      <source>Conventional</source>
+      <translation>Konvencionális</translation>
     </message>
   </context>
   <context>
@@ -7848,13 +7853,13 @@ For example:
     </message>
     <message>
       <location filename="../../../Path/Op/Slot.py" line="613"/>
-      <source>Custom points are identical.</source>
-      <translation>Az egyéni pontok azonosak.</translation>
+      <source>Custom points are identical. No slot path will be generated</source>
+      <translation>Az egyéni pontok azonosak. Nem generálódik résútvonal</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Slot.py" line="620"/>
-      <source>Custom points not at same Z height.</source>
-      <translation>Az egyéni pontok nem azonos z-magasságban vannak.</translation>
+      <source>Custom points not at same Z height. No slot path will be generated</source>
+      <translation>Az egyéni pontok nem azonos Z magasságban vannak. Nem generálódik réspálya</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Slot.py" line="678"/>
@@ -8163,12 +8168,12 @@ For example:
       <translation>Konvencionális</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/ThreadMilling.py" line="253"/>
+      <location filename="../../../Path/Op/Gui/ThreadMilling.py" line="263"/>
       <source>Thread Milling</source>
       <translation>Menetmarás</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/ThreadMilling.py" line="257"/>
+      <location filename="../../../Path/Op/Gui/ThreadMilling.py" line="267"/>
       <source>Creates a Thread Milling toolpath from features of a base object</source>
       <translation>Létrehoz egy menetmaró szerszámpályát egy alaptárgy jellemzőiből</translation>
     </message>
@@ -8176,22 +8181,22 @@ For example:
   <context>
     <name>CAM_Vcarve</name>
     <message>
-      <location filename="../../../Path/Op/Vcarve.py" line="546"/>
+      <location filename="../../../Path/Op/Vcarve.py" line="549"/>
       <source>VCarve requires an engraving cutter with a cutting edge angle</source>
       <translation>A V-kivágás gravírozást igényel élvágási szöggel</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Vcarve.py" line="553"/>
+      <location filename="../../../Path/Op/Vcarve.py" line="557"/>
       <source>Engraver cutting edge angle must be &lt; 180 degrees.</source>
       <translation>A gravírozó vágóél szögének &lt; 180 fokosnak kell lennie.</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Vcarve.py" line="219"/>
+      <location filename="../../../Path/Op/Gui/Vcarve.py" line="228"/>
       <source>Vcarve</source>
       <translation>V kivágás</translation>
     </message>
     <message>
-      <location filename="../../../Path/Op/Gui/Vcarve.py" line="220"/>
+      <location filename="../../../Path/Op/Gui/Vcarve.py" line="229"/>
       <source>Creates a medial line engraving toolpath</source>
       <translation>Középvonalas gravírozó szerszámpálya létrehozása</translation>
     </message>
@@ -8491,36 +8496,36 @@ For example:
       <translation>Példafájlok másolása új {} könyvtárba?</translation>
     </message>
     <message>
-      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="746"/>
-      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="877"/>
+      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="747"/>
+      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="878"/>
       <source>Tooltable JSON (*.fctl)</source>
       <translation>Eszközasztal JSON (*.json)</translation>
     </message>
     <message>
-      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="748"/>
-      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="882"/>
+      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="749"/>
+      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="883"/>
       <source>Save toolbit library</source>
       <translation>Szerszámkönyvtár mentése</translation>
     </message>
     <message>
-      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="809"/>
+      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="810"/>
       <source>Tool</source>
       <translation>Eszköz</translation>
     </message>
     <message>
-      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="810"/>
+      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="811"/>
       <source>Shape</source>
       <translation>Alakzat</translation>
     </message>
     <message>
-      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="878"/>
+      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="879"/>
       <source>LinuxCNC tooltable (*.tbl)</source>
       <translation>LinuxCNC szerszámlista (*.tbl)</translation>
     </message>
     <message>
-      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="880"/>
-      <source>Camotics tooltable (*.json)</source>
-      <translation>Camotics eszköztábla (*.json)</translation>
+      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="881"/>
+      <source>CAMotics tooltable (*.json)</source>
+      <translation>CAMotics eszköztábla (*.json)</translation>
     </message>
   </context>
   <context>
@@ -8585,14 +8590,27 @@ For example:
       <translation>Eszköz alakzat kiválasztása</translation>
     </message>
     <message>
-      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="475"/>
+      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="476"/>
       <source>Select a library</source>
-      <translation type="unfinished">Select a library</translation>
+      <translation>Könyvtár kiválasztása</translation>
     </message>
     <message>
-      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="479"/>
+      <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="480"/>
       <source>No library selected</source>
-      <translation type="unfinished">No library selected</translation>
+      <translation>Nincs könyvtár kiválasztva</translation>
+    </message>
+  </context>
+  <context>
+    <name>CAM_Camotics</name>
+    <message>
+      <location filename="../../../Path/Main/Gui/Camotics.py" line="314"/>
+      <source>CAMotics</source>
+      <translation>CAMotics</translation>
+    </message>
+    <message>
+      <location filename="../../../Path/Main/Gui/Camotics.py" line="316"/>
+      <source>Simulate using CAMotics</source>
+      <translation>Szimuláció CAMotics használatával</translation>
     </message>
   </context>
 </TS>

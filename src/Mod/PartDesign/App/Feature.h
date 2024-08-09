@@ -58,6 +58,8 @@ public:
     App::PropertyLink   BaseFeature;
     App::PropertyLinkHidden _Body;
 
+    /// Keep a copy of suppressed shapes so that we can restore them (and maybe display them)
+    Part::PropertyPartShape SuppressedShape;
     App::DocumentObjectExecReturn* recompute() override;
 
     short mustExecute() const override;
@@ -97,8 +99,10 @@ protected:
     /**
      * Get a solid of the given shape. If no solid is found an exception is raised.
      */
+#ifndef FC_USE_TNP_FIX
     // TODO: Toponaming April 2024 Deprecated in favor of TopoShape method.  Remove when possible.
     TopoDS_Shape getSolid(const TopoDS_Shape&);
+#endif
     TopoShape getSolid(const TopoShape&);
     static int countSolids(const TopoDS_Shape&, TopAbs_ShapeEnum type = TopAbs_SOLID);
 
@@ -107,6 +111,8 @@ protected:
      */
     bool isSingleSolidRuleSatisfied(const TopoDS_Shape&, TopAbs_ShapeEnum type = TopAbs_SOLID);
     SingleSolidRuleMode singleSolidRuleMode();
+
+    void updateSuppressedShape();
 
     /// Grab any point from the given face
     static const gp_Pnt getPointFromFace(const TopoDS_Face& f);

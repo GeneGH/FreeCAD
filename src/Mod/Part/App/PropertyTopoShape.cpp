@@ -79,9 +79,6 @@ void PropertyPartShape::setValue(const TopoShape& sh)
             _Shape.Hasher = obj->getDocument()->getStringHasher();
             _Shape.hashChildMaps();
         }
-        if ( ! _Shape.isNull() && ! _Shape.isValid() ) {
-            _Shape.fix();
-        }
     }
     hasSetValue();
     _Ver.clear();
@@ -260,7 +257,7 @@ void PropertyPartShape::beforeSave() const
         _Shape.beforeSave();
     }
 }
-
+#ifndef FC_USE_TNP_FIX
 void PropertyPartShape::Save (Base::Writer &writer) const
 {
     if(!writer.isForceXML()) {
@@ -278,7 +275,7 @@ void PropertyPartShape::Save (Base::Writer &writer) const
     }
 }
 
-#ifdef NOT_YET_AND_MAYBE_NEVER
+#else
 void PropertyPartShape::Save (Base::Writer &writer) const
 {
     //See SaveDocFile(), RestoreDocFile()
@@ -301,20 +298,18 @@ void PropertyPartShape::Save (Base::Writer &writer) const
     writer.Stream() << " ElementMap=\"" << version << '"';
 
     bool binary = writer.getMode("BinaryBrep");
-    bool toXML = writer.getFileVersion()>1 && writer.isForceXML()>=(binary?3:2);
+    bool toXML = writer.isForceXML();
     if(!toXML) {
         writer.Stream() << " file=\""
-                        << writer.addFile(getFileName(binary?".bin":".brp"), this)
+                        << writer.addFile(getFileName(binary?".bin":".brp").c_str(), this)
                         << "\"/>\n";
     } else if(binary) {
         writer.Stream() << " binary=\"1\">\n";
-        TopoShape shape;
-        shape.setShape(_Shape.getShape());
-        shape.exportBinary(writer.beginCharStream(true));
+        _Shape.exportBinary(writer.beginCharStream(Base::CharStreamFormat::Base64Encoded));
         writer.endCharStream() <<  writer.ind() << "</Part>\n";
     } else {
         writer.Stream() << " brep=\"1\">\n";
-        _Shape.exportBrep(writer.beginCharStream(false)<<'\n');
+        _Shape.exportBrep(writer.beginCharStream(Base::CharStreamFormat::Raw)<<'\n');
         writer.endCharStream() << '\n' << writer.ind() << "</Part>\n";
     }
 
@@ -341,6 +336,7 @@ std::string PropertyPartShape::getElementMapVersion(bool restored) const {
     return PropertyComplexGeoData::getElementMapVersion(false);
 }
 
+#ifndef FC_USE_TNP_FIX
 void PropertyPartShape::Restore(Base::XMLReader &reader)
 {
     reader.readElement("Part");
@@ -352,7 +348,7 @@ void PropertyPartShape::Restore(Base::XMLReader &reader)
     }
 }
 
-#ifdef NOT_YET_AND_MAYBE_NEVER
+#else
 void PropertyPartShape::Restore(Base::XMLReader &reader)
 {
     reader.readElement("Part");
@@ -360,27 +356,28 @@ void PropertyPartShape::Restore(Base::XMLReader &reader)
     auto owner = Base::freecad_dynamic_cast<App::DocumentObject>(getContainer());
     _Ver = "?";
     bool has_ver = reader.hasAttribute("ElementMap");
-    if(has_ver)
+    if (has_ver)
         _Ver = reader.getAttribute("ElementMap");
 
-    int hasher_idx = reader.getAttributeAsInteger("HasherIndex","-1");
-    int save_hasher = reader.getAttributeAsInteger("SaveHasher","");
+    int hasher_idx = static_cast<int>(reader.getAttributeAsInteger("HasherIndex", "-1"));
+    int save_hasher = static_cast<int>(reader.getAttributeAsInteger("SaveHasher", "0"));
 
-    TopoDS_Shape sh;
+    TopoShape shape;
 
-    if(reader.hasAttribute("file")) {
+    if (reader.hasAttribute("file")) {
         std::string file = reader.getAttribute("file");
         if (!file.empty()) {
             // initiate a file read
-            reader.addFile(file.c_str(),this);
+            reader.addFile(file.c_str(), this);
         }
-    } else if(reader.getAttributeAsInteger("binary","")) {
+    }
+    else if (reader.hasAttribute(("binary")) && reader.getAttributeAsInteger("binary")) {
         TopoShape shape;
-        shape.importBinary(reader.beginCharStream(true));
-        sh = shape.getShape();
-    } else if(reader.getAttributeAsInteger("brep","")) {
-        BRep_Builder builder;
-        BRepTools::Read(sh, reader.beginCharStream(false), builder);
+        shape.importBinary(reader.beginCharStream());
+        shape = shape.getShape();
+    }
+    else if (reader.hasAttribute("brep") && reader.getAttributeAsInteger("brep")) {
+        shape.importBrep(reader.beginCharStream(Base::CharStreamFormat::Raw));
     }
 
     reader.readEndElement("Part");
@@ -425,15 +422,16 @@ void PropertyPartShape::Restore(Base::XMLReader &reader)
             }
         }
     } else if(owner && !owner->getDocument()->testStatus(App::Document::PartialDoc)) {
-        if(App::DocumentParams::getWarnRecomputeOnRestore()) {
+        // if(App::DocumentParams::getWarnRecomputeOnRestore()) {
+        if( true ) {
             FC_WARN("Pending recompute for generating element map: " << owner->getFullName());
             owner->getDocument()->addRecomputeObject(owner);
         }
     }
 
-    if (!sh.IsNull() || !_Shape.isNull()) {
+    if (!shape.isNull() || !_Shape.isNull()) {
         aboutToSetValue();
-        _Shape.setShape(sh,false);
+        _Shape.setShape(shape.getShape(),false);
         hasSetValue();
     }
 }
@@ -446,8 +444,10 @@ void PropertyPartShape::afterRestore()
         // order to try to regenerate the element map
         _Ver = "?";
     }
-    else if (_Shape.getElementMapSize() == 0)
-        _Shape.Hasher->clear(); //reset();
+    else if (_Shape.getElementMapSize() == 0) {
+        if (_Shape.Hasher)
+            _Shape.Hasher->clear();
+    }
     PropertyComplexGeoData::afterRestore();
 }
 #endif

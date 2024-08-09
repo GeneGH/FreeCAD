@@ -17,17 +17,17 @@
   <context>
     <name>Assembly_CreateJointFixed</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="76"/>
+      <location filename="../../../CommandCreateJoint.py" line="79"/>
       <source>Create a Fixed Joint</source>
       <translation>Napravi fiksni spoj</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="83"/>
+      <location filename="../../../CommandCreateJoint.py" line="86"/>
       <source>1 - If an assembly is active : Create a joint permanently locking two parts together, preventing any movement or rotation.</source>
-      <translation>1 - Ako je aktivan sklop: Napravi spoj koji trajno zaključa dva dela zajedno, sprečavajući bilo kakvo kretanje ili rotaciju.</translation>
+      <translation>1 - Ako je aktivan sklop: Napravi spoj koji trajno zaključa dva dela zajedno, sprečavajući bilo kakvu translaciju ili rotaciju.</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="89"/>
+      <location filename="../../../CommandCreateJoint.py" line="92"/>
       <source>2 - If a part is active : Position sub parts by matching selected coordinate systems. The second part selected will move.</source>
       <translation>2 - Ako je aktivan deo: Pozicionira delove tako što će napraviti podudarnim izabrane koordinatne sisteme. Drugi izabrani deo će se pomeriti.</translation>
     </message>
@@ -35,12 +35,12 @@
   <context>
     <name>Assembly_CreateJointRevolute</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="111"/>
+      <location filename="../../../CommandCreateJoint.py" line="114"/>
       <source>Create Revolute Joint</source>
       <translation>Napravi rotacioni spoj</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="118"/>
+      <location filename="../../../CommandCreateJoint.py" line="121"/>
       <source>Create a Revolute Joint: Allows rotation around a single axis between selected parts.</source>
       <translation>Napravi rotacioni spoj (Kinematski par V klase) između izabranih delova: Dozvoljava rotaciju oko jedne ose.</translation>
     </message>
@@ -48,12 +48,12 @@
   <context>
     <name>Assembly_CreateJointCylindrical</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="139"/>
+      <location filename="../../../CommandCreateJoint.py" line="142"/>
       <source>Create Cylindrical Joint</source>
       <translation>Napravi cilindrični spoj</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="146"/>
+      <location filename="../../../CommandCreateJoint.py" line="149"/>
       <source>Create a Cylindrical Joint: Enables rotation along one axis while permitting movement along the same axis between assembled parts.</source>
       <translation>Napravi cilindrični spoj (Kinematski par IV klase) izmeđi izabranih delova: Dozvoljava rotaciju oko jedne ose i translaciju po istoj osi.</translation>
     </message>
@@ -61,25 +61,25 @@
   <context>
     <name>Assembly_CreateJointSlider</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="165"/>
+      <location filename="../../../CommandCreateJoint.py" line="168"/>
       <source>Create Slider Joint</source>
-      <translation>Napravi translatorni spoj</translation>
+      <translation>Napravi translacioni spoj</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="172"/>
+      <location filename="../../../CommandCreateJoint.py" line="175"/>
       <source>Create a Slider Joint: Allows linear movement along a single axis but restricts rotation between selected parts.</source>
-      <translation>Napravi translatorni spoj (Kinematski par V klase) između izabranih delova: Dozvoljava jednu translaciju.</translation>
+      <translation>Napravi translacioni spoj (Kinematski par V klase) između izabranih delova: Dozvoljava jednu translaciju.</translation>
     </message>
   </context>
   <context>
     <name>Assembly_CreateJointBall</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="191"/>
+      <location filename="../../../CommandCreateJoint.py" line="194"/>
       <source>Create Ball Joint</source>
       <translation>Napravi kuglasti spoj</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="198"/>
+      <location filename="../../../CommandCreateJoint.py" line="201"/>
       <source>Create a Ball Joint: Connects parts at a point, allowing unrestricted movement as long as the connection points remain in contact.</source>
       <translation>Napravi kuglasti spoj (Kinematski par III klase) između izabranih delova: Dozvoljava rotaciju oko sve tri ose.</translation>
     </message>
@@ -87,17 +87,17 @@
   <context>
     <name>Assembly_CreateJointDistance</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="217"/>
+      <location filename="../../../CommandCreateJoint.py" line="220"/>
       <source>Create Distance Joint</source>
       <translation>Napravi ravanski spoj</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="224"/>
+      <location filename="../../../CommandCreateJoint.py" line="227"/>
       <source>Create a Distance Joint: Fix the distance between the selected objects.</source>
       <translation>Napravi ravanski spoj (kinematski par III klase) između izabanih delova: Dozvoljava rotaciju oko jedne ose i translaciju po dve ose.</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="230"/>
+      <location filename="../../../CommandCreateJoint.py" line="233"/>
       <source>Create one of several different joints based on the selection.For example, a distance of 0 between a plane and a cylinder creates a tangent joint. A distance of 0 between planes will make them co-planar.</source>
       <translation>Na osnovu izbora napravi jedan ili nekoliko različitih spojeva. Na primer, rastojanje 0 između ravni i cilindra napraviće ih tangentnim, rastojanje 0 između ravni napraviće ih koplanarnim.</translation>
     </message>
@@ -105,12 +105,12 @@
   <context>
     <name>Assembly_ToggleGrounded</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="496"/>
+      <location filename="../../../CommandCreateJoint.py" line="499"/>
       <source>Toggle grounded</source>
       <translation>Učvrsti</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="503"/>
+      <location filename="../../../CommandCreateJoint.py" line="506"/>
       <source>Grounding a part permanently locks its position in the assembly, preventing any movement or rotation. You need at least one grounded part before starting to assemble.</source>
       <translation>Učvršćavanje trajno fiksira poziciju dela u sklopu, sprečavajući bilo kakvu translaciju ili rotaciju. Potreban je najmanje jedan učvršćen deo pre nego što se počne formirati sklop.</translation>
     </message>
@@ -123,7 +123,7 @@
       <translation>Izvezi ASMT datoteku</translation>
     </message>
     <message>
-      <location filename="../../../CommandExportASMT.py" line="52"/>
+      <location filename="../../../CommandExportASMT.py" line="51"/>
       <source>Export currently active assembly as a ASMT file.</source>
       <translation>Izvezi trenutno aktivan sklop kao ASMT datoteku.</translation>
     </message>
@@ -180,17 +180,17 @@
   <context>
     <name>Workbench</name>
     <message>
-      <location filename="../../../InitGui.py" line="107"/>
+      <location filename="../../../InitGui.py" line="108"/>
       <source>Assembly</source>
-      <translation type="unfinished">Assembly</translation>
+      <translation>Sklopovi</translation>
     </message>
     <message>
-      <location filename="../../../InitGui.py" line="108"/>
+      <location filename="../../../InitGui.py" line="109"/>
       <source>Assembly Joints</source>
       <translation>Spojevi u sklopu</translation>
     </message>
     <message>
-      <location filename="../../../InitGui.py" line="111"/>
+      <location filename="../../../InitGui.py" line="112"/>
       <source>&amp;Assembly</source>
       <translation>&amp;Sklopovi</translation>
     </message>
@@ -198,230 +198,320 @@
   <context>
     <name>Assembly</name>
     <message>
-      <location filename="../../../JointObject.py" line="48"/>
+      <location filename="../../../JointObject.py" line="46"/>
       <source>Fixed</source>
-      <translation>Učvršćen</translation>
+      <translation>Fiksni</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="49"/>
+      <location filename="../../../JointObject.py" line="47"/>
       <source>Revolute</source>
       <translation>Rotacioni</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="50"/>
+      <location filename="../../../JointObject.py" line="48"/>
       <source>Cylindrical</source>
       <translation>Cilindrični</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="51"/>
+      <location filename="../../../JointObject.py" line="49"/>
       <source>Slider</source>
-      <translation>Translacija</translation>
+      <translation>Translacioni</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="52"/>
+      <location filename="../../../JointObject.py" line="50"/>
       <source>Ball</source>
       <translation>Kuglasti</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="53"/>
+      <location filename="../../../JointObject.py" line="51"/>
+      <location filename="../../../JointObject.py" line="1556"/>
       <source>Distance</source>
       <translation>Rastojanje</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="54"/>
+      <location filename="../../../JointObject.py" line="52"/>
       <source>Parallel</source>
-      <translation>Paralelno</translation>
+      <translation>Paralelni</translation>
+    </message>
+    <message>
+      <location filename="../../../JointObject.py" line="53"/>
+      <source>Perpendicular</source>
+      <translation>Upravni</translation>
+    </message>
+    <message>
+      <location filename="../../../JointObject.py" line="54"/>
+      <location filename="../../../JointObject.py" line="1558"/>
+      <source>Angle</source>
+      <translation>Ugaoni</translation>
     </message>
     <message>
       <location filename="../../../JointObject.py" line="55"/>
-      <source>Perpendicular</source>
-      <translation>Upravnost</translation>
-    </message>
-    <message>
-      <location filename="../../../JointObject.py" line="56"/>
-      <source>Angle</source>
-      <translation>Ugao</translation>
-    </message>
-    <message>
-      <location filename="../../../JointObject.py" line="57"/>
       <source>RackPinion</source>
       <translation>Zupčasta letva</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="58"/>
+      <location filename="../../../JointObject.py" line="56"/>
       <source>Screw</source>
-      <translation>Zavrtanj</translation>
+      <translation>Navojni</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="59"/>
+      <location filename="../../../JointObject.py" line="57"/>
       <source>Gears</source>
-      <translation>Zupčanik</translation>
+      <translation>Zupčasti</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="60"/>
+      <location filename="../../../JointObject.py" line="58"/>
       <source>Belt</source>
-      <translation>Remen</translation>
+      <translation>Remeni</translation>
     </message>
     <message>
-      <location filename="../../../Preferences.py" line="47"/>
+      <location filename="../../../JointObject.py" line="1413"/>
+      <source>You need to select 2 elements from 2 separate parts.</source>
+      <translation>Potrebno je izabrati 2 elementa sa 2 različita dela.</translation>
+    </message>
+    <message>
+      <location filename="../../../JointObject.py" line="1560"/>
+      <source>Radius 1</source>
+      <translation>Poluprečnik 1</translation>
+    </message>
+    <message>
+      <location filename="../../../JointObject.py" line="1562"/>
+      <source>Pitch radius</source>
+      <translation>Podeoni poluprečnik</translation>
+    </message>
+    <message>
+      <location filename="../../../Preferences.py" line="49"/>
       <source>Ask</source>
       <translation>Pitaj</translation>
     </message>
     <message>
-      <location filename="../../../Preferences.py" line="48"/>
+      <location filename="../../../Preferences.py" line="50"/>
       <source>Always</source>
       <translation>Uvek</translation>
     </message>
     <message>
-      <location filename="../../../Preferences.py" line="49"/>
+      <location filename="../../../Preferences.py" line="51"/>
       <source>Never</source>
       <translation>Nikada</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="46"/>
+      <source>Index (auto)</source>
+      <translation>Redni broj (automatski)</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="47"/>
+      <source>Name (auto)</source>
+      <translation>Ime (automatski)</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="48"/>
+      <source>Description</source>
+      <translation>Opis</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="49"/>
+      <source>File Name (auto)</source>
+      <translation>Ime datoteke (automatski)</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="50"/>
+      <source>Quantity (auto)</source>
+      <translation>Količina (automatski)</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="197"/>
+      <source>Default</source>
+      <translation>Podrazumevano</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="293"/>
+      <source>Duplicate Name</source>
+      <translation>Duplirano ime</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="294"/>
+      <source>This name is already used. Please choose a different name.</source>
+      <translation>Ovo ime je već u upotrebi. Izaberi drugo ime.</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="367"/>
+      <source>Options:</source>
+      <translation>Opcije:</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="374"/>
+      <source>Sub-assemblies children : If checked, Sub assemblies children will be added to the bill of materials.</source>
+      <translation>Komponente unutar podsklopova: Ako je označeno, u sastavnici će se pojaviti i komponente podsklopova.</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="380"/>
+      <source>Parts children : If checked, Parts children will be added to the bill of materials.</source>
+      <translation>Komponente unutar kontejnera Deo: Ako je označeno, u sastavnici će se pojaviti kontejneri Deo i komponente unutar njih.</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="386"/>
+      <source>Only parts : If checked, only Part containers and sub-assemblies will be added to the bill of materials. Solids like PartDesign Bodies, fasteners or Part workbench primitives will be ignored.</source>
+      <translation>Samo kontejneri Deo: Ako je označeno, u sastavnici će se pojaviti samo kontejneri Deo i podsklopovi. Komponente kao što su kontejneri Telo, komponente iz gvožđare ili objekti iz okruženja Delovi biće ignorisani.</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="388"/>
+      <source>Columns:</source>
+      <translation>Kolone:</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="395"/>
+      <source>Auto columns :  (Index, Quantity, Name...) are populated automatically. Any modification you make will be overridden. These columns cannot be renamed.</source>
+      <translation>Automatske kolone: (Indeks, Količina, Naziv...) se popunjavaju automatski. Svaka promena koju napraviš biće poništena. Ove kolone se ne mogu preimenovati.</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="401"/>
+      <source>Custom columns : 'Description' and other custom columns you add by clicking on 'Add column' will not have their data overwritten. These columns can be renamed by double-clicking or pressing F2 (Renaming a column will currently lose its data).</source>
+      <translation>Sopstvene kolone: 'Opis' i ostale kolone koje su dodate pomoću opcije 'Dodaj kolonu' neće biti prepisane. Ove kolone se mogu preimenovati dvostrukim klikom ili pritiskom na tipku F2 (preimenovanje kolone će obrisati njihove podatke).</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="407"/>
+      <source>Any column (custom or not) can be deleted by pressing Del.</source>
+      <translation>Bilo koja kolona može biti obrisana pritiskom na tipku Del.</translation>
     </message>
   </context>
   <context>
     <name>App::Property</name>
     <message>
-      <location filename="../../../JointObject.py" line="184"/>
+      <location filename="../../../JointObject.py" line="188"/>
       <source>The type of the joint</source>
       <translation>Vrsta spoja</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="203"/>
+      <location filename="../../../JointObject.py" line="210"/>
+      <location filename="../../../JointObject.py" line="474"/>
+      <source>The first reference of the joint</source>
+      <translation type="unfinished">The first reference of the joint</translation>
+    </message>
+    <message>
+      <location filename="../../../JointObject.py" line="221"/>
+      <source>This is the local coordinate system within Reference1's object that will be used for the joint.</source>
+      <translation type="unfinished">This is the local coordinate system within Reference1's object that will be used for the joint.</translation>
+    </message>
+    <message>
+      <location filename="../../../JointObject.py" line="241"/>
+      <location filename="../../../JointObject.py" line="497"/>
+      <source>The second reference of the joint</source>
+      <translation type="unfinished">The second reference of the joint</translation>
+    </message>
+    <message>
+      <location filename="../../../JointObject.py" line="252"/>
+      <source>This is the local coordinate system within Reference2's object that will be used for the joint.</source>
+      <translation type="unfinished">This is the local coordinate system within Reference2's object that will be used for the joint.</translation>
+    </message>
+    <message>
+      <location filename="../../../JointObject.py" line="430"/>
       <source>The first object of the joint</source>
       <translation>Prvi objekat u spoju</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="211"/>
-      <source>The first part of the joint</source>
-      <translation>Prvi deo u spoju</translation>
-    </message>
-    <message>
-      <location filename="../../../JointObject.py" line="219"/>
-      <source>The selected element of the first object</source>
-      <translation>Izabrani element prvog objekta</translation>
-    </message>
-    <message>
-      <location filename="../../../JointObject.py" line="227"/>
-      <source>The selected vertex of the first object</source>
-      <translation>Izabrano teme prvog objekta</translation>
-    </message>
-    <message>
-      <location filename="../../../JointObject.py" line="238"/>
-      <source>This is the local coordinate system within object1 that will be used for the joint.</source>
-      <translation>Ovo je lokalni koordinatni sistem unutar object1 koji će se koristiti u spoju.</translation>
-    </message>
-    <message>
-      <location filename="../../../JointObject.py" line="249"/>
+      <location filename="../../../JointObject.py" line="232"/>
       <source>This prevents Placement1 from recomputing, enabling custom positioning of the placement.</source>
       <translation>Ovo sprečava da se ponovo izračunava Placement1 omogućavajući sopstveno pozicioniranje.</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="258"/>
+      <location filename="../../../JointObject.py" line="449"/>
       <source>The second object of the joint</source>
       <translation>Drugi objekat u spoju</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="266"/>
-      <source>The second part of the joint</source>
-      <translation>Drugi deo u spoju</translation>
-    </message>
-    <message>
-      <location filename="../../../JointObject.py" line="274"/>
-      <source>The selected element of the second object</source>
-      <translation>Izabrani element drugog objekta</translation>
-    </message>
-    <message>
-      <location filename="../../../JointObject.py" line="282"/>
-      <source>The selected vertex of the second object</source>
-      <translation>Izabrano teme drugog objekta</translation>
-    </message>
-    <message>
-      <location filename="../../../JointObject.py" line="293"/>
-      <source>This is the local coordinate system within object2 that will be used for the joint.</source>
-      <translation>Ovo je lokalni koordinatni sistem unutar object2 koji će se koristiti u spoju.</translation>
-    </message>
-    <message>
-      <location filename="../../../JointObject.py" line="304"/>
+      <location filename="../../../JointObject.py" line="263"/>
       <source>This prevents Placement2 from recomputing, enabling custom positioning of the placement.</source>
       <translation>Ovo sprečava da se ponovo izračunava Placement2 omogućavajući sopstveno pozicioniranje.</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="315"/>
-      <source>This is the distance of the joint. It is used only by the distance joint and by RackPinion (pitch radius), Screw and Gears and Belt(radius1)</source>
+      <location filename="../../../JointObject.py" line="275"/>
+      <source>This is the distance of the joint. It is used only by the Distance joint and Rack and Pinion (pitch radius), Screw and Gears and Belt (radius1)</source>
       <translation>Rastojanje spoja. Koristi se kod ravanskog i navojnog spoja, a takođe i kod zupčastog, remenog (poluprečnik) i prenosnog spoja sa zupčastom letvom (poluprečnik koraka)</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="326"/>
+      <location filename="../../../JointObject.py" line="286"/>
       <source>This is the second distance of the joint. It is used only by the gear joint to store the second radius.</source>
       <translation>Ovo je drugo rastojanje spoja. Koristi se samo kod zupčastog spoja da odredi drugi poluprečnik.</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="337"/>
+      <location filename="../../../JointObject.py" line="297"/>
       <source>This is the rotation of the joint.</source>
       <translation>Rotacija spoja.</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="348"/>
+      <location filename="../../../JointObject.py" line="308"/>
       <source>This is the offset vector of the joint.</source>
       <translation>Vektor odmaka spoja.</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="359"/>
+      <location filename="../../../JointObject.py" line="319"/>
       <source>This indicates if the joint is active.</source>
       <translation>Ovo pokazuje da li je spoj aktivan.</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="371"/>
-      <source>Is this joint using limits.</source>
-      <translation>Da li ovaj spoj koristi ograničenja.</translation>
+      <location filename="../../../JointObject.py" line="331"/>
+      <source>Enable the minimum length limit of the joint.</source>
+      <translation>Omogući minimalno dužinsko ograničenje spoja.</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="383"/>
+      <location filename="../../../JointObject.py" line="343"/>
+      <source>Enable the maximum length limit of the joint.</source>
+      <translation>Omogući maksimalno dužinsko ograničenje spoja.</translation>
+    </message>
+    <message>
+      <location filename="../../../JointObject.py" line="355"/>
+      <source>Enable the minimum angle limit of the joint.</source>
+      <translation>Omogući minimalno ugaono ograničenje spoja.</translation>
+    </message>
+    <message>
+      <location filename="../../../JointObject.py" line="367"/>
+      <source>Enable the minimum length of the joint.</source>
+      <translation>Omogući minimalno rastojanje spoja.</translation>
+    </message>
+    <message>
+      <location filename="../../../JointObject.py" line="379"/>
       <source>This is the minimum limit for the length between both coordinate systems (along their Z axis).</source>
       <translation>Ovo je minimalno dužinsko ograničenje između koordinatnih sistema (uzduž njihovih Z osa).</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="394"/>
+      <location filename="../../../JointObject.py" line="390"/>
       <source>This is the maximum limit for the length between both coordinate systems (along their Z axis).</source>
       <translation>Ovo je maksimalno dužinsko ograničenje između koordinatnih sistema (uzduž njihovih Z osa).</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="405"/>
+      <location filename="../../../JointObject.py" line="401"/>
       <source>This is the minimum limit for the angle between both coordinate systems (between their X axis).</source>
       <translation>Ovo je minimalno ugaono ograničenje između koordinatnih sistema (između njihovih X osa).</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="416"/>
+      <location filename="../../../JointObject.py" line="412"/>
       <source>This is the maximum limit for the angle between both coordinate systems (between their X axis).</source>
       <translation>Ovo je maksimalno ugaono ograničenje između koordinatnih sistema (između njihovih X osa).</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="959"/>
+      <location filename="../../../JointObject.py" line="1070"/>
       <source>The object to ground</source>
       <translation>Objekat koji treba učvrstiti</translation>
     </message>
     <message>
-      <location filename="../../../JointObject.py" line="971"/>
+      <location filename="../../../JointObject.py" line="1082"/>
       <source>This is where the part is grounded.</source>
       <translation>Ovde je mesto gde je deo učvršćen.</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateView.py" line="230"/>
-      <source>The object moved by the move</source>
-      <translation>Objekti koji se pomeraju prilikom pomeranja</translation>
+      <location filename="../../../CommandCreateView.py" line="246"/>
+      <location filename="../../../CommandCreateView.py" line="280"/>
+      <source>The objects moved by the move</source>
+      <translation type="unfinished">The objects moved by the move</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateView.py" line="237"/>
-      <source>The containing parts of objects moved by the move</source>
-      <translation>Delovi koji sadrže objekte koji su se pomerali tokom pomeranja</translation>
-    </message>
-    <message>
-      <location filename="../../../CommandCreateView.py" line="247"/>
+      <location filename="../../../CommandCreateView.py" line="257"/>
       <source>This is the movement of the move. The end placement is the result of the start placement * this placement.</source>
       <translation>Pomeranje tokom pomeranja. Krajnji položaj je rezultat početnog položaja * ovog položaja.</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateView.py" line="254"/>
+      <location filename="../../../CommandCreateView.py" line="265"/>
       <source>The type of the move</source>
       <translation>Vrsta pomeranja</translation>
     </message>
@@ -434,62 +524,62 @@
       <translation>Napravi spoj</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="28"/>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="41"/>
       <source>Distance</source>
-      <translation>Rastojanje</translation>
+      <translation>Ravanski</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="52"/>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="65"/>
       <source>Radius 2</source>
       <translation>Poluprečnik 2</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="76"/>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="89"/>
       <source>Offset</source>
       <translation>Odmak</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="100"/>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="113"/>
       <source>Rotation</source>
-      <translation>Rotacija</translation>
+      <translation>Okretanje</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="128"/>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="141"/>
       <source>Reverse the direction of the joint.</source>
       <translation>Obrni smer spoja.</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="131"/>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="144"/>
       <source>Reverse</source>
       <translation>Obrnuto</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="142"/>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="155"/>
       <source>Limits</source>
       <translation>Ograničenja</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="152"/>
-      <source>Length min</source>
-      <translation>Minimalna dužina</translation>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="161"/>
+      <source>Min length</source>
+      <translation>Min. dužina</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="172"/>
-      <source>Length max</source>
-      <translation>Maksimalna dužina</translation>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="184"/>
+      <source>Max length</source>
+      <translation>Maks. dužina</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="192"/>
-      <source>Angle min</source>
-      <translation>Minimalni ugao</translation>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="207"/>
+      <source>Min angle</source>
+      <translation>Min. ugao</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="212"/>
-      <source>Angle max</source>
-      <translation>Maksimalni ugao</translation>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="236"/>
+      <source>Max angle</source>
+      <translation>Maks. ugao</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="232"/>
+      <location filename="../panels/TaskAssemblyCreateJoint.ui" line="268"/>
       <source>Reverse rotation</source>
       <translation>Obrni rotaciju</translation>
     </message>
@@ -507,22 +597,22 @@
       <translation>Pretraga delova...</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyInsertLink.ui" line="32"/>
+      <location filename="../panels/TaskAssemblyInsertLink.ui" line="39"/>
       <source>Don't find your part? </source>
       <translation>Ne pronalaziš deo? </translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyInsertLink.ui" line="39"/>
+      <location filename="../panels/TaskAssemblyInsertLink.ui" line="46"/>
       <source>Open file</source>
       <translation>Otvori datoteku</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyInsertLink.ui" line="48"/>
+      <location filename="../panels/TaskAssemblyInsertLink.ui" line="55"/>
       <source>If checked, the list will show only Parts.</source>
       <translation>Ako je čekirano lista će pokazivati samo delove.</translation>
     </message>
     <message>
-      <location filename="../panels/TaskAssemblyInsertLink.ui" line="51"/>
+      <location filename="../panels/TaskAssemblyInsertLink.ui" line="58"/>
       <source>Show only parts</source>
       <translation>Prikaži samo delove</translation>
     </message>
@@ -541,16 +631,28 @@
     </message>
     <message>
       <location filename="../preferences/Assembly.ui" line="23"/>
-      <source>Esc leave edit mode</source>
-      <translation>Esc napusti režim uređivanja</translation>
+      <source>Esc leaves edit mode</source>
+      <translation>Esc da napustiš režim uređivanja</translation>
     </message>
     <message>
       <location filename="../preferences/Assembly.ui" line="39"/>
+      <source>Log the dragging steps of the solver. Useful if you want to report a bug.
+The files are named "runPreDrag.asmt" and "dragging.log" and are located in the default directory of std::ofstream (on Windows it's the desktop)</source>
+      <translation>Zabeleži korake solvera. Ovo je korisno ako želiš da prijaviš grešku.
+Datoteke se zovu „runPreDrag.asmt“ i „dragging.log“ i nalaze se u podrazumevanoj fascikli std::ofstream (u Windows-u je to radna površina)</translation>
+    </message>
+    <message>
+      <location filename="../preferences/Assembly.ui" line="43"/>
+      <source>Log dragging steps</source>
+      <translation>Zabeleži korake</translation>
+    </message>
+    <message>
+      <location filename="../preferences/Assembly.ui" line="59"/>
       <source>Ground first part:</source>
       <translation>Učvrsti prvi deo:</translation>
     </message>
     <message>
-      <location filename="../preferences/Assembly.ui" line="46"/>
+      <location filename="../preferences/Assembly.ui" line="66"/>
       <source>When you insert the first part in the assembly, you can choose to ground the part automatically.</source>
       <translation>Da li da prvi deo koji se umeće u sklop treba da bude učvršćen.</translation>
     </message>
@@ -558,22 +660,17 @@
   <context>
     <name>AssemblyGui::ViewProviderAssembly</name>
     <message>
-      <location filename="../../ViewProviderAssembly.cpp" line="148"/>
-      <source>Delete associated joints</source>
-      <translation>Obriši pridružene spojeve</translation>
-    </message>
-    <message>
-      <location filename="../../ViewProviderAssembly.cpp" line="160"/>
+      <location filename="../../ViewProviderAssembly.cpp" line="176"/>
       <source>The object is associated to one or more joints.</source>
       <translation>Objektu su pridruženi jedan ili više spojeva.</translation>
     </message>
     <message>
-      <location filename="../../ViewProviderAssembly.cpp" line="162"/>
+      <location filename="../../ViewProviderAssembly.cpp" line="178"/>
       <source>Do you want to move the object and delete associated joints?</source>
       <translation>Da li želiš pomeriti objekat i obrisati pridružene spojeve?</translation>
     </message>
     <message>
-      <location filename="../../ViewProviderAssembly.cpp" line="762"/>
+      <location filename="../../ViewProviderAssembly.cpp" line="805"/>
       <source>Move part</source>
       <translation>Pomeri deo</translation>
     </message>
@@ -581,17 +678,17 @@
   <context>
     <name>Assembly_CreateJointRackPinion</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="331"/>
+      <location filename="../../../CommandCreateJoint.py" line="334"/>
       <source>Create Rack and Pinion Joint</source>
       <translation>Napravi prenos sa zupačastom letvom</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="338"/>
+      <location filename="../../../CommandCreateJoint.py" line="341"/>
       <source>Create a Rack and Pinion Joint: Links a part with a sliding joint with a part with a revolute joint.</source>
       <translation>Napravi prenos sa zupačastom letvom: Kombinacija translatornog i rotacionog spoja.</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="343"/>
+      <location filename="../../../CommandCreateJoint.py" line="346"/>
       <source>Select the same coordinate systems as the revolute and sliding joints. The pitch radius defines the movement ratio between the rack and the pinion.</source>
       <translation>Izaberi iste koordinatne sisteme kao kod rotacionih ili translatornih spojeva. Poluprečnik koraka određuje odnos kretanja između zupčanika i letve.</translation>
     </message>
@@ -599,23 +696,23 @@
   <context>
     <name>Assembly_CreateJointScrew</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="362"/>
+      <location filename="../../../CommandCreateJoint.py" line="365"/>
       <source>Create Screw Joint</source>
       <translation>Napravi navojni spoj</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="369"/>
+      <location filename="../../../CommandCreateJoint.py" line="372"/>
       <source>Create a Screw Joint: Links a part with a sliding joint with a part with a revolute joint.</source>
       <translation>Napravi navojni spoj: Omogućava translaciju i rotaciju jednog dela unutar drugog.</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="374"/>
+      <location filename="../../../CommandCreateJoint.py" line="377"/>
       <source>Select the same coordinate systems as the revolute and sliding joints. The pitch radius defines the movement ratio between the rotating screw and the sliding part.</source>
       <translation>Izaberi iste koordinatne sisteme kao kod rotacionih ili translatornih spojeva. Poluprečnik koraka određuje odnos kretanja između zavrtnja koji se rotira i dela koji klizi.</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="405"/>
-      <location filename="../../../CommandCreateJoint.py" line="436"/>
+      <location filename="../../../CommandCreateJoint.py" line="408"/>
+      <location filename="../../../CommandCreateJoint.py" line="439"/>
       <source>Select the same coordinate systems as the revolute joints.</source>
       <translation>Izaberi iste koordinatne sisteme kao kod rotacionih spojeva.</translation>
     </message>
@@ -623,12 +720,12 @@
   <context>
     <name>Assembly_CreateJointGears</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="393"/>
+      <location filename="../../../CommandCreateJoint.py" line="396"/>
       <source>Create Gears Joint</source>
       <translation>Napravi zupčasti prenos</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="400"/>
+      <location filename="../../../CommandCreateJoint.py" line="403"/>
       <source>Create a Gears Joint: Links two rotating gears together. They will have inverse rotation direction.</source>
       <translation>Napravi zupčasti prenos: Spaja zajedno dva zupčanika koji se rotiraju. Zupčanici će imati suprotne smerove obrtanja.</translation>
     </message>
@@ -636,12 +733,12 @@
   <context>
     <name>Assembly_CreateJointBelt</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="424"/>
+      <location filename="../../../CommandCreateJoint.py" line="427"/>
       <source>Create Belt Joint</source>
       <translation>Napravi remeni prenos</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="431"/>
+      <location filename="../../../CommandCreateJoint.py" line="434"/>
       <source>Create a Belt Joint: Links two rotating objects together. They will have the same rotation direction.</source>
       <translation>Napravi remeni prenos: Spaja zajedno dve remenice koje se rotiraju. Remenice će imati iste smerove obrtanja.</translation>
     </message>
@@ -649,17 +746,17 @@
   <context>
     <name>Assembly_CreateJointGearBelt</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="456"/>
+      <location filename="../../../CommandCreateJoint.py" line="459"/>
       <source>Create Gear/Belt Joint</source>
       <translation>Napravi zupčasti/remeni prenos</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="462"/>
+      <location filename="../../../CommandCreateJoint.py" line="465"/>
       <source>Create a Gears/Belt Joint: Links two rotating gears together.</source>
       <translation>Napravi zupačasti/remeni prenos: Spoji zajedno dva zupčanika/remenice.</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="467"/>
+      <location filename="../../../CommandCreateJoint.py" line="470"/>
       <source>Select the same coordinate systems as the revolute joints.</source>
       <translation>Izaberi iste koordinatne sisteme kao kod rotacionih spojeva.</translation>
     </message>
@@ -713,44 +810,122 @@ Pritisni ESC da otkažeš.</translation>
       <source>Explode radially</source>
       <translation>Rastavi radijalno</translation>
     </message>
+    <message>
+      <location filename="../panels/TaskAssemblyCreateBom.ui" line="14"/>
+      <source>Create Bill Of Materials</source>
+      <translation>Napravi sastavnicu</translation>
+    </message>
+    <message>
+      <location filename="../panels/TaskAssemblyCreateBom.ui" line="20"/>
+      <source>If checked, Sub assemblies children will be added to the bill of materials.</source>
+      <translation>Ako je označeno, u sastavnici će se pojaviti i komponente podsklopova.</translation>
+    </message>
+    <message>
+      <location filename="../panels/TaskAssemblyCreateBom.ui" line="23"/>
+      <source>Sub-assemblies children</source>
+      <translation>Komponente unutar podsklopova</translation>
+    </message>
+    <message>
+      <location filename="../panels/TaskAssemblyCreateBom.ui" line="39"/>
+      <source>If checked, Parts children will be added to the bill of materials.</source>
+      <translation>Ako je označeno, u sastavnici će se pojaviti kontejneri Deo i komponente unutar njih.</translation>
+    </message>
+    <message>
+      <location filename="../panels/TaskAssemblyCreateBom.ui" line="42"/>
+      <source>Parts children</source>
+      <translation>Komponente unutar kontejnera Deo</translation>
+    </message>
+    <message>
+      <location filename="../panels/TaskAssemblyCreateBom.ui" line="58"/>
+      <source>If checked, only Part containers and sub-assemblies will be added to the bill of materials. Solids like PartDesign Bodies, fasteners or Part workbench primitives will be ignored.</source>
+      <translation>Ako je označeno, u sastavnici će se pojaviti samo kontejneri Deo i podsklopovi. Komponente kao što su kontejneri Telo, komponente iz gvožđare ili objekti iz okruženja Delovi biće ignorisani.</translation>
+    </message>
+    <message>
+      <location filename="../panels/TaskAssemblyCreateBom.ui" line="61"/>
+      <source>Only parts</source>
+      <translation>Samo kontejneri Deo</translation>
+    </message>
+    <message>
+      <location filename="../panels/TaskAssemblyCreateBom.ui" line="77"/>
+      <source>Columns</source>
+      <translation>Kolone</translation>
+    </message>
+    <message>
+      <location filename="../panels/TaskAssemblyCreateBom.ui" line="86"/>
+      <source>Add column</source>
+      <translation>Dodaj Kolonu</translation>
+    </message>
+    <message>
+      <location filename="../panels/TaskAssemblyCreateBom.ui" line="96"/>
+      <source>Export</source>
+      <translation>Izvezi</translation>
+    </message>
+    <message>
+      <location filename="../panels/TaskAssemblyCreateBom.ui" line="109"/>
+      <source>Help</source>
+      <translation>Pomoć</translation>
+    </message>
   </context>
   <context>
     <name>Assembly_CreateJointParallel</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="249"/>
+      <location filename="../../../CommandCreateJoint.py" line="252"/>
       <source>Create Parallel Joint</source>
-      <translation type="unfinished">Create Parallel Joint</translation>
+      <translation>Napravi paralelni spoj</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="256"/>
+      <location filename="../../../CommandCreateJoint.py" line="259"/>
       <source>Create an Parallel Joint: Make the Z axis of selected coordinate systems parallel.</source>
-      <translation type="unfinished">Create an Parallel Joint: Make the Z axis of selected coordinate systems parallel.</translation>
+      <translation>Napravi paralelni spoj: Napravi Z ose koordinatnih sistema izabranih delova paralelnim.</translation>
     </message>
   </context>
   <context>
     <name>Assembly_CreateJointPerpendicular</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="277"/>
+      <location filename="../../../CommandCreateJoint.py" line="280"/>
       <source>Create Perpendicular Joint</source>
-      <translation type="unfinished">Create Perpendicular Joint</translation>
+      <translation>Napravi upravni spoj</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="284"/>
+      <location filename="../../../CommandCreateJoint.py" line="287"/>
       <source>Create an Perpendicular Joint: Make the Z axis of selected coordinate systems perpendicular.</source>
-      <translation type="unfinished">Create an Perpendicular Joint: Make the Z axis of selected coordinate systems perpendicular.</translation>
+      <translation>Napravi upravni spoj: Napravi Z ose koordinatnih sistema izabranih delova upravnim.</translation>
     </message>
   </context>
   <context>
     <name>Assembly_CreateJointAngle</name>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="303"/>
+      <location filename="../../../CommandCreateJoint.py" line="306"/>
       <source>Create Angle Joint</source>
-      <translation type="unfinished">Create Angle Joint</translation>
+      <translation>Napravi ugaoni spoj</translation>
     </message>
     <message>
-      <location filename="../../../CommandCreateJoint.py" line="310"/>
+      <location filename="../../../CommandCreateJoint.py" line="313"/>
       <source>Create an Angle Joint: Fix the angle between the Z axis of selected coordinate systems.</source>
-      <translation type="unfinished">Create an Angle Joint: Fix the angle between the Z axis of selected coordinate systems.</translation>
+      <translation>Napravi ugaoni spoj: Fiksira zadani ugao između Z osa koordinatnih sistema izabranih delova.</translation>
+    </message>
+  </context>
+  <context>
+    <name>Assembly_CreateBom</name>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="69"/>
+      <source>Create Bill of Materials</source>
+      <translation>Napravi sastavnicu</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="76"/>
+      <source>Create a bill of materials of the current assembly. If an assembly is active, it will be a BOM of this assembly. Else it will be a BOM of the whole document.</source>
+      <translation>Napravi sastavnicu sklopa. Ako je neki sklop aktivan napraviće se njegova sastavnica. U suprotnom, napraviće se sastavnica celog dokumenta.</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="81"/>
+      <source>The BOM object is a document object that stores the settings of your BOM. It is also a spreadsheet object so you can easily visualize the bom. If you don't need the BOM object to be saved as a document object, you can simply export and cancel the task.</source>
+      <translation>Pošto je sastavnica objekat okruženja Tabele u njemu ju možete i pregledati. U objektu Sastavnica su sačuvana i podešavanja sastavnice. Ako nemate potrebu da u Stablu dokumenta čuvate sastavnicu, izvezite ju i otkažite zadatak.</translation>
+    </message>
+    <message>
+      <location filename="../../../CommandCreateBom.py" line="86"/>
+      <source>The columns 'Index', 'Name', 'File Name' and 'Quantity' are automatically generated on recompute. The 'Description' and custom columns are not overwritten.</source>
+      <translation>Kolone 'Indeks', 'Ime', 'Ime datoteke' i 'Količina' se automatski generišu pri ponovnom izračunavanju. Kolone „Opis“ i sopstvene kolone se ne prepisuju.</translation>
     </message>
   </context>
 </TS>

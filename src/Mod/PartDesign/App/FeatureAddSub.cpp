@@ -49,7 +49,7 @@ FeatureAddSub::FeatureAddSub()
     //init Refine property
     Base::Reference<ParameterGrp> hGrp = App::GetApplication().GetUserParameter()
         .GetGroup("BaseApp")->GetGroup("Preferences")->GetGroup("Mod/PartDesign");
-    this->Refine.setValue(hGrp->GetBool("RefineModel", false));
+    this->Refine.setValue(hGrp->GetBool("RefineModel", true));
 }
 
 FeatureAddSub::Type FeatureAddSub::getAddSubType()
@@ -64,6 +64,7 @@ short FeatureAddSub::mustExecute() const
     return PartDesign::Feature::mustExecute();
 }
 
+#ifndef FC_USE_TNP_FIX
 // TODO: Toponaming April 2024 Deprecated in favor of TopoShape method.  Remove when possible.
 TopoDS_Shape FeatureAddSub::refineShapeIfActive(const TopoDS_Shape& oldShape) const
 {
@@ -83,6 +84,7 @@ TopoDS_Shape FeatureAddSub::refineShapeIfActive(const TopoDS_Shape& oldShape) co
 
     return oldShape;
 }
+#endif
 
 TopoShape FeatureAddSub::refineShapeIfActive(const TopoShape& oldShape) const
 {
