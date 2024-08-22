@@ -50,6 +50,7 @@
 #include "FeatureLinearPattern.h"
 #include "FeaturePolarPattern.h"
 #include "FeatureSketchBased.h"
+#include "Mod/Part/App/TopoShapeOpCode.h"
 
 
 using namespace PartDesign;
@@ -213,22 +214,22 @@ App::DocumentObjectExecReturn* Transformed::execute()
         return App::DocumentObject::StdReturn;
     }
 
+    std::vector<App::DocumentObject*> originals;
     auto const mode = static_cast<Mode>(TransformMode.getValue());
     if (mode == Mode::TransformBody) {
-        Originals.setValues({});
+        Originals.setStatus(App::Property::Status::Hidden, true);
+    } else {
+        Originals.setStatus(App::Property::Status::Hidden, false);
+        originals = Originals.getValues();
     }
-
-    std::vector<App::DocumentObject*> originals = Originals.getValues();
     // Remove suppressed features from the list so the transformations behave as if they are not
     // there
-    {
-        auto eraseIter =
-            std::remove_if(originals.begin(), originals.end(), [](App::DocumentObject const* obj) {
-                auto feature = Base::freecad_dynamic_cast<PartDesign::Feature>(obj);
-                return feature != nullptr && feature->Suppressed.getValue();
-            });
-        originals.erase(eraseIter, originals.end());
-    }
+    auto eraseIter =
+        std::remove_if(originals.begin(), originals.end(), [](App::DocumentObject const* obj) {
+            auto feature = Base::freecad_dynamic_cast<PartDesign::Feature>(obj);
+            return feature != nullptr && feature->Suppressed.getValue();
+        });
+    originals.erase(eraseIter, originals.end());
 
     if (mode == Mode::TransformToolShapes && originals.empty()) {
         return App::DocumentObject::StdReturn;
@@ -283,12 +284,15 @@ App::DocumentObjectExecReturn* Transformed::execute()
 
     supportShape.setTransform(Base::Matrix4D());
 
-    auto getTransformedCompShape = [&](const auto& origShape) {
-        std::vector<TopoShape> shapes;
-        TopoShape shape = origShape;
+    auto getTransformedCompShape = [&](const auto& supportShape, const auto& origShape) {
+        std::vector<TopoShape> shapes = {supportShape};
+        TopoShape shape (origShape);
+        int idx=1;
         auto transformIter = transformations.cbegin();
-        for (; transformIter != transformations.end(); ++transformIter) {
-            shapes.emplace_back(shape.makeElementTransform(*transformIter));
+        transformIter++;
+        for ( ; transformIter != transformations.end(); transformIter++) {
+            auto opName = Data::indexSuffix(idx++);
+            shapes.emplace_back(shape.makeElementTransform(*transformIter, opName.c_str()));
         }
         return shapes;
     };
@@ -336,17 +340,16 @@ App::DocumentObjectExecReturn* Transformed::execute()
                 }
 
 #endif
-
                 if (!fuseShape.isNull()) {
-                    supportShape = supportShape.makeElementFuse(getTransformedCompShape(fuseShape.getShape()));
+                    supportShape.makeElementFuse(getTransformedCompShape(supportShape, fuseShape));
                 }
                 if (!cutShape.isNull()) {
-                    supportShape = supportShape.makeElementCut(getTransformedCompShape(cutShape.getShape()));
+                    supportShape.makeElementCut(getTransformedCompShape(supportShape, cutShape));
                 }
             }
             break;
         case Mode::TransformBody: {
-            supportShape = supportShape.makeElementFuse(getTransformedCompShape(supportShape));
+            supportShape.makeElementFuse(getTransformedCompShape(supportShape, supportShape));
             break;
         }
     }
@@ -368,26 +371,6 @@ TopoShape Transformed::refineShapeIfActive(const TopoShape& oldShape) const
     if (this->Refine.getValue()) {
         return oldShape.makeElementRefine();
     }
-    return oldShape;
-}
-
-// Deprecated, prefer the TopoShape method
-TopoDS_Shape Transformed::refineShapeIfActive(const TopoDS_Shape& oldShape) const
-{
-    if (this->Refine.getValue()) {
-        try {
-            Part::BRepBuilderAPI_RefineModel mkRefine(oldShape);
-            TopoDS_Shape resShape = mkRefine.Shape();
-            if (!TopoShape(resShape).isClosed()) {
-                return oldShape;
-            }
-            return resShape;
-        }
-        catch (Standard_Failure&) {
-            return oldShape;
-        }
-    }
-
     return oldShape;
 }
 
