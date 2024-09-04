@@ -36,6 +36,8 @@ using namespace MillSim;
 namespace CAMSimulator
 {
 
+static const float MouseScrollDelta = 120.0f;
+
 DlgCAMSimulator::DlgCAMSimulator(QWindow* parent)
     : QWindow(parent)
 {
@@ -81,7 +83,10 @@ void DlgCAMSimulator::exposeEvent(QExposeEvent* event)
 
 void DlgCAMSimulator::mouseMoveEvent(QMouseEvent* ev)
 {
-    mMillSimulator->MouseMove(ev->x(), ev->y());
+    int modifiers = (ev->modifiers() & Qt::ShiftModifier) != 0 ? MS_KBD_SHIFT : 0;
+    modifiers |= (ev->modifiers() & Qt::ControlModifier) != 0 ? MS_KBD_CONTROL : 0;
+    modifiers |= (ev->modifiers() & Qt::AltModifier) != 0 ? MS_KBD_ALT : 0;
+    mMillSimulator->MouseMove(ev->x(), ev->y(), modifiers);
 }
 
 void DlgCAMSimulator::mousePressEvent(QMouseEvent* ev)
@@ -96,19 +101,18 @@ void DlgCAMSimulator::mouseReleaseEvent(QMouseEvent* ev)
 
 void DlgCAMSimulator::wheelEvent(QWheelEvent* ev)
 {
-    mMillSimulator->MouseScroll((float)ev->angleDelta().y() / 120.0f);
+    mMillSimulator->MouseScroll((float)ev->angleDelta().y() / MouseScrollDelta);
 }
 
 void DlgCAMSimulator::resetSimulation()
-{
-}
+{}
 
 void DlgCAMSimulator::addGcodeCommand(const char* cmd)
 {
     mMillSimulator->AddGcodeLine(cmd);
 }
 
-void DlgCAMSimulator::addTool(const std::vector<float> toolProfilePoints,
+void DlgCAMSimulator::addTool(const std::vector<float>& toolProfilePoints,
                               int toolNumber,
                               float diameter,
                               float resolution)
@@ -143,7 +147,7 @@ void DlgCAMSimulator::resizeEvent(QResizeEvent* event)
         mMillSimulator->UpdateWindowScale(newWidth, newHeight);
     }
     const qreal retinaScale = devicePixelRatio();
-    glViewport(0, 0, newWidth * retinaScale, newHeight * retinaScale);
+    glViewport(0, 0, (int)(newWidth * retinaScale), (int)(newHeight * retinaScale));
 }
 
 void DlgCAMSimulator::GetMeshData(const Part::TopoShape& tshape,

@@ -49,7 +49,7 @@ bool IsArcMotion(MillMotion* m)
     if (m->cmd != eRotateCCW && m->cmd != eRotateCW) {
         return false;
     }
-    return fabs(m->i > EPSILON) || fabs(m->j) > EPSILON;
+    return fabs(m->i) > EPSILON || fabs(m->j) > EPSILON;
 }
 
 float MillPathSegment::mResolution = 1;
@@ -103,9 +103,9 @@ MillPathSegment::MillPathSegment(EndMill* _endmill, MillMotion* from, MillMotion
         }
         else {
             endmill->GenerateArcSegmentDL(mRadius,
-                                           mStepAngRad * SWEEP_ARC_PAD,
-                                           mDiff[PZ] / numSimSteps,
-                                           &mShape);
+                                          mStepAngRad * SWEEP_ARC_PAD,
+                                          mDiff[PZ] / numSimSteps,
+                                          &mShape);
             numSimSteps++;
         }
 

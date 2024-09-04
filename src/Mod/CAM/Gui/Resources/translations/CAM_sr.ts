@@ -3313,13 +3313,13 @@ Should multiple tools or tool shapes with the same name exist in different direc
       <translation>Заустави</translation>
     </message>
     <message>
-      <location filename="../panels/TaskCAMSimulator.ui" line="115"/>
+      <location filename="../panels/TaskCAMSimulator.ui" line="96"/>
       <location filename="../panels/TaskPathSimulator.ui" line="55"/>
       <source>Activate / resume simulation</source>
       <translation>Покрени/настави симулацију</translation>
     </message>
     <message>
-      <location filename="../panels/TaskCAMSimulator.ui" line="118"/>
+      <location filename="../panels/TaskCAMSimulator.ui" line="99"/>
       <location filename="../panels/TaskPathSimulator.ui" line="58"/>
       <source>Play</source>
       <translation>Покрени</translation>
@@ -3365,13 +3365,13 @@ Should multiple tools or tool shapes with the same name exist in different direc
       <translation>Г-код/с</translation>
     </message>
     <message>
-      <location filename="../panels/TaskCAMSimulator.ui" line="50"/>
+      <location filename="../panels/TaskCAMSimulator.ui" line="31"/>
       <location filename="../panels/TaskPathSimulator.ui" line="229"/>
       <source>Accuracy:</source>
       <translation>Тачност:</translation>
     </message>
     <message>
-      <location filename="../panels/TaskCAMSimulator.ui" line="105"/>
+      <location filename="../panels/TaskCAMSimulator.ui" line="86"/>
       <location filename="../panels/TaskPathSimulator.ui" line="278"/>
       <source>Job:</source>
       <translation>Обрада:</translation>
@@ -5559,9 +5559,9 @@ Default: 3 mm</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Vcarve.py" line="331"/>
-      <source>Cutoff for removing colinear segments (degrees). 
+      <source>Cutoff for removing colinear segments (degrees).
                         default=10.0.</source>
-      <translation type="unfinished">Cutoff for removing colinear segments (degrees). 
+      <translation type="unfinished">Cutoff for removing colinear segments (degrees).
                         default=10.0.</translation>
     </message>
     <message>
@@ -6947,23 +6947,23 @@ Aborting op creation</translation>
     </message>
     <message>
       <location filename="../../../Path/Main/Gui/JobDlg.py" line="69"/>
-      <source>The currently selected unit schema: 
+      <source>The currently selected unit schema:
      &apos;{}&apos; for this document
- Does not use &apos;minutes&apos; for velocity values. 
- 
-CNC machines require feed rate to be expressed in 
-unit/minute. To ensure correct G-code: 
+ Does not use &apos;minutes&apos; for velocity values.
+
+CNC machines require feed rate to be expressed in
+unit/minute. To ensure correct G-code:
 Select a minute-based schema in preferences.
 For example:
     &apos;Metric, Small Parts &amp; CNC&apos;
     &apos;US Customary&apos;
     &apos;Imperial Decimal&apos;</source>
-      <translation type="unfinished">The currently selected unit schema: 
+      <translation type="unfinished">The currently selected unit schema:
      &apos;{}&apos; for this document
- Does not use &apos;minutes&apos; for velocity values. 
- 
-CNC machines require feed rate to be expressed in 
-unit/minute. To ensure correct G-code: 
+ Does not use &apos;minutes&apos; for velocity values.
+
+CNC machines require feed rate to be expressed in
+unit/minute. To ensure correct G-code:
 Select a minute-based schema in preferences.
 For example:
     &apos;Metric, Small Parts &amp; CNC&apos;
@@ -7033,9 +7033,9 @@ For example:
     <name>CAM_Inspect</name>
     <message>
       <location filename="../../../Path/Main/Gui/Inspect.py" line="145"/>
-      <source>&lt;b&gt;Note&lt;/b&gt;: This dialog shows Path Commands in FreeCAD base units (mm/s). 
+      <source>&lt;b&gt;Note&lt;/b&gt;: This dialog shows Path Commands in FreeCAD base units (mm/s).
  Values will be converted to the desired unit during post processing.</source>
-      <translation type="unfinished">&lt;b&gt;Note&lt;/b&gt;: This dialog shows Path Commands in FreeCAD base units (mm/s). 
+      <translation type="unfinished">&lt;b&gt;Note&lt;/b&gt;: This dialog shows Path Commands in FreeCAD base units (mm/s).
  Values will be converted to the desired unit during post processing.</translation>
     </message>
     <message>
@@ -7351,9 +7351,9 @@ For example:
     </message>
     <message>
       <location filename="../../../Path/Main/Sanity/Sanity.py" line="382"/>
-      <source>Tool number {} is a legacy tool. Legacy tools not 
+      <source>Tool number {} is a legacy tool. Legacy tools not
                     supported by Path-Sanity</source>
-      <translation type="unfinished">Tool number {} is a legacy tool. Legacy tools not 
+      <translation type="unfinished">Tool number {} is a legacy tool. Legacy tools not
                     supported by Path-Sanity</translation>
     </message>
     <message>
@@ -7400,28 +7400,28 @@ For example:
       <translation>CAM симулатор</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="311"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="367"/>
       <location filename="../../../Path/Main/Gui/Simulator.py" line="635"/>
       <source>Simulate G-code on stock</source>
       <translation>Симулирај Г-код на припремку</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="270"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="316"/>
       <source>High</source>
       <translation type="unfinished">High</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="272"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="318"/>
       <source>Low</source>
       <translation type="unfinished">Low</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="274"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="320"/>
       <source>Medium</source>
       <translation type="unfinished">Medium</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="307"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="363"/>
       <source>New CAM Simulator</source>
       <translation>Нови CAM симулатор</translation>
     </message>
@@ -8493,10 +8493,10 @@ For example:
     <message>
       <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="128"/>
       <source>Toolbit Working directory {} needs these sudirectories:
- {} 
+ {}
  Create them?</source>
       <translation type="unfinished">Toolbit Working directory {} needs these sudirectories:
- {} 
+ {}
  Create them?</translation>
     </message>
     <message>

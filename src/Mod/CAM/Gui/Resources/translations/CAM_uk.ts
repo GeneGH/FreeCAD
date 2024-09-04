@@ -78,27 +78,27 @@
     <message>
       <location filename="../../Command.cpp" line="97"/>
       <source>Create Path Area View</source>
-      <translation>Створення перегляду області шляху</translation>
+      <translation>Створити вигляд області траєкторії</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="106"/>
       <source>Create Path Area</source>
-      <translation>Створити область шляху</translation>
+      <translation>Створити область траєкторії</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="194"/>
       <source>Select Workplane for Path Area</source>
-      <translation>Вибрати робочу площину для області шляху</translation>
+      <translation>Вибрати робочу площину для області траєкторії</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="245"/>
       <source>Create Path Compound</source>
-      <translation>Створити з'єднання шляхів</translation>
+      <translation>Створити з'єднання траєкторій</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="315"/>
       <source>Create Path Shape</source>
-      <translation>Створити фігуру шляху</translation>
+      <translation>Створити фігуру траєкторії</translation>
     </message>
   </context>
   <context>
@@ -740,11 +740,11 @@ For stock from the Base object&apos;s bounding box it means the extra material i
 You can add feature for processing by selecting them and then pressing Add. If a feature is accidentally added to the list it can be removed through Remove and will no longer be processed.
 
 Reset deletes all current items from the list and fills the list with all circular holes eligible for the operation from the model. You can again refine the list afterwards by enabling/disabling, removing and adding features.</source>
-      <translation type="unfinished">Table of hole features and the determined radius of the associated hole.
+      <translation>Таблиця властивостей отворів і визначений радіус відповідного отвору.
 
-You can add feature for processing by selecting them and then pressing Add. If a feature is accidentally added to the list it can be removed through Remove and will no longer be processed.
+Ви можете додати елементи для обробки, вибравши їх і натиснувши кнопку Додати. Якщо елемент випадково додано до списку, його можна видалити за допомогою кнопки Видалити і він більше не буде оброблятися.
 
-Reset deletes all current items from the list and fills the list with all circular holes eligible for the operation from the model. You can again refine the list afterwards by enabling/disabling, removing and adding features.</translation>
+Скинути видаляє всі поточні елементи зі списку і заповнює список всіма круглими отворами, придатними для обробки, з моделі. Згодом ви можете знову вдосконалити список, вмикаючи/вимикаючи, видаляючи та додаючи елементи.</translation>
     </message>
     <message>
       <location filename="../panels/PageBaseHoleGeometryEdit.ui" line="33"/>
@@ -2985,7 +2985,7 @@ Should multiple tools or tool shapes with the same name exist in different direc
     <message>
       <location filename="../panels/DogboneEdit.ui" line="87"/>
       <source>On which side of the profile bones are inserted - this also determines which corners are dressed up. The default value is determined based on the profile being dressed up.</source>
-      <translation type="unfinished">On which side of the profile bones are inserted - this also determines which corners are dressed up. The default value is determined based on the profile being dressed up.</translation>
+      <translation>З якої сторони профілю вставлені елементи – це також визначає, які кути оброблені. Значення за замовчуванням визначається на основі обробки профілю.</translation>
     </message>
     <message>
       <location filename="../panels/DogboneEdit.ui" line="94"/>
@@ -3314,13 +3314,13 @@ Should multiple tools or tool shapes with the same name exist in different direc
       <translation>Стоп</translation>
     </message>
     <message>
-      <location filename="../panels/TaskCAMSimulator.ui" line="115"/>
+      <location filename="../panels/TaskCAMSimulator.ui" line="96"/>
       <location filename="../panels/TaskPathSimulator.ui" line="55"/>
       <source>Activate / resume simulation</source>
       <translation type="unfinished">Activate / resume simulation</translation>
     </message>
     <message>
-      <location filename="../panels/TaskCAMSimulator.ui" line="118"/>
+      <location filename="../panels/TaskCAMSimulator.ui" line="99"/>
       <location filename="../panels/TaskPathSimulator.ui" line="58"/>
       <source>Play</source>
       <translation>Відтворити</translation>
@@ -3366,13 +3366,13 @@ Should multiple tools or tool shapes with the same name exist in different direc
       <translation type="unfinished">G/s</translation>
     </message>
     <message>
-      <location filename="../panels/TaskCAMSimulator.ui" line="50"/>
+      <location filename="../panels/TaskCAMSimulator.ui" line="31"/>
       <location filename="../panels/TaskPathSimulator.ui" line="229"/>
       <source>Accuracy:</source>
       <translation>Точність:</translation>
     </message>
     <message>
-      <location filename="../panels/TaskCAMSimulator.ui" line="105"/>
+      <location filename="../panels/TaskCAMSimulator.ui" line="86"/>
       <location filename="../panels/TaskPathSimulator.ui" line="278"/>
       <source>Job:</source>
       <translation>Завдання:</translation>
@@ -3660,13 +3660,13 @@ This is useful if the operator can safely load work into one coordinate system w
 Ordering by Tool, will minimize the Tool Changes. A tool change will be done, then all operations in all coordinate systems before changing tools.
 
 Ordering by operation will do each operation in all coordinate systems before moving to the next operation. This is especially useful in conjunction with the &apos;split output&apos; even with only a single work coordinate system since it will put each operation into a separate file.</source>
-      <translation type="unfinished">Ordering by Fixture, will cause all operations to be performed in the first coordinate system before switching to the second. Then all operations will be performed there in the same order.
+      <translation>Упорядкування за пристосуванням призведе до того, що всі операції будуть виконані в першій системі координат перед переходом до другої. Потім всі операції будуть виконуватися в тій же системі координат в тому ж порядку.
 
-This is useful if the operator can safely load work into one coordinate system while the machine is doing work in another.
+Це корисно, якщо оператор може безпечно завантажити роботу в одну систему координат, поки верстат виконує роботу в іншій.
 
-Ordering by Tool, will minimize the Tool Changes. A tool change will be done, then all operations in all coordinate systems before changing tools.
+Упорядкування за інструментом мінімізує зміну інструменту. Перед зміною інструменту виконується зміна інструменту, а потім всі операції у всіх системах координат перед зміною інструменту.
 
-Ordering by operation will do each operation in all coordinate systems before moving to the next operation. This is especially useful in conjunction with the &apos;split output&apos; even with only a single work coordinate system since it will put each operation into a separate file.</translation>
+Упорядкування за операціями виконує кожну операцію у всіх системах координат перед тим, як перейти до наступної операції. Це особливо корисно в поєднанні з функцією &apos;роздільного виводу&apos; навіть з однією робочою системою координат, оскільки кожна операція буде зберігатися в окремому файлі.</translation>
     </message>
     <message>
       <location filename="../panels/PathEdit.ui" line="254"/>
@@ -4101,7 +4101,7 @@ Default: 3 mm</translation>
       <location filename="../../../InitGui.py" line="194"/>
       <location filename="../../../InitGui.py" line="231"/>
       <source>Path Modification</source>
-      <translation>Модифікація шляху</translation>
+      <translation>Модифікація траєкторії</translation>
     </message>
     <message>
       <location filename="../../../InitGui.py" line="198"/>
@@ -5560,9 +5560,9 @@ Default: 3 mm</translation>
     </message>
     <message>
       <location filename="../../../Path/Op/Vcarve.py" line="331"/>
-      <source>Cutoff for removing colinear segments (degrees). 
+      <source>Cutoff for removing colinear segments (degrees).
                         default=10.0.</source>
-      <translation type="unfinished">Cutoff for removing colinear segments (degrees). 
+      <translation type="unfinished">Cutoff for removing colinear segments (degrees).
                         default=10.0.</translation>
     </message>
     <message>
@@ -6948,23 +6948,23 @@ Aborting op creation</translation>
     </message>
     <message>
       <location filename="../../../Path/Main/Gui/JobDlg.py" line="69"/>
-      <source>The currently selected unit schema: 
+      <source>The currently selected unit schema:
      &apos;{}&apos; for this document
- Does not use &apos;minutes&apos; for velocity values. 
- 
-CNC machines require feed rate to be expressed in 
-unit/minute. To ensure correct G-code: 
+ Does not use &apos;minutes&apos; for velocity values.
+
+CNC machines require feed rate to be expressed in
+unit/minute. To ensure correct G-code:
 Select a minute-based schema in preferences.
 For example:
     &apos;Metric, Small Parts &amp; CNC&apos;
     &apos;US Customary&apos;
     &apos;Imperial Decimal&apos;</source>
-      <translation>Поточна вибрана схема одиниці виміру: 
+      <translation>Поточна вибрана схема одиниці виміру:
      &apos;{}&apos; для цього документа
- Не використовує &apos;хвилини&apos; для значень швидкості. 
- 
-Верстати з ЧПК вимагають, щоб швидкість подачі була виражена в 
-одиницях/хвилину. Для забезпечення правильного G-коду: 
+ Не використовує &apos;хвилини&apos; для значень швидкості.
+
+Верстати з ЧПК вимагають, щоб швидкість подачі була виражена в
+одиницях/хвилину. Для забезпечення правильного G-коду:
 Виберіть схему на основі хвилин у налаштуваннях.
 Наприклад:
     &apos;Метрична, Дрібні деталі та ЧПК&apos;
@@ -7034,9 +7034,9 @@ For example:
     <name>CAM_Inspect</name>
     <message>
       <location filename="../../../Path/Main/Gui/Inspect.py" line="145"/>
-      <source>&lt;b&gt;Note&lt;/b&gt;: This dialog shows Path Commands in FreeCAD base units (mm/s). 
+      <source>&lt;b&gt;Note&lt;/b&gt;: This dialog shows Path Commands in FreeCAD base units (mm/s).
  Values will be converted to the desired unit during post processing.</source>
-      <translation type="unfinished">&lt;b&gt;Note&lt;/b&gt;: This dialog shows Path Commands in FreeCAD base units (mm/s). 
+      <translation type="unfinished">&lt;b&gt;Note&lt;/b&gt;: This dialog shows Path Commands in FreeCAD base units (mm/s).
  Values will be converted to the desired unit during post processing.</translation>
     </message>
     <message>
@@ -7352,9 +7352,9 @@ For example:
     </message>
     <message>
       <location filename="../../../Path/Main/Sanity/Sanity.py" line="382"/>
-      <source>Tool number {} is a legacy tool. Legacy tools not 
+      <source>Tool number {} is a legacy tool. Legacy tools not
                     supported by Path-Sanity</source>
-      <translation type="unfinished">Tool number {} is a legacy tool. Legacy tools not 
+      <translation type="unfinished">Tool number {} is a legacy tool. Legacy tools not
                     supported by Path-Sanity</translation>
     </message>
     <message>
@@ -7401,28 +7401,28 @@ For example:
       <translation type="unfinished">CAM Simulator</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="311"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="367"/>
       <location filename="../../../Path/Main/Gui/Simulator.py" line="635"/>
       <source>Simulate G-code on stock</source>
       <translation type="unfinished">Simulate G-code on stock</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="270"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="316"/>
       <source>High</source>
       <translation>Високий</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="272"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="318"/>
       <source>Low</source>
       <translation>Низький</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="274"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="320"/>
       <source>Medium</source>
       <translation>Середній</translation>
     </message>
     <message>
-      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="307"/>
+      <location filename="../../../Path/Main/Gui/SimulatorGL.py" line="363"/>
       <source>New CAM Simulator</source>
       <translation type="unfinished">New CAM Simulator</translation>
     </message>
@@ -8494,10 +8494,10 @@ For example:
     <message>
       <location filename="../../../Path/Tool/Gui/BitLibrary.py" line="128"/>
       <source>Toolbit Working directory {} needs these sudirectories:
- {} 
+ {}
  Create them?</source>
       <translation type="unfinished">Toolbit Working directory {} needs these sudirectories:
- {} 
+ {}
  Create them?</translation>
     </message>
     <message>
