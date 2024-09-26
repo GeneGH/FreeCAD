@@ -28,8 +28,6 @@
 #include <map>
 #include <string>
 
-#define  putpix()
-
 #include <App/Application.h>
 
 class QCloseEvent;
@@ -74,6 +72,8 @@ public:
     void exportTo(const char* FileName, const char* DocName, const char* Module);
     /// Reload a partial opened document
     App::Document *reopen(App::Document *doc);
+    /// Prompt about recomputing if needed
+    static void checkForRecomputes();
     //@}
 
 
@@ -131,8 +131,6 @@ public:
     boost::signals2::signal<void ()> signalRefreshWorkbenches;
     /// signal on show hidden items
     boost::signals2::signal<void (const Gui::Document&)> signalShowHidden;
-    /// signal on document restore complete
-    boost::signals2::signal<void (const Gui::Document&)> signalFinishRestoreDocument;
     /// signal on activating view
     boost::signals2::signal<void (const Gui::MDIView*)> signalActivateView;
     /// signal on entering in edit mode
@@ -153,7 +151,6 @@ protected:
     void slotRenameDocument(const App::Document&);
     void slotActiveDocument(const App::Document&);
     void slotShowHidden(const App::Document&);
-    void slotFinishRestoreDocument(const App::Document&);
     void slotNewObject(const ViewProvider&);
     void slotDeletedObject(const ViewProvider&);
     void slotChangedObject(const ViewProvider&, const App::Property& Prop);
@@ -341,6 +338,8 @@ public:
 
     static PyObject* sDoCommand                (PyObject *self,PyObject *args);
     static PyObject* sDoCommandGui             (PyObject *self,PyObject *args);
+    static PyObject* sDoCommandEval            (PyObject *self,PyObject *args);
+    static PyObject* sDoCommandSkip            (PyObject *self,PyObject *args);
     static PyObject* sAddModule                (PyObject *self,PyObject *args);
 
     static PyObject* sShowDownloads            (PyObject *self,PyObject *args);
