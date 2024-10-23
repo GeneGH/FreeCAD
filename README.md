@@ -2,7 +2,7 @@
 
 ### Your own 3D parametric modeler
 
-[Website](https://www.freecad.org) • 
+[Website](https://www.freecad.org) •
 [Documentation](https://wiki.freecad.org) •
 [Forum](https://forum.freecad.org/) •
 [Bug tracker](https://github.com/FreeCAD/FreeCAD/issues) •
@@ -12,7 +12,7 @@
 
 [![Release](https://img.shields.io/github/release/freecad/freecad.svg)](https://github.com/freecad/freecad/releases/latest) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/freecad/localized.svg)](https://crowdin.com/project/freecad) [![Liberapay](https://img.shields.io/liberapay/receives/FreeCAD.svg?logo=liberapay)](https://liberapay.com/FreeCAD)
 
-<img src="https://user-images.githubusercontent.com/1828501/174066870-1692005b-f8d7-43fb-a289-6d2f07f73d7f.png" width="800"/>
+<img src="/.github/images/partdesign.png" width="800"/>
 
 Overview
 --------
@@ -51,12 +51,12 @@ software center application.
 
 For development releases check the [weekly-builds page](https://github.com/FreeCAD/FreeCAD-Bundle/releases/tag/weekly-builds).
 
-Other options are described at the [wiki Download page](https://wiki.freecad.org/Download).
+Other options are described on the [wiki Download page](https://wiki.freecad.org/Download).
 
 Compiling
 ---------
 
-Compiling FreeCAD requires installation of several libraries and their 
+Compiling FreeCAD requires the installation of several libraries and their 
 development files such as OCCT (Open Cascade), Coin and Qt, listed in the 
 pages below. Once this is done, FreeCAD can be compiled with 
 CMake. On Windows, these libraries are bundled and offered by the 
@@ -86,7 +86,7 @@ To report an issue please:
 - Post a Step-By-Step explanation on how to recreate the issue; 
 - Upload an example file (FCStd as ZIP file) to demonstrate the problem; 
 
-For more detail see:
+For more details see:
 
 - [Bug Tracker](https://github.com/FreeCAD/FreeCAD/issues)
 - [Reporting Issues and Requesting Features](https://github.com/FreeCAD/FreeCAD/issues/new/choose)
