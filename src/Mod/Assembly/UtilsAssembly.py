@@ -28,12 +28,10 @@ import Part
 
 if App.GuiUp:
     import FreeCADGui as Gui
-
-import PySide.QtCore as QtCore
-import PySide.QtGui as QtGui
+    from PySide import QtCore, QtGui, QtWidgets
 
 
-# translate = App.Qt.translate
+translate = App.Qt.translate
 
 __title__ = "Assembly utilitary functions"
 __author__ = "Ondsel"
@@ -392,7 +390,7 @@ def extract_type_and_number(element_name):
         return None, None
 
 
-def findElementClosestVertex(assembly, ref, mousePos):
+def findElementClosestVertex(ref, mousePos):
     element_name = getElementName(ref[1][0])
     if element_name == "":
         return ""
@@ -634,8 +632,14 @@ def removeObjsAndChilds(objs):
 # It does not include Part::Features that are within App::Parts.
 # It includes things inside Groups.
 def getMovablePartsWithin(group, partsAsSolid=False):
+    children = []
+    if isLinkGroup(group):
+        children = group.ElementList
+    elif hasattr(group, "Group"):
+        children = group.Group
+
     parts = []
-    for obj in group.OutList:
+    for obj in children:
         parts = parts + getSubMovingParts(obj, partsAsSolid)
     return parts
 
@@ -656,7 +660,7 @@ def getSubMovingParts(obj, partsAsSolid):
 
     if isLink(obj):
         linked_obj = obj.getLinkedObject()
-        if linked_obj.TypeId == "App::Part" or linked_obj.isDerivedFrom("Part::Feature"):
+        if linked_obj.isDerivedFrom("App::Part") or linked_obj.isDerivedFrom("Part::Feature"):
             return [obj]
 
     return []
@@ -788,6 +792,36 @@ def findCylindersIntersection(obj, surface, edge, elt_index):
     return surface.Center
 
 
+def openEditingPlacementDialog(obj, propName):
+    task_placement = Gui.TaskPlacement()
+    dialog = task_placement.form
+
+    # Connect to the placement property
+    task_placement.setPlacement(getattr(obj, propName))
+    task_placement.setSelection([obj])
+    task_placement.setPropertyName(propName)
+    task_placement.bindObject()
+    task_placement.setIgnoreTransactions(True)
+
+    dialog.findChild(QtWidgets.QPushButton, "selectedVertex").hide()
+    dialog.exec_()
+
+
+def setPickableState(obj, state: bool):
+    vobj = obj.ViewObject
+    if hasattr(vobj, "Proxy"):
+        proxy = vobj.Proxy
+        if hasattr(proxy, "setPickableState"):
+            proxy.setPickableState(state)
+
+
+def setJointsPickableState(doc, state: bool):
+    """Make all joints in document selectable (True) or unselectable (False) in 3D view"""
+    for obj in doc.Objects:
+        if obj.TypeId == "App::FeaturePython" and hasattr(obj, "JointType"):
+            setPickableState(obj, state)
+
+
 def applyOffsetToPlacement(plc, offset):
     plc.Base = plc.Base + plc.Rotation.multVec(offset)
     return plc
@@ -818,6 +852,23 @@ def arePlacementZParallel(plc1, plc2):
     zAxis1 = plc1.Rotation.multVec(App.Vector(0, 0, 1))
     zAxis2 = plc2.Rotation.multVec(App.Vector(0, 0, 1))
     return zAxis1.cross(zAxis2).Length < 1e-06
+
+
+def removeTNPFromSubname(doc_name, obj_name, sub_name):
+    rootObj = App.getDocument(doc_name).getObject(obj_name)
+    resolved = rootObj.resolveSubElement(sub_name)
+    element_name_TNP = resolved[1]
+    element_name = resolved[2]
+
+    # Preprocess the sub_name to remove the TNP string
+    # We do this because after we need to add the vertex_name as well.
+    # And the names will be resolved anyway after.
+    if len(element_name_TNP.split(".")) == 2:
+        names = sub_name.split(".")
+        names.pop(-2)  # remove the TNP string
+        sub_name = ".".join(names)
+
+    return sub_name
 
 
 """
@@ -1101,6 +1152,10 @@ def getMovingPart(assembly, ref):
         if obj.TypeId == "App::DocumentObjectGroup":
             continue  # we ignore groups.
 
+        # We ignore dynamic sub-assemblies.
+        if obj.isDerivedFrom("Assembly::AssemblyLink") and obj.Rigid == False:
+            continue
+
         # If it is a LinkGroup then we skip it
         if isLinkGroup(obj):
             continue
@@ -1188,30 +1243,30 @@ def getParentPlacementIfNeeded(part):
     return Base.Placement()
 
 
-def generatePropertySettings(objectName, documentObject):
+def generatePropertySettings(documentObject):
     commands = []
     if hasattr(documentObject, "Name"):
-        commands.append(f'{objectName} = App.ActiveDocument.getObject("{documentObject.Name}")')
+        commands.append(f'obj = App.ActiveDocument.getObject("{documentObject.Name}")')
     for propertyName in documentObject.PropertiesList:
         propertyValue = documentObject.getPropertyByName(propertyName)
         propertyType = documentObject.getTypeIdOfProperty(propertyName)
         # Note: OpenCascade precision is 1e-07, angular precision is 1e-05.  For purposes of creating a Macro,
         # we are forcing a reduction in precision so as to get round numbers like 0 instead of tiny near 0 values
         if propertyType == "App::PropertyFloat":
-            commands.append(f"{objectName}.{propertyName} = {propertyValue:.5f}")
+            commands.append(f"obj.{propertyName} = {propertyValue:.5f}")
         elif propertyType == "App::PropertyInt" or propertyType == "App::PropertyBool":
-            commands.append(f"{objectName}.{propertyName} = {propertyValue}")
+            commands.append(f"obj.{propertyName} = {propertyValue}")
         elif propertyType == "App::PropertyString" or propertyType == "App::PropertyEnumeration":
-            commands.append(f'{objectName}.{propertyName} = "{propertyValue}"')
+            commands.append(f'obj.{propertyName} = "{propertyValue}"')
         elif propertyType == "App::PropertyPlacement":
             commands.append(
-                f"{objectName}.{propertyName} = App.Placement("
+                f"obj.{propertyName} = App.Placement("
                 f"App.Vector({propertyValue.Base.x:.5f},{propertyValue.Base.y:.5f},{propertyValue.Base.z:.5f}),"
                 f"App.Rotation(*{[round(n,5) for n in propertyValue.Rotation.getYawPitchRoll()]}))"
             )
         elif propertyType == "App::PropertyXLinkSubHidden":
             commands.append(
-                f'{objectName}.{propertyName} = [App.ActiveDocument.getObject("{propertyValue[0].Name}"), {propertyValue[1]}]'
+                f'obj.{propertyName} = [App.ActiveDocument.getObject("{propertyValue[0].Name}"), {propertyValue[1]}]'
             )
         else:
             # print("Not processing properties of type ", propertyType)
