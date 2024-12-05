@@ -49,6 +49,14 @@ FC_LOG_LEVEL_INIT("PartDesign", true, true)
 
 namespace PartDesign {
 
+bool getPDRefineModelParameter()
+{
+    Base::Reference<ParameterGrp> hGrp = App::GetApplication().GetUserParameter()
+        .GetGroup("BaseApp")->GetGroup("Preferences")->GetGroup("Mod/PartDesign");
+    return hGrp->GetBool("RefineModel", true);
+}
+
+// ------------------------------------------------------------------------------------------------
 
 PROPERTY_SOURCE(PartDesign::Feature,Part::Feature)
 
@@ -142,7 +150,7 @@ short Feature::mustExecute() const
     return Part::Feature::mustExecute();
 }
 
-TopoShape Feature::getSolid(const TopoShape& shape)
+TopoShape Feature::getSolid(const TopoShape& shape) const
 {
     if (shape.isNull()) {
         throw Part::NullShapeException("Null shape");
@@ -218,7 +226,7 @@ bool Feature::isSingleSolidRuleSatisfied(const TopoDS_Shape& shape, TopAbs_Shape
 }
 
 
-Feature::SingleSolidRuleMode Feature::singleSolidRuleMode()
+Feature::SingleSolidRuleMode Feature::singleSolidRuleMode() const
 {
     auto body = getFeatureBody();
 
