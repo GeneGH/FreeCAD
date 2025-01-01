@@ -26,25 +26,22 @@
 
 #include <App/PropertyGeo.h>
 
-#include "ViewProviderDocumentObject.h"
+#include "ViewProviderGeoFeatureGroup.h"
 
 
 namespace Gui {
 
 class Document;
 
-class GuiExport ViewProviderOrigin : public ViewProviderDocumentObject
+class GuiExport ViewProviderCoordinateSystem : public ViewProviderGeoFeatureGroup
 {
-    PROPERTY_HEADER_WITH_OVERRIDE(Gui::ViewProviderOrigin);
+    PROPERTY_HEADER_WITH_OVERRIDE(Gui::ViewProviderCoordinateSystem);
 
 public:
-    /// Size of the origin as set by the part.
-    App::PropertyVector Size;
-
     /// constructor.
-    ViewProviderOrigin();
+    ViewProviderCoordinateSystem();
     /// destructor.
-    ~ViewProviderOrigin() override;
+    ~ViewProviderCoordinateSystem() override;
 
     /// @name Override methods
     ///@{
@@ -63,12 +60,17 @@ public:
      */
     ///@{
     /// Set temporary visibility of some of origin's objects e.g. while rotating or mirroring
-    void setTemporaryVisibility (bool axis, bool planes);
+    void setTemporaryVisibility (bool axis, bool planes, bool points = false);
     /// Returns true if the origin in temporary visibility mode
     bool isTemporaryVisibility ();
     /// Reset the visibility
     void resetTemporaryVisibility ();
     ///@}
+
+    void setTemporaryScale(double factor);
+    void resetTemporarySize();
+
+    void setPlaneLabelVisibility(bool val);
 
     bool canDragObjects() const override {
         return false;
@@ -83,7 +85,7 @@ public:
     // default color for origini: light-blue (50, 150, 250, 255 stored as 0xRRGGBBAA)
     static const uint32_t defaultColor = 0x3296faff;
 protected:
-    void onChanged(const App::Property* prop) override;
+    void updateData(const App::Property*) override;
     bool onDelete(const std::vector<std::string> &) override;
 
 private:

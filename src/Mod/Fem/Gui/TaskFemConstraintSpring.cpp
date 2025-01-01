@@ -69,8 +69,7 @@ TaskFemConstraintSpring::TaskFemConstraintSpring(ViewProviderFemConstraintSpring
 
     /* Note: */
     // Get the feature data
-    Fem::ConstraintSpring* pcConstraint =
-        static_cast<Fem::ConstraintSpring*>(ConstraintView->getObject());
+    Fem::ConstraintSpring* pcConstraint = ConstraintView->getObject<Fem::ConstraintSpring>();
 
     std::vector<App::DocumentObject*> Objects = pcConstraint->References.getValues();
     std::vector<std::string> SubElements = pcConstraint->References.getSubValues();
@@ -130,8 +129,7 @@ void TaskFemConstraintSpring::addToSelection()
         QMessageBox::warning(this, tr("Selection error"), tr("Nothing selected!"));
         return;
     }
-    Fem::ConstraintSpring* pcConstraint =
-        static_cast<Fem::ConstraintSpring*>(ConstraintView->getObject());
+    Fem::ConstraintSpring* pcConstraint = ConstraintView->getObject<Fem::ConstraintSpring>();
     std::vector<App::DocumentObject*> Objects = pcConstraint->References.getValues();
     std::vector<std::string> SubElements = pcConstraint->References.getSubValues();
 
@@ -185,8 +183,7 @@ void TaskFemConstraintSpring::removeFromSelection()
         QMessageBox::warning(this, tr("Selection error"), tr("Nothing selected!"));
         return;
     }
-    Fem::ConstraintSpring* pcConstraint =
-        static_cast<Fem::ConstraintSpring*>(ConstraintView->getObject());
+    Fem::ConstraintSpring* pcConstraint = ConstraintView->getObject<Fem::ConstraintSpring>();
     std::vector<App::DocumentObject*> Objects = pcConstraint->References.getValues();
     std::vector<std::string> SubElements = pcConstraint->References.getSubValues();
     std::vector<size_t> itemsToDel;
@@ -251,12 +248,12 @@ const std::string TaskFemConstraintSpring::getReferences() const
 
 std::string TaskFemConstraintSpring::getNormalStiffness() const
 {
-    return ui->qsb_norm->value().getSafeUserString().toStdString();
+    return ui->qsb_norm->value().getSafeUserString();
 }
 
 std::string TaskFemConstraintSpring::getTangentialStiffness() const
 {
-    return ui->qsb_tan->value().getSafeUserString().toStdString();
+    return ui->qsb_tan->value().getSafeUserString();
 }
 
 std::string TaskFemConstraintSpring::getElmerStiffness() const
