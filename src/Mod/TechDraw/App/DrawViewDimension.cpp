@@ -231,6 +231,8 @@ DrawViewDimension::DrawViewDimension()
                       "If true, area dimensions return the area of the face minus the areas of any enclosed faces. \
                        If false, the area of the face's outer boundary is returned.");
 
+    ADD_PROPERTY_TYPE(ShowUnits, (Preferences::showUnits()), "Format", App::Prop_None,
+                                          "Show or hide the units.");
     measurement = new Measure::Measurement();
     // TODO: should have better initial datumLabel position than (0, 0) in the DVP?? something
     // closer to the object being measured?
@@ -809,7 +811,7 @@ pointPair DrawViewDimension::getPointsOneEdge(ReferenceVector references)
 {
     App::DocumentObject* refObject = references.front().getObject();
     int iSubelement = DrawUtil::getIndexFromName(references.front().getSubName());
-    if (refObject->isDerivedFrom(TechDraw::DrawViewPart::getClassTypeId())
+    if (refObject->isDerivedFrom<TechDraw::DrawViewPart>()
         && !references.at(0).getSubName().empty()) {
         // TODO: Notify if not straight line Edge?
         // this is a 2d object (a DVP + subelements)
@@ -850,7 +852,7 @@ pointPair DrawViewDimension::getPointsTwoEdges(ReferenceVector references)
     App::DocumentObject* refObject = references.front().getObject();
     int iSubelement0 = DrawUtil::getIndexFromName(references.at(0).getSubName());
     int iSubelement1 = DrawUtil::getIndexFromName(references.at(1).getSubName());
-    if (refObject->isDerivedFrom(TechDraw::DrawViewPart::getClassTypeId())
+    if (refObject->isDerivedFrom<TechDraw::DrawViewPart>()
         && !references.at(0).getSubName().empty()) {
         // this is a 2d object (a DVP + subelements)
         TechDraw::BaseGeomPtr geom0 = getViewPart()->getGeomByIndex(iSubelement0);
@@ -882,7 +884,7 @@ pointPair DrawViewDimension::getPointsTwoVerts(ReferenceVector references)
     App::DocumentObject* refObject = references.front().getObject();
     int iSubelement0 = DrawUtil::getIndexFromName(references.at(0).getSubName());
     int iSubelement1 = DrawUtil::getIndexFromName(references.at(1).getSubName());
-    if (refObject->isDerivedFrom(TechDraw::DrawViewPart::getClassTypeId())
+    if (refObject->isDerivedFrom<TechDraw::DrawViewPart>()
         && !references.at(0).getSubName().empty()) {
         // this is a 2d object (a DVP + subelements)
         TechDraw::VertexPtr v0 = getViewPart()->getProjVertexByIndex(iSubelement0);
@@ -919,7 +921,7 @@ pointPair DrawViewDimension::getPointsEdgeVert(ReferenceVector references)
     App::DocumentObject* refObject = references.front().getObject();
     int iSubelement0 = DrawUtil::getIndexFromName(references.at(0).getSubName());
     int iSubelement1 = DrawUtil::getIndexFromName(references.at(1).getSubName());
-    if (refObject->isDerivedFrom(TechDraw::DrawViewPart::getClassTypeId())
+    if (refObject->isDerivedFrom<TechDraw::DrawViewPart>()
         && !references.at(0).getSubName().empty()) {
         // this is a 2d object (a DVP + subelements)
         TechDraw::BaseGeomPtr edge;
@@ -975,7 +977,7 @@ arcPoints DrawViewDimension::getArcParameters(ReferenceVector references)
 {
     App::DocumentObject* refObject = references.front().getObject();
     int iSubelement = DrawUtil::getIndexFromName(references.front().getSubName());
-    if (refObject->isDerivedFrom(TechDraw::DrawViewPart::getClassTypeId())
+    if (refObject->isDerivedFrom<TechDraw::DrawViewPart>()
         && !references.at(0).getSubName().empty()) {
         // this is a 2d object (a DVP + subelements)
         TechDraw::BaseGeomPtr geom = getViewPart()->getGeomByIndex(iSubelement);
@@ -1207,7 +1209,7 @@ anglePoints DrawViewDimension::getAnglePointsTwoEdges(ReferenceVector references
     App::DocumentObject* refObject = references.front().getObject();
     int iSubelement0 = DrawUtil::getIndexFromName(references.at(0).getSubName());
     int iSubelement1 = DrawUtil::getIndexFromName(references.at(1).getSubName());
-    if (refObject->isDerivedFrom(TechDraw::DrawViewPart::getClassTypeId())
+    if (refObject->isDerivedFrom<TechDraw::DrawViewPart>()
         && !references.at(0).getSubName().empty()) {
         // this is a 2d object (a DVP + subelements)
         TechDraw::BaseGeomPtr geom0 = getViewPart()->getGeomByIndex(iSubelement0);
@@ -1345,7 +1347,7 @@ anglePoints DrawViewDimension::getAnglePointsThreeVerts(ReferenceVector referenc
     int iSubelement0 = DrawUtil::getIndexFromName(references.at(0).getSubName());
     int iSubelement1 = DrawUtil::getIndexFromName(references.at(1).getSubName());
     int iSubelement2 = DrawUtil::getIndexFromName(references.at(2).getSubName());
-    if (refObject->isDerivedFrom(TechDraw::DrawViewPart::getClassTypeId())
+    if (refObject->isDerivedFrom<TechDraw::DrawViewPart>()
         && !references.at(0).getSubName().empty()) {
         // this is a 2d object (a DVP + subelements)
         TechDraw::VertexPtr vert0 = getViewPart()->getProjVertexByIndex(iSubelement0);
@@ -2076,7 +2078,7 @@ bool DrawViewDimension::hasOverUnderTolerance() const
 
 bool DrawViewDimension::showUnits() const
 {
-    return Preferences::getPreferenceGroup("Dimensions")->GetBool("ShowUnits", false);
+    return ShowUnits.getValue();
 }
 
 bool DrawViewDimension::useDecimals() const

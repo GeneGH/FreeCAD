@@ -34,7 +34,7 @@
 #include <App/Part.h>
 #include <Gui/MainWindow.h>
 #include <Gui/ViewProvider.h>
-#include <Gui/Selection.h>
+#include <Gui/Selection/Selection.h>
 #include <Mod/Part/App/DatumFeature.h>
 #include <Mod/PartDesign/App/Body.h>
 
@@ -61,7 +61,7 @@ TaskDatumParameters::TaskDatumParameters(ViewProviderDatum *ViewProvider,QWidget
 
 TaskDatumParameters::~TaskDatumParameters()
 {
-    if(this->ViewProvider && this->ViewProvider->isDerivedFrom(ViewProviderDatum::getClassTypeId()))
+    if(this->ViewProvider && this->ViewProvider->isDerivedFrom<ViewProviderDatum>())
         static_cast<ViewProviderDatum*>(this->ViewProvider)->setPickable(true);
     Gui::Selection().rmvSelectionGate();
 }

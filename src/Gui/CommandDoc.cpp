@@ -61,7 +61,7 @@
 #include "GraphvizView.h"
 #include "ManualAlignment.h"
 #include "MergeDocuments.h"
-#include "NavigationStyle.h"
+#include "Navigation/NavigationStyle.h"
 #include "Placement.h"
 #include "Transform.h"
 #include "View3DInventor.h"
@@ -1385,6 +1385,11 @@ void StdCmdDelete::activated(int iMsg)
             bool autoDeletion = true;
             for(auto &sel : sels) {
                 auto obj = sel.getObject();
+                if (obj == nullptr){
+                    Base::Console().DeveloperWarning("StdCmdDelete::activated",
+                                                     "App::DocumentObject pointer is nullptr\n");
+                    continue;
+                }
                 for(auto parent : obj->getInList()) {
                     if(!Selection().isSelected(parent)) {
                         ViewProvider* vp = Application::Instance->getViewProvider(parent);
@@ -1728,7 +1733,7 @@ void StdCmdEdit::activated(int iMsg)
 {
     Q_UNUSED(iMsg);
     Gui::MDIView* view = Gui::getMainWindow()->activeWindow();
-    if (view && view->isDerivedFrom(Gui::View3DInventor::getClassTypeId())) {
+    if (view && view->isDerivedFrom<Gui::View3DInventor>()) {
         Gui::View3DInventorViewer* viewer = static_cast<Gui::View3DInventor*>(view)->getViewer();
         if (viewer->isEditingViewProvider()) {
             doCommand(Command::Gui,"Gui.activeDocument().resetEdit()");

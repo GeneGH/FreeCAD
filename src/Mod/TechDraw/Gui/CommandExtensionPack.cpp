@@ -41,8 +41,8 @@
 #include <Gui/Control.h>
 #include <Gui/Document.h>
 #include <Gui/MainWindow.h>
-#include <Gui/Selection.h>
-#include <Gui/SelectionObject.h>
+#include <Gui/Selection/Selection.h>
+#include <Gui/Selection/SelectionObject.h>
 #include <Gui/ViewProvider.h>
 #include <Mod/Part/App/Geometry2d.h>
 #include <Mod/TechDraw/App/CenterLine.h>
@@ -1480,7 +1480,7 @@ void CmdTechDrawExtensionLockUnlockView::activated(int iMsg)
         return;
     }
     Gui::Command::openCommand(QT_TRANSLATE_NOOP("Command", "Lock/Unlock View"));
-    if (objFeat->isDerivedFrom(TechDraw::DrawViewPart::getClassTypeId())) {
+    if (objFeat->isDerivedFrom<TechDraw::DrawViewPart>()) {
         bool lockPosition = objFeat->LockPosition.getValue();
         lockPosition = !lockPosition;
         objFeat->LockPosition.setValue(lockPosition);

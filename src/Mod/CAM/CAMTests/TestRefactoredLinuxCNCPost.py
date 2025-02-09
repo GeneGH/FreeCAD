@@ -21,6 +21,14 @@
 # *                                                                         *
 # ***************************************************************************
 
+# ***************************************************************************
+# *  Note: TestRefactoredMassoG3Post.py is a modified clone of this file    *
+# *        any changes to this file should be applied to the other          *
+# *                                                                         *
+# *                                                                         *
+# ***************************************************************************
+
+
 from importlib import reload
 
 import FreeCAD

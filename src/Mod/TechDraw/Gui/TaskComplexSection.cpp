@@ -33,7 +33,7 @@
 #include <Gui/Command.h>
 #include <Gui/Control.h>
 #include <Gui/MainWindow.h>
-#include <Gui/Selection.h>
+#include <Gui/Selection/Selection.h>
 #include <Gui/WaitCursor.h>
 
 #include "Widgets/CompassWidget.h"
@@ -282,9 +282,9 @@ void TaskComplexSection::onSectionObjectsUseSelectionClicked()
     std::vector<App::DocumentObject*> newSelection;
     std::vector<App::DocumentObject*> newXSelection;
     for (auto& sel : selection) {
-        if (sel.getObject()->isDerivedFrom(App::LinkElement::getClassTypeId())
-            || sel.getObject()->isDerivedFrom(App::LinkGroup::getClassTypeId())
-            || sel.getObject()->isDerivedFrom(App::Link::getClassTypeId())) {
+        if (sel.getObject()->isDerivedFrom<App::LinkElement>()
+            || sel.getObject()->isDerivedFrom<App::LinkGroup>()
+            || sel.getObject()->isDerivedFrom<App::Link>()) {
             newXSelection.push_back(sel.getObject());
         }
         else {

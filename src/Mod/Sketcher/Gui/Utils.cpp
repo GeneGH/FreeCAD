@@ -34,7 +34,7 @@
 #include <Base/UnitsApi.h>
 #include <Gui/CommandT.h>
 #include <Gui/Document.h>
-#include <Gui/Selection.h>
+#include <Gui/Selection/Selection.h>
 #include <Mod/Sketcher/App/GeometryFacade.h>
 #include <Mod/Sketcher/App/SketchObject.h>
 
@@ -182,7 +182,7 @@ bool SketcherGui::ReleaseHandler(Gui::Document* doc)
 {
     if (doc) {
         if (doc->getInEdit()
-            && doc->getInEdit()->isDerivedFrom(SketcherGui::ViewProviderSketch::getClassTypeId())) {
+            && doc->getInEdit()->isDerivedFrom<SketcherGui::ViewProviderSketch>()) {
             SketcherGui::ViewProviderSketch* vp =
                 static_cast<SketcherGui::ViewProviderSketch*>(doc->getInEdit());
 
@@ -479,7 +479,7 @@ void SketcherGui::ActivateHandler(Gui::Document* doc, std::unique_ptr<DrawSketch
 {
     if (doc) {
         if (doc->getInEdit()
-            && doc->getInEdit()->isDerivedFrom(SketcherGui::ViewProviderSketch::getClassTypeId())) {
+            && doc->getInEdit()->isDerivedFrom<SketcherGui::ViewProviderSketch>()) {
             SketcherGui::ViewProviderSketch* vp =
                 static_cast<SketcherGui::ViewProviderSketch*>(doc->getInEdit());
             vp->purgeHandler();
@@ -522,7 +522,7 @@ bool SketcherGui::isSketcherBSplineActive(Gui::Document* doc, bool actsOnSelecti
     if (doc) {
         // checks if a Sketch Viewprovider is in Edit and is in no special mode
         if (doc->getInEdit()
-            && doc->getInEdit()->isDerivedFrom(SketcherGui::ViewProviderSketch::getClassTypeId())) {
+            && doc->getInEdit()->isDerivedFrom<SketcherGui::ViewProviderSketch>()) {
             if (static_cast<SketcherGui::ViewProviderSketch*>(doc->getInEdit())->getSketchMode()
                 == ViewProviderSketch::STATUS_NONE) {
                 if (!actsOnSelection) {

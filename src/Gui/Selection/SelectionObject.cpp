@@ -27,7 +27,7 @@
 #include <App/Application.h>
 #include <App/Document.h>
 #include <App/DocumentObject.h>
-#include <Gui/SelectionObjectPy.h>
+#include <Gui/Selection/SelectionObjectPy.h>
 
 #include "SelectionObject.h"
 #include "Selection.h"
@@ -85,7 +85,7 @@ App::DocumentObject * SelectionObject::getObject()
 bool SelectionObject::isObjectTypeOf(const Base::Type& typeId) const
 {
     const App::DocumentObject* obj = getObject();
-    return (obj && obj->getTypeId().isDerivedFrom(typeId));
+    return (obj && obj->isDerivedFrom(typeId));
 }
 
 std::string SelectionObject::getAsPropertyLinkSubString()const

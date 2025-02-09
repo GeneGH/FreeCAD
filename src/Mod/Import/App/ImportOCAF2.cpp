@@ -411,7 +411,10 @@ App::Document* ImportOCAF2::getDocument(App::Document* doc, TDF_Label label)
         return doc;
     }
 
-    auto newDoc = App::GetApplication().newDocument(name.c_str(), name.c_str(), false);
+    App::DocumentCreateFlags createFlags;
+    createFlags.createView = false;
+    auto newDoc = App::GetApplication().newDocument(name.c_str(), name.c_str(), createFlags);
+
     std::ostringstream ss;
     Base::FileInfo fi(doc->FileName.getValue());
     std::string path = fi.dirPath();
@@ -561,7 +564,7 @@ App::DocumentObject* ImportOCAF2::loadShapes()
     if (ret) {
         ret->recomputeFeature(true);
     }
-    if (options.merge && ret && !ret->isDerivedFrom(Part::Feature::getClassTypeId())) {
+    if (options.merge && ret && !ret->isDerivedFrom<Part::Feature>()) {
         auto shape = Part::Feature::getTopoShape(ret);
         auto feature =
             static_cast<Part::Feature*>(pDocument->addObject("Part::Feature", "Feature"));

@@ -38,7 +38,7 @@
 #include <Gui/Command.h>
 #include <Gui/Control.h>
 #include <Gui/Document.h>
-#include <Gui/SelectionObject.h>
+#include <Gui/Selection/SelectionObject.h>
 #include <Gui/Widgets.h>
 #include <Mod/Part/Gui/ViewProvider.h>
 
@@ -168,7 +168,7 @@ bool GeomFillSurface::EdgeSelection::allow(App::Document*,
     if (pObj == editedObject) {
         return false;
     }
-    if (!pObj->isDerivedFrom(Part::Feature::getClassTypeId())) {
+    if (!pObj->isDerivedFrom<Part::Feature>()) {
         return false;
     }
 

@@ -44,8 +44,8 @@
 #include <Gui/Document.h>
 #include <Gui/FileDialog.h>
 #include <Gui/MainWindow.h>
-#include <Gui/Selection.h>
-#include <Gui/SelectionObject.h>
+#include <Gui/Selection/Selection.h>
+#include <Gui/Selection/SelectionObject.h>
 #include <Gui/ViewProvider.h>
 #include <Gui/WaitCursor.h>
 
@@ -303,7 +303,7 @@ CmdTechDrawView::CmdTechDrawView() : Command("TechDraw_View")
     sGroup = QT_TR_NOOP("TechDraw");
     sMenuText = QT_TR_NOOP("Insert View");
     sToolTipText = QT_TR_NOOP("Insert a View in current page.\n"
-        "Selected objects, spreadsheets or Arch WB section planes will be added.\n"
+        "Selected objects, spreadsheets or BIM section planes will be added.\n"
         "Without a selection, a file browser lets you select a SVG or image file.");
     sWhatsThis = "TechDraw_View";
     sStatusTip = sToolTipText;
@@ -360,12 +360,12 @@ void CmdTechDrawView::activated(int iMsg)
             continue;
         }
         else if (DrawGuiUtil::isArchSection(obj)) {
-            std::string FeatName = getUniqueObjectName("ArchView");
+            std::string FeatName = getUniqueObjectName("BIM view");
             std::string SourceName = obj->getNameInDocument();
-            openCommand(QT_TRANSLATE_NOOP("Command", "Create BIM View"));
+            openCommand(QT_TRANSLATE_NOOP("Command", "Create BIM view"));
             doCommand(Doc, "App.activeDocument().addObject('TechDraw::DrawViewArch', '%s')",
                 FeatName.c_str());
-            doCommand(Doc, "App.activeDocument().%s.translateLabel('DrawViewArch', 'ArchView', '%s')",
+            doCommand(Doc, "App.activeDocument().%s.translateLabel('DrawViewArch', 'BIM view', '%s')",
                 FeatName.c_str(), FeatName.c_str());
             doCommand(Doc, "App.activeDocument().%s.Source = App.activeDocument().%s", FeatName.c_str(),
                 SourceName.c_str());
@@ -377,9 +377,9 @@ void CmdTechDrawView::activated(int iMsg)
             continue;
         }
 
-        if (obj->isDerivedFrom(App::LinkElement::getClassTypeId())
-            || obj->isDerivedFrom(App::LinkGroup::getClassTypeId())
-            || obj->isDerivedFrom(App::Link::getClassTypeId())) {
+        if (obj->isDerivedFrom<App::LinkElement>()
+            || obj->isDerivedFrom<App::LinkGroup>()
+            || obj->isDerivedFrom<App::Link>()) {
             is_linked = true;
         }
         // If parent of the obj is a link to another document, we possibly need to treat non-link obj as linked, too
@@ -392,9 +392,9 @@ void CmdTechDrawView::activated(int iMsg)
                     continue;
                 }
                 // 2nd, do we really have a link to obj?
-                if (parent->isDerivedFrom(App::LinkElement::getClassTypeId())
-                    || parent->isDerivedFrom(App::LinkGroup::getClassTypeId())
-                    || parent->isDerivedFrom(App::Link::getClassTypeId())) {
+                if (parent->isDerivedFrom<App::LinkElement>()
+                    || parent->isDerivedFrom<App::LinkGroup>()
+                    || parent->isDerivedFrom<App::Link>()) {
                     // We have a link chain from this document to obj, and obj is in another document -> it is an XLink target
                     is_linked = true;
                 }
@@ -920,10 +920,10 @@ void execComplexSection(Gui::Command* cmd)
     for (auto& sel : selection) {
         bool is_linked = false;
         auto obj = sel.getObject();
-        if (obj->isDerivedFrom(TechDraw::DrawPage::getClassTypeId())) {
+        if (obj->isDerivedFrom<TechDraw::DrawPage>()) {
             continue;
         }
-        if (obj->isDerivedFrom(TechDraw::DrawViewPart::getClassTypeId())) {
+        if (obj->isDerivedFrom<TechDraw::DrawViewPart>()) {
             //use the dvp's Sources as sources for this ComplexSection &
             //check the subelement(s) to see if they can be used as a profile
             baseView = static_cast<TechDraw::DrawViewPart*>(obj);
@@ -934,9 +934,9 @@ void execComplexSection(Gui::Command* cmd)
             }
             continue;
         }
-        if (obj->isDerivedFrom(App::LinkElement::getClassTypeId())
-            || obj->isDerivedFrom(App::LinkGroup::getClassTypeId())
-            || obj->isDerivedFrom(App::Link::getClassTypeId())) {
+        if (obj->isDerivedFrom<App::LinkElement>()
+            || obj->isDerivedFrom<App::LinkGroup>()
+            || obj->isDerivedFrom<App::Link>()) {
             is_linked = true;
         }
         // If parent of the obj is a link to another document, we possibly need to treat non-link obj as linked, too
@@ -949,9 +949,9 @@ void execComplexSection(Gui::Command* cmd)
                     continue;
                 }
                 // 2nd, do we really have a link to obj?
-                if (parent->isDerivedFrom(App::LinkElement::getClassTypeId())
-                    || parent->isDerivedFrom(App::LinkGroup::getClassTypeId())
-                    || parent->isDerivedFrom(App::Link::getClassTypeId())) {
+                if (parent->isDerivedFrom<App::LinkElement>()
+                    || parent->isDerivedFrom<App::LinkGroup>()
+                    || parent->isDerivedFrom<App::Link>()) {
                     // We have a link chain from this document to obj, and obj is in another document -> it is an XLink target
                     is_linked = true;
                 }
@@ -1076,12 +1076,12 @@ void CmdTechDrawProjectionGroup::activated(int iMsg)
     for (auto& sel : selection) {
         bool is_linked = false;
         auto obj = sel.getObject();
-        if (obj->isDerivedFrom(TechDraw::DrawPage::getClassTypeId())) {
+        if (obj->isDerivedFrom<TechDraw::DrawPage>()) {
             continue;
         }
-        if (obj->isDerivedFrom(App::LinkElement::getClassTypeId())
-            || obj->isDerivedFrom(App::LinkGroup::getClassTypeId())
-            || obj->isDerivedFrom(App::Link::getClassTypeId())) {
+        if (obj->isDerivedFrom<App::LinkElement>()
+            || obj->isDerivedFrom<App::LinkGroup>()
+            || obj->isDerivedFrom<App::Link>()) {
             is_linked = true;
         }
         // If parent of the obj is a link to another document, we possibly need to treat non-link obj as linked, too
@@ -1094,9 +1094,9 @@ void CmdTechDrawProjectionGroup::activated(int iMsg)
                     continue;
                 }
                 // 2nd, do we really have a link to obj?
-                if (parent->isDerivedFrom(App::LinkElement::getClassTypeId())
-                    || parent->isDerivedFrom(App::LinkGroup::getClassTypeId())
-                    || parent->isDerivedFrom(App::Link::getClassTypeId())) {
+                if (parent->isDerivedFrom<App::LinkElement>()
+                    || parent->isDerivedFrom<App::LinkGroup>()
+                    || parent->isDerivedFrom<App::Link>()) {
                     // We have a link chain from this document to obj, and obj is in another document -> it is an XLink target
                     is_linked = true;
                 }
@@ -1396,10 +1396,10 @@ void CmdTechDrawClipGroupAdd::activated(int iMsg)
     TechDraw::DrawView* view = nullptr;
     std::vector<Gui::SelectionObject>::iterator itSel = selection.begin();
     for (; itSel != selection.end(); itSel++) {
-        if ((*itSel).getObject()->isDerivedFrom(TechDraw::DrawViewClip::getClassTypeId())) {
+        if ((*itSel).getObject()->isDerivedFrom<TechDraw::DrawViewClip>()) {
             clip = static_cast<TechDraw::DrawViewClip*>((*itSel).getObject());
         }
-        else if ((*itSel).getObject()->isDerivedFrom(TechDraw::DrawView::getClassTypeId())) {
+        else if ((*itSel).getObject()->isDerivedFrom<TechDraw::DrawView>()) {
             view = static_cast<TechDraw::DrawView*>((*itSel).getObject());
         }
     }
@@ -1625,8 +1625,8 @@ void CmdTechDrawDraftView::activated(int iMsg)
 
     std::pair<Base::Vector3d, Base::Vector3d> dirs = DrawGuiUtil::get3DDirAndRot();
     for (auto* obj : objects) {
-         if (obj->isDerivedFrom(TechDraw::DrawPage::getClassTypeId()) ||
-             obj->isDerivedFrom(TechDraw::DrawView::getClassTypeId())) {
+         if (obj->isDerivedFrom<TechDraw::DrawPage>() ||
+             obj->isDerivedFrom<TechDraw::DrawView>()) {
             // skip over TechDraw objects as they are not valid subjects for a DraftView
             continue;
         }
@@ -1661,7 +1661,7 @@ CmdTechDrawArchView::CmdTechDrawArchView() : Command("TechDraw_ArchView")
     // setting the Gui eye-candy
     sGroup = QT_TR_NOOP("TechDraw");
     sMenuText = QT_TR_NOOP("Insert BIM Workbench Object");
-    sToolTipText = QT_TR_NOOP("Insert a View of a Section Plane from BIM Workbench");
+    sToolTipText = QT_TR_NOOP("Insert a View of a BIM Workbench section plane");
     sWhatsThis = "TechDraw_NewArch";
     sStatusTip = sToolTipText;
     sPixmap = "actions/TechDraw_ArchView";
@@ -1676,8 +1676,8 @@ void CmdTechDrawArchView::activated(int iMsg)
     App::DocumentObject* archObject = nullptr;
     int archCount = 0;
     for (auto& obj : objects) {
-        if (obj->isDerivedFrom(TechDraw::DrawPage::getClassTypeId()) ||
-            obj->isDerivedFrom(TechDraw::DrawView::getClassTypeId())) {
+        if (obj->isDerivedFrom<TechDraw::DrawPage>() ||
+            obj->isDerivedFrom<TechDraw::DrawView>()) {
             // skip over TechDraw objects as they are not valid subjects for a ArchView
             continue;
         }
@@ -1688,13 +1688,13 @@ void CmdTechDrawArchView::activated(int iMsg)
     }
     if (archCount > 1) {
         QMessageBox::warning(Gui::getMainWindow(), QObject::tr("Wrong selection"),
-                             QObject::tr("Please select only 1 BIM Section."));
+                             QObject::tr("Please select only 1 BIM section plane."));
         return;
     }
 
     if (!archObject) {
         QMessageBox::warning(Gui::getMainWindow(), QObject::tr("Wrong selection"),
-                             QObject::tr("No BIM Sections in selection."));
+                             QObject::tr("No BIM section plane in selection."));
         return;
     }
 
@@ -1704,12 +1704,12 @@ void CmdTechDrawArchView::activated(int iMsg)
     }
     std::string PageName = page->getNameInDocument();
 
-    std::string FeatName = getUniqueObjectName("ArchView");
+    std::string FeatName = getUniqueObjectName("BIM view");
     std::string SourceName = archObject->getNameInDocument();
-    openCommand(QT_TRANSLATE_NOOP("Command", "Create ArchView"));
+    openCommand(QT_TRANSLATE_NOOP("Command", "Create BIM view"));
     doCommand(Doc, "App.activeDocument().addObject('TechDraw::DrawViewArch', '%s')",
               FeatName.c_str());
-    doCommand(Doc, "App.activeDocument().%s.translateLabel('DrawViewArch', 'ArchView', '%s')",
+    doCommand(Doc, "App.activeDocument().%s.translateLabel('DrawViewArch', 'BIM view', '%s')",
               FeatName.c_str(), FeatName.c_str());
     doCommand(Doc, "App.activeDocument().%s.Source = App.activeDocument().%s", FeatName.c_str(),
               SourceName.c_str());
@@ -1864,7 +1864,7 @@ void CmdTechDrawExportPageDXF::activated(int iMsg)
 
     std::vector<App::DocumentObject*> views = page->getViews();
     for (auto& v : views) {
-        if (v->isDerivedFrom(TechDraw::DrawViewArch::getClassTypeId())) {
+        if (v->isDerivedFrom<TechDraw::DrawViewArch>()) {
             QMessageBox::StandardButton rc = QMessageBox::question(
                 Gui::getMainWindow(), QObject::tr("Can not export selection"),
                 QObject::tr("Page contains DrawViewArch which will not be exported. Continue?"),
@@ -1977,12 +1977,12 @@ void getSelectedShapes(Gui::Command* cmd,
     for (auto& sel : selection) {
         bool is_linked = false;
         auto obj = sel.getObject();
-        if (obj->isDerivedFrom(TechDraw::DrawPage::getClassTypeId())) {
+        if (obj->isDerivedFrom<TechDraw::DrawPage>()) {
             continue;
         }
-        if (obj->isDerivedFrom(App::LinkElement::getClassTypeId())
-            || obj->isDerivedFrom(App::LinkGroup::getClassTypeId())
-            || obj->isDerivedFrom(App::Link::getClassTypeId())) {
+        if (obj->isDerivedFrom<App::LinkElement>()
+            || obj->isDerivedFrom<App::LinkGroup>()
+            || obj->isDerivedFrom<App::Link>()) {
             is_linked = true;
         }
         // If parent of the obj is a link to another document, we possibly need to treat non-link obj as linked, too
@@ -1995,9 +1995,9 @@ void getSelectedShapes(Gui::Command* cmd,
                     continue;
                 }
                 // 2nd, do we really have a link to obj?
-                if (parent->isDerivedFrom(App::LinkElement::getClassTypeId())
-                    || parent->isDerivedFrom(App::LinkGroup::getClassTypeId())
-                    || parent->isDerivedFrom(App::Link::getClassTypeId())) {
+                if (parent->isDerivedFrom<App::LinkElement>()
+                    || parent->isDerivedFrom<App::LinkGroup>()
+                    || parent->isDerivedFrom<App::Link>()) {
                     // We have a link chain from this document to obj, and obj is in another document -> it is an XLink target
                     is_linked = true;
                 }
@@ -2058,5 +2058,3 @@ std::pair<App::DocumentObject*, std::string> faceFromSelection()
 
     return { nullptr, "" };
 }
-
-
