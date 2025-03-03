@@ -45,9 +45,9 @@ using namespace TechDraw;
 using DU = DrawUtil;
 
 QGITile::QGITile(TechDraw::DrawTileWeld* dtw) :
-    m_textL(QString::fromUtf8(" ")),
-    m_textR(QString::fromUtf8(" ")),
-    m_textC(QString::fromUtf8(" ")),
+    m_textL(QStringLiteral(" ")),
+    m_textR(QStringLiteral(" ")),
+    m_textC(QStringLiteral(" ")),
     m_scale(1.0),
     m_row(0),
     m_col(0),
@@ -280,7 +280,7 @@ bool QGITile::getAltWeld() const
 //TODO: this is Pen, not Brush. sb Brush to colour background
 QColor QGITile::getTileColor() const
 {
-    App::Color fcColor = App::Color((uint32_t) Preferences::getPreferenceGroup("Colors")->GetUnsigned("TileColor", 0x00000000));
+    Base::Color fcColor = Base::Color((uint32_t) Preferences::getPreferenceGroup("Colors")->GetUnsigned("TileColor", 0x00000000));
     return PreferencesGui::getAccessibleQColor( fcColor.asValue<QColor>());
 }
 

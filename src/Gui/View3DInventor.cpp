@@ -93,7 +93,7 @@ void GLOverlayWidget::paintEvent(QPaintEvent*)
 TYPESYSTEM_SOURCE_ABSTRACT(Gui::View3DInventor,Gui::MDIView)
 
 View3DInventor::View3DInventor(Gui::Document* pcDocument, QWidget* parent,
-                               const QtGLWidget* sharewidget, Qt::WindowFlags wflags)
+                               const QOpenGLWidget* sharewidget, Qt::WindowFlags wflags)
     : MDIView(pcDocument, parent, wflags), _viewerPy(nullptr)
 {
     stack = new QStackedWidget(this);
@@ -106,7 +106,7 @@ View3DInventor::View3DInventor(Gui::Document* pcDocument, QWidget* parent,
     bool smoothing = false;
     bool glformat = false;
     int samples = View3DInventorViewer::getNumSamples();
-    QtGLFormat f;
+    QSurfaceFormat f;
 
     if (samples > 1) {
         glformat = true;
@@ -250,7 +250,7 @@ void View3DInventor::print()
 void View3DInventor::printPdf()
 {
     QString filename = FileDialog::getSaveFileName(this, tr("Export PDF"), QString(),
-        QString::fromLatin1("%1 (*.pdf)").arg(tr("PDF file")));
+        QStringLiteral("%1 (*.pdf)").arg(tr("PDF file")));
     if (!filename.isEmpty()) {
         Gui::WaitCursor wc;
         QPrinter printer(QPrinter::ScreenResolution);

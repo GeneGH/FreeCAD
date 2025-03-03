@@ -23,7 +23,6 @@
 """Document observer to act on documents containing NativeIFC objects"""
 
 
-import os
 import FreeCAD
 
 params = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/NativeIFC")
@@ -67,7 +66,7 @@ class ifc_observer:
     def slotDeletedObject(self, obj):
         """Deletes the corresponding object in the IFC document"""
 
-        from nativeifc import ifc_tools  # lazy loading
+        from . import ifc_tools  # lazy loading
 
         proj = ifc_tools.get_project(obj)
         if not proj:
@@ -81,10 +80,13 @@ class ifc_observer:
     def slotChangedDocument(self, doc, prop):
         """Watch document IFC properties"""
 
-        from nativeifc import ifc_tools  # lazy import
-        from nativeifc import ifc_status
+        # only look at locked IFC documents
+        if "IfcFilePath" not in doc.PropertiesList:
+            return
 
-        if prop == "Schema" and "IfcFilePath" in doc.PropertiesList:
+        from . import ifc_tools  # lazy import
+
+        if prop == "Schema":
             schema = doc.Schema
             ifcfile = ifc_tools.get_ifcfile(doc)
             if ifcfile:
@@ -101,6 +103,10 @@ class ifc_observer:
                         ]
                         if len(child) == 1:
                             child[0].StepId = new_id
+        elif prop == "Label":
+            ifcfile = ifc_tools.get_ifcfile(doc)
+            project = ifc_tools.get_ifc_element(doc)
+            ifc_tools.set_attribute(ifcfile, project, "Name", doc.Label)
 
     def slotCreatedObject(self, obj):
         """If this is an IFC document, turn the object into IFC"""
@@ -118,13 +124,13 @@ class ifc_observer:
     def slotActivateDocument(self, doc):
         """Check if we need to lock"""
 
-        from nativeifc import ifc_status
+        from . import ifc_status
 
         ifc_status.on_activate()
 
     def slotRemoveDynamicProperty(self, obj, prop):
 
-        from nativeifc import ifc_psets
+        from . import ifc_psets
         ifc_psets.remove_property(obj, prop)
 
     # implementation methods
@@ -156,8 +162,8 @@ class ifc_observer:
                     if obj.Modified:
                         projects.append(obj)
         if projects:
-            from nativeifc import ifc_tools  # lazy loading
-            from nativeifc import ifc_viewproviders
+            from . import ifc_tools  # lazy loading
+            from . import ifc_viewproviders
 
             ask = params.GetBool("AskBeforeSaving", True)
             if ask and FreeCAD.GuiUp:
@@ -200,8 +206,8 @@ class ifc_observer:
         or "IfcType" in obj.PropertiesList \
         or "CreateSpreadsheet" in obj.PropertiesList:
             FreeCAD.Console.PrintLog("Converting " + obj.Label + " to IFC\n")
-            from nativeifc import ifc_geometry  # lazy loading
-            from nativeifc import ifc_tools  # lazy loading
+            from . import ifc_geometry  # lazy loading
+            from . import ifc_tools  # lazy loading
 
             newobj = ifc_tools.aggregate(obj, doc)
             ifc_geometry.add_geom_properties(newobj)

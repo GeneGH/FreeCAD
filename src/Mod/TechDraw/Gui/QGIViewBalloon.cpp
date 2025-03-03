@@ -438,9 +438,9 @@ void QGIViewBalloon::updateBalloon(bool obtuse)
 
     if (strcmp(balloon->BubbleShape.getValueAsString(), "Rectangle") == 0) {
         std::vector<int> newSeps;
-        while (labelText.contains(QString::fromUtf8("|"))) {
-            int pos = labelText.indexOf(QString::fromUtf8("|"));
-            labelText.replace(pos, 1, QString::fromUtf8("   "));
+        while (labelText.contains(QStringLiteral("|"))) {
+            int pos = labelText.indexOf(QStringLiteral("|"));
+            labelText.replace(pos, 1, QStringLiteral("   "));
             QFontMetrics fm(balloonLabel->getFont());
             newSeps.push_back(Gui::QtTools::horizontalAdvance(fm, labelText.left(pos + 2)));
             balloonLabel->setVerticalSep(true);
@@ -785,7 +785,7 @@ void QGIViewBalloon::drawBalloon(bool originDrag)
 
     double xAdj = 0.0;
     double yAdj = 0.0;
-    int endType = balloon->EndType.getValue();
+    ArrowType endType = static_cast<ArrowType>(balloon->EndType.getValue());
     double arrowAdj = QGIArrow::getOverlapAdjust(
         endType, balloon->EndTypeScale.getValue() * QGIArrow::getPrefArrowSize());
 
@@ -948,15 +948,16 @@ QColor QGIViewBalloon::prefNormalColor()
     if (vp) {
         vpBalloon = dynamic_cast<ViewProviderBalloon*>(vp);
         if (vpBalloon) {
-            App::Color fcColor = Preferences::getAccessibleColor(vpBalloon->Color.getValue());
+            Base::Color fcColor = Preferences::getAccessibleColor(vpBalloon->Color.getValue());
             setNormalColor(fcColor.asValue<QColor>());
         }
     }
     return getNormalColor();
 }
 
-int QGIViewBalloon::prefDefaultArrow() const { return Preferences::balloonArrow(); }
-
+ArrowType QGIViewBalloon::prefDefaultArrow() const {
+    return Preferences::balloonArrow();
+}
 
 //should this be an object property or global preference?
 //when would you want a crooked pyramid?

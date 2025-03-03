@@ -250,7 +250,7 @@ void ImportOCAF::loadShapes(const TDF_Label& label,
             if (!localValue.empty()) {
                 if (aShapeTool->IsAssembly(label)) {
                     App::Part* pcPart = nullptr;
-                    pcPart = static_cast<App::Part*>(doc->addObject("App::Part", asm_name.c_str()));
+                    pcPart = doc->addObject<App::Part>(asm_name.c_str());
                     pcPart->Label.setValue(asm_name);
                     pcPart->addObjects(localValue);
 
@@ -326,7 +326,7 @@ void ImportOCAF::createShape(const TDF_Label& label,
             // Ok we got a Compound which is computed
             // Just need to add it to a Part::Feature and push it to lValue
             if (!comp.IsNull() && (ctSolids || ctShells || ctEdges || ctVertices)) {
-                Part::Feature* part = static_cast<Part::Feature*>(doc->addObject("Part::Feature"));
+                Part::Feature* part = doc->addObject<Part::Feature>();
                 // Let's allocate the relative placement of the Compound from the STEP file
                 tryPlacementFromLoc(part, loc);
                 if (!loc.IsIdentity()) {
@@ -352,7 +352,7 @@ void ImportOCAF::createShape(const TDF_Label& label,
         }
 
         if (!localValue.empty() && !mergeShape) {
-            pcPart = static_cast<App::Part*>(doc->addObject("App::Part", name.c_str()));
+            pcPart = doc->addObject<App::Part>(name.c_str());
             pcPart->Label.setValue(name);
 
             // localValue contain the objects that  must added to the local Part
@@ -376,7 +376,7 @@ void ImportOCAF::createShape(const TopoDS_Shape& aShape,
                              const std::string& name,
                              std::vector<App::DocumentObject*>& lvalue)
 {
-    Part::Feature* part = static_cast<Part::Feature*>(doc->addObject("Part::Feature"));
+    Part::Feature* part = doc->addObject<Part::Feature>();
 
     if (!loc.IsIdentity()) {
         part->Shape.setValue(aShape.Moved(loc));
@@ -394,12 +394,12 @@ void ImportOCAF::createShape(const TopoDS_Shape& aShape,
 void ImportOCAF::loadColors(Part::Feature* part, const TopoDS_Shape& aShape)
 {
     Quantity_ColorRGBA aColor;
-    App::Color color(0.8f, 0.8f, 0.8f);
+    Base::Color color(0.8f, 0.8f, 0.8f);
     if (aColorTool->GetColor(aShape, XCAFDoc_ColorGen, aColor)
         || aColorTool->GetColor(aShape, XCAFDoc_ColorSurf, aColor)
         || aColorTool->GetColor(aShape, XCAFDoc_ColorCurv, aColor)) {
         color = Tools::convertColor(aColor);
-        std::vector<App::Color> colors;
+        std::vector<Base::Color> colors;
         colors.push_back(color);
         applyColors(part, colors);
     }
@@ -412,7 +412,7 @@ void ImportOCAF::loadColors(Part::Feature* part, const TopoDS_Shape& aShape)
     }
 
     bool found_face_color = false;
-    std::vector<App::Color> faceColors;
+    std::vector<Base::Color> faceColors;
     faceColors.resize(faces.Extent(), color);
     xp.Init(aShape, TopAbs_FACE);
     while (xp.More()) {
@@ -438,7 +438,7 @@ ImportOCAFCmd::ImportOCAFCmd(Handle(TDocStd_Document) h, App::Document* d, const
     : ImportOCAF(h, d, name)
 {}
 
-void ImportOCAFCmd::applyColors(Part::Feature* part, const std::vector<App::Color>& colors)
+void ImportOCAFCmd::applyColors(Part::Feature* part, const std::vector<Base::Color>& colors)
 {
     partColors[part] = colors;
 }
@@ -497,13 +497,13 @@ void ImportXCAF::loadShapes()
 void ImportXCAF::createShape(const TopoDS_Shape& shape, bool perface, bool setname) const
 {
     Part::Feature* part;
-    part = static_cast<Part::Feature*>(doc->addObject("Part::Feature", default_name.c_str()));
+    part = doc->addObject<Part::Feature>(default_name.c_str());
     part->Label.setValue(default_name);
     part->Shape.setValue(shape);
     std::map<Standard_Integer, Quantity_ColorRGBA>::const_iterator jt;
     jt = myColorMap.find(Part::ShapeMapHasher {}(shape));
 
-    App::Color partColor(0.8f, 0.8f, 0.8f);
+    Base::Color partColor(0.8f, 0.8f, 0.8f);
 
 
     // set label name if defined
@@ -524,7 +524,7 @@ void ImportXCAF::createShape(const TopoDS_Shape& shape, bool perface, bool setna
             xp.Next();
         }
 
-        std::vector<App::Color> faceColors;
+        std::vector<Base::Color> faceColors;
         faceColors.resize(faces.Extent(), partColor);
         xp.Init(shape, TopAbs_FACE);
         while (xp.More()) {

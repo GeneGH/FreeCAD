@@ -28,7 +28,7 @@ translate = FreeCAD.Qt.translate
 
 # the property groups below should not be treated as psets
 NON_PSETS = ["Base", "IFC", "", "Geometry", "Dimension", "Linear/radial dimension",
-             "SectionPlane", "Axis", "PhysicalProperties"]
+             "SectionPlane", "Axis", "PhysicalProperties", "BuildingPart", "IFC Attributes"]
 
 class ifc_object:
     """Base class for all IFC-based objects"""
@@ -120,7 +120,7 @@ class ifc_object:
     def rebuild_classlist(self, obj, setprops=False):
         """rebuilds the list of Class enum property according to current class"""
 
-        from nativeifc import ifc_tools  # lazy import
+        from . import ifc_tools  # lazy import
 
         obj.Class = [obj.IfcClass]
         obj.Class = ifc_tools.get_ifc_classes(obj, obj.IfcClass)
@@ -144,7 +144,7 @@ class ifc_object:
         return None
 
     def execute(self, obj):
-        from nativeifc import ifc_generator  # lazy import
+        from . import ifc_generator  # lazy import
 
         if obj.isDerivedFrom("Part::Feature"):
             cached = getattr(self, "cached", False)
@@ -167,7 +167,7 @@ class ifc_object:
     def edit_attribute(self, obj, attribute, value=None):
         """Edits an attribute of an underlying IFC object"""
 
-        from nativeifc import ifc_tools  # lazy import
+        from . import ifc_tools  # lazy import
 
         if not value:
             value = obj.getPropertyByName(attribute)
@@ -182,8 +182,8 @@ class ifc_object:
     def edit_annotation(self, obj, attribute, value=None):
         """Edits an attribute of an underlying IFC annotation"""
 
-        from nativeifc import ifc_tools  # lazy import
-        from nativeifc import ifc_export
+        from . import ifc_tools  # lazy import
+        from . import ifc_export
 
         if not value:
             if hasattr(obj, attribute):
@@ -239,8 +239,8 @@ class ifc_object:
     def edit_geometry(self, obj, prop):
         """Edits a geometry property of an object"""
 
-        from nativeifc import ifc_geometry  # lazy loading
-        from nativeifc import ifc_tools  # lazy import
+        from . import ifc_geometry  # lazy loading
+        from . import ifc_tools  # lazy import
 
         result = ifc_geometry.set_geom_property(obj, prop)
         if result:
@@ -249,7 +249,7 @@ class ifc_object:
     def edit_schema(self, obj, schema):
         """Changes the schema of an IFC document"""
 
-        from nativeifc import ifc_tools  # lazy import
+        from . import ifc_tools  # lazy import
 
         ifcfile = ifc_tools.get_ifcfile(obj)
         if not ifcfile:
@@ -275,22 +275,22 @@ class ifc_object:
     def edit_placement(self, obj):
         """Syncs the internal IFC placement"""
 
-        from nativeifc import ifc_tools  # lazy import
+        from . import ifc_tools  # lazy import
 
         ifc_tools.set_placement(obj)
 
     def edit_pset(self, obj, prop):
         """Edits a Pset value"""
 
-        from nativeifc import ifc_psets  # lazy import
+        from . import ifc_psets  # lazy import
 
         ifc_psets.edit_pset(obj, prop)
 
     def edit_group(self, obj):
         """Edits the children list"""
 
-        from nativeifc import ifc_tools  # lazy import
-        from nativeifc import ifc_layers
+        from . import ifc_tools  # lazy import
+        from . import ifc_layers
 
         if obj.Class in [
             "IfcPresentationLayerAssignment",
@@ -321,11 +321,9 @@ class ifc_object:
     def edit_type(self, obj):
         """Edits the type of this object"""
 
-        from nativeifc import ifc_types  # lazy import
+        from . import ifc_types  # lazy import
 
         ifc_types.edit_type(obj)
-
-
 
     def edit_quantity(self, obj, prop):
         """Edits the given quantity"""
@@ -334,7 +332,7 @@ class ifc_object:
     def get_section_data(self, obj):
         """Returns two things: a list of objects and a cut plane"""
 
-        from nativeifc import ifc_tools  # lazy import
+        from . import ifc_tools  # lazy import
         import Part
 
         if not obj.IfcClass == "IfcAnnotation":
@@ -377,7 +375,7 @@ class ifc_object:
     def edit_classification(self, obj):
         """Edits the classification of this object"""
 
-        from nativeifc import ifc_classification  # lazy loading
+        from . import ifc_classification  # lazy loading
 
         ifc_classification.edit_classification(obj)
 

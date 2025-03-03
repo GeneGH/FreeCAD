@@ -36,7 +36,7 @@
 #include "TextEdit.h"
 #include "SyntaxHighlighter.h"
 #include "Tools.h"
-#include <App/Color.h>
+#include <Base/Color.h>
 
 
 using namespace Gui;
@@ -60,7 +60,7 @@ TextEdit::TextEdit(QWidget* parent)
     //Note: Set the correct context to this shortcut as we may use several instances of this
     //class at a time
     auto shortcut = new QShortcut(this);
-    shortcut->setKey(QKeySequence(QString::fromLatin1("CTRL+Space")));
+    shortcut->setKey(QKeySequence(QStringLiteral("CTRL+Space")));
     shortcut->setContext(Qt::WidgetShortcut);
     connect(shortcut, &QShortcut::activated, this, &TextEdit::complete);
 
@@ -375,7 +375,7 @@ void TextEditor::highlightCurrentLine()
     if (!isReadOnly() && isEnabledHighlightCurrentLine()) {
         QTextEdit::ExtraSelection selection;
         QColor lineColor = d->colormap[QLatin1String("Current line highlight")];
-        unsigned int col = App::Color::asPackedRGB<QColor>(lineColor);
+        unsigned int col = Base::Color::asPackedRGB<QColor>(lineColor);
         ParameterGrp::handle hPrefGrp = getWindowParameter();
         auto value = static_cast<unsigned long>(col);
         value = hPrefGrp->GetUnsigned( "Current line highlight", value);
@@ -457,7 +457,7 @@ void TextEditor::OnChange(Base::Subject<const char*> &rCaller,const char* sReaso
         QMap<QString, QColor>::Iterator it = d->colormap.find(QString::fromLatin1(sReason));
         if (it != d->colormap.end()) {
             QColor color = it.value();
-            unsigned int col = App::Color::asPackedRGB<QColor>(color);
+            unsigned int col = Base::Color::asPackedRGB<QColor>(color);
             auto value = static_cast<unsigned long>(col);
             value = hPrefGrp->GetUnsigned(sReason, value);
             col = static_cast<unsigned int>(value);
@@ -502,7 +502,7 @@ void PythonTextEditor::keyPressEvent (QKeyEvent * e)
         bool space = hPrefGrp->GetBool("Spaces", true);
         int indent = hPrefGrp->GetInt( "IndentSize", 4 );
         QString ch = space ? QString(indent, QLatin1Char(' '))
-                           : QString::fromLatin1("\t");
+                           : QStringLiteral("\t");
 
         QTextCursor cursor = textCursor();
         if (!cursor.hasSelection()) {

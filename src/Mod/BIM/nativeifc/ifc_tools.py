@@ -33,14 +33,13 @@ translate = FreeCAD.Qt.translate
 
 try:
     import ifcopenshell
-    from ifcopenshell import geom
-    from ifcopenshell import api
-    from ifcopenshell import template
-    from ifcopenshell.util import element
-    from ifcopenshell.util import attribute
-    from ifcopenshell.util import schema
-    from ifcopenshell.util import placement
-    from ifcopenshell.util import unit
+    import ifcopenshell.api
+    import ifcopenshell.geom
+    import ifcopenshell.util.attribute
+    import ifcopenshell.util.element
+    import ifcopenshell.util.placement
+    import ifcopenshell.util.schema
+    import ifcopenshell.util.unit
 except ImportError as e:
     import FreeCAD
     FreeCAD.Console.PrintError(
@@ -52,15 +51,16 @@ except ImportError as e:
     )
     raise e
 
-from nativeifc import ifc_objects
-from nativeifc import ifc_viewproviders
-from nativeifc import ifc_import
-from nativeifc import ifc_layers
-from nativeifc import ifc_status
-from nativeifc import ifc_export
-from nativeifc import ifc_psets
+from . import ifc_objects
+from . import ifc_viewproviders
+from . import ifc_import
+from . import ifc_layers
+from . import ifc_status
+from . import ifc_export
+from . import ifc_psets
 
 from draftviewproviders import view_layer
+import ArchBuildingPart
 from PySide import QtCore
 
 SCALE = 1000.0  # IfcOpenShell works in meters, FreeCAD works in mm
@@ -133,7 +133,7 @@ def convert_document(document, filename=None, shapemode=0, strategy=0, silent=Fa
                3 = no children
     """
 
-    if not "Proxy" in document.PropertiesList:
+    if "Proxy" not in document.PropertiesList:
         document.addProperty("App::PropertyPythonObject", "Proxy")
     document.setPropertyStatus("Proxy", "Transient")
     document.Proxy = ifc_objects.document_object()
@@ -160,9 +160,9 @@ def setup_project(proj, filename, shapemode, silent):
 
     full = False
     d = "The path to the linked IFC file"
-    if not "IfcFilePath" in proj.PropertiesList:
+    if "IfcFilePath" not in proj.PropertiesList:
         proj.addProperty("App::PropertyFile", "IfcFilePath", "Base", d)
-    if not "Modified" in proj.PropertiesList:
+    if "Modified" not in proj.PropertiesList:
         proj.addProperty("App::PropertyBool", "Modified", "Base")
     proj.setPropertyStatus("Modified", "Hidden")
     if filename:
@@ -180,7 +180,7 @@ def setup_project(proj, filename, shapemode, silent):
     # In IFC4, history is optional. What should we do here?
     proj.Proxy.ifcfile = ifcfile
     add_properties(proj, ifcfile, project, shapemode=shapemode)
-    if not "Schema" in proj.PropertiesList:
+    if "Schema" not in proj.PropertiesList:
         proj.addProperty("App::PropertyEnumeration", "Schema", "Base")
     # bug in FreeCAD - to avoid a crash, pre-populate the enum with one value
     proj.Schema = [ifcfile.wrapped_data.schema_name()]
@@ -320,7 +320,7 @@ def create_children(
     def create_child(parent, element):
         subresult = []
         # do not create if a child with same stepid already exists
-        if not element.id() in [
+        if element.id() not in [
             getattr(c, "StepId", 0) for c in get_parent_objects(parent)
         ]:
             doc = getattr(parent, "Document", parent)
@@ -396,7 +396,7 @@ def assign_groups(children, ifcfile=None):
 
 
 def get_children(
-    obj, ifcfile=None, only_structure=False, assemblies=True, expand=False, iftype=None
+    obj, ifcfile=None, only_structure=False, assemblies=True, expand=False, ifctype=None
 ):
     """Returns the direct descendants of an object"""
 
@@ -417,7 +417,7 @@ def get_children(
     result = filter_elements(
         children, ifcfile, expand=expand, spaces=True, assemblies=assemblies
     )
-    if iftype:
+    if ifctype:
         result = [r for r in result if r.is_a(ifctype)]
     return result
 
@@ -524,6 +524,7 @@ def add_object(document, otype=None, oname="IfcObject"):
     'sectionplane',
     'axis',
     'schedule'
+    'buildingpart'
     or anything else for a standard IFC object"""
 
     if not document:
@@ -572,6 +573,16 @@ def add_object(document, otype=None, oname="IfcObject"):
         proxy = ifc_objects.ifc_object(otype)
         vproxy = ifc_viewproviders.ifc_vp_document()
         obj = document.addObject("Part::FeaturePython", oname, proxy, vproxy, False)
+    elif otype == "buildingpart":
+        obj = Arch.makeBuildingPart()
+        if obj.ViewObject:
+            obj.ViewObject.ShowLevel = False
+            obj.ViewObject.ShowLabel = False
+            obj.ViewObject.Proxy = ifc_viewproviders.ifc_vp_buildingpart(obj.ViewObject)
+        for p in obj.PropertiesList:
+            if obj.getGroupOfProperty(p) in ["BuildingPart","IFC Attributes","Children"]:
+                obj.removeProperty(p)
+        obj.Proxy = ifc_objects.ifc_object(otype)
     else:  # default case, standard IFC object
         proxy = ifc_objects.ifc_object(otype)
         vproxy = ifc_viewproviders.ifc_vp_object()
@@ -673,18 +684,12 @@ def add_properties(
         elif isinstance(value, ifcopenshell.entity_instance):
             if links:
                 if attr not in obj.PropertiesList:
-                    # value = create_object(value, obj.Document)
                     obj.addProperty("App::PropertyLink", attr, "IFC")
-                # setattr(obj, attr, value)
         elif isinstance(value, (list, tuple)) and value:
             if isinstance(value[0], ifcopenshell.entity_instance):
                 if links:
                     if attr not in obj.PropertiesList:
-                        # nvalue = []
-                        # for elt in value:
-                        #    nvalue.append(create_object(elt, obj.Document))
                         obj.addProperty("App::PropertyLinkList", attr, "IFC")
-                    # setattr(obj, attr, nvalue)
         elif data_type == "enum":
             if attr not in obj.PropertiesList:
                 obj.addProperty("App::PropertyEnumeration", attr, "IFC")
@@ -701,6 +706,12 @@ def add_properties(
                 setattr(obj, attr, [value])
                 setattr(obj, attr, value)
                 setattr(obj, attr, items)
+        elif attr in ["RefLongitude", "RefLatitude"]:
+            obj.addProperty("App::PropertyFloat", attr, "IFC")
+            if value is not None:
+                # convert from list of 4 ints
+                value = value[0] + value[1]/60. + value[2]/3600. + value[3]/3600.e6
+                setattr(obj, attr, value)
         else:
             if attr not in obj.PropertiesList:
                 obj.addProperty("App::PropertyString", attr, "IFC")
@@ -717,6 +728,10 @@ def add_properties(
                 obj.setExpression("CustomText", "AxisTag")
             if "Length" not in obj.PropertiesList:
                 obj.addProperty("App::PropertyLength","Length","Axis")
+            if "Text" not in obj.PropertiesList:
+                obj.addProperty("App::PropertyStringList", "Text", "Base")
+            obj.Text = [text.Literal]
+            obj.Placement = ifc_export.get_placement(ifcentity.ObjectPlacement, ifcfile)
             obj.Length = axisdata[1]
     elif ifcentity.is_a("IfcAnnotation"):
         sectionplane = ifc_export.get_sectionplane(ifcentity)
@@ -929,6 +944,12 @@ def set_attribute(ifcfile, element, attribute, value):
                 product = api_run(cmd, ifcfile, product=element, ifc_class=value)
                 # TODO fix attributes
                 return product
+    if attribute in ["RefLongitude", "RefLatitude"]:
+      c = [int(value)]
+      c.append(int((value - c[0]) * 60))
+      c.append(int(((value - c[0]) * 60 - c[1]) * 60))
+      c.append(int((((value - c[0]) * 60 - c[1]) * 60 - c[2]) * 1.e6))
+      value = c
     cmd = "attribute.edit_attributes"
     attribs = {attribute: value}
     if hasattr(element, attribute):
@@ -973,7 +994,6 @@ def set_colors(obj, colors):
                 colors = [colors]
             # set the first color to opaque otherwise it spoils object transparency
             if len(colors) > 1:
-                #colors[0] = colors[0][:3] + (0.0,)
                 # TEMP HACK: if multiple colors, set everything to opaque because it looks wrong
                 colors = [color[:3] + (1.0,) for color in colors]
             sapp = []
@@ -985,7 +1005,6 @@ def set_colors(obj, colors):
                     sapp_mat.DiffuseColor = color[:3] + (1.0 - color[3],)
                 sapp_mat.Transparency = 1.0 - color[3] if len(color) > 3 else 0.0
                 sapp.append(sapp_mat)
-            #print(vobj.Object.Label,[[m.DiffuseColor,m.Transparency] for m in sapp])
             vobj.ShapeAppearance = sapp
 
 
@@ -1224,7 +1243,9 @@ def aggregate(obj, parent, mode=None):
         if hasattr(child,"Host") and child.Host == obj:
             aggregate(child, newobj)
         elif hasattr(child,"Hosts") and obj in child.Hosts:
-            #op = create_product(child, newobj, ifcfile, ifcclass="IfcOpeningElement")
+            aggregate(child, newobj)
+    for child in getattr(obj, "Group", []):
+        if newobj.IfcClass == "IfcGroup" and child in obj.Group:
             aggregate(child, newobj)
     delete = not (PARAMS.GetBool("KeepAggregated", False))
     if new and delete and base:
@@ -1352,10 +1373,10 @@ def create_relationship(old_obj, obj, parent, element, ifcfile, mode=None):
                 if hasattr(old_par, "Group") and old_obj in old_par.Group:
                     old_par.Group = [o for o in old_par.Group if o != old_obj]
             try:
-                api_run("spatial.unassign_container", ifcfile, products=[element])
+                uprel = api_run("spatial.unassign_container", ifcfile, products=[element])
             except:
                 # older version of IfcOpenShell
-                api_run("spatial.unassign_container", ifcfile, product=element)
+                uprel = api_run("spatial.unassign_container", ifcfile, product=element)
         if element.is_a("IfcOpeningElement"):
             uprel = api_run(
                 "void.add_opening",
@@ -1488,7 +1509,6 @@ def get_elem_attribs(ifcentity):
             attr = ifcentity.attribute_name(anumber)
         except Exception:
             break
-        # print(attr)
         attribs.append(attr)
 
     # get attrib values
@@ -1496,14 +1516,12 @@ def get_elem_attribs(ifcentity):
         try:
             value = getattr(ifcentity, attr)
         except Exception as e:
-            # print(e)
             value = "Error: {}".format(e)
             print(
                 "DEBUG: The entity #{} has a problem on attribute {}: {}".format(
                     ifcentity.id(), attr, e
                 )
             )
-        # print(value)
         info_ifcentity[attr] = value
 
     return info_ifcentity
@@ -1550,8 +1568,8 @@ def get_orphan_elements(ifcfile):
     ]
     # add control elements
     proj = ifcfile.by_type("IfcProject")[0]
-    for rel in proj.Declares:
-        for ctrl in getattr(rel,"RelatedDefinitions", []):
+    for rel in getattr(proj, "Declares", []):
+        for ctrl in getattr(rel, "RelatedDefinitions", []):
             if ctrl.is_a("IfcControl"):
                 products.append(ctrl)
     groups = []
@@ -1586,8 +1604,6 @@ def get_group(project, name):
         doc = project
     group = add_object(doc, otype="group", oname=name)
     group.Label = name.strip("Ifc").strip("Group")
-    # if FreeCAD.GuiUp:
-    #    group.ViewObject.ShowInTree = PARAMS.GetBool("ShowDataGroups", False)
     if hasattr(project.Proxy, "addObject"):
         project.Proxy.addObject(project, group)
     return group
@@ -1631,7 +1647,7 @@ def remove_tree(objs):
     nobjs = objs
     for obj in objs:
         for child in obj.OutListRecursive:
-            if not child in nobjs:
+            if child not in nobjs:
                 nobjs.append(child)
     deletelist = []
     for obj in nobjs:
@@ -1647,8 +1663,6 @@ def remove_tree(objs):
 def recompute(children):
     """Temporary function to recompute objects. Some objects don't get their
     shape correctly at creation"""
-    #import time
-    #stime = time.time()
     doc = None
     for c in children:
         if c:
@@ -1656,5 +1670,3 @@ def recompute(children):
             doc = c.Document
     if doc:
         doc.recompute()
-    #endtime = "%02d:%02d" % (divmod(round(time.time() - stime, 1), 60))
-    #print("DEBUG: Extra recomputing of",len(children),"objects took",endtime)

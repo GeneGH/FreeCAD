@@ -360,7 +360,7 @@ void ViewProviderMeshCurvature::setVertexCurvatureMode(int mode)
     float* transp = pcColorMat->transparency.startEditing();
 
     for (auto const& value : fValues | boost::adaptors::indexed(0)) {
-        App::Color c = pcColorBar->getColor(value.value());
+        Base::Color c = pcColorBar->getColor(value.value());
         // NOLINTBEGIN
         diffcol[value.index()].setValue(c.r, c.g, c.b);
         transp[value.index()] = c.transparency();
@@ -480,12 +480,10 @@ public:
             }
         }
         if (!group) {
-            group = dynamic_cast<App::DocumentObjectGroup*>(
-                doc->addObject("App::DocumentObjectGroup", internalname.c_str()));
+            group = doc->addObject<App::DocumentObjectGroup>(internalname.c_str());
         }
 
-        auto anno = dynamic_cast<App::AnnotationLabel*>(
-            group->addObject("App::AnnotationLabel", internalname.c_str()));
+        auto anno = group->addObject<App::AnnotationLabel>(internalname.c_str());
         QStringList lines = s.split(QLatin1String("\n"));
         std::vector<std::string> text;
         for (const auto& line : lines) {

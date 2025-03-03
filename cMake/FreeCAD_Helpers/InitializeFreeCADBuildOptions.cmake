@@ -12,6 +12,7 @@ macro(InitializeFreeCADBuildOptions)
     option(FREECAD_USE_EXTERNAL_ONDSELSOLVER "Use system installed OndselSolver instead of git submodule." OFF)
     option(FREECAD_USE_FREETYPE "Builds the features using FreeType libs" ON)
     option(FREECAD_BUILD_DEBIAN "Prepare for a build of a Debian package" OFF)
+    option(FREECAD_CHECK_PIVY "Check for pivy version using Python at build time" ON)
     option(BUILD_WITH_CONDA "Set ON if you build FreeCAD with conda" OFF)
     option(BUILD_DYNAMIC_LINK_PYTHON "If OFF extension-modules do not link against python-libraries" ON)
     option(INSTALL_TO_SITEPACKAGES "If ON the freecad root namespace (python) is installed into python's site-packages" ON)
@@ -75,8 +76,6 @@ macro(InitializeFreeCADBuildOptions)
                  "Official Version"
                  "Community Edition"
     )
-
-    configure_file(${CMAKE_SOURCE_DIR}/src/QtOpenGL.h.cmake ${CMAKE_BINARY_DIR}/src/QtOpenGL.h)
 
     option(BUILD_DESIGNER_PLUGIN "Build and install the designer plugin" OFF)
 

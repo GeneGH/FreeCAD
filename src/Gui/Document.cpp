@@ -23,11 +23,20 @@
 #include "PreCompiled.h"
 
 #ifndef _PreComp_
+# include <tuple>
+# include <memory>
+# include <list>
+# include <string>
+# include <map>
+# include <set>
+# include <unordered_map>
+# include <vector>
 # include <cctype>
 # include <mutex>
 # include <QApplication>
 # include <QFileInfo>
 # include <QMessageBox>
+# include <QOpenGLWidget>
 # include <QTextStream>
 # include <QTimer>
 # include <QStatusBar>
@@ -1298,7 +1307,7 @@ static bool checkCanonicalPath(const std::map<App::Document*, bool> &docs)
     auto docName = [](App::Document *doc) -> QString {
         if (doc->Label.getStrValue() == doc->getName())
             return QString::fromLatin1(doc->getName());
-        return QString::fromLatin1("%1 (%2)").arg(QString::fromUtf8(doc->Label.getValue()),
+        return QStringLiteral("%1 (%2)").arg(QString::fromUtf8(doc->Label.getValue()),
                                                   QString::fromLatin1(doc->getName()));
     };
     int count = 0;
@@ -1458,7 +1467,7 @@ bool Document::saveAs()
     }
     QString fn = FileDialog::getSaveFileName(getMainWindow(), QObject::tr("Save %1 Document").arg(exe),
         name,
-        QString::fromLatin1("%1 %2 (*.FCStd)").arg(exe, QObject::tr("Document")));
+        QStringLiteral("%1 %2 (*.FCStd)").arg(exe, QObject::tr("Document")));
 
     if (!fn.isEmpty()) {
         QFileInfo fi;
@@ -1544,7 +1553,7 @@ void Document::saveAll()
         catch (const Base::Exception& e) {
             QMessageBox::critical(getMainWindow(),
                     QObject::tr("Failed to save document") +
-                        QString::fromLatin1(": %1").arg(QString::fromUtf8(doc->getName())),
+                        QStringLiteral(": %1").arg(QString::fromUtf8(doc->getName())),
                     QString::fromLatin1(e.what()));
             break;
         }
@@ -1701,7 +1710,7 @@ void Document::RestoreDocFile(Base::Reader &reader)
         localreader->readElement("Camera");
         const char* ppReturn = localreader->getAttribute("settings");
         cameraSettings.clear();
-        if(ppReturn && ppReturn[0]) {
+        if(!Base::Tools::isNullOrEmpty(ppReturn)) {
             saveCameraSettings(ppReturn);
             try {
                 const char** pReturnIgnore=nullptr;
@@ -1938,8 +1947,9 @@ void Document::importObjects(const std::vector<App::DocumentObject*>& obj, Base:
     localreader->readEndElement("Document");
 
     // In the file GuiDocument.xml new data files might be added
-    if (!localreader->getFilenames().empty())
+    if (localreader->hasFilenames()) {
         reader.initLocalReader(localreader);
+    }
 }
 
 void Document::slotFinishImportObjects(const std::vector<App::DocumentObject*> &objs) {
@@ -1990,11 +2000,11 @@ MDIView *Document::createView(const Base::Type& typeId)
     std::list<MDIView*> theViews = this->getMDIViewsOfType(typeId);
     if (typeId == View3DInventor::getClassTypeId()) {
 
-        QtGLWidget* shareWidget = nullptr;
+        QOpenGLWidget* shareWidget = nullptr;
         // VBO rendering doesn't work correctly when we don't share the OpenGL widgets
         if (!theViews.empty()) {
             auto firstView = static_cast<View3DInventor*>(theViews.front());
-            shareWidget = qobject_cast<QtGLWidget*>(firstView->getViewer()->getGLWidget());
+            shareWidget = qobject_cast<QOpenGLWidget*>(firstView->getViewer()->getGLWidget());
 
             const char *ppReturn = nullptr;
             firstView->onMsg("GetCamera",&ppReturn);
@@ -2029,7 +2039,7 @@ MDIView *Document::createView(const Base::Type& typeId)
             view3D->getViewer()->removeViewProvider(getViewProvider(obj));
 
         const char* name = getDocument()->Label.getValue();
-        QString title = QString::fromLatin1("%1 : %2[*]")
+        QString title = QStringLiteral("%1 : %2[*]")
             .arg(QString::fromUtf8(name)).arg(d->_iWinCount++);
 
         view3D->setWindowTitle(title);
@@ -2260,7 +2270,7 @@ bool Document::canClose (bool checkModify, bool checkLink)
                     getActiveView(),
                     QObject::tr("Document not saved"),
                     QObject::tr("The document%1 could not be saved. Do you want to cancel closing it?")
-                    .arg(docName?(QString::fromUtf8(" ")+QString::fromUtf8(docName)):QString()),
+                    .arg(docName?(QStringLiteral(" ")+QString::fromUtf8(docName)):QString()),
                     QMessageBox::Discard | QMessageBox::Cancel,
                     QMessageBox::Discard);
                 if (ret == QMessageBox::Discard)
@@ -2593,7 +2603,7 @@ bool Document::checkTransactionID(bool undo, int iSteps) {
             str << "    " << doc->getName() << "\n";
         }
         int ret = QMessageBox::warning(getMainWindow(), undo ? QObject::tr("Undo") : QObject::tr("Redo"),
-                    QString::fromLatin1("%1,\n%2%3").arg(
+                    QStringLiteral("%1,\n%2%3").arg(
                         QObject::tr("There are grouped transactions in the following documents with "
                                     "other preceding transactions"),
                         QString::fromStdString(str.str()),
