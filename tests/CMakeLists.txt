@@ -1,10 +1,10 @@
-if ( EXISTS "${CMAKE_SOURCE_DIR}/tests/lib/googletest" )
-    include_directories( ${CMAKE_SOURCE_DIR}/tests/lib/googletest/include/ )
-    include_directories( ${CMAKE_SOURCE_DIR}/tests/lib/googlemock/include/ )
+if(FREECAD_USE_EXTERNAL_GTEST)
+    find_package(GTest REQUIRED)
+    set(Google_Tests_LIBS ${GTEST_LIBRARIES} ${GMOCK_LIBRARIES})
 else()
-    find_package(GTest)
-    if( GTest_FOUND )
-        message( STATUS "Found Google Test: version ${GTest_VERSION}" )
+    if ( EXISTS "${CMAKE_SOURCE_DIR}/tests/lib/googletest" )
+        include_directories( ${CMAKE_SOURCE_DIR}/tests/lib/googletest/include/ )
+        include_directories( ${CMAKE_SOURCE_DIR}/tests/lib/googlemock/include/ )
     else()
         message( SEND_ERROR "The Google Test submodule is not available. Please run git submodule update --init" )
     endif()
@@ -69,19 +69,10 @@ function(setup_qt_test)
 
         target_include_directories(${_testname}_Tests_run PUBLIC
             SYSTEM
-            ${PYCXX_INCLUDE_DIR}
-            ${Python3_INCLUDE_DIRS}
-            ${XercesC_INCLUDE_DIRS}
-            ${ZIPIOS_INCLUDES}
-            ${QtGui_INCLUDE_DIRS}
-            ${QtWidgets_INCLUDE_DIRS}
-            ${QtTest_INCLUDE_DIRS}
-            ${COIN3D_INCLUDE_DIRS})
+            ${QtTest_INCLUDE_DIRS})
         target_link_libraries(${_testname}_Tests_run
             FreeCADApp
             FreeCADGui
-            ${QtCore_LIBRARIES}
-            ${QtWidgets_LIBRARIES}
             ${QtTest_LIBRARIES}
             ${${_testname}_LIBS})
     endforeach()
@@ -123,6 +114,9 @@ endif(BUILD_SKETCHER)
 if(BUILD_SPREADSHEET)
   list (APPEND TestExecutables Spreadsheet_tests_run)
 endif()
+if(BUILD_START)
+  list (APPEND TestExecutables Start_tests_run)
+endif()
 
 # -------------------------
 
@@ -130,22 +124,17 @@ foreach (exe ${TestExecutables})
     add_executable(${exe})
 endforeach()
 
-if ( EXISTS "${CMAKE_SOURCE_DIR}/tests/lib/googletest" )
+if ( NOT FREECAD_USE_EXTERNAL_GTEST )
     add_subdirectory(lib)
 endif()
 add_subdirectory(src)
 
-target_include_directories(Tests_run SYSTEM PUBLIC
-    ${PYCXX_INCLUDE_DIR}
-    ${Python3_INCLUDE_DIRS}
-    ${XercesC_INCLUDE_DIRS}
-    ${ZIPIOS_INCLUDES}
-)
 target_link_libraries(Tests_run
     gtest_main
     gmock_main
     ${Google_Tests_LIBS}
     FreeCADApp
+    FreeCADGui
 )
 
 include(GoogleTest)

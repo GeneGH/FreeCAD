@@ -46,8 +46,7 @@ QGIArrow::QGIArrow() :
     setFlipped(false);
     setFillStyle(Qt::SolidPattern);
     m_brush.setStyle(m_fill);
-    m_colDefFill = getNormalColor();
-    m_colNormalFill = m_colDefFill;
+    m_colNormalFill = getNormalColor();
 
     setCacheMode(QGraphicsItem::NoCache);
     setAcceptHoverEvents(false);
@@ -316,7 +315,7 @@ double QGIArrow::getOverlapAdjust(ArrowType style, double size)
     // ex for fork and tick, adjustment sb zero. 0.25 is good for filled triangle, 0.1 for open arrow.
     // open circle sb = radius
     // NOTE: this may need to be adjusted to account for line thickness too.
-//    Base::Console().Message("QGIA::getOverlapAdjust(%d, %.3f) \n", style, size);
+//    Base::Console().message("QGIA::getOverlapAdjust(%d, %.3f) \n", style, size);
     switch(style) {
         case ArrowType::FILLED_ARROW:
             return 0.50 * size;

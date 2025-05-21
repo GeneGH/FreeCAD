@@ -58,11 +58,6 @@ directories = [
     {"tsname": "Base", "workingdir": "./src/Base", "tsdir": "Resources/translations"},
     {"tsname": "FreeCAD", "workingdir": "./src/Gui", "tsdir": "Language"},
     {
-        "tsname": "AddonManager",
-        "workingdir": "./src/Mod/AddonManager/",
-        "tsdir": "Resources/translations",
-    },
-    {
         "tsname": "Arch",
         "workingdir": "./src/Mod/BIM/",
         "tsdir": "Resources/translations",
@@ -78,11 +73,6 @@ directories = [
         "tsdir": "Resources/translations",
     },
     {
-        "tsname": "Drawing",
-        "workingdir": "./src/Mod/Drawing/",
-        "tsdir": "Gui/Resources/translations",
-    },
-    {
         "tsname": "Fem",
         "workingdir": "./src/Mod/Fem/",
         "tsdir": "Gui/Resources/translations",
@@ -96,6 +86,11 @@ directories = [
         "tsname": "Material",
         "workingdir": "./src/Mod/Material/Gui",
         "tsdir": "Resources/translations",
+    },
+    {
+        "tsname": "Measure",
+        "workingdir": "./src/Mod/Measure/",
+        "tsdir": "Gui/Resources/translations",
     },
     {
         "tsname": "Mesh",

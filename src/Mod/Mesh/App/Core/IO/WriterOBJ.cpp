@@ -83,7 +83,7 @@ bool WriterOBJ::Save(std::ostream& out)
     if (_material) {
         if (_material->binding == MeshIO::PER_FACE) {
             if (_material->diffuseColor.size() != rFacets.size()) {
-                Base::Console().Warning("Cannot export color information because there is a "
+                Base::Console().warning("Cannot export color information because there is a "
                                         "different number of faces and colors");
             }
             else {
@@ -92,7 +92,7 @@ bool WriterOBJ::Save(std::ostream& out)
         }
         else if (_material->binding == MeshIO::PER_VERTEX) {
             if (_material->diffuseColor.size() != rPoints.size()) {
-                Base::Console().Warning("Cannot export color information because there is a "
+                Base::Console().warning("Cannot export color information because there is a "
                                         "different number of points and colors");
             }
             else {
@@ -101,7 +101,7 @@ bool WriterOBJ::Save(std::ostream& out)
         }
         else if (_material->binding == MeshIO::OVERALL) {
             if (_material->diffuseColor.empty()) {
-                Base::Console().Warning(
+                Base::Console().warning(
                     "Cannot export color information because there is no color defined");
             }
             else {
@@ -182,8 +182,7 @@ bool WriterOBJ::Save(std::ostream& out)
             for (auto it = rFacets.begin(); it != rFacets.end(); ++it, index++) {
                 if (index == 0 || prev != Kd[index]) {
                     prev = Kd[index];
-                    auto c_it = std::find(colors.begin(), colors.end(), prev);
-                    if (c_it != colors.end()) {
+                    if (auto c_it = std::ranges::find(colors, prev); c_it != colors.end()) {
                         out << "usemtl material_" << (c_it - colors.begin()) << '\n';
                     }
                 }
@@ -224,8 +223,7 @@ bool WriterOBJ::Save(std::ostream& out)
                     if (first || prev != Kd[it]) {
                         first = false;
                         prev = Kd[it];
-                        auto c_it = std::find(colors.begin(), colors.end(), prev);
-                        if (c_it != colors.end()) {
+                        if (auto c_it = std::ranges::find(colors, prev); c_it != colors.end()) {
                             out << "usemtl material_" << (c_it - colors.begin()) << '\n';
                         }
                     }

@@ -75,7 +75,7 @@ bool ViewProviderGroupExtension::extensionCanDropObjects() const {
 bool ViewProviderGroupExtension::extensionCanDropObject(App::DocumentObject* obj) const
 {
 #ifdef FC_DEBUG
-    Base::Console().Log("Check ViewProviderGroupExtension\n");
+    Base::Console().log("Check ViewProviderGroupExtension\n");
 #endif
 
     auto extobj = getExtendedViewProvider()->getObject();
@@ -88,8 +88,8 @@ bool ViewProviderGroupExtension::extensionCanDropObject(App::DocumentObject* obj
 
     // Check for possible cyclic dependencies if we allowed to drop the object
     const auto& list = obj->getOutList();
-    if (std::find(list.begin(), list.end(), extobj) != list.end()) {
-        Base::Console().Warning("Do not add cyclic dependency to %s\n", extobj->Label.getValue());
+    if (std::ranges::find(list, extobj) != list.end()) {
+        Base::Console().warning("Do not add cyclic dependency to %s\n", extobj->Label.getValue());
         return false;
     }
 

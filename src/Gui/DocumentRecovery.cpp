@@ -483,8 +483,8 @@ DocumentRecoveryPrivate::XmlConfig DocumentRecoveryPrivate::readXmlFile(const QS
         child = root.firstChildElement();
         while (!child.isNull()) {
             QString name = child.localName();
-            QString value = child.text();
-            if (std::find(filter.begin(), filter.end(), name) != filter.end())
+            const QString value = child.text();
+            if (filter.contains(name))
                 cfg[name] = value;
             child = child.nextSiblingElement();
         }
@@ -677,7 +677,7 @@ void DocumentRecoveryHandler::checkForPreviousCrashes(const std::function<void(Q
                 callableFunc(tmp, dirs, it.fileName());
             }
             else {
-                Base::Console().Log("Failed to lock file %s\n", fn.toUtf8().constData());
+                Base::Console().log("Failed to lock file %s\n", fn.toUtf8().constData());
             }
         }
     }

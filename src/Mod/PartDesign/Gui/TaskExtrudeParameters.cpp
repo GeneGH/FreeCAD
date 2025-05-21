@@ -334,7 +334,7 @@ void TaskExtrudeParameters::tryRecomputeFeature()
         recomputeFeature();
     }
     catch (const Base::Exception& e) {
-        e.ReportException();
+        e.reportException();
     }
 }
 
@@ -402,19 +402,18 @@ void TaskExtrudeParameters::selectedShapeFace(const Gui::SelectionChanges& msg)
     }
 
     std::vector<std::string> faces = getShapeFaces();
-    std::string subName(msg.pSubName);
+    const std::string subName(msg.pSubName);
 
     if (subName.empty()) {
         return;
     }
 
-    auto positionInList = std::find(faces.begin(), faces.end(), subName);
-
-    if (positionInList != faces.end()) {  // If it's found then it's in the list so we remove it.
-        faces.erase(positionInList);
+    if (const auto positionInList = std::ranges::find(faces, subName);
+        positionInList != faces.end()) {  // it's in the list
+        faces.erase(positionInList);  // remove it.
     }
-    else {  // if it's not found then it's not yet in the list so we add it.
-        faces.push_back(subName);
+    else {
+        faces.push_back(subName);  // not yet in the list so add it.
     }
 
     extrude->UpToShape.setValue(base, faces);
@@ -801,7 +800,7 @@ void TaskExtrudeParameters::onDirectionCBChanged(int num)
     else if (auto extrude = getObject<PartDesign::FeatureExtrude>()) {
         if (lnk.getValue()) {
             if (!extrude->getDocument()->isIn(lnk.getValue())) {
-                Base::Console().Error("Object was deleted\n");
+                Base::Console().error("Object was deleted\n");
                 return;
             }
             propReferenceAxis->Paste(lnk);

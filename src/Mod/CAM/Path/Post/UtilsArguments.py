@@ -5,7 +5,7 @@
 # *   Copyright (c) 2015 Dan Falck <ddfalck@gmail.com>                      *
 # *   Copyright (c) 2018, 2019 Gauthier Briere                              *
 # *   Copyright (c) 2019, 2020 Schildkroet                                  *
-# *   Copyright (c) 2022 Larry Woestman <LarryWoestman2@gmail.com>          *
+# *   Copyright (c) 2022-2025 Larry Woestman <LarryWoestman2@gmail.com>     *
 # *                                                                         *
 # *   This file is part of the FreeCAD CAx development system.              *
 # *                                                                         *
@@ -74,6 +74,8 @@ def init_argument_defaults(argument_defaults: Dict[str, bool]) -> None:
     argument_defaults["axis-modal"] = False
     argument_defaults["bcnc"] = False
     argument_defaults["comments"] = True
+    argument_defaults["enable_coolant"] = False
+    argument_defaults["enable_machine_specific_commands"] = False
     argument_defaults["header"] = True
     argument_defaults["line-numbers"] = False
     argument_defaults["metric_inches"] = True
@@ -88,10 +90,16 @@ def init_argument_defaults(argument_defaults: Dict[str, bool]) -> None:
 
 def init_arguments_visible(arguments_visible: Dict[str, bool]) -> None:
     """Initialize the flags for which arguments are visible in the arguments tooltip."""
-    arguments_visible["bcnc"] = False
     arguments_visible["axis-modal"] = True
     arguments_visible["axis-precision"] = True
+    arguments_visible["bcnc"] = False
+    arguments_visible["chipbreaking_amount"] = False
+    arguments_visible["command_space"] = False
     arguments_visible["comments"] = True
+    arguments_visible["comment_symbol"] = False
+    arguments_visible["enable_coolant"] = False
+    arguments_visible["enable_machine_specific_commands"] = False
+    arguments_visible["end_of_line_characters"] = False
     arguments_visible["feed-precision"] = True
     arguments_visible["header"] = True
     arguments_visible["line-numbers"] = True
@@ -167,6 +175,29 @@ def init_shared_arguments(
         "Suppress bCNC block header output",
         arguments_visible["bcnc"],
     )
+    if arguments_visible["chipbreaking_amount"]:
+        help_message = (
+            "Amount to move for chipbreaking in a translated G73 command, "
+            f'default is {str(values["CHIPBREAKING_AMOUNT"])}'
+        )
+    else:
+        help_message = argparse.SUPPRESS
+    shared.add_argument(
+        "--chipbreaking_amount",
+        help=help_message,
+    )
+    if arguments_visible["command_space"]:
+        help_message = (
+            "The character to use between parts of a command, "
+            "default is a space, may also use a null string"
+        )
+    else:
+        help_message = argparse.SUPPRESS
+    shared.add_argument(
+        "--command_space",
+        default=" ",
+        help=help_message,
+    )
     add_flag_type_arguments(
         shared,
         argument_defaults["comments"],
@@ -175,6 +206,45 @@ def init_shared_arguments(
         "Output comments",
         "Suppress comment output",
         arguments_visible["comments"],
+    )
+    if arguments_visible["comment_symbol"]:
+        help_message = (
+            f'The character used to start a comment, default is "{values["COMMENT_SYMBOL"]}"'
+        )
+    else:
+        help_message = argparse.SUPPRESS
+    shared.add_argument(
+        "--comment_symbol",
+        help=help_message,
+    )
+    add_flag_type_arguments(
+        shared,
+        argument_defaults["enable_coolant"],
+        "--enable_coolant",
+        "--disable_coolant",
+        "Enable coolant",
+        "Disable coolant",
+        arguments_visible["enable_coolant"],
+    )
+    add_flag_type_arguments(
+        shared,
+        argument_defaults["enable_machine_specific_commands"],
+        "--enable_machine_specific_commands",
+        "--disable_machine_specific_commands",
+        "Enable machine specific commands of the form (MC_RUN_COMMAND: blah)",
+        "Disable machine specific commands",
+        arguments_visible["enable_machine_specific_commands"],
+    )
+    if arguments_visible["end_of_line_characters"]:
+        help_message = (
+            "The character(s) to use at the end of each line in the output file, "
+            "default is whatever the system uses, may also use '\\n', '\\r', or '\\r\\n'"
+        )
+    else:
+        help_message = argparse.SUPPRESS
+    shared.add_argument(
+        "--end_of_line_characters",
+        help=help_message,
     )
     if arguments_visible["feed-precision"]:
         help_message = (
@@ -376,10 +446,11 @@ def init_shared_values(values: Values) -> None:
     #
     # By default the line ending characters of the output file(s)
     # are written to match the system that the postprocessor runs on.
-    # If you need to force the line ending characters to a specific
-    # value, set this variable to "\n" or "\r\n" instead.
+    # This is indicated by a value of "\n".  If you need to force the line ending
+    # characters to a specific value, set this variable to "\n\n" (meaning "use \n"),
+    # "\r" or "\r\n" instead.
     #
-    values["END_OF_LINE_CHARACTERS"] = os.linesep
+    values["END_OF_LINE_CHARACTERS"] = "\n"
     #
     # The starting precision for feed is also set to 3 digits after the decimal point.
     #
@@ -551,7 +622,8 @@ def init_shared_values(values: Values) -> None:
     #
     values["SHOW_MACHINE_UNITS"] = True
     #
-    # If True then the current operation label is output just before the PRE_OPERATION.
+    # If True then the current operation label is output just before the PRE_OPERATION
+    # and just before the POST_OPERATION.
     #
     values["SHOW_OPERATION_LABELS"] = True
     #
@@ -621,7 +693,6 @@ def process_shared_arguments(
                     filename,
                     "w",
                     encoding="utf-8",
-                    newline=values["END_OF_LINE_CHARACTERS"],
                 ) as f:
                     f.write(argument_text)
             return (False, argument_text)
@@ -632,7 +703,6 @@ def process_shared_arguments(
                     filename,
                     "w",
                     encoding="utf-8",
-                    newline=values["END_OF_LINE_CHARACTERS"],
                 ) as f:
                     f.write(argument_text)
             return (False, argument_text)
@@ -680,10 +750,32 @@ def process_shared_arguments(
             values["OUTPUT_BCNC"] = True
         if args.no_bcnc:
             values["OUTPUT_BCNC"] = False
+        if args.chipbreaking_amount:
+            values["CHIPBREAKING_AMOUNT"] = Units.parseQuantity(args.chipbreaking_amount)
+        values["COMMAND_SPACE"] = args.command_space
         if args.comments:
             values["OUTPUT_COMMENTS"] = True
         if args.no_comments:
             values["OUTPUT_COMMENTS"] = False
+        if args.comment_symbol:
+            values["COMMENT_SYMBOL"] = args.comment_symbol
+        if args.enable_coolant:
+            values["ENABLE_COOLANT"] = True
+        if args.disable_coolant:
+            values["ENABLE_COOLANT"] = False
+        if args.enable_machine_specific_commands:
+            values["ENABLE_MACHINE_SPECIFIC_COMMANDS"] = True
+        if args.disable_machine_specific_commands:
+            values["ENABLE_MACHINE_SPECIFIC_COMMANDS"] = False
+        if args.end_of_line_characters:
+            if args.end_of_line_characters == "\\n" or args.end_of_line_characters == "\n":
+                values["END_OF_LINE_CHARACTERS"] = "\n\n"
+            elif args.end_of_line_characters == "\\r" or args.end_of_line_characters == "\r":
+                values["END_OF_LINE_CHARACTERS"] = "\r"
+            elif args.end_of_line_characters == "\\r\\n" or args.end_of_line_characters == "\r\n":
+                values["END_OF_LINE_CHARACTERS"] = "\r\n"
+            else:
+                print("invalid end_of_line_characters, ignoring")
         if args.header:
             values["OUTPUT_HEADER"] = True
         if args.no_header:
@@ -697,9 +789,9 @@ def process_shared_arguments(
         if args.no_modal:
             values["MODAL"] = False
         if args.postamble is not None:
-            values["POSTAMBLE"] = args.postamble
+            values["POSTAMBLE"] = args.postamble.replace("\\n", "\n")
         if args.preamble is not None:
-            values["PREAMBLE"] = args.preamble
+            values["PREAMBLE"] = args.preamble.replace("\\n", "\n")
         if args.return_to != "":
             values["RETURN_TO"] = [int(v) for v in args.return_to.split(",")]
             if len(values["RETURN_TO"]) != 3:

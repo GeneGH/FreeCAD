@@ -338,10 +338,10 @@ bool ProjectFile::restoreObject(const std::string& name, App::PropertyContainer*
     reader.readEndElement("Objects");
 
     reader.readElement("ObjectData");
-    long Cnt = reader.getAttributeAsInteger("Count");
+    long Cnt = reader.getAttribute<long>("Count");
     for (long i = 0; i < Cnt; i++) {
         reader.readElement("Object");
-        std::string nameAttr = reader.getAttribute("name");
+        std::string nameAttr = reader.getAttribute<const char*>("name");
 
         if (nameAttr == name) {
             // obj->StatusBits.set(4);
@@ -363,7 +363,7 @@ Base::Type ProjectFile::getTypeId(const std::string& name) const
     //   <Object type="Mesh::MeshFeature" name="Mesh" />
     // <Objects/>
     if (!xmlDocument) {
-        return Base::Type::badType();
+        return Base::Type::BadType;
     }
 
     DOMNodeList* nodes = xmlDocument->getElementsByTagName(XStrLiteral("Objects").unicodeForm());
@@ -388,7 +388,7 @@ Base::Type ProjectFile::getTypeId(const std::string& name) const
         }
     }
 
-    return Base::Type::badType();
+    return Base::Type::BadType;
 }
 
 std::list<ProjectFile::PropertyFile> ProjectFile::getPropertyFiles(const std::string& name) const
