@@ -387,7 +387,6 @@ void SketchObject::buildShape()
                       convertSubName(indexedName, false));
         }
         else {
-            shapes.push_back(getEdge(geo, convertSubName(indexedName, false).c_str()));
             addEdge(geo, indexedName);
         }
     }
@@ -3704,7 +3703,7 @@ int SketchObject::split(int GeoId, const Base::Vector3d& point)
     // FIXME: we should be able to transfer these to new curves smoothly
     deleteUnusedInternalGeometryAndUpdateGeoId(GeoId);
     const auto* geoAsCurve = getGeometry<Part::GeomCurve>(GeoId);
-    bool isOriginalCurveConstruction = GeometryFacade::getConstruction(geoAsCurve);
+
     bool isOriginalCurvePeriodic = isClosedCurve(geoAsCurve);
     std::vector<int> newIds;
     std::vector<Part::Geometry*> newGeos;
@@ -7100,7 +7099,9 @@ int SketchObject::addExternal(App::DocumentObject* Obj,
         return -1;
     }
 
-    auto wholeShape = Part::Feature::getTopoShape(Obj);
+    auto wholeShape =
+        Part::Feature::getTopoShape(Obj,
+                                    Part::ShapeOption::ResolveLink | Part::ShapeOption::Transform);
     auto shape = wholeShape.getSubTopoShape(SubName, /*silent*/ true);
     TopAbs_ShapeEnum shapeType = TopAbs_SHAPE;
     if (shape.shapeType(/*silent*/ true) != TopAbs_FACE) {
