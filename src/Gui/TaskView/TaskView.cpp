@@ -40,6 +40,7 @@
 #include <Gui/Application.h>
 #include <Gui/Document.h>
 #include <Gui/MainWindow.h>
+#include <Gui/ViewProviderDocumentObject.h>
 
 #include "TaskView.h"
 #include "TaskDialog.h"
@@ -269,7 +270,10 @@ QSize TaskPanel::minimumSizeHint() const
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 TaskView::TaskView(QWidget *parent)
-    : QWidget(parent),ActiveDialog(nullptr),ActiveCtrl(nullptr)
+    : QWidget(parent)
+    , ActiveDialog(nullptr)
+    , ActiveCtrl(nullptr)
+    , hGrp(Gui::WindowParameter::getDefaultParameter()->GetGroup("General"))
 {
     mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -317,7 +321,18 @@ TaskView::TaskView(QWidget *parent)
     connectApplicationRedoDocument =
     App::GetApplication().signalRedoDocument.connect
         (std::bind(&Gui::TaskView::TaskView::slotRedoDocument, this, sp::_1));
+    connectApplicationInEdit =
+    Gui::Application::Instance->signalInEdit.connect(
+        std::bind(&Gui::TaskView::TaskView::slotInEdit, this, sp::_1));
     //NOLINTEND
+
+    setShowTaskWatcher(hGrp->GetBool("ShowTaskWatcher", true));
+    connectShowTaskWatcherSetting = hGrp->Manager()->signalParamChanged.connect(
+        [this](ParameterGrp *Param, ParameterGrp::ParamType Type, const char *name, const char * value) {
+            if(Param == hGrp && Type == ParameterGrp::ParamType::FCBool && name && strcmp(name, "ShowTaskWatcher") == 0) {
+                setShowTaskWatcher(value && *value == '1');
+            }
+    });
 
     updateWatcher();
 }
@@ -329,6 +344,8 @@ TaskView::~TaskView()
     connectApplicationClosedView.disconnect();
     connectApplicationUndoDocument.disconnect();
     connectApplicationRedoDocument.disconnect();
+    connectApplicationInEdit.disconnect();
+    connectShowTaskWatcherSetting.disconnect();
     Gui::Selection().Detach(this);
 
     for (QWidget* panel : contextualPanels) {
@@ -474,8 +491,20 @@ QSize TaskView::minimumSizeHint() const
 void TaskView::slotActiveDocument(const App::Document& doc)
 {
     Q_UNUSED(doc);
-    if (!ActiveDialog)
+    if (!ActiveDialog) {
+        // at this point, active object of the active view returns None.
+        // which is a problem if shouldShow of a watcher rely on the presence
+        // of an active object (example Assembly).
+        QTimer::singleShot(100, this, &TaskView::updateWatcher);
+    }
+}
+
+void TaskView::slotInEdit(const Gui::ViewProviderDocumentObject& vp)
+{
+    Q_UNUSED(vp);
+    if (!ActiveDialog) {
         updateWatcher();
+    }
 }
 
 void TaskView::slotDeletedDocument(const App::Document& doc)
@@ -684,9 +713,21 @@ void TaskView::removeDialog()
     tryRestoreWidth();
     triggerMinimumSizeHint();
 }
-
+void TaskView::setShowTaskWatcher(bool show)
+{
+    showTaskWatcher = show;
+    if (show) {
+        addTaskWatcher();
+    } else {
+        clearTaskWatcher();
+    }
+}
 void TaskView::updateWatcher()
 {
+    if (!showTaskWatcher) {
+        return;
+    }
+
     if (ActiveWatcher.empty()) {
         auto panel = Gui::Control().taskPanel();
         if (panel && panel->ActiveWatcher.size())
@@ -762,6 +803,9 @@ void TaskView::clearTaskWatcher()
 
 void TaskView::addTaskWatcher()
 {
+    if (!showTaskWatcher) {
+        return;
+    }
     // add all widgets for all watcher to the task view
     for (TaskWatcher* tw : ActiveWatcher) {
         std::vector<QWidget*> &cont = tw->getWatcherContent();

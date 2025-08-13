@@ -2879,12 +2879,12 @@ bool ViewProviderSketch::getIsShownVirtualSpace() const
 
 void ViewProviderSketch::drawEdit(const std::vector<Base::Vector2d>& EditCurve)
 {
-    editCoinManager->drawEdit(EditCurve);
+    editCoinManager->drawEdit(EditCurve, currentGeometryCreationMode());
 }
 
 void ViewProviderSketch::drawEdit(const std::list<std::vector<Base::Vector2d>>& list)
 {
-    editCoinManager->drawEdit(list);
+    editCoinManager->drawEdit(list, currentGeometryCreationMode());
 }
 
 void ViewProviderSketch::drawEditMarkers(const std::vector<Base::Vector2d>& EditMarkers,
@@ -3259,7 +3259,7 @@ void ViewProviderSketch::UpdateSolverInformation()
     bool hasMalformed = getSketchObject()->getLastHasMalformedConstraints();
 
     if (getSketchObject()->Geometry.getSize() == 0) {
-        signalSetUp(QStringLiteral("empty_sketch"), tr("Empty sketch"), QString(), QString());
+        signalSetUp(QStringLiteral("empty"), tr("Empty sketch"), QString(), QString());
     }
     else if (dofs < 0 || hasConflicts) {// over-constrained sketch
         signalSetUp(
