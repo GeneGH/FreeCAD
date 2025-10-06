@@ -194,8 +194,9 @@ class ObjectDressup:
         if obj.PercentageRadiusOut < 1:
             obj.PercentageRadiusOut = 1
 
-        limit_angle_in = 1 if "Arc" in obj.StyleIn or "Helix" == obj.StyleIn else 0
-        limit_angle_out = 1 if "Arc" in obj.StyleOut or "Helix" == obj.StyleOut else 0
+        nonZeroAngleStyles = ("Arc", "Arc3d", "ArcZ", "Helix", "LineZ")
+        limit_angle_in = 1 if obj.StyleIn in nonZeroAngleStyles else 0
+        limit_angle_out = 1 if obj.StyleOut in nonZeroAngleStyles else 0
         if obj.AngleIn > 180:
             obj.AngleIn = 180
         if obj.AngleIn < limit_angle_in:
@@ -818,6 +819,8 @@ class ObjectDressup:
 
     # Get finish index of mill command for one profile
     def findLastCutMultiProfileIndex(self, source, startIndex):
+        if startIndex >= len(source):
+            return len(source) - 1
         for i in range(startIndex, len(source), +1):
             if not self.isCuttingMove(source[i]):
                 return i - 1
@@ -1123,9 +1126,8 @@ class TaskDressupLeadInOut(SimpleEditPanel):
         self.connectWidget("OffsetIn", self.form.dspOffsetIn)
         self.connectWidget("OffsetOut", self.form.dspOffsetOut)
         self.connectWidget("RapidPlunge", self.form.chkRapidPlunge)
+        self.connectWidget("RetractThreshold", self.form.dspRetractThreshold)
         self.setFields()
-
-        styleEnum = self.obj.getEnumerationsOfProperty("StyleIn")
 
         def handleGroupBoxCheck():
             self.obj.LeadIn = self.form.groupBoxIn.isChecked()
