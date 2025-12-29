@@ -2404,7 +2404,7 @@ polylignes fermées (ancien importateur uniquement).</translation>
     <message>
       <location filename="../ui/preferences-dxf.ui" line="379"/>
       <source>Appearance</source>
-      <translation>Définir l'apparence</translation>
+      <translation>Apparence</translation>
     </message>
     <message>
       <location filename="../ui/preferences-dxf.ui" line="388"/>
@@ -3048,7 +3048,7 @@ des commandes.</translation>
     </message>
     <message>
       <location filename="../../DraftGui.py" line="641"/>
-      <location filename="../../DraftGui.py" line="997"/>
+      <location filename="../../DraftGui.py" line="998"/>
       <source>Continue</source>
       <translation>Continuer</translation>
     </message>
@@ -3170,8 +3170,8 @@ placée précédemment.</translation>
     <message>
       <location filename="../../DraftGui.py" line="553"/>
       <location filename="../../DraftGui.py" line="582"/>
-      <location filename="../../DraftGui.py" line="1663"/>
-      <location filename="../../DraftGui.py" line="1681"/>
+      <location filename="../../DraftGui.py" line="1664"/>
+      <location filename="../../DraftGui.py" line="1682"/>
       <location filename="../../draftguitools/gui_groups.py" line="273"/>
       <source>None</source>
       <translation>Aucun</translation>
@@ -3219,7 +3219,7 @@ placée précédemment.</translation>
     </message>
     <message>
       <location filename="../../DraftGui.py" line="602"/>
-      <location filename="../../DraftGui.py" line="980"/>
+      <location filename="../../DraftGui.py" line="981"/>
       <source>Radius</source>
       <translation>Rayon</translation>
     </message>
@@ -3239,12 +3239,12 @@ placée précédemment.</translation>
       <translation>Active/désactive le mode construction.</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="934"/>
+      <location filename="../../DraftGui.py" line="935"/>
       <source>Label Type</source>
       <translation>Type d'étiquette</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="981"/>
+      <location filename="../../DraftGui.py" line="982"/>
       <source>Radius of Circle</source>
       <translation>Rayon du cercle</translation>
     </message>
@@ -3308,12 +3308,12 @@ Décocher pour utiliser le système de coordonnées du plan de travail.</transla
       <translation>Termine l'opération de dessin ou de l'édition en cours</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="1885"/>
+      <location filename="../../DraftGui.py" line="1886"/>
       <source>Modify Objects</source>
       <translation>Éditer des objets</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="2042"/>
+      <location filename="../../DraftGui.py" line="2043"/>
       <source>Facebinder Elements</source>
       <translation>Éléments de la surface liée</translation>
     </message>
@@ -3406,50 +3406,50 @@ préférence « Créer des primitives de Part si possible » est activée.</tran
     </message>
     <message>
       <location filename="../../DraftGui.py" line="738"/>
-      <location filename="../../DraftGui.py" line="1669"/>
-      <location filename="../../DraftGui.py" line="1687"/>
+      <location filename="../../DraftGui.py" line="1670"/>
+      <location filename="../../DraftGui.py" line="1688"/>
       <source>Autogroup off</source>
       <translation>Groupement automatique désactivé</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="841"/>
+      <location filename="../../DraftGui.py" line="842"/>
       <location filename="../../draftguitools/gui_lines.py" line="71"/>
       <source>Line</source>
       <translation>Ligne</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="856"/>
+      <location filename="../../DraftGui.py" line="857"/>
       <source>DWire</source>
       <translation>Polyligne</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="879"/>
+      <location filename="../../DraftGui.py" line="880"/>
       <source>Circle</source>
       <translation>Cercle</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="884"/>
+      <location filename="../../DraftGui.py" line="885"/>
       <source>Arc</source>
       <translation>Arc</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="889"/>
+      <location filename="../../DraftGui.py" line="890"/>
       <location filename="../../draftguitools/gui_rotate.py" line="286"/>
       <source>Rotate</source>
       <translation>Pivoter</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="895"/>
+      <location filename="../../DraftGui.py" line="896"/>
       <source>Point</source>
       <translation>Point</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="932"/>
+      <location filename="../../DraftGui.py" line="933"/>
       <source>Label</source>
       <translation>Étiquette</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="951"/>
+      <location filename="../../DraftGui.py" line="952"/>
       <location filename="../../draftguitools/gui_offset.py" line="243"/>
       <location filename="../../draftguitools/gui_offset.py" line="258"/>
       <location filename="../../draftguitools/gui_offset.py" line="321"/>
@@ -3457,31 +3457,31 @@ préférence « Créer des primitives de Part si possible » est activée.</tran
       <translation>Décaler</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="956"/>
-      <location filename="../../DraftGui.py" line="973"/>
+      <location filename="../../DraftGui.py" line="957"/>
+      <location filename="../../DraftGui.py" line="974"/>
       <location filename="../../draftguitools/gui_trimex.py" line="223"/>
       <source>Distance</source>
       <translation>Distance</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="957"/>
-      <location filename="../../DraftGui.py" line="974"/>
+      <location filename="../../DraftGui.py" line="958"/>
+      <location filename="../../DraftGui.py" line="975"/>
       <location filename="../../draftguitools/gui_trimex.py" line="224"/>
       <source>Offset distance</source>
       <translation>Distance de décalage</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="970"/>
+      <location filename="../../DraftGui.py" line="971"/>
       <source>Trimex</source>
       <translation>Ajuster ou prolonger</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="1053"/>
-      <location filename="../../DraftGui.py" line="1055"/>
+      <location filename="../../DraftGui.py" line="1054"/>
       <location filename="../../DraftGui.py" line="1056"/>
-      <location filename="../../DraftGui.py" line="1058"/>
+      <location filename="../../DraftGui.py" line="1057"/>
       <location filename="../../DraftGui.py" line="1059"/>
       <location filename="../../DraftGui.py" line="1060"/>
+      <location filename="../../DraftGui.py" line="1061"/>
       <location filename="../../drafttaskpanels/task_shapestring.py" line="122"/>
       <location filename="../../drafttaskpanels/task_shapestring.py" line="123"/>
       <location filename="../../drafttaskpanels/task_shapestring.py" line="124"/>
@@ -3489,12 +3489,12 @@ préférence « Créer des primitives de Part si possible » est activée.</tran
       <translation>{} local</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="1062"/>
       <location filename="../../DraftGui.py" line="1063"/>
       <location filename="../../DraftGui.py" line="1064"/>
-      <location filename="../../DraftGui.py" line="1066"/>
+      <location filename="../../DraftGui.py" line="1065"/>
       <location filename="../../DraftGui.py" line="1067"/>
       <location filename="../../DraftGui.py" line="1068"/>
+      <location filename="../../DraftGui.py" line="1069"/>
       <location filename="../../drafttaskpanels/task_shapestring.py" line="118"/>
       <location filename="../../drafttaskpanels/task_shapestring.py" line="119"/>
       <location filename="../../drafttaskpanels/task_shapestring.py" line="120"/>
@@ -3502,22 +3502,22 @@ préférence « Créer des primitives de Part si possible » est activée.</tran
       <translation>{} global</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="1677"/>
+      <location filename="../../DraftGui.py" line="1678"/>
       <source>Autogroup:</source>
       <translation>Groupement automatique :</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="2039"/>
+      <location filename="../../DraftGui.py" line="2040"/>
       <source>Faces</source>
       <translation>Faces</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="2040"/>
+      <location filename="../../DraftGui.py" line="2041"/>
       <source>Remove</source>
       <translation>Supprimer</translation>
     </message>
     <message>
-      <location filename="../../DraftGui.py" line="2041"/>
+      <location filename="../../DraftGui.py" line="2042"/>
       <source>Add</source>
       <translation>Ajouter</translation>
     </message>
@@ -4271,7 +4271,7 @@ groupes.</translation>
       <location filename="../../draftguitools/gui_groups.py" line="317"/>
       <location filename="../../draftguitools/gui_layers.py" line="165"/>
       <source>New Layer</source>
-      <translation>Nouveau calque</translation>
+      <translation>Créer un calque</translation>
     </message>
     <message>
       <location filename="../../draftguitools/gui_groups.py" line="318"/>
@@ -4289,7 +4289,7 @@ groupes.</translation>
     <message>
       <location filename="../../draftguitools/gui_groups.py" line="325"/>
       <source>New layer</source>
-      <translation>Nouvelle couche</translation>
+      <translation>Nouveau calque</translation>
     </message>
     <message>
       <location filename="../../draftguitools/gui_groups.py" line="382"/>
@@ -4738,7 +4738,7 @@ groupes.</translation>
     <message>
       <location filename="../../draftguitools/gui_mirror.py" line="122"/>
       <source>Mirror</source>
-      <translation>Mettre en miroir</translation>
+      <translation>Symétrie</translation>
     </message>
     <message>
       <location filename="../../draftguitools/gui_mirror.py" line="167"/>
@@ -4965,7 +4965,7 @@ groupes.</translation>
       <translation>Forme à partir d'un texte</translation>
     </message>
     <message>
-      <location filename="../../draftutils/params.py" line="506"/>
+      <location filename="../../draftutils/params.py" line="505"/>
       <source>Default</source>
       <translation>Par défaut</translation>
     </message>
@@ -6064,7 +6064,7 @@ pour permettre à FreeCAD de télécharger ces bibliothèques. Répondre Oui.</t
     <message>
       <location filename="../../drafttaskpanels/task_scale.py" line="206"/>
       <source>Edit Scale</source>
-      <translation>Modifier l'échelle</translation>
+      <translation>Éditer l'échelle</translation>
     </message>
     <message>
       <location filename="../../drafttaskpanels/task_scale.py" line="104"/>
@@ -6130,7 +6130,7 @@ pour permettre à FreeCAD de télécharger ces bibliothèques. Répondre Oui.</t
     <message>
       <location filename="../../draftguitools/gui_layers.py" line="427"/>
       <source>New Layer</source>
-      <translation>Nouveau calque</translation>
+      <translation>Créer un calque</translation>
     </message>
     <message>
       <location filename="../../draftobjects/label.py" line="315"/>
@@ -6392,7 +6392,7 @@ Si l'option « Copier » est activée, cela crée des copies déplacées.</trans
     <message>
       <location filename="../../draftguitools/gui_points.py" line="67"/>
       <source>Creates a point</source>
-      <translation>Crée un point</translation>
+      <translation>Crée un point.</translation>
     </message>
   </context>
   <context>
@@ -6531,7 +6531,7 @@ If the "Copy" option is active, it will create rotated copies.</source>
     <message>
       <location filename="../../draftguitools/gui_layers.py" line="73"/>
       <source>New Layer</source>
-      <translation>Nouveau calque</translation>
+      <translation>Créer un calque</translation>
     </message>
     <message>
       <location filename="../../draftguitools/gui_layers.py" line="77"/>
@@ -6586,7 +6586,7 @@ ou une dimension angulaire pour deux arêtes droites.</translation>
     <message>
       <location filename="../../draftguitools/gui_mirror.py" line="67"/>
       <source>Mirror</source>
-      <translation>Mettre en miroir</translation>
+      <translation>Symétrie</translation>
     </message>
     <message>
       <location filename="../../draftguitools/gui_mirror.py" line="70"/>
@@ -8276,7 +8276,7 @@ que pour les lignes de Draft droites tracées sur le plan XY.</translation>
     <message>
       <location filename="../../draftguitools/gui_planeproxy.py" line="48"/>
       <source>Working Plane Proxy</source>
-      <translation>Proxy du plan de travail</translation>
+      <translation>Créer un proxy de plan de travail</translation>
     </message>
     <message>
       <location filename="../../draftguitools/gui_planeproxy.py" line="52"/>
@@ -8329,7 +8329,7 @@ caméra et la visibilité des objets.</translation>
     <message>
       <location filename="../../draftguitools/gui_selectplane.py" line="61"/>
       <source>Working Plane</source>
-      <translation>Plan de travail</translation>
+      <translation>Sélectionner un plan de travail</translation>
     </message>
     <message>
       <location filename="../../draftguitools/gui_selectplane.py" line="65"/>
@@ -8605,12 +8605,12 @@ proxys du plan de travail et des pièces de construction.</translation>
     <message>
       <location filename="../../draftguitools/gui_styles.py" line="50"/>
       <source>Apply Current Style</source>
-      <translation>Appliquer le style actuel</translation>
+      <translation>Appliquer le style en cours</translation>
     </message>
     <message>
       <location filename="../../draftguitools/gui_styles.py" line="53"/>
       <source>Applies the current style to the selected objects and groups</source>
-      <translation>Applique le style actuel aux objets et aux groupes sélectionnés.</translation>
+      <translation>Applique le style en cours aux objets et aux groupes sélectionnés.</translation>
     </message>
   </context>
   <context>
@@ -8645,7 +8645,7 @@ mettre à l'échelle.</translation>
     <message>
       <location filename="../../draftguitools/gui_togglemodes.py" line="143"/>
       <source>Toggle Wireframe</source>
-      <translation>Basculer en mode filaire</translation>
+      <translation>Basculer entre mode filaire ombré/filaire</translation>
     </message>
     <message>
       <location filename="../../draftguitools/gui_togglemodes.py" line="147"/>

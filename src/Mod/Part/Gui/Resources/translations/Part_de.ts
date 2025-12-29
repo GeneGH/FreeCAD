@@ -136,7 +136,7 @@
       <location filename="../../AttacherTexts.cpp" line="728"/>
       <source>Attachment is disabled. Point can be moved by editing Placement property.</source>
       <comment>AttachmentPoint mode tooltip</comment>
-      <translation>Befestigen ist deaktiviert. Der Punkt kann duch Bearbeitung der Platzierungseigenschaften verschoben werden.</translation>
+      <translation>Befestigen ist deaktiviert. Der Punkt kann duch Bearbeitung der Platzierungs-Eigenschaften verschoben werden.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="736"/>
@@ -148,7 +148,7 @@
       <location filename="../../AttacherTexts.cpp" line="737"/>
       <source>Point is put at object's placement position. Works on objects with placements, and ellipse/parabola/hyperbola edges.</source>
       <comment>AttachmentPoint mode tooltip</comment>
-      <translation>Punkt ist auf Position der Objektplatzierung gesetzt. Dies funktioniert für Objekte mit Platzierungen oder Ellipsen/Parabeln/Hyperbeln.</translation>
+      <translation>Punkt ist auf Position der Objektpositionierung gesetzt. Dies funktioniert für Objekte mit Positionierung oder Ellipse-/Parabel-/Hyperbelkanten.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="746"/>
@@ -202,7 +202,7 @@
       <location filename="../../AttacherTexts.cpp" line="784"/>
       <source>Center of mass</source>
       <comment>AttachmentPoint mode caption</comment>
-      <translation>Massenmittelpunkt</translation>
+      <translation>Schwerpunkt</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="785"/>
@@ -271,7 +271,7 @@
       <location filename="../../AttacherTexts.cpp" line="538"/>
       <source>Attachment is disabled. Line can be moved by editing Placement property.</source>
       <comment>AttachmentLine mode tooltip</comment>
-      <translation>Befestigen ist deaktiviert. Zeile kann durch Bearbeiten von der Platzierungseigenschaft verschoben werden.</translation>
+      <translation>Befestigen ist deaktiviert. Zeile kann durch Bearbeiten von der Placement-Eigenschaft verschoben werden.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="546"/>
@@ -516,7 +516,7 @@
       <location filename="../../AttacherTexts.cpp" line="297"/>
       <source>Attachment is disabled. Object can be moved by editing Placement property.</source>
       <comment>AttachmentPlane mode tooltip</comment>
-      <translation>Befestigen ist deaktiviert. Objekt kann durch Bearbeiten der Platzierungseigenschaft verschoben werden.</translation>
+      <translation>Befestigen ist deaktiviert. Objekt kann durch Bearbeiten der Placement-Eigenschaft verschoben werden.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="306"/>
@@ -725,7 +725,7 @@
       <location filename="../../AttacherTexts.cpp" line="55"/>
       <source>Attachment is disabled. Object can be moved by editing Placement property.</source>
       <comment>Attachment3D mode tooltip</comment>
-      <translation>Befestigen ist deaktiviert. Objekt kann durch Bearbeiten der Platzierungseigenschaft verschoben werden.</translation>
+      <translation>Befestigen ist deaktiviert. Objekt kann durch Bearbeiten der Placement-Eigenschaft verschoben werden.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="64"/>
@@ -749,7 +749,7 @@
       <location filename="../../AttacherTexts.cpp" line="75"/>
       <source>Placement is made equal to Placement of linked object.</source>
       <comment>Attachment3D mode tooltip</comment>
-      <translation>Die Platzierung erfolgt gleich zu der Platzierung des verknüpften Objekts.</translation>
+      <translation>Die Positionierung erfolgt gleich zu der Positionierung des verknüpften Objekts.</translation>
     </message>
     <message>
       <location filename="../../AttacherTexts.cpp" line="83"/>
@@ -2028,7 +2028,7 @@ der Projektion.</translation>
     <message>
       <location filename="../../Command.cpp" line="1775"/>
       <source>Sweep</source>
-      <translation>Sweep</translation>
+      <translation>Austragung</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="1776"/>
@@ -2099,7 +2099,7 @@ der Projektion.</translation>
     <message>
       <location filename="../../CommandSimple.cpp" line="329"/>
       <source>Creates a non-parametric copy with transformed placement of the selected shapes</source>
-      <translation>Erstellt eine nicht-parametrische Kopie mit transformierter Platzierung der ausgewählten Formen</translation>
+      <translation>Erstellt eine nicht-parametrische Kopie mit transformierter Positionierung der ausgewählten Formen</translation>
     </message>
   </context>
   <context>
@@ -2264,7 +2264,7 @@ der Projektion.</translation>
     <message>
       <location filename="../../TaskSweep.cpp" line="423"/>
       <source>Sweep</source>
-      <translation>Sweep</translation>
+      <translation>Austragung</translation>
     </message>
     <message>
       <location filename="../../DlgProjectionOnSurface.cpp" line="1603"/>
@@ -2641,7 +2641,7 @@ in der Eigenschaft Placement zu behalten.</translation>
     <message>
       <location filename="../../DlgExportStep.ui" line="110"/>
       <source>Export single object placement</source>
-      <translation>Einzelne Objektplatzierung exportieren</translation>
+      <translation>Einzelne Objektpositionierung exportieren</translation>
     </message>
     <message>
       <location filename="../../DlgExportStep.ui" line="91"/>
@@ -4814,7 +4814,7 @@ nur die beschnittenen Objeke sichtbar</translation>
     <message>
       <location filename="../../TaskSweep.cpp" line="526"/>
       <source>Sweep</source>
-      <translation>Sweep</translation>
+      <translation>Austragung</translation>
     </message>
   </context>
   <context>
@@ -5470,7 +5470,7 @@ Einzelne Überprüfungen boolescher Verknüpfungen:</translation>
     <message>
       <location filename="../../TaskSweep.ui" line="14"/>
       <source>Sweep</source>
-      <translation>Sweep</translation>
+      <translation>Austragung</translation>
     </message>
     <message>
       <location filename="../../TaskSweep.ui" line="23"/>
@@ -5574,7 +5574,7 @@ für die Spine-Kurve in der 3D-Ansicht auswählen.</translation>
       <location filename="../../AppPartGui.cpp" line="249"/>
       <location filename="../../AppPartGui.cpp" line="250"/>
       <source>Import-Export</source>
-      <translation>Import / Export</translation>
+      <translation>Import/Export</translation>
     </message>
     <message>
       <location filename="../../Command.cpp" line="333"/>
@@ -5980,7 +5980,7 @@ Fortfahren?</translation>
       <translation>Befestigungs-Editor</translation>
     </message>
     <message>
-      <location filename="../../ViewProviderExt.cpp" line="1000"/>
+      <location filename="../../ViewProviderExt.cpp" line="1002"/>
       <source>Appearance per Face</source>
       <translation>Aussehen per Fläche</translation>
     </message>
@@ -6314,67 +6314,67 @@ für die Kollisions- oder Entfernungsfilterung.</translation>
       <translation>Befestigung von {} bearbeiten</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="450"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="471"/>
       <source>Ignored. Can't attach object to itself!</source>
       <translation>Ignoriert. Objekt kann nicht an sich selbst angeheftet werden!</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="458"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="479"/>
       <source>{} depends on object being attached, can't use it for attachment</source>
       <translation>{} hängt vom Objekt ab, das befestigt werden soll, es kann nicht zum Befestigen verwendet werden</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="610"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="631"/>
       <source>{} (add {})</source>
       <translation>{} ({} hinzufügen)</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="614"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="635"/>
       <source>{} (add more references)</source>
       <translation>{} (weitere Bezugselemente hinzufügen)</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="650"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="671"/>
       <source>Reference combinations:</source>
       <translation>Referenz-Kombinationen:</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="665"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="686"/>
       <source>Reference{}</source>
       <translation>Bezugselement{}</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="672"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="693"/>
       <source>Selecting…</source>
       <translation>Auswählen…</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="701"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="722"/>
       <source>Failed to resolve links. {}</source>
       <translation>Fehler beim Auflösen der Verknüpfungen. {}</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="712"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="733"/>
       <source>Not attached</source>
       <translation>Nicht befestigt</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="715"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="736"/>
       <source>Attached with mode {}</source>
       <translation>Angehängt mit Modus {}</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="725"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="746"/>
       <source>Error: {}</source>
       <translation>Fehler: {}</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="731"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="752"/>
       <source>Attachment Offset (in local coordinates):</source>
       <translation>Befestigungsversatz (in lokalen Koordinaten):</translation>
     </message>
     <message>
-      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="736"/>
+      <location filename="../../../AttachmentEditor/TaskAttachmentEditor.py" line="757"/>
       <source>Attachment Offset (inactive - not attached):</source>
       <translation>Befestigungsversatz (Inaktiv - nicht gebunden):</translation>
     </message>
@@ -6469,7 +6469,7 @@ für die Kollisions- oder Entfernungsfilterung.</translation>
     <message>
       <location filename="../../../BasicShapes/ShapeContent.py" line="131"/>
       <source>Center of mass</source>
-      <translation>Massenmittelpunkt</translation>
+      <translation>Schwerpunkt</translation>
     </message>
     <message>
       <location filename="../../../BasicShapes/ShapeContent.py" line="152"/>
