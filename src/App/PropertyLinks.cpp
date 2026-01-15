@@ -3304,7 +3304,7 @@ DocInfoMap _DocInfoMap;
 class App::DocInfo: public std::enable_shared_from_this<App::DocInfo>
 {
 public:
-    using Connection = boost::signals2::scoped_connection;
+    using Connection = fastsignals::scoped_connection;
     Connection connFinishRestoreDocument;
     Connection connPendingReloadDocument;
     Connection connDeleteDocument;
@@ -4552,7 +4552,7 @@ PropertyXLink::getDocumentInList(App::Document* doc)
 {
     std::map<App::Document*, std::set<App::Document*>> ret;
     for (auto& v : _DocInfoMap) {
-        if (!v.second->pcDoc || (doc && doc != v.second->pcDoc)) {
+        if (!v.second->pcDoc || (doc && doc != v.second->pcDoc) || v.second->links.empty()) {
             continue;
         }
         auto& docs = ret[v.second->pcDoc];
