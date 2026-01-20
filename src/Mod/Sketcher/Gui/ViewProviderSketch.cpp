@@ -628,8 +628,12 @@ ViewProviderSketch::ViewProviderSketch()
 
     VisualLayerList.setValues(std::move(layers));
 
-    // Default values that will be overridden by preferences (if existing)
-    PointSize.setValue(4);
+    ParameterGrp::handle hGrp =
+        App::GetApplication().GetParameterGroupByPath("User parameter:BaseApp/Preferences/View");
+    const int defaultSketchVertexSize = 4;
+    auto psize = hGrp->GetInt("DefaultShapePointSize", defaultSketchVertexSize);
+
+    PointSize.setValue(psize);
 
     // visibility automation and other parameters: update parameter and property defaults to follow
     // preferences
@@ -2770,8 +2774,8 @@ void ViewProviderSketch::doBoxSelection(const SbVec2s& startPos, const SbVec2s& 
 
     if (!batchSelection.empty()) {
         Gui::Selection().addSelections(
-            getSketchObject()->getDocument()->getName(),
-            getSketchObject()->getNameInDocument(),
+            editDocName.c_str(),
+            editObjName.c_str(),
             batchSelection
         );
     }
@@ -2925,8 +2929,8 @@ bool ViewProviderSketch::selectAll()
 
     if (!batchSelection.empty()) {
         Gui::Selection().addSelections(
-            getSketchObject()->getDocument()->getName(),
-            getSketchObject()->getNameInDocument(),
+            editDocName.c_str(),
+            editObjName.c_str(),
             batchSelection
         );
     }
