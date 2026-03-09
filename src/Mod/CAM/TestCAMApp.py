@@ -37,7 +37,6 @@ from CAMTests.TestPathAdaptive import TestPathAdaptive
 from CAMTests.TestPathCommandAnnotations import TestPathCommandAnnotations
 from CAMTests.TestPathCore import TestPathCore
 from CAMTests.TestPathDepthParams import depthTestCases
-from CAMTests.TestPathDressupDogbone import TestDressupDogbone
 from CAMTests.TestPathDressupDogboneII import TestDressupDogboneII
 from CAMTests.TestPathDressupHoldingTags import TestHoldingTags
 from CAMTests.TestPathDrillable import TestPathDrillable
@@ -80,6 +79,7 @@ from CAMTests.TestPathToolAssetManager import TestPathToolAssetManager
 from CAMTests.TestPathToolAssetStore import TestPathToolFileStore, TestPathToolMemoryStore
 from CAMTests.TestPathToolAssetUri import TestPathToolAssetUri
 from CAMTests.TestPathToolBit import TestPathToolBit
+from CAMTests.TestToolBitRecomputeState import TestToolBitRecomputeState
 from CAMTests.TestPathToolShapeClasses import TestPathToolShapeClasses
 from CAMTests.TestPathToolShapeDoc import TestPathToolShapeDoc
 from CAMTests.TestPathToolShapeIcon import (
