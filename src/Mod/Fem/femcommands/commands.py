@@ -256,18 +256,18 @@ class _ConstraintElectricChargeDensity(CommandManager):
         self.do_activated = "add_obj_on_gui_set_edit"
 
 
-class _ConstraintElectrostaticPotential(CommandManager):
-    "The FEM_ConstraintElectrostaticPotential command definition"
+class _ConstraintElectromagnetic(CommandManager):
+    "The FEM_ConstraintElectromagnetic command definition"
 
     def __init__(self):
         super().__init__()
         self.menutext = Qt.QT_TRANSLATE_NOOP(
-            "FEM_ConstraintElectrostaticPotential",
-            "Electrostatic Potential Boundary Condition",
+            "FEM_ConstraintElectromagnetic",
+            "Electromagnetic Boundary Condition",
         )
         self.tooltip = Qt.QT_TRANSLATE_NOOP(
-            "FEM_ConstraintElectrostaticPotential",
-            "Creates an electrostatic potential boundary condition",
+            "FEM_ConstraintElectromagnetic",
+            "Creates an electromagnetic boundary condition",
         )
         self.is_active = "with_analysis"
         self.do_activated = "add_obj_on_gui_set_edit"
@@ -1006,9 +1006,7 @@ class _SolverCalculixContextManager:
             "{}.MatrixSolverType = {}".format(self.cli_name, ccx_prefs.GetInt("Solver", 0))
         )
         FreeCADGui.doCommand(
-            "{}.BeamShellResultOutput3D = {}".format(
-                self.cli_name, ccx_prefs.GetBool("BeamShellOutput", True)
-            )
+            "{}.Output3d = {}".format(self.cli_name, ccx_prefs.GetBool("BeamShellOutput", True))
         )
         FreeCADGui.doCommand(
             "{}.GeometricalNonlinearity = {}".format(
@@ -1173,6 +1171,32 @@ class _SolverZ88(CommandManager):
         self.is_active = "with_analysis"
         self.do_activated = "add_obj_on_gui_expand_noset_edit"
 
+    def Activated(self):
+        FreeCAD.ActiveDocument.openTransaction(f"Create Fem SolverZ88")
+        FreeCADGui.addModule("ObjectsFem")
+        FreeCADGui.addModule("FemGui")
+        # expand parent obj in tree view if selected
+        expandParentObject()
+        # add the object
+        FreeCADGui.doCommand("ObjectsFem.makeSolverZ88(FreeCAD.ActiveDocument)")
+        # select only added object
+        FreeCADGui.doCommand(
+            "FemGui.getActiveAnalysis().addObject(FreeCAD.ActiveDocument.ActiveObject)"
+        )
+        z88_prefs = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/Fem/Z88")
+        solver_type = z88_prefs.GetString("Solver", "sorcg")
+        maxgs = z88_prefs.GetInt("MaxGS", 100000000)
+        maxkoi = z88_prefs.GetInt("MaxKOI", 2800000)
+
+        FreeCADGui.doCommand(f"FreeCAD.ActiveDocument.ActiveObject.SolverType = '{solver_type}'")
+        FreeCADGui.doCommand(f"FreeCAD.ActiveDocument.ActiveObject.MatrixMaximum = {maxgs}")
+        FreeCADGui.doCommand(f"FreeCAD.ActiveDocument.ActiveObject.VectorMaximum = {maxkoi}")
+
+        FreeCADGui.Selection.clearSelection()
+        FreeCADGui.doCommand(
+            "FreeCADGui.Selection.addSelection(FreeCAD.ActiveDocument.ActiveObject)"
+        )
+
 
 class _PostFilterGlyph(CommandManager):
     "The FEM_PostFilterGlyph command definition"
@@ -1225,7 +1249,7 @@ FreeCADGui.addCommand("FEM_ConstraintBodyHeatSource", _ConstraintBodyHeatSource(
 FreeCADGui.addCommand("FEM_ConstraintCentrif", _ConstraintCentrif())
 FreeCADGui.addCommand("FEM_ConstraintCurrentDensity", _ConstraintCurrentDensity())
 FreeCADGui.addCommand("FEM_ConstraintElectricChargeDensity", _ConstraintElectricChargeDensity())
-FreeCADGui.addCommand("FEM_ConstraintElectrostaticPotential", _ConstraintElectrostaticPotential())
+FreeCADGui.addCommand("FEM_ConstraintElectromagnetic", _ConstraintElectromagnetic())
 FreeCADGui.addCommand("FEM_ConstraintFlowVelocity", _ConstraintFlowVelocity())
 FreeCADGui.addCommand("FEM_ConstraintInitialFlowVelocity", _ConstraintInitialFlowVelocity())
 FreeCADGui.addCommand("FEM_ConstraintInitialPressure", _ConstraintInitialPressure())

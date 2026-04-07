@@ -54,6 +54,7 @@
 #include <QWhatsThis>
 #include <QWindow>
 #include <QPushButton>
+#include <string>
 
 
 #if defined(Q_OS_WIN)
@@ -251,7 +252,7 @@ public:
     void setUserSchema(int userSchema)
     {
         App::Document* doc = App::GetApplication().getActiveDocument();
-        if (doc != nullptr) {
+        if (doc) {
             if (doc->UnitSystem.getValue() != userSchema) {
                 doc->UnitSystem.setValue(userSchema);
             }
@@ -275,7 +276,7 @@ private:
         bool ignore = hGrpu->GetBool("IgnoreProjectSchema", false);
         App::Document* doc = App::GetApplication().getActiveDocument();
         int userSchema = getWindowParameter()->GetInt("UserSchema", 0);
-        if (doc != nullptr && !ignore) {
+        if (doc && !ignore) {
             userSchema = doc->UnitSystem.getValue();
         }
         auto actions = menu()->actions();
@@ -937,7 +938,7 @@ int MainWindow::confirmSave(App::Document* doc, QWidget* parent, bool addCheckbo
         const QList<QWidget*> listOfMDIs = this->windows();
         for (QWidget* widget : listOfMDIs) {
             auto mdiView = qobject_cast<MDIView*>(widget);
-            if (mdiView != nullptr && mdiView->getAppDocument() == doc) {
+            if (mdiView && mdiView->getAppDocument() == doc) {
                 this->setActiveWindow(mdiView);
             }
         }
@@ -974,7 +975,7 @@ bool MainWindow::closeAllDocuments(bool close)
     // moves the active document to the front
     MDIView* activeView = this->activeWindow();
     App::Document* activeDoc = (activeView ? activeView->getAppDocument() : nullptr);
-    if (activeDoc != nullptr) {
+    if (activeDoc) {
         for (auto it = ++docs.begin(); it != docs.end(); it++) {
             if (*it == activeDoc) {
                 docs.erase(it);
@@ -1150,7 +1151,12 @@ bool MainWindow::event(QEvent* e)
                 return true;
             }
             else {
-                Application::Instance->commandManager().runCommandByName(commandName.c_str());
+                Command* cmd = Application::Instance->commandManager().getCommandByName(
+                    commandName.c_str()
+                );
+                if (cmd) {
+                    cmd->invoke(1);
+                }
             }
         }
         else {
@@ -1710,6 +1716,8 @@ void MainWindow::processMessages(const QList<QString>& msg)
         for (const auto& file : files) {
             QString filename = QString::fromUtf8(file.c_str(), file.size());
             FileDialog::setWorkingDirectory(filename);
+            QFileInfo fi(filename);
+            appendRecentFile(fi.absoluteFilePath());
         }
     }
     catch (const Base::SystemExitException&) {
@@ -1736,6 +1744,8 @@ void MainWindow::delayedStartup()
                 Base::Interpreter().runString(command.c_str());
             }
             catch (const Base::SystemExitException&) {
+                // Properly quit the Qt event loop before propagating the exception
+                QApplication::quit();
                 throw;
             }
             catch (const Base::Exception& e) {
@@ -1752,6 +1762,8 @@ void MainWindow::delayedStartup()
         for (const auto& file : files) {
             QString filename = QString::fromUtf8(file.c_str(), file.size());
             FileDialog::setWorkingDirectory(filename);
+            QFileInfo fi(filename);
+            appendRecentFile(fi.absoluteFilePath());
         }
     }
     catch (const Base::SystemExitException&) {
@@ -1860,6 +1872,7 @@ void MainWindow::appendRecentFile(const QString& filename)
     auto recent = this->findChild<RecentFilesAction*>(QStringLiteral("recentFiles"));
     if (recent) {
         recent->appendFile(filename);
+        Q_EMIT recentFileAdded(filename);
     }
 }
 
@@ -2239,9 +2252,10 @@ QMimeData* MainWindow::createMimeDataFromSelection() const
     // if less than ~10 MB
     bool use_buffer = (memsize < 0xA00000);
     QByteArray res;
+    std::string buffer;
     if (use_buffer) {
         try {
-            res.reserve(memsize);
+            buffer.reserve(memsize);
         }
         catch (const std::bad_alloc&) {
             use_buffer = false;
@@ -2252,12 +2266,13 @@ QMimeData* MainWindow::createMimeDataFromSelection() const
     QString mime;
     if (use_buffer) {
         mime = hasXLink ? _MimeDocObjX : _MimeDocObj;
-        Base::ByteArrayOStreambuf buf(res);
-        std::ostream str(&buf);
+        Base::StringOStreambuf sbuf(buffer);
+        std::ostream str(&sbuf);
         // need this instance to call MergeDocuments::Save()
         App::Document* doc = sel.front()->getDocument();
         MergeDocuments mimeView(doc);
         doc->exportObjects(sel, str);
+        res = QByteArray(buffer.data(), static_cast<int>(buffer.size()));
     }
     else {
         mime = hasXLink ? _MimeDocObjXFile : _MimeDocObjFile;
@@ -2388,9 +2403,10 @@ void MainWindow::insertFromMimeData(const QMimeData* mimeData)
     }
     if (!fromDoc) {
         QByteArray res = mimeData->data(format);
+        std::string buffer(res.constData(), static_cast<std::size_t>(res.size()));
 
         doc->openTransaction("Paste");
-        Base::ByteArrayIStreambuf buf(res);
+        Base::StringIStreambuf buf(buffer);
         std::istream in(nullptr);
         in.rdbuf(&buf);
         MergeDocuments mimeView(doc);
