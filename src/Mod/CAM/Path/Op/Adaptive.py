@@ -419,6 +419,7 @@ def Execute(op, obj):
             "keepToolDownRatio": keepToolDownRatio,
             "stockToLeave": float(obj.StockToLeave),
             "modelAwareExperiment": obj.ModelAwareExperiment,
+            "adaptiveGeneratorVersion": "1.0.1",
         }
 
         inputStateChanged = False
@@ -654,6 +655,7 @@ def ExecuteModelAware(op, obj):
             "zStockToLeave": obj.ZStockToLeave.Value,
             "orderCutsByRegion": obj.OrderCutsByRegion,
             "modelAwareExperiment": obj.ModelAwareExperiment,
+            "adaptiveGeneratorVersion": "1.0.1",
         }
 
         inputStateObject = [outsideInputStateObject, insideInputStateObject]
@@ -1097,7 +1099,7 @@ def _workingEdgeHelperManual(op, obj, depths):
                 for f in ext.getExtensionFaces(wire):
                     selectedRegions.extend(f.Faces)
 
-    for base, subs in obj.Base:
+    for base, subs in op.baseShapes(obj):
         for sub in subs:
             element = base.Shape.getElement(sub)
             if sub.startswith("Face") and sub not in avoidFeatures:
@@ -1239,7 +1241,7 @@ def _get_working_edges(op, obj):
     avoidFeatures = [e.feature for e in extensions if e.avoid]
 
     # Get faces selected by user
-    for base, subs in obj.Base:
+    for base, subs in op.baseShapes(obj):
         for sub in subs:
             if sub.startswith("Face"):
                 if sub not in avoidFeatures:
@@ -1253,8 +1255,8 @@ def _get_working_edges(op, obj):
                         shape = base.Shape.getElement(sub)
                     all_regions.append(shape)
             elif sub.startswith("Edge"):
-                # Save edges for later processing
-                rawEdges.append(base.Shape.getElement(sub))
+                if sub not in avoidFeatures:
+                    rawEdges.append(base.Shape.getElement(sub))
     # Efor
 
     # Process selected edges
@@ -1913,8 +1915,8 @@ class PathAdaptive(PathOp.ObjectOp):
                 "AdaptiveHelixEntry",
                 QT_TRANSLATE_NOOP(
                     "App::Property",
-                    "The maximum allowable descent in a single revolution of the helix"
-                    "Set to zero to disable limitation by pitch",
+                    "The maximum allowable descent in a single revolution of the helix. "
+                    "Set to 0 to disable the pitch limit.",
                 ),
             )
         helixProps = (

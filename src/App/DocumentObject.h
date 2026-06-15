@@ -1054,13 +1054,15 @@ public:
 
     bool renameDynamicProperty(Property *prop, const char *name) override;
 
-    App::Property* addDynamicProperty(const char* type,
-                                      const char* name = nullptr,
-                                      const char* group = nullptr,
-                                      const char* doc = nullptr,
-                                      short attr = 0,
-                                      bool ro = false,
-                                      bool hidden = false) override;
+    App::Property* addDynamicProperty(
+        std::string_view type,
+        const char* name = nullptr,
+        const char* group = nullptr,
+        const char* doc = nullptr,
+        short attr = 0,
+        bool ro = false,
+        bool hidden = false
+    ) override;
 
     /**
      * @brief Resolve the last document object referenced in the subname.
@@ -1270,6 +1272,23 @@ public:
 
     /// Returns the Placement property to use if any.
     virtual App::PropertyPlacement* getPlacementProperty() const;
+
+    /** Check whether a property can be referenced in an expression.
+     *
+     * @param prop: the property to check
+     *
+     * @return Return true if the property can be referenced in expressions.
+     */
+    static bool canPropBeReferenced(const App::Property* prop);
+
+    /** Get the object identifiers that reference the given property.
+     *
+     * @param prop: the property to check
+     *
+     * @return Return a set of object identifiers that reference the given
+     * property.
+     */
+    static std::set<ObjectIdentifier> getPropertyUses(const App::Property* prop);
 
 protected:
     /// Recompute only this object.
