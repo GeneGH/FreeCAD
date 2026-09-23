@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-2.1-or-later
+
 /***************************************************************************
  *   Copyright (c) 2022 WandererFan <wandererfan@gmail.com>                *
  *                                                                         *
@@ -179,7 +181,7 @@ TopoDS_Shape DrawComplexSection::makeCuttingTool(double dMax)
     //       if the sketch can't be made into an appropriate face/prism.
     if (CuttingToolWireObject.getValue()->isDerivedFrom(Base::Type::fromName("Sketcher::SketchObject"))) {
         if (!validateSketchNormal(CuttingToolWireObject.getValue())) {
-            Base::Console().warning("cutting object not aligned with section normal in %s\n", Label.getValue());
+            Base::Console().warning("cutting object not aligned with section normal in {}\n", Label.getValue());
         }
     }
 
@@ -275,7 +277,7 @@ void DrawComplexSection::makeSectionCut(const TopoDS_Shape& baseShape)
         waitingForAlign(true);
     }
     catch (...) {
-        Base::Console().warning("%s failed to make alignedPieces\n", Label.getValue());
+        Base::Console().warning("{} failed to make alignedPieces\n", Label.getValue());
         return;
     }
 
@@ -340,7 +342,7 @@ void DrawComplexSection::makeAlignedPieces(const TopoDS_Shape& rawShape)
 
     // faceNormals are not in the same order as the faces(sometimes??).
     TopExp_Explorer expFaces(m_toolFaceShape, TopAbs_FACE);
-    for (int iPiece = 0; expFaces.More(); expFaces.Next(), iPiece++) {
+    for (; expFaces.More(); expFaces.Next()) {
         TopoDS_Face face = TopoDS::Face(expFaces.Current());
         if (!isFacePlanar(face)) {
             // TODO: continue blocks curved profile segments (which doesn't work right).
@@ -464,7 +466,7 @@ DrawComplexSection::findSectionPlaneIntersections(const TopoDS_Shape& shapeToInt
 {
     if (shapeToIntersect.IsNull()) {
         // this shouldn't happen
-        Base::Console().warning("DCS::findSectionPlaneInter - %s - cut shape is Null\n",
+        Base::Console().warning("DCS::findSectionPlaneInter - {} - cut shape is Null\n",
                                 getNameInDocument());
         return {};
     }
@@ -729,7 +731,7 @@ TopoDS_Wire DrawComplexSection::makeSectionLineWire()
         }
         else {
             //probably can't happen as cut profile has been checked before this
-            Base::Console().warning("DCS::makeSectionLineGeometry - profile is type: %d\n",
+            Base::Console().warning("DCS::makeSectionLineGeometry - profile is type: {}\n",
                                     static_cast<int>(sScaled.ShapeType()));
             return {};
         }
@@ -818,7 +820,7 @@ bool DrawComplexSection::validateOffsetProfile(const TopoDS_Wire& profile, Base:
         if (angleRad < angleThresholdRad &&
             angleRad > 0.0) {
             // profile segment is slightly skewed. possible bad SectionNormal?
-            Base::Console().warning("%s profile is slightly skewed. Check SectionNormal low decimal places\n",
+            Base::Console().warning("{} profile is slightly skewed. Check SectionNormal low decimal places\n",
                                     getNameInDocument());
             return false;
         }
@@ -1037,7 +1039,7 @@ std::vector<TopoDS_Face> DrawComplexSection::faceShapeIntersect(const TopoDS_Fac
     }
     std::vector<TopoDS_Face> intersectFaceList;
     TopExp_Explorer expFaces(intersect, TopAbs_FACE);
-    for (int i = 1; expFaces.More(); expFaces.Next(), i++) {
+    for (; expFaces.More(); expFaces.Next()) {
         intersectFaceList.push_back(TopoDS::Face(expFaces.Current()));
     }
     return intersectFaceList;
@@ -1412,7 +1414,7 @@ DrawComplexSection::getSegmentViewDirections(const TopoDS_Wire& profileWire,
     // are all these shenanigans necessary?
     // no guarantee of order from TopExp_Explorer.  Need to match faces to the profile segment that
     // generated it?
-    for (int iFace = 0; expFaces.More(); expFaces.Next(), iFace++) {
+    for (; expFaces.More(); expFaces.Next()) {
         auto shape = expFaces.Current();
         auto face = TopoDS::Face(shape);
         auto normal = Base::convertTo<Base::Vector3d>(getFaceNormal(face));
@@ -1608,7 +1610,7 @@ TopoDS_Shape DrawComplexSection::makeCuttingToolFromClosedProfile(const TopoDS_W
         }
     }
     catch (...) {
-        Base::Console().error("%s could not make tool from closed profile\n", Label.getValue());
+        Base::Console().error("{} could not make tool from closed profile\n", Label.getValue());
         return {};
     }
     gp_Dir gpNormal = getFaceNormal(toolFace);
@@ -1628,7 +1630,7 @@ bool DrawComplexSection::validateProfileAlignment(const TopoDS_Wire& profileWire
         // just a warning here, so don't fail on this
         constexpr double AngleThresholdDeg{5.0};
         if (!validateOffsetProfile(profileWire, SectionNormal.getValue(), AngleThresholdDeg)) {
-            Base::Console().warning("%s: profile and section normal are misaligned\n", Label.getValue());
+            Base::Console().warning("{}: profile and section normal are misaligned\n", Label.getValue());
         }
     }
 
@@ -1636,7 +1638,7 @@ bool DrawComplexSection::validateProfileAlignment(const TopoDS_Wire& profileWire
     //       if the sketch can't be made into an appropriate face/prism.
     if (CuttingToolWireObject.getValue()->isDerivedFrom(Base::Type::fromName("Sketcher::SketchObject"))) {
         if (!validateSketchNormal(CuttingToolWireObject.getValue())) {
-            Base::Console().error("%s: cutting object not aligned with section normal\n", Label.getValue());
+            Base::Console().error("{}: cutting object not aligned with section normal\n", Label.getValue());
             return false;
         }
     }
