@@ -1,6 +1,6 @@
 [workspace]
 name = "FreeCAD"
-version = "26.3.0"
+version = "27.1.0"
 description = "pixi instructions for FreeCAD"
 authors = ["looooo <sppedflyer@gmail.com>"]
 channels = ["conda-forge"]
@@ -11,7 +11,7 @@ platforms = [
     { platform = "osx-arm64", macos = "14.0" },
     { platform = "win-64" },
 ]
-requires-pixi = ">=0.81.0"
+requires-pixi = ">=0.82.1"
 
 [dependencies]
 av = "*"
